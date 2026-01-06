@@ -1,12 +1,13 @@
 import { Close, List } from "@mui/icons-material";
-import { Box, IconButton, Typography } from "@mui/material";
+import { Box, Button, IconButton, Typography } from "@mui/material";
 import { useContext } from "react";
 import { ShowContext } from "./Project/Context/MainContext";
 import ContNav from "./Project/Navbar/ContNav";
+import { useNavigate } from "react-router-dom";
 
 export default function Head({ setMode, mode }) {
   const { show, setShow } = useContext(ShowContext);
-
+  const navigate = useNavigate();
   return (
     <>
       <Box
@@ -32,8 +33,14 @@ export default function Head({ setMode, mode }) {
           transition: "0.3s",
         }}
       >
-        <Typography variant="h3" fontWeight={900} color="primary">
-          DAC FOOD
+        <Typography
+          variant="h3"
+          fontWeight={900}
+          color="primary"
+          sx={{ cursor: "pointer" }} 
+          onClick={() => navigate("/")}
+        >
+          ZEUS Restaurant
         </Typography>
 
         <IconButton onClick={() => setShow(!show)} color="primary">

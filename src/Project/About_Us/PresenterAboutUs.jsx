@@ -47,39 +47,63 @@ export default function AboutUs({
       {/* ===== STATS (Glassmorphism Cards) ===== */}
       <Box
         sx={{
-          bgcolor: isDark ? "grey.900" : "grey.50",
+          bgcolor: isDark ? "rgba(255,255,255,0.02)" : "grey.50", // خلفية أنعم في الدارك مود
           py: 10,
           mb: 12,
+          borderTop: "1px solid",
+          borderBottom: "1px solid",
+          borderColor: "divider",
         }}
       >
         <Container maxWidth="lg">
-          <Grid container spacing={3}>
+          <Grid
+            container
+            spacing={{ xs: 2, md: 4 }} // مسافات أصغر في الموبايل لترك مساحة للكروت
+            justifyContent="center"
+          >
             {stats.map((stat, i) => (
               <Grid
                 key={i}
                 item
-                xs={6}
-                md={3}
+                xs={6} // كرتين بجانب بعض في الموبايل
+                sm={4} // 3 كروت في الشاشات المتوسطة
+                md={3} // 4 كروت في الشاشات الكبيرة
                 sx={{
                   display: "flex",
                   justifyContent: "center",
-                  alignItems: "center",
                 }}
               >
                 <Paper
                   elevation={0}
                   sx={{
-                    p: 4,
+                    p: { xs: 2, md: 4 }, // بادينج أقل في الموبايل
                     textAlign: "center",
-                    borderRadius: 6,
-                    bgcolor: "transparent",
+                    borderRadius: 5,
+                    bgcolor: isDark ? "background.paper" : "white",
                     border: "1px solid",
                     borderColor: "divider",
-                    minWidth: "250px",
+                    width: "100%", // ياخد مساحة الجريد كاملة
+                    // نلغي الـ minWidth تماماً ونستبدلها بـ maxWidth اختيارية
+                    maxWidth: "280px",
+                    transition: "0.3s",
+                    "&:hover": { transform: "translateY(-5px)" },
                   }}
                 >
-                  <Box sx={{ color: "primary.main", mb: 2 }}>{stat.icon}</Box>
-                  <Typography variant="h3" fontWeight="900">
+                  <Box
+                    sx={{
+                      color: "primary.main",
+                      mb: 1,
+                      "& svg": { fontSize: { xs: "1.8rem", md: "2.5rem" } },
+                    }}
+                  >
+                    {stat.icon}
+                  </Box>
+
+                  <Typography
+                    variant="h3"
+                    fontWeight="900"
+                    sx={{ fontSize: { xs: "1.4rem", md: "2.5rem" } }}
+                  >
                     {stat.static ? (
                       stat.number
                     ) : (
@@ -88,9 +112,13 @@ export default function AboutUs({
                   </Typography>
 
                   <Typography
-                    variant="subtitle1"
+                    variant="subtitle2" // أصغر قليلاً للموبايل
                     color="text.secondary"
-                    fontWeight="bold"
+                    fontWeight="800"
+                    sx={{
+                      fontSize: { xs: "0.7rem", md: "0.9rem" },
+                      textTransform: "uppercase",
+                    }}
                   >
                     {stat.label}
                   </Typography>
@@ -100,7 +128,6 @@ export default function AboutUs({
           </Grid>
         </Container>
       </Box>
-
       {/* ===== TEAM SECTION (Modern Grid) ===== */}
       <TeamSec teamMembers={teamMembers} />
     </Box>

@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { useTheme } from "@mui/material";
-import { useLocation } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { OpenAlert } from "../Context/MainContext";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchMeals } from "../RTK/MainSlice";
@@ -11,7 +11,7 @@ export default function ContHome() {
   const location = useLocation();
   const [open, setOpen] = useState(false);
   const { open: open2, setOpen: setOpen2 } = useContext(OpenAlert);
-
+  const navigate = useNavigate();
   const dispatch = useDispatch();
   const { meals, loading, error } = useSelector((state) => state.meals);
   const theme = useTheme();
@@ -74,6 +74,8 @@ export default function ContHome() {
     );
   }
 
+  const isDark = theme.palette.mode === "dark";
+
   return (
     <HomePre
       loading={loading}
@@ -84,6 +86,8 @@ export default function ContHome() {
       open2={open2}
       open={open}
       toggleFavorite={toggleFavorite}
+      isDark={isDark}
+      navigate={navigate}
     />
   );
 }

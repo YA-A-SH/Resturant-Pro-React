@@ -64,8 +64,8 @@ export default function FoodCard({
         "&:hover": {
           transform: "translateY(-8px)",
           boxShadow: isDark
-            ? "0 12px 40px rgba(182, 182, 182, 0.7)"
-            : "0 12px 30px rgba(0, 0, 0, 0.61)",
+            ? "0 12px 20px rgba(182, 182, 182, 0.7)"
+            : "0 12px 20px rgba(0, 0, 0, 0.61)",
           "& .card-media": { transform: "scale(1.05)" },
         },
       }}

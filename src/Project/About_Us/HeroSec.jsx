@@ -12,51 +12,79 @@ export default function HeroSec({ isDark, navigate }) {
           alignItems: "center",
           justifyContent: "center",
           overflow: "hidden",
+          // تحسين الـ Gradient ليكون "شفافاً" في المنتصف وعميقاً في الأطراف فقط (Vignette Effect)
           background: isDark
-            ? `linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.8)), url('https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&w=1500')`
-            : `linear-gradient(rgba(255,255,255,0.1), rgba(255,255,255,0.4)), url('https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&w=1500')`,
+            ? `radial-gradient(circle, rgba(254, 254, 254, 0) 0%, rgba(255, 255, 255, 0.03) 100%), url('https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&w=1500')`
+            : `radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(0, 0, 0, 0.19) 100%), url('https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&w=1500')`,
           backgroundSize: "cover",
           backgroundPosition: "center",
-          backgroundAttachment: "fixed",
+          backgroundAttachment: { xs: "scroll", md: "fixed" }, // الـ fixed أحياناً بيعمل غبش في الموبايل
           mb: 8,
           borderRadius: "0 0 80px 80px",
+          // إضافة Contrast و Brightness للصورة نفسها لإبراز التفاصيل
+          filter: isDark ? "brightness(0.8) contrast(1.1)" : "none",
         }}
       >
+        {/* طبقة حماية إضافية للنص لضمان وضوحه مهما كانت الصورة خلفه */}
+        <Box
+          sx={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            right: 0,
+            bottom: 0,
+            bgcolor: isDark ? "rgba(0,0,0,0.2)" : "rgba(0,0,0,0.1)",
+            zIndex: 1,
+          }}
+        />
+
         <Container maxWidth="md" sx={{ textAlign: "center", zIndex: 2 }}>
           <Typography
             variant="h1"
-            fontWeight="900"
             sx={{
-              fontSize: { xs: "3rem", md: "5rem" },
-              color: "white",
-              letterSpacing: -2,
+              fontWeight: 900,
+              fontSize: { xs: "2.8rem", md: "5rem" },
+              color: "white", // اللون الأبيض ثابت دائماً في الهيرو لضمان القراءة
+              letterSpacing: -1,
               mb: 2,
+              // إضافة "ظلال نص" خفيفة جداً لمنع التداخل مع تفاصيل الصورة (Text Shadow)
+              textShadow: "0 4px 12px rgba(0,0,0,0.5)",
             }}
           >
-            DAC FOOD
+            ZEUS Restaurant
           </Typography>
+
           <Typography
             variant="h5"
             sx={{
-              opacity: 0.9,
-              color: "#ffffffff",
+              color: "rgba(255,255,255,0.9)", // لون أبيض شبه كامل وليس شفافاً جداً
               mb: 4,
               fontWeight: 500,
+              fontSize: { xs: "1.1rem", md: "1.5rem" },
+              textShadow: "0 2px 8px rgba(0,0,0,0.4)",
             }}
           >
             Crafting Culinary Experiences, Not Just Meals.
           </Typography>
+
           <Button
             variant="contained"
             size="large"
             endIcon={<ChevronRightRounded />}
             sx={{
               borderRadius: 4,
-              px: 5,
+              px: 6,
               py: 2,
               fontWeight: "bold",
               fontSize: "1.1rem",
-              boxShadow: "0 10px 20px rgba(0,0,0,0.2)",
+              textTransform: "none", // لإعطاء لمسة عصرية
+              bgcolor: "primary.main",
+              boxShadow: "0 15px 30px rgba(0,0,0,0.3)",
+              "&:hover": {
+                transform: "translateY(-3px)",
+                boxShadow: "0 20px 40px rgba(0,0,0,0.4)",
+              },
+              transition: "0.3s all ease",
             }}
             onClick={() => navigate("/meals")}
           >

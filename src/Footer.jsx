@@ -14,7 +14,7 @@ export default function Footer() {
       {" "}
       <Typography variant="h6" color="text.secondary">
         {" "}
-        © 2025 DAC FOOD — Crafted by YA.A.SH{" "}
+        © 2025 ZEUS Restaurant — Crafted by YA.A.SH{" "}
       </Typography>{" "}
       <Stack direction="row" justifyContent="center" spacing={2} mt={1}>
         {" "}
