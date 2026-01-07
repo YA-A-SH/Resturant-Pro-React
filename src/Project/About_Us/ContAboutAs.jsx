@@ -3,6 +3,9 @@ import AboutUs from "./PresenterAboutUs";
 import { useNavigate } from "react-router-dom";
 
 export default function ContAboutUs() {
+  const navigate = useNavigate();
+  const theme = useTheme();
+
   const teamMembers = [
     {
       name: "Chef S.Ramos",
@@ -27,17 +30,13 @@ export default function ContAboutUs() {
     { number: "24/7", label: "Support", static: true }, // 👈
   ];
 
-  const navigate = useNavigate();
-  const theme = useTheme();
-
   // Original Theme For About Us Comp
 
   const cardBg =
     theme.palette.mode === "dark" ? theme.palette.background.paper : "#fff";
   const textSecondary = theme.palette.text.secondary;
 
-  const muiTheme = useTheme();
-  const isDark = muiTheme.palette.mode === "dark";
+  const isDark = theme.palette.mode === "dark";
 
   return (
     <AboutUs

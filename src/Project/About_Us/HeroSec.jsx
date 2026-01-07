@@ -53,7 +53,7 @@ export default function HeroSec({ isDark, navigate }) {
           <Typography
             variant="h5"
             sx={{
-              color: "rgba(255,255,255,0.9)", // لون أبيض شبه كامل وليس شفافاً جداً
+              color: "rgba(255,255,255,0.9)",
               mb: 4,
               fontWeight: 500,
               fontSize: { xs: "1.1rem", md: "1.5rem" },

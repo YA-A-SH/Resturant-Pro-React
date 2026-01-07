@@ -4,7 +4,7 @@ import { ShowCart } from "../Context/MainContext";
 
 //Hooks
 
-import { useContext, useEffect, useState } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 
 // Lib
 
@@ -48,37 +48,42 @@ export default function ContCart({ setSnackbar }) {
 
   // Functions
 
-  const handleClose = () => {
+  const handleClose = useCallback(() => {
     setShow(false);
-  };
+  }, [setShow]);
 
-  const onDecrease = (id) => {
-    setCartItems((prev) =>
-      prev
-        .map((e) => (e.id === id ? { ...e, quantity: e.quantity - 1 } : e))
-        .filter((e) => e.quantity > 0)
-    );
-  };
+  const onDecrease = useCallback(
+    (id) => {
+      setCartItems((prev) =>
+        prev
+          .map((e) => (e.id === id ? { ...e, quantity: e.quantity - 1 } : e))
+          .filter((e) => e.quantity > 0)
+      );
+    },
+    [setCartItems]
+  );
 
-  const onIncrease = (id) => {
-    setCartItems((prev) =>
-      prev.map((e) => (e.id === id ? { ...e, quantity: e.quantity + 1 } : e))
-    );
-  };
+  const onIncrease = useCallback(
+    (id) => {
+      setCartItems((prev) =>
+        prev.map((e) => (e.id === id ? { ...e, quantity: e.quantity + 1 } : e))
+      );
+    },
+    [setCartItems]
+  );
 
-  function handelClear() {
+  const handelClear = useCallback(() => {
     setCartItems([]);
     setSnackbar({
       open: true,
       message: "Cart Cleared Successfully",
       color: "error",
     });
-  }
+  }, [setCartItems, setSnackbar]);
 
-  function onPay() {
+  const onPay = useCallback(() => {
     const id = uuidv4();
-    const readyItems = { id: id, cartItems };
-    setReadyItemsState([...readyItemsState, readyItems]);
+    setReadyItemsState((prev) => [...prev, { id, cartItems }]);
     setCartItems([]);
     setShow(false);
     setSnackbar({
@@ -86,24 +91,24 @@ export default function ContCart({ setSnackbar }) {
       message: "Item's Added Successfully",
       color: "success",
     });
-  }
+  }, [cartItems, setCartItems, setShow, setSnackbar]);
 
   // UI
-  
+
   return (
     <CartPre
       show={show}
-      handleClose={handleClose}
       fullScreen={fullScreen}
+      totalPrice={totalPrice}
+      navigate={navigate}
       isDark={isDark}
       cartItems={cartItems}
       setShow={setShow}
-      navigate={navigate}
       onDecrease={onDecrease}
       onIncrease={onIncrease}
-      totalPrice={totalPrice}
-      handelClear={handelClear}
       onPay={onPay}
+      handelClear={handelClear}
+      handleClose={handleClose}
     />
   );
 }

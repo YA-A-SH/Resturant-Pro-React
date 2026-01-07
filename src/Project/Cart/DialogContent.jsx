@@ -19,7 +19,6 @@ export default function DialogCont({
   cartItems,
   onDecrease,
   onIncrease,
-  totalPrice,
 }) {
   return (
     <>
@@ -118,15 +117,6 @@ export default function DialogCont({
             </TableBody>
           </Table>
         </TableContainer>
-
-        <Box sx={{ mt: 10, textAlign: "center", px: 2 }}>
-          <Typography variant="h5" color="text.secondary">
-            Total Amount:
-          </Typography>
-          <Typography variant="h5" color="primary" fontWeight={800}>
-            ${totalPrice.toFixed(2)}
-          </Typography>
-        </Box>
       </DialogContent>
     </>
   );
