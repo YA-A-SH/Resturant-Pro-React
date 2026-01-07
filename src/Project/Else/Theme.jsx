@@ -26,7 +26,6 @@ export default function Theme({ mode, children }) {
           },
         },
         typography: {
-          // إضافة خطوط أنيقة للمطاعم
           fontFamily: "'Playfair Display', 'Poppins', serif",
         },
         components: {

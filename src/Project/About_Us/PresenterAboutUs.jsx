@@ -18,7 +18,7 @@ export default function AboutUs({
       {/* ===== LUXURY HERO SECTION ===== */}
       <HeroSec navigate={navigate} isDark={isDark} />
 
-      {/* ===== MISSION & VISION (Side-by-Side Modern) ===== */}
+      {/* ===== MISSION & VISION ===== */}
       <Container maxWidth="lg" sx={{ mb: 12 }}>
         <Grid container spacing={4}>
           <Mission
@@ -44,7 +44,7 @@ export default function AboutUs({
         </Grid>
       </Container>
 
-      {/* ===== STATS (Glassmorphism Cards) ===== */}
+      {/* ===== STATS ===== */}
       <Box
         sx={{
           bgcolor: isDark ? "rgba(255,255,255,0.02)" : "grey.50", // خلفية أنعم في الدارك مود
@@ -56,18 +56,14 @@ export default function AboutUs({
         }}
       >
         <Container maxWidth="lg">
-          <Grid
-            container
-            spacing={{ xs: 2, md: 4 }} // مسافات أصغر في الموبايل لترك مساحة للكروت
-            justifyContent="center"
-          >
+          <Grid container spacing={{ xs: 2, md: 4 }} justifyContent="center">
             {stats.map((stat, i) => (
               <Grid
                 key={i}
                 item
-                xs={6} // كرتين بجانب بعض في الموبايل
-                sm={4} // 3 كروت في الشاشات المتوسطة
-                md={3} // 4 كروت في الشاشات الكبيرة
+                xs={6}
+                sm={4}
+                md={3}
                 sx={{
                   display: "flex",
                   justifyContent: "center",
@@ -76,14 +72,13 @@ export default function AboutUs({
                 <Paper
                   elevation={0}
                   sx={{
-                    p: { xs: 2, md: 4 }, // بادينج أقل في الموبايل
+                    p: { xs: 2, md: 4 },
                     textAlign: "center",
                     borderRadius: 5,
                     bgcolor: isDark ? "background.paper" : "white",
                     border: "1px solid",
                     borderColor: "divider",
-                    width: "100%", // ياخد مساحة الجريد كاملة
-                    // نلغي الـ minWidth تماماً ونستبدلها بـ maxWidth اختيارية
+                    width: "100%",
                     maxWidth: "280px",
                     transition: "0.3s",
                     "&:hover": { transform: "translateY(-5px)" },
@@ -112,7 +107,7 @@ export default function AboutUs({
                   </Typography>
 
                   <Typography
-                    variant="subtitle2" // أصغر قليلاً للموبايل
+                    variant="subtitle2"
                     color="text.secondary"
                     fontWeight="800"
                     sx={{
@@ -128,7 +123,7 @@ export default function AboutUs({
           </Grid>
         </Container>
       </Box>
-      {/* ===== TEAM SECTION (Modern Grid) ===== */}
+      {/* ===== TEAM SECTION ===== */}
       <TeamSec teamMembers={teamMembers} />
     </Box>
   );

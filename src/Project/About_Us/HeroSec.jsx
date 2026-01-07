@@ -12,7 +12,6 @@ export default function HeroSec({ isDark, navigate }) {
           alignItems: "center",
           justifyContent: "center",
           overflow: "hidden",
-          // تحسين الـ Gradient ليكون "شفافاً" في المنتصف وعميقاً في الأطراف فقط (Vignette Effect)
           background: isDark
             ? `radial-gradient(circle, rgba(254, 254, 254, 0) 0%, rgba(255, 255, 255, 0.03) 100%), url('https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&w=1500')`
             : `radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(0, 0, 0, 0.19) 100%), url('https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&w=1500')`,
@@ -21,11 +20,9 @@ export default function HeroSec({ isDark, navigate }) {
           backgroundAttachment: { xs: "scroll", md: "fixed" }, // الـ fixed أحياناً بيعمل غبش في الموبايل
           mb: 8,
           borderRadius: "0 0 80px 80px",
-          // إضافة Contrast و Brightness للصورة نفسها لإبراز التفاصيل
           filter: isDark ? "brightness(0.8) contrast(1.1)" : "none",
         }}
       >
-        {/* طبقة حماية إضافية للنص لضمان وضوحه مهما كانت الصورة خلفه */}
         <Box
           sx={{
             position: "absolute",
@@ -44,10 +41,9 @@ export default function HeroSec({ isDark, navigate }) {
             sx={{
               fontWeight: 900,
               fontSize: { xs: "2.8rem", md: "5rem" },
-              color: "white", // اللون الأبيض ثابت دائماً في الهيرو لضمان القراءة
+              color: "white",
               letterSpacing: -1,
               mb: 2,
-              // إضافة "ظلال نص" خفيفة جداً لمنع التداخل مع تفاصيل الصورة (Text Shadow)
               textShadow: "0 4px 12px rgba(0,0,0,0.5)",
             }}
           >
@@ -77,7 +73,7 @@ export default function HeroSec({ isDark, navigate }) {
               py: 2,
               fontWeight: "bold",
               fontSize: "1.1rem",
-              textTransform: "none", // لإعطاء لمسة عصرية
+              textTransform: "none",
               bgcolor: "primary.main",
               boxShadow: "0 15px 30px rgba(0,0,0,0.3)",
               "&:hover": {

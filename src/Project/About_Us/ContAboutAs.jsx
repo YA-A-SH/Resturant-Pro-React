@@ -29,17 +29,12 @@ export default function ContAboutUs() {
 
   const navigate = useNavigate();
   const theme = useTheme();
+
+  // Original Theme For About Us Comp
+
   const cardBg =
     theme.palette.mode === "dark" ? theme.palette.background.paper : "#fff";
   const textSecondary = theme.palette.text.secondary;
-  const hoverShadow =
-    theme.palette.mode === "dark"
-      ? "0 10px 25px rgba(255,111,0,0.4)"
-      : "0 10px 25px rgba(255,152,0,0.3)";
-  const heroBg =
-    theme.palette.mode === "dark"
-      ? "linear-gradient(15deg, #1e1e1e, #ff6f00)"
-      : "linear-gradient(15deg, #ebebeb, #ffd89b)";
 
   const muiTheme = useTheme();
   const isDark = muiTheme.palette.mode === "dark";
@@ -47,12 +42,10 @@ export default function ContAboutUs() {
   return (
     <AboutUs
       theme={theme}
-      heroBg={heroBg}
       navigate={navigate}
       textSecondary={textSecondary}
       cardBg={cardBg}
       teamMembers={teamMembers}
-      hoverShadow={hoverShadow}
       stats={stats}
       isDark={isDark}
     />

@@ -1,8 +1,16 @@
+// Hooks
+
+import { useState } from "react";
+
+//Component
+
+import ContNav from "../Navbar/ContNav";
+
+// Lib
+
+import { useNavigate } from "react-router-dom";
 import { Close, List } from "@mui/icons-material";
 import { Box, IconButton, Typography } from "@mui/material";
-import { useState } from "react";
-import ContNav from "../Navbar/ContNav";
-import { useNavigate } from "react-router-dom";
 
 export default function Head({ setMode, mode }) {
   const [showNav, setShowNav] = useState(false);

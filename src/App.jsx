@@ -19,7 +19,7 @@ import { useState } from "react";
 function App() {
   const [mode, setMode] = useState("light");
   return (
-    <>
+    <> 
       <Theme mode={mode}>
         <IsAdminProvider>
           <FavProvider>

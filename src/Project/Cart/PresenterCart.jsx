@@ -41,7 +41,6 @@ export default function CartPre({
           fullScreen={fullScreen}
           maxWidth="md"
           fullWidth
-          // تأثير الدخول السلس (Bounce Effect)
           PaperProps={{
             component: motion.div,
             initial: { opacity: 0, y: fullScreen ? 50 : 100, scale: 0.9 },
@@ -62,7 +61,6 @@ export default function CartPre({
             },
           }}
         >
-          {/* Header الاحترافي */}
           <DialogTitle
             sx={{
               p: 3,
@@ -94,7 +92,6 @@ export default function CartPre({
 
           <Divider sx={{ opacity: 0.5 }} />
 
-          {/* محتوى العربة */}
           <Box sx={{ flexGrow: 1, overflowY: "auto", p: 1 }}>
             {cartItems.length === 0 ? (
               <IsEmpty navigate={navigate} setShow={setShow} />
@@ -119,7 +116,6 @@ export default function CartPre({
                 }`,
               }}
             >
-              {/* تفاصيل السعر قبل أزرار الأكشن */}
               <Box
                 sx={{
                   display: "flex",
