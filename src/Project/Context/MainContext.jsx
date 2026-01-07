@@ -1,19 +1,6 @@
 import { createContext, useState } from "react";
 
 // eslint-disable-next-line react-refresh/only-export-components
-export const ShowContext = createContext();
-
-export const ShowContextProvider = ({ children }) => {
-  const [show, setShow] = useState(false);
-  const [color, setColor] = useState("");
-  return (
-    <ShowContext.Provider value={{ show, setShow, color, setColor }}>
-      {children}
-    </ShowContext.Provider>
-  );
-};
-
-// eslint-disable-next-line react-refresh/only-export-components
 export const User = createContext({
   user: null,
 });
@@ -40,14 +27,14 @@ export const ShowCartProvider = ({ children }) => {
 };
 
 // eslint-disable-next-line react-refresh/only-export-components
-export const OpenAlert = createContext();
+export const OpenSnackbarContext = createContext();
 
-export const OpenAlertProvider = ({ children }) => {
-  const [open, setOpen] = useState(false);
+export const OpenSnackbarProvider = ({ children }) => {
+  const [openSnackbar, setOpenSnackbar] = useState(false);
   return (
-    <OpenAlert.Provider value={{ open, setOpen }}>
+    <OpenSnackbarContext.Provider value={{ openSnackbar, setOpenSnackbar }}>
       {children}
-    </OpenAlert.Provider>
+    </OpenSnackbarContext.Provider>
   );
 };
 
@@ -67,7 +54,14 @@ export const FavProvider = ({ children }) => {
 };
 
 // eslint-disable-next-line react-refresh/only-export-components
-export const IsAdminContext = createContext({
-  isAdmin: false,
-  setIsAdmin: () => {},
-});
+export const IsAdminContext = createContext();
+
+export const IsAdminProvider = ({ children }) => {
+  const [isAdmin, setIsAdmin] = useState(false);
+
+  return (
+    <IsAdminContext.Provider value={{ isAdmin, setIsAdmin }}>
+      {children}
+    </IsAdminContext.Provider>
+  );
+};

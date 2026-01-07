@@ -1,11 +1,12 @@
 import { useContext, useState } from "react";
 import DialogAdmin from "./DialogAdmin";
 import { useNavigate } from "react-router-dom";
-import { IsAdminContext } from "../Context/MainContext";
+import { IsAdminContext, OpenSnackbarContext } from "../Context/MainContext";
 
 export default function ContAdmin({ open, setOpen }) {
   const [secNum, setSecNum] = useState("");
-  const [openSnak, setOpenSnak] = useState(false);
+  const { openSnackbar, setOpenSnackbar } = useContext(OpenSnackbarContext);
+
   const [trys, setTrys] = useState(3);
   const [isAval, setIsAval] = useState(false);
   const secreteNumber = "770304";
@@ -19,14 +20,14 @@ export default function ContAdmin({ open, setOpen }) {
 
   const handleSnackbarClose = (_, reason) => {
     if (reason === "clickaway") return;
-    setOpenSnak(false);
+    setOpenSnackbar(false);
   };
   const handleCheck = () => {
     if (secNum === secreteNumber) {
       navigate("/admin");
       setIsAdmin(true);
     } else {
-      setOpenSnak(true);
+      setOpenSnackbar(true);
     }
     setTrys(trys - 1);
   };
@@ -44,7 +45,8 @@ export default function ContAdmin({ open, setOpen }) {
         setSecNum={setSecNum}
         isAval={isAval}
         handleCheck={handleCheck}
-        openSnak={openSnak}
+        openSnackbar={openSnackbar}
+        setOpenSnackbar={setOpenSnackbar}
       />
     </>
   );

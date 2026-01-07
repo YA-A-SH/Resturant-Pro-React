@@ -7,7 +7,7 @@ import {
   facebookReducer,
   emailReducer,
   resetReducer,
-} from "./RTK/MainSlice";
+} from "./MainSlice";
 export const store = configureStore({
   reducer: {
     meals: mealsReducer,

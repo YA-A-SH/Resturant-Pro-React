@@ -11,6 +11,7 @@ import {
 import { ArrowForward, LocalMall } from "@mui/icons-material";
 import FoodCard from "../Main/FoodCards";
 import FoodCardSkeleton from "../Skeleton/FoodCardSkeleton";
+import SnackbarComp from "../Else/SnackbarComp";
 
 export default function HomePre({
   loading,
@@ -20,6 +21,9 @@ export default function HomePre({
   theme,
   navigate,
   isDark,
+  openSnackbar,
+  setOpenSnackbar,
+  handleCloseSnackbar,
 }) {
   return (
     <Box
@@ -337,7 +341,11 @@ export default function HomePre({
                 key={meal.id}
                 sx={{ minWidth: 300, scrollSnapAlign: "start", p: 3 }}
               >
-                <FoodCard {...meal} toggleFavorite={toggleFavorite} />
+                <FoodCard
+                  {...meal}
+                  toggleFavorite={toggleFavorite}
+                  setOpenSnackbar={setOpenSnackbar}
+                />
               </Box>
             ))
           )}
@@ -371,7 +379,12 @@ export default function HomePre({
         </Box>
       </Container>
 
-      {/* Snackbar remains the same */}
+      <SnackbarComp
+        openSnackbar={openSnackbar}
+        msg="Tasty choice! Added to your cart 🍔"
+        color="success"
+        handleClose={handleCloseSnackbar}
+      />
     </Box>
   );
 }

@@ -9,16 +9,13 @@ import {
 import PreNav from "./PresenterNavbar";
 import { useLocation } from "react-router-dom";
 import { useTheme } from "@mui/material";
-import { useContext } from "react";
-import { ShowContext } from "../Context/MainContext";
 
-export default function ContNav({ showIt, setMode }) {
-  const { setShow } = useContext(ShowContext);
+export default function ContNav({ showNav, setShowNav, setMode }) {
   const theme = useTheme();
   const location = useLocation();
   const isDark = theme.palette.mode === "dark";
 
-  const closeNav = () => setShow(false);
+  const closeNav = () => setShowNav(false);
 
   const menuItems = [
     { label: "Home", path: "/", icon: <HomeRounded fontSize="small" /> },
@@ -48,7 +45,7 @@ export default function ContNav({ showIt, setMode }) {
   return (
     <>
       <PreNav
-        showIt={showIt}
+        showNav={showNav}
         setMode={setMode}
         menuItems={menuItems}
         closeNav={closeNav}

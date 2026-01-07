@@ -21,7 +21,7 @@ export default function PreProfile({
   u,
   fav,
   accType,
-  closeNav,
+
   theme,
   paid,
   idForCart,
@@ -185,7 +185,6 @@ export default function PreProfile({
             to="/logout"
             variant="outlined"
             color="error"
-            onClick={closeNav}
             startIcon={<LogoutRounded />}
             sx={{
               px: 10,

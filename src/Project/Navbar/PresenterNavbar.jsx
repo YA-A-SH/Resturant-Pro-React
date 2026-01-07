@@ -1,17 +1,10 @@
-import {
-  Box,
-  Typography,
-  Stack,
-  IconButton,
-} from "@mui/material";
-import {
-  CloseRounded,
-} from "@mui/icons-material";
+import { Box, Typography, Stack, IconButton } from "@mui/material";
+import { CloseRounded } from "@mui/icons-material";
 import { AnimatePresence, motion } from "framer-motion";
 import MainNav from "./MainNav";
 
 export default function PreNav({
-  showIt,
+  showNav,
   setMode,
   menuItems,
   closeNav,
@@ -20,7 +13,7 @@ export default function PreNav({
 }) {
   return (
     <AnimatePresence>
-      {showIt && (
+      {showNav && (
         <Box
           component={motion.div}
           initial={{ opacity: 0, y: 50, scale: 0 }}

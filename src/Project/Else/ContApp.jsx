@@ -4,18 +4,23 @@ import { ShowCart } from "../Context/MainContext";
 import { useSelector } from "react-redux";
 import { useLocation } from "react-router-dom";
 export default function ContApp({ mode, setMode }) {
-  const [openAlert2, setOpenAlert2] = useState(false);
-  const [openAlert3, setOpenAlert3] = useState(false);
+  const [snackbar, setSnackbar] = useState({
+    open: false,
+    message: "",
+    color: "success",
+  });
+
+  const handleCloseSnackbar = (reason) => {
+    if (reason === "clickaway") return;
+
+    setSnackbar((prev) => ({
+      ...prev,
+      open: false,
+    }));
+  };
 
   const { show, setShow } = useContext(ShowCart);
 
-  const handleClose = (reason) => {
-    if (reason === "clickaway") {
-      return;
-    }
-    setOpenAlert2(false);
-    setOpenAlert3(false);
-  };
   const faUser = useSelector((state) => state.facebook.user);
   const goUser = useSelector((state) => state.google.user);
   const maUser = useSelector((state) => state.email.user);
@@ -32,13 +37,11 @@ export default function ContApp({ mode, setMode }) {
       setMode={setMode}
       setShowCart={setShow}
       ShowCart={show}
-      setOpenAlert2={setOpenAlert2}
-      openAlert2={openAlert2}
-      handleClose={handleClose}
-      openAlert3={openAlert3}
-      setOpenAlert3={setOpenAlert3}
       bool={bool}
       location={location}
+      snackbar={snackbar}
+      setSnackbar={setSnackbar}
+      handleCloseSnackbar={handleCloseSnackbar}
     />
   );
 }

@@ -6,7 +6,7 @@ import { useTheme } from "@emotion/react";
 import { useMediaQuery } from "@mui/material";
 import { v4 as uuidv4 } from "uuid";
 
-export default function ContCart({ setOpenAlert, setOpenAlert3 }) {
+export default function ContCart({ setSnackbar }) {
   const navigate = useNavigate();
   const { show, setShow, cartItems, setCartItems } = useContext(ShowCart);
   const theme = useTheme();
@@ -49,7 +49,11 @@ export default function ContCart({ setOpenAlert, setOpenAlert3 }) {
 
   function handelClear() {
     setCartItems([]);
-    setOpenAlert(true);
+    setSnackbar({
+      open: true,
+      message: "Cart Cleared Successfully",
+      color: "error",
+    });
   }
 
   function onPay() {
@@ -61,8 +65,12 @@ export default function ContCart({ setOpenAlert, setOpenAlert3 }) {
     setReadyItemsState([...readyItemsState, readyItems]);
 
     setCartItems([]);
-    setOpenAlert3(true);
     setShow(false);
+    setSnackbar({
+      open: true,
+      message: "Item's Added Successfully",
+      color: "success",
+    });
   }
   return (
     <CartPre

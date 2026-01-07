@@ -1,32 +1,30 @@
 import { useContext, useEffect, useState } from "react";
 import { useTheme } from "@mui/material";
 import { useLocation, useNavigate } from "react-router-dom";
-import { OpenAlert } from "../Context/MainContext";
 import { useDispatch, useSelector } from "react-redux";
 import { fetchMeals } from "../RTK/MainSlice";
 import HomePre from "./PresenterHome";
+import { OpenSnackbarContext } from "../Context/MainContext";
 
 export default function ContHome() {
   const [popularMeals, setPopularMeals] = useState([]);
   const location = useLocation();
-  const [open, setOpen] = useState(false);
-  const { open: open2, setOpen: setOpen2 } = useContext(OpenAlert);
+  const { openSnackbar, setOpenSnackbar } = useContext(OpenSnackbarContext);
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const { meals, loading, error } = useSelector((state) => state.meals);
   const theme = useTheme();
 
-  const handleClose = (reason) => {
+  const handleCloseSnackbar = (reason) => {
     if (reason === "clickaway") {
       return;
     }
-    setOpen(false);
-    setOpen2(false);
+    setOpenSnackbar(false);
   };
   useEffect(() => {
     if (location.state?.loginSuccess) {
       // eslint-disable-next-line react-hooks/set-state-in-effect
-      setOpen(true);
+      // setOpen(true);
       window.history.replaceState({}, document.title);
     }
   }, [location.state]);
@@ -82,12 +80,12 @@ export default function ContHome() {
       error={error}
       theme={theme}
       popularMeals={popularMeals}
-      handleClose={handleClose}
-      open2={open2}
-      open={open}
       toggleFavorite={toggleFavorite}
       isDark={isDark}
+      openSnackbar={openSnackbar}
+      setOpenSnackbar={setOpenSnackbar}
       navigate={navigate}
+      handleCloseSnackbar={handleCloseSnackbar}
     />
   );
 }

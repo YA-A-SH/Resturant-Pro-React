@@ -1,7 +1,6 @@
 import { useTheme } from "@emotion/react";
-import { ShowContext } from "../Context/MainContext";
 import PreProfile from "./PresenterProfile";
-import { useContext, useEffect, useState } from "react";
+import { useEffect, useState } from "react";
 import {
   CalendarToday,
   Email,
@@ -17,7 +16,6 @@ export default function ContProfile() {
   const [openDeleteOrderPopup, setOpenDeleteOrderPopup] = useState(false);
   const [openDeleteItemPopup, setOpenDeleteItemPopup] = useState(false);
 
-  const { setShow, setCartItems } = useContext(ShowContext);
   const [paid, setPaid] = useState(() => {
     const saved = localStorage.getItem("payedItems");
     return saved ? JSON.parse(saved) : [];
@@ -120,8 +118,6 @@ export default function ContProfile() {
     );
   }
 
-  const closeNav = () => setShow(false);
-
   function handleDeleteItem(id) {
     setPaid((prev) => {
       const updated = prev
@@ -146,7 +142,6 @@ export default function ContProfile() {
     });
   }
 
-
   function handleDeleteOrderClose() {
     setOpenDeleteOrderPopup(false);
   }
@@ -167,7 +162,6 @@ export default function ContProfile() {
       handleEditClose={handleEditClose}
       handleSave={handleSave}
       setUserMoreInfo={setUserMoreInfo}
-      closeNav={closeNav}
       theme={theme}
       paid={paid}
       handleDeleteItem={handleDeleteItem}

@@ -1,15 +1,14 @@
 import { useEffect } from "react";
 import {
-  Alert,
   Button,
   Dialog,
   DialogActions,
   DialogContent,
   DialogTitle,
   Slide,
-  Snackbar,
   TextField,
 } from "@mui/material";
+import SnackbarComp from "../Else/SnackbarComp";
 
 const Transition = (props) => {
   return <Slide direction="up" {...props} />;
@@ -25,7 +24,7 @@ export default function DialogAdmin({
   setSecNum,
   isAval,
   handleCheck,
-  openSnak,
+  openSnackbar,
   handleSnackbarClose,
 }) {
   useEffect(() => {
@@ -75,23 +74,17 @@ export default function DialogAdmin({
           Check The Secrete Number
         </Button>
       </DialogActions>
-      <Snackbar
-        open={openSnak}
-        onClose={handleSnackbarClose}
-        autoHideDuration={3000}
-        anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
-      >
-        <Alert
-          onClose={handleSnackbarClose}
-          severity="error"
-          variant="filled"
-          sx={{ color: "white" }}
-        >
-          {trys === 0
+
+      <SnackbarComp
+        openSnackbar={openSnackbar}
+        msg={
+          trys === 0
             ? "You Use All You'r Attempts Try Again Later "
-            : `Wrong Key You Have ${trys} Attempts Left`}
-        </Alert>
-      </Snackbar>
+            : `Wrong Key You Have ${trys} Attempts Left`
+        }
+        color="error"
+        handleClose={handleSnackbarClose}
+      />
     </Dialog>
   );
 }

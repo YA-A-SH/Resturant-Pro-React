@@ -1,9 +1,7 @@
 import {
-  Alert,
   Box,
   Button,
   Grid,
-  Snackbar,
   Stack,
   Typography,
   useTheme,
@@ -11,10 +9,12 @@ import {
 } from "@mui/material";
 import FoodCard from "./FoodCards";
 import { useContext, useState } from "react";
-import { OpenAlert } from "../Context/MainContext";
+import { OpenSnackbarContext } from "../Context/MainContext";
 import SwapVertIcon from "@mui/icons-material/SwapVert";
 import FoodCardSkeleton from "../Skeleton/FoodCardSkeleton";
+// eslint-disable-next-line no-unused-vars
 import { motion, AnimatePresence } from "framer-motion";
+import SnackbarComp from "../Else/SnackbarComp";
 
 export default function Base({
   loading,
@@ -31,7 +31,15 @@ export default function Base({
   itemsPerPage = 12,
 }) {
   const theme = useTheme();
-  const { open, setOpen } = useContext(OpenAlert);
+  const { openSnackbar, setOpenSnackbar } = useContext(OpenSnackbarContext);
+
+  const handleCloseSnackbar = (reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpenSnackbar(false);
+  };
+
   const isDark = theme.palette.mode === "dark";
 
   const [currentPage, setCurrentPage] = useState(1);
@@ -39,11 +47,6 @@ export default function Base({
   const totalPages = Math.ceil(data.length / itemsPerPage);
   const startIdx = (currentPage - 1) * itemsPerPage;
   const currentData = data.slice(startIdx, startIdx + itemsPerPage);
-
-  const handleClose = (event, reason) => {
-    if (reason === "clickaway") return;
-    setOpen(false);
-  };
 
   const gradientBackground = isDark
     ? "radial-gradient(circle at top, #1a002a 0%, #0b0b0f 45%, #000 100%)"
@@ -145,6 +148,7 @@ export default function Base({
               border: `1px solid ${
                 isDark ? "rgba(255,255,255,0.1)" : "transparent"
               }`,
+              justifyContent: { xs: "space-evenly" },
             }}
           >
             {["Breakfast", "Lunch", "Dinner"].map((type) => (
@@ -210,7 +214,7 @@ export default function Base({
                     >
                       <FoodCard
                         {...item}
-                        setOpen={setOpen}
+                        setOpenSnackbar={setOpenSnackbar}
                         toggleFavorite={toggleFavorite}
                       />
                     </Box>
@@ -255,26 +259,12 @@ export default function Base({
         )}
       </Container>
 
-      <Snackbar
-        open={open}
-        autoHideDuration={3000}
-        onClose={handleClose}
-        anchorOrigin={{ vertical: "bottom", horizontal: "left" }}
-      >
-        <Alert
-          onClose={handleClose}
-          severity="success"
-          variant="filled"
-          sx={{
-            borderRadius: "15px",
-            px: 3,
-            boxShadow: "0 10px 30px rgba(0,0,0,0.2)",
-            bgcolor: theme.palette.success.main,
-          }}
-        >
-          Tasty choice! Added to your cart 🍔
-        </Alert>
-      </Snackbar>
+      <SnackbarComp
+        openSnackbar={openSnackbar}
+        msg="Tasty choice! Added to your cart 🍔"
+        color="success"
+        handleClose={handleCloseSnackbar}
+      />
     </Box>
   );
 }

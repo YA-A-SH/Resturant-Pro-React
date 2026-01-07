@@ -1,12 +1,11 @@
 import { Close, List } from "@mui/icons-material";
-import { Box, Button, IconButton, Typography } from "@mui/material";
-import { useContext } from "react";
-import { ShowContext } from "./Project/Context/MainContext";
-import ContNav from "./Project/Navbar/ContNav";
+import { Box, IconButton, Typography } from "@mui/material";
+import { useState } from "react";
+import ContNav from "../Navbar/ContNav";
 import { useNavigate } from "react-router-dom";
 
 export default function Head({ setMode, mode }) {
-  const { show, setShow } = useContext(ShowContext);
+  const [showNav, setShowNav] = useState(false);
   const navigate = useNavigate();
   return (
     <>
@@ -37,18 +36,18 @@ export default function Head({ setMode, mode }) {
           variant="h3"
           fontWeight={900}
           color="primary"
-          sx={{ cursor: "pointer" }} 
+          sx={{ cursor: "pointer" }}
           onClick={() => navigate("/")}
         >
           ZEUS Restaurant
         </Typography>
 
-        <IconButton onClick={() => setShow(!show)} color="primary">
-          {show ? <Close /> : <List />}
+        <IconButton onClick={() => setShowNav(!showNav)} color="primary">
+          {showNav ? <Close /> : <List />}
         </IconButton>
       </Box>
 
-      <ContNav showIt={show} setMode={setMode} />
+      <ContNav showNav={showNav} setMode={setMode} setShowNav={setShowNav} />
     </>
   );
 }

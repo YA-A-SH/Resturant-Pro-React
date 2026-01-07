@@ -18,7 +18,7 @@ import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlin
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import { useContext, useState } from "react";
-import { OpenAlert, ShowCart } from "../Context/MainContext";
+import { ShowCart } from "../Context/MainContext";
 
 export default function FoodCard({
   id,
@@ -28,15 +28,15 @@ export default function FoodCard({
   rate,
   favorite,
   toggleFavorite,
+  setOpenSnackbar,
 }) {
-  const { setOpen } = useContext(OpenAlert);
   const [openDet, setOpenDet] = useState(false);
   const { setShow, setCartItems } = useContext(ShowCart);
   const theme = useTheme(); // للوصول للألوان اللي ضبطناها في الـ Theme
 
   const isDark = theme.palette.mode === "dark";
 
-  function handleClick() {
+  function handleAddToCartClick() {
     setCartItems((prev) => {
       const found = prev.find((e) => e.id === id);
       if (found) {
@@ -46,10 +46,10 @@ export default function FoodCard({
       }
       return [...prev, { id, image, title, price, quantity: 1 }];
     });
-    if (setOpen) {
-      setOpen(false);
-      setTimeout(() => setOpen(true), 0);
-    }
+    setOpenSnackbar(true);
+    setTimeout(() => {
+      setOpenSnackbar(false);
+    }, 3000);
     setShow(true);
   }
 
@@ -123,7 +123,7 @@ export default function FoodCard({
             fullWidth
             variant="contained"
             startIcon={<AddShoppingCartIcon />}
-            onClick={handleClick}
+            onClick={handleAddToCartClick}
             sx={{
               borderRadius: "12px",
               py: 1.2,
@@ -191,7 +191,7 @@ export default function FoodCard({
           </Button>
           <Button
             variant="contained"
-            onClick={handleClick}
+            onClick={handleAddToCartClick}
             sx={{ borderRadius: "10px" }}
           >
             Order Now

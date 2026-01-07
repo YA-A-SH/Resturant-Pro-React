@@ -1,12 +1,10 @@
 // ************** Contexts ****************
 
-import ContAboutUs from "./Project/About_Us/ContAboutAs";
 import {
   FavProvider,
-  IsAdminContext,
-  OpenAlertProvider,
+  IsAdminProvider,
+  OpenSnackbarProvider,
   ShowCartProvider,
-  ShowContextProvider,
 } from "./Project/Context/MainContext";
 
 // ************** Components ****************
@@ -20,23 +18,18 @@ import { useState } from "react";
 
 function App() {
   const [mode, setMode] = useState("light");
-  const [isAdmin, setIsAdmin] = useState(false);
   return (
     <>
       <Theme mode={mode}>
-        <IsAdminContext.Provider
-          value={{ isAdmin: isAdmin, setIsAdmin: setIsAdmin }}
-        >
+        <IsAdminProvider>
           <FavProvider>
-            <ShowContextProvider>
-              <ShowCartProvider>
-                <OpenAlertProvider>
-                  <ContApp mode={mode} setMode={setMode} />
-                </OpenAlertProvider>
-              </ShowCartProvider>
-            </ShowContextProvider>
+            <ShowCartProvider>
+              <OpenSnackbarProvider>
+                <ContApp mode={mode} setMode={setMode} />
+              </OpenSnackbarProvider>
+            </ShowCartProvider>
           </FavProvider>
-        </IsAdminContext.Provider>
+        </IsAdminProvider>
       </Theme>
     </>
   );
