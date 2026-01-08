@@ -30,12 +30,15 @@ export default function FoodCard({
   toggleFavorite,
   setOpenSnackbar,
 }) {
-  const [openDet, setOpenDet] = useState(false);
+  // Hooks Use
   const { setShow, setCartItems } = useContext(ShowCart);
-  const theme = useTheme(); // للوصول للألوان اللي ضبطناها في الـ Theme
+  const [openDet, setOpenDet] = useState(false);
+  const theme = useTheme();
 
+  // Variables
   const isDark = theme.palette.mode === "dark";
 
+  // Functions
   function handleAddToCartClick() {
     setCartItems((prev) => {
       const found = prev.find((e) => e.id === id);
@@ -46,9 +49,13 @@ export default function FoodCard({
       }
       return [...prev, { id, image, title, price, quantity: 1 }];
     });
-    setOpenSnackbar(true);
+    setOpenSnackbar({
+      open: true,
+      msg: "Tasty choice! Added to your cart 🍔",
+      color: "success",
+    });
     setTimeout(() => {
-      setOpenSnackbar(false);
+      setOpenSnackbar({ open: false, msg: "", color: "" });
     }, 3000);
     setShow(true);
   }
@@ -70,7 +77,8 @@ export default function FoodCard({
         },
       }}
     >
-      {/* Favorite Button Overlay */}
+      {/* Favorite Button  */}
+
       <IconButton
         onClick={() => toggleFavorite(id)}
         sx={{
@@ -90,6 +98,8 @@ export default function FoodCard({
         )}
       </IconButton>
 
+      {/* Food Image */}
+
       <Box sx={{ overflow: "hidden" }}>
         <CardMedia
           className="card-media"
@@ -100,6 +110,8 @@ export default function FoodCard({
           sx={{ transition: "0.5s ease" }}
         />
       </Box>
+
+      {/* Food Info  */}
 
       <CardContent sx={{ p: 2.5 }}>
         <Typography variant="h6" fontWeight="700" noWrap sx={{ mb: 1 }}>
@@ -129,7 +141,7 @@ export default function FoodCard({
               py: 1.2,
               fontWeight: "bold",
               boxShadow: "none",
-              background: theme.palette.primary.main, // نستخدم لون الثيم الموحد
+              background: theme.palette.primary.main,
               "&:hover": {
                 background: theme.palette.primary.dark,
                 boxShadow: "none",
@@ -154,6 +166,8 @@ export default function FoodCard({
           </Button>
         </Stack>
       </CardContent>
+
+      {/* Food More Info  */}
 
       <Dialog
         open={openDet}

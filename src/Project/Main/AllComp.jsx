@@ -8,13 +8,14 @@ import {
   Container,
 } from "@mui/material";
 import FoodCard from "./FoodCards";
-import { useContext, useState } from "react";
+import { useContext, useMemo, useState } from "react";
 import { OpenSnackbarContext } from "../Context/MainContext";
 import SwapVertIcon from "@mui/icons-material/SwapVert";
 import FoodCardSkeleton from "../Skeleton/FoodCardSkeleton";
 // eslint-disable-next-line no-unused-vars
 import { motion, AnimatePresence } from "framer-motion";
-import SnackbarComp from "../Else/SnackbarComp";
+import SnackbarComp from "../Else/Components/SnackbarComp";
+import ButtonsAllComp from "./Components/ButtonsAllComp";
 
 export default function Base({
   loading,
@@ -30,28 +31,25 @@ export default function Base({
   toggleFavorite,
   itemsPerPage = 12,
 }) {
-  const theme = useTheme();
+  //Hooks Use
   const { openSnackbar, setOpenSnackbar } = useContext(OpenSnackbarContext);
+  const [currentPage, setCurrentPage] = useState(1);
+  const theme = useTheme();
 
-  const handleCloseSnackbar = (reason) => {
-    if (reason === "clickaway") {
-      return;
-    }
-    setOpenSnackbar(false);
-  };
+  // Variables
 
   const isDark = theme.palette.mode === "dark";
-
-  const [currentPage, setCurrentPage] = useState(1);
-
   const totalPages = Math.ceil(data.length / itemsPerPage);
-  const startIdx = (currentPage - 1) * itemsPerPage;
-  const currentData = data.slice(startIdx, startIdx + itemsPerPage);
-
   const gradientBackground = isDark
     ? "radial-gradient(circle at top, #1a002a 0%, #0b0b0f 45%, #000 100%)"
     : "radial-gradient(circle at top, #fff5e6 0%, #ffffff 100%)";
 
+  const currentData = useMemo(() => {
+    const startIdx = (currentPage - 1) * itemsPerPage;
+    return data.slice(startIdx, startIdx + itemsPerPage);
+  }, [data, currentPage, itemsPerPage]);
+
+  // Functions
   const getPaginationButtons = () => {
     let buttons = [];
     if (totalPages <= 5) {
@@ -82,12 +80,19 @@ export default function Base({
     }
     return buttons;
   };
-
+  const handleCloseSnackbar = (reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setOpenSnackbar(false);
+  };
   return (
     <Box
       sx={{ minHeight: "100vh", background: gradientBackground, pt: 5, pb: 10 }}
     >
       <Container maxWidth="xl">
+        {/* ===== Sort BTN ===== */}
+
         <Box sx={{ display: "flex", justifyContent: "center", mb: 4 }}>
           <Button
             onClick={() => setSortAscending((prev) => !prev)}
@@ -121,7 +126,9 @@ export default function Base({
           </Button>
         </Box>
 
-        {id === "1" || id === "2" ? (
+        {/* ===== Check if the Comp is Meals or Else===== */}
+
+        {id === "1" ? (
           <Stack spacing={1} alignItems="center" mb={6}>
             <Typography
               variant="h3"
@@ -136,55 +143,18 @@ export default function Base({
             </Typography>
           </Stack>
         ) : (
-          <Box
-            sx={{
-              width: { xs: "100%", sm: "fit-content" },
-              m: "0 auto 50px auto",
-              p: 0.8,
-              borderRadius: "100px",
-              bgcolor: isDark ? "rgba(255,255,255,0.05)" : "rgba(0,0,0,0.03)",
-              display: "flex",
-              gap: 1,
-              border: `1px solid ${
-                isDark ? "rgba(255,255,255,0.1)" : "transparent"
-              }`,
-              justifyContent: { xs: "space-evenly" },
-            }}
-          >
-            {["Breakfast", "Lunch", "Dinner"].map((type) => (
-              <Button
-                key={type}
-                variant={selectedType === type ? "contained" : "text"}
-                onClick={() => setSelectedType(type)}
-                sx={{
-                  borderRadius: "100px",
-                  px: { xs: 3, sm: 5 },
-                  py: 1.5,
-                  fontWeight: "bold",
-                  textTransform: "none",
-                  transition: "0.4s",
-                  boxShadow:
-                    selectedType === type
-                      ? "0 8px 20px rgba(0,0,0,0.2)"
-                      : "none",
-                  color: selectedType === type ? "#fff" : "text.secondary",
-                  "&:hover": {
-                    bgcolor:
-                      selectedType === type
-                        ? "primary.main"
-                        : "rgba(0,0,0,0.05)",
-                  },
-                }}
-              >
-                {type}
-              </Button>
-            ))}
-          </Box>
+          <ButtonsAllComp
+            selectedType={selectedType}
+            setSelectedType={setSelectedType}
+            isDark={isDark}
+          />
         )}
+
+        {/* ===== Cards ===== */}
 
         <AnimatePresence mode="wait">
           <motion.div
-            key={selectedType + currentPage} // يغير الأنيميشن عند تغيير النوع أو الصفحة
+            key={selectedType + currentPage}
             initial={{ opacity: 0, y: 20 }}
             animate={{ opacity: 1, y: 0 }}
             exit={{ opacity: 0, y: -20 }}
@@ -225,7 +195,7 @@ export default function Base({
           </motion.div>
         </AnimatePresence>
 
-        {/* ===== MODERN NUMERIC PAGINATION ===== */}
+        {/* =====  NUMERIC PAGINATION ===== */}
         {totalPages > 1 && (
           <Stack direction="row" spacing={1.5} justifyContent="center" mt={10}>
             {getPaginationButtons().map((btn, idx) => (
@@ -258,6 +228,8 @@ export default function Base({
           </Stack>
         )}
       </Container>
+
+      {/* ===== Snackbar ===== */}
 
       <SnackbarComp
         openSnackbar={openSnackbar}

@@ -1,8 +1,8 @@
 import { Box, Typography, Grid, Container, Paper } from "@mui/material";
-import Mission from "./Missions";
-import Counter from "./Counter";
-import TeamSec from "./TeamSec";
-import HeroSec from "./HeroSec";
+import Mission from "./Components/Missions";
+import Counter from "./Components/Counter";
+import TeamSec from "./Components/TeamSec";
+import HeroSec from "./Components/HeroSec";
 
 export default function AboutUs({
   theme,

@@ -6,10 +6,10 @@ import {
   Divider,
   useTheme,
 } from "@mui/material";
-import DialogReset from "./DialogReset";
-import FacGoogleLogin from "./Facebook&GoogleLogin";
-import EmailLogin from "./EmailLogin";
-import ContAdmin from "./ContDialogAdmin";
+import DialogReset from "./Components/DialogReset";
+import FacGoogleLogin from "./Components/Facebook&GoogleLogin";
+import EmailLogin from "./Components/EmailLogin";
+import ContAdmin from "./Components/ContDialogAdmin";
 import { motion } from "framer-motion";
 
 export default function Login({

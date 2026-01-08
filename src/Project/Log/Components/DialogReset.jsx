@@ -1,16 +1,20 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { clearResetState, resetPassword } from "../RTK/MainSlice";
-import { Alert, Button, Dialog, DialogActions, DialogContent, DialogTitle, Slide, TextField } from "@mui/material";
-
-const Transition = (props) => {
-  return <Slide direction="up" {...props} />;
-};
+import { clearResetState, resetPassword } from "../../RTK/MainSlice";
+import {
+  Alert,
+  Button,
+  Dialog,
+  DialogActions,
+  DialogContent,
+  DialogTitle,
+  TextField,
+} from "@mui/material";
 
 export default function DialogReset({ open, setOpen }) {
+  const { loading, success, error } = useSelector((st) => st.reset);
   const [email, setEmail] = useState("");
   const dispatch = useDispatch();
-  const { loading, success, error } = useSelector((st) => st.reset);
 
   const handleClose = () => {
     setOpen(false);
@@ -22,7 +26,6 @@ export default function DialogReset({ open, setOpen }) {
     <Dialog
       open={open}
       onClose={handleClose}
-      TransitionComponent={Transition}
       PaperProps={{
         sx: {
           borderRadius: 3,
@@ -51,7 +54,7 @@ export default function DialogReset({ open, setOpen }) {
 
         {error && (
           <Alert severity="error" sx={{ mt: 2 }}>
-            {error}
+            Sorry Something Went Wrong Try Again Later
           </Alert>
         )}
       </DialogContent>

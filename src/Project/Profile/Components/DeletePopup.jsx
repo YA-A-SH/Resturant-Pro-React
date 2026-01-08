@@ -1,4 +1,3 @@
-import React from "react";
 import {
   Box,
   Typography,
@@ -12,7 +11,7 @@ import { Close, WarningAmberRounded, DeleteSweep } from "@mui/icons-material";
 // eslint-disable-next-line no-unused-vars
 import { motion, AnimatePresence } from "framer-motion";
 
-const CustomPopup = ({ open, handleClose, handleDelete, id, msg1, msg2 }) => {
+const DeletePopup = ({ open, handleClose, handleDelete, id, msg1, msg2 }) => {
   const theme = useTheme();
   const isDark = theme.palette.mode === "dark";
 
@@ -166,4 +165,4 @@ const CustomPopup = ({ open, handleClose, handleDelete, id, msg1, msg2 }) => {
   );
 };
 
-export default CustomPopup;
+export default DeletePopup;

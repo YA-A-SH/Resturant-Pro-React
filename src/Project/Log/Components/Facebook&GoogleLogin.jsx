@@ -6,7 +6,6 @@ export default function FacGoogleLogin({
   googleError,
   handleGoogleLogin,
 }) {
-  // console.log(handleGoogleLogin);
   return (
     <>
       <Box sx={{ display: "flex", gap: 2 }}>

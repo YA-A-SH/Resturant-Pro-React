@@ -34,6 +34,8 @@ export default function ContProfile() {
     name: "User",
   });
 
+  // Variables
+
   const u = JSON.parse(localStorage.getItem("user"));
 
   const isDark = theme.palette.mode === "dark";
@@ -94,7 +96,9 @@ export default function ContProfile() {
       value: accType === "Email Account" ? u?.email : userMoreInfo.mail,
     },
   ];
+
   // ================== FUNCTIONS ==================
+
   const handleEditOpen = () => setEditOpen(true);
   const handleEditClose = () => setEditOpen(false);
 
@@ -145,39 +149,66 @@ export default function ContProfile() {
   function handleDeleteOrderClose() {
     setOpenDeleteOrderPopup(false);
   }
+
   function handleDeleteItemClose() {
     setOpenDeleteItemPopup(false);
   }
+
+  // ================== Obj For Props  ==================
+
+  const user = {
+    u: u,
+    userMoreInfo: userMoreInfo,
+    accType: accType,
+  };
+
+  const handlersAndToggles = {
+    handleEditOpen: handleEditOpen,
+    handleEditClose: handleEditClose,
+    handleSave: handleSave,
+    handleDeleteItem: handleDeleteItem,
+    handleDeleteCartOrder: handleDeleteCartOrder,
+    handleDeleteItemClose: handleDeleteItemClose,
+    handleDeleteOrderClose: handleDeleteOrderClose,
+    toggleFavorite: toggleFavorite,
+  };
+
+  const mealsTypes = {
+    fav: favMeals,
+  };
+
+  const state = {
+    editOpen: editOpen,
+    paid: paid,
+    openDeleteOrderPopup: openDeleteOrderPopup,
+    idForItem: idForItem,
+    idForCart: idForCart,
+    openDeleteItemPopup: openDeleteItemPopup,
+  };
+
+  const setState = {
+    setUserMoreInfo: setUserMoreInfo,
+    setOpenDeleteOrderPopup: setOpenDeleteOrderPopup,
+    setIdForItem: setIdForItem,
+    setIdForCart: setIdForCart,
+    setOpenDeleteItemPopup: setOpenDeleteItemPopup,
+  };
+
+  const variables = {
+    theme: theme,
+    info: info,
+    isDark: isDark,
+  };
   // ================== RENDER ==================
 
   return (
     <PreProfile
-      u={u}
-      accType={accType}
-      userMoreInfo={userMoreInfo}
-      handleEditOpen={handleEditOpen}
-      fav={favMeals}
-      toggleFavorite={toggleFavorite}
-      editOpen={editOpen}
-      handleEditClose={handleEditClose}
-      handleSave={handleSave}
-      setUserMoreInfo={setUserMoreInfo}
-      theme={theme}
-      paid={paid}
-      handleDeleteItem={handleDeleteItem}
-      info={info}
-      isDark={isDark}
-      openDeleteOrderPopup={openDeleteOrderPopup}
-      setOpenDeleteOrderPopup={setOpenDeleteOrderPopup}
-      idForItem={idForItem}
-      setIdForItem={setIdForItem}
-      setIdForCart={setIdForCart}
-      handleDeleteCartOrder={handleDeleteCartOrder}
-      idForCart={idForCart}
-      handleDeleteOrderClose={handleDeleteOrderClose}
-      handleDeleteItemClose={handleDeleteItemClose}
-      openDeleteItemPopup={openDeleteItemPopup}
-      setOpenDeleteItemPopup={setOpenDeleteItemPopup}
+      user={user}
+      handlersAndToggles={handlersAndToggles}
+      mealsTypes={mealsTypes}
+      state={state}
+      setState={setState}
+      variables={variables}
     />
   );
 }

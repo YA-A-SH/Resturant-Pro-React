@@ -8,7 +8,7 @@ import {
   Slide,
   TextField,
 } from "@mui/material";
-import SnackbarComp from "../Else/SnackbarComp";
+import SnackbarComp from "../../Else/Components/SnackbarComp";
 
 const Transition = (props) => {
   return <Slide direction="up" {...props} />;
@@ -29,7 +29,6 @@ export default function DialogAdmin({
 }) {
   useEffect(() => {
     if (trys === 0) {
-      // eslint-disable-next-line react-hooks/set-state-in-effect
       setIsAval(true);
       const timer = setTimeout(() => {
         setIsAval(false);
@@ -37,7 +36,7 @@ export default function DialogAdmin({
       }, 5000);
       return () => clearTimeout(timer);
     }
-  }, [trys]);
+  }, [setIsAval, setTrys, trys]);
 
   return (
     <Dialog

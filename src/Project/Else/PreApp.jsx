@@ -4,24 +4,24 @@ import { lazy, Suspense } from "react";
 
 //************* */ MUI ******************
 
-import { Alert, Fab, Snackbar } from "@mui/material";
+import { Fab } from "@mui/material";
 import { ShoppingCart } from "@mui/icons-material";
 
 // ************** Component ****************
 
-const Head = lazy(() => import("./Heading"));
+const Head = lazy(() => import("./Components/Heading"));
 const ContCart = lazy(() => import("../Cart/ContCart"));
 const ContHome = lazy(() => import("../Home/ContHome"));
-const Meals = lazy(() => import("../Main/Meels"));
-const Drinks = lazy(() => import("../Main/Drinks"));
-const Sweets = lazy(() => import("../Main/Sweet"));
+const Meals = lazy(() => import("../Main/Components/Meels"));
+const Drinks = lazy(() => import("../Main/Components/Drinks"));
+const Sweets = lazy(() => import("../Main/Components/Sweet"));
 const Profile = lazy(() => import("../Profile/ContProfile"));
 
 import ProtectedRoute from "../Routes/ProtectedRoute";
 import ContAboutUs from "../About_Us/ContAboutAs";
 import ContLogin from "../Log/ContLogin";
 import Logout from "../Log/Logout";
-import Footer from "./Footer";
+import Footer from "./Components/Footer";
 
 // ************** Router ****************
 
@@ -34,7 +34,7 @@ import DrinksSkeleton from "../Skeleton/DrinksSkeleton";
 import SweetsSkiliton from "../Skeleton/SweetsSkiliton";
 import { AnimatePresence } from "framer-motion";
 import PageWrapper from "../Routes/Wrapper";
-import SnackbarComp from "./SnackbarComp";
+import SnackbarComp from "./Components/SnackbarComp";
 
 export default function PreApp({
   mode,

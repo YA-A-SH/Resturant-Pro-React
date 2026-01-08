@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
-import { fetchMeals } from "../RTK/MainSlice";
+import { fetchMeals } from "../../RTK/MainSlice";
 import { useDispatch, useSelector } from "react-redux";
-import Base from "./AllComp";
+import Base from "../AllComp";
 
 function getMealType(category) {
   if (category === "Breakfast" || category === "Side" || category === "Starter")

@@ -15,9 +15,7 @@ export default function Theme({ mode, children }) {
             main: "#1e1e26",
           },
           background: {
-            // أسود مطفي (Matte Black)
             default: mode === "dark" ? "#0D0D0D" : "#FAFAFA",
-            // رمادي مزرق (Slate Gray) يعطي إحساس بالنظافة
             paper: mode === "dark" ? "#2e2e34ff" : "#ffffff",
           },
           text: {
@@ -32,8 +30,8 @@ export default function Theme({ mode, children }) {
           MuiPaper: {
             styleOverrides: {
               root: {
-                backgroundImage: "none", // لإزالة الـ overlay الافتراضي المزعج في MUI
-                borderRadius: "16px", // حواف ناعمة تعطي فخامة
+                backgroundImage: "none",
+                borderRadius: "16px",
               },
             },
           },

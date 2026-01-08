@@ -1,0 +1,232 @@
+import { ArrowForward, LocalMall } from "@mui/icons-material";
+import {
+  Avatar,
+  AvatarGroup,
+  Box,
+  Button,
+  Stack,
+  Typography,
+  useTheme,
+} from "@mui/material";
+import { useNavigate } from "react-router-dom";
+
+export default function HeaderHome() {
+  const navigate = useNavigate();
+  const theme = useTheme();
+  const isDark = theme.palette.mode === "dark";
+
+  return (
+    <>
+      <Box
+        sx={{
+          display: "flex",
+          flexDirection: { xs: "column", md: "row-reverse" },
+          alignItems: "center",
+          justifyContent: "space-between",
+          textAlign: { xs: "center", md: "left" },
+          width: "100%",
+          gap: { xs: 5, md: 15, lg: 25, xl: 35 },
+          maxWidth: "1400px",
+          mx: "auto",
+        }}
+      >
+        {/* --- Logo --- */}
+        <Box
+          component="img"
+          src="/favBig.png"
+          alt="Logo"
+          sx={{
+            height: {
+              xs: 280,
+              sm: 320,
+              md: 390,
+              lg: 440,
+            },
+            filter: isDark
+              ? "brightness(1.2) drop-shadow(0 0 20px rgba(255,255,255,0.1))"
+              : "none",
+            transition: "all 0.4s ease",
+            "&:hover": { transform: "rotate(5deg) scale(1.1)" },
+            order: { xs: -1, xl: 2 },
+          }}
+        />
+
+        {/* --- Head Title--- */}
+
+        <Box sx={{ display: "flex", flexDirection: "column", gap: "15px" }}>
+          <Typography
+            variant="overline"
+            sx={{
+              color: "primary.main",
+              fontWeight: 800,
+              letterSpacing: { xs: 1, md: 3 },
+              fontSize: {
+                xs: "0.7rem",
+                sm: "0.8rem",
+                md: "0.9rem",
+                lg: "1rem",
+              },
+            }}
+          >
+            Pure Taste, Pure Quality
+          </Typography>
+
+          <Typography
+            variant="h1"
+            sx={{
+              fontSize: {
+                xs: "2.2rem",
+                sm: "2.7rem",
+                md: "3.2rem",
+                lg: "4.1rem",
+              },
+              fontWeight: 900,
+              lineHeight: 1,
+              mt: 1,
+              background: isDark
+                ? "linear-gradient(to right, #fff, #A1A1A6)"
+                : "linear-gradient(to right, #1d1d1f, #434343)",
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+            }}
+          >
+            Experience Real <br />
+            <Box
+              component="span"
+              sx={{
+                color: "primary.main",
+                WebkitTextFillColor: "initial",
+              }}
+            >
+              Taste
+            </Box>{" "}
+            in Gaza
+          </Typography>
+
+          {/* --- Description --- */}
+          <Typography
+            variant="body1"
+            sx={{
+              color: "text.secondary",
+              maxWidth: { xs: "90%", md: 550 },
+              lineHeight: 1.7,
+              fontSize: { xs: "0.95rem", md: "1.1rem" },
+              fontWeight: 400,
+            }}
+          >
+            Discover a world of premium flavors crafted with passion. From our
+            kitchen to your doorstep, with love and Palestinian pride.
+          </Typography>
+
+          {/* --- Buttons --- */}
+          <Stack
+            direction={{ xs: "column", sm: "row" }}
+            spacing={2}
+            sx={{
+              width: "100%",
+              justifyContent: { xs: "center", md: "flex-start" },
+              alignItems: "center",
+              pt: 2,
+            }}
+          >
+            <Button
+              variant="contained"
+              size="large"
+              endIcon={<LocalMall />}
+              sx={{
+                width: { xs: "100%", sm: "200px", md: "auto" },
+                borderRadius: 3,
+                px: { xs: 2, md: 5 },
+                py: 1.8,
+                fontSize: { xs: "0.9rem", md: "1rem" },
+                textTransform: "none",
+                boxShadow: "0 10px 20px -5px rgba(255, 87, 34, 0.3)",
+                whiteSpace: "nowrap",
+              }}
+              onClick={() => navigate("/meals")}
+            >
+              Order Now
+            </Button>
+
+            <Button
+              variant="outlined"
+              size="large"
+              color="primary"
+              endIcon={<ArrowForward />}
+              sx={{
+                width: { xs: "100%", sm: "200px", md: "auto" },
+                borderRadius: 3,
+                px: { xs: 2, md: 5 },
+                py: 1.8,
+                fontSize: { xs: "0.9rem", md: "1rem" },
+                textTransform: "none",
+                whiteSpace: "nowrap",
+                "&:hover": {
+                  borderColor: "primary.main",
+                  bgcolor: "rgba(255, 87, 34, 0.04)", // خلفية خفيفة جداً عند الحوم
+                },
+              }}
+              onClick={() => navigate("/aboutUs")}
+            >
+              About Us
+            </Button>
+          </Stack>
+
+          {/* --- Social Proof --- */}
+          <Stack
+            direction={{ xs: "column", sm: "row" }}
+            alignItems="center"
+            spacing={2}
+            sx={{
+              p: 1.5,
+              borderRadius: 4,
+              bgcolor: isDark ? "rgba(255,255,255,0.03)" : "rgba(0,0,0,0.02)",
+              width: "fit-content",
+              mx: { xs: "auto", md: 0 },
+              mt: 2,
+              border: "1px solid",
+              borderColor: isDark
+                ? "rgba(255,255,255,0.05)"
+                : "rgba(0,0,0,0.05)",
+            }}
+          >
+            {/* --- User's Image's --- */}
+
+            <AvatarGroup
+              max={4}
+              sx={{
+                "& .MuiAvatar-root": {
+                  width: 35,
+                  height: 35,
+                  border: `2px solid ${
+                    isDark ? theme.palette.background.paper : "#fff"
+                  }`,
+                },
+              }}
+            >
+              <Avatar src="https://randomuser.me/api/portraits/men/1.jpg" />
+              <Avatar src="https://randomuser.me/api/portraits/women/18.jpg" />
+              <Avatar src="https://randomuser.me/api/portraits/men/22.jpg" />
+              <Avatar src="https://randomuser.me/api/portraits/women/25.jpg" />
+            </AvatarGroup>
+
+            <Typography
+              variant="body2"
+              color="text.secondary"
+              sx={{
+                fontWeight: 600,
+                textAlign: { xs: "center", sm: "left" }, // النص نفسه يتوسط في الموبايل
+              }}
+            >
+              Join{" "}
+              <Box component="span" sx={{ color: "primary.main" }}>
+                2,000+
+              </Box>{" "}
+              happy foodies
+            </Typography>
+          </Stack>
+        </Box>
+      </Box>
+    </>
+  );
+}

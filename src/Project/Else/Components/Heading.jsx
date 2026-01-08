@@ -4,7 +4,7 @@ import { useState } from "react";
 
 //Component
 
-import ContNav from "../Navbar/ContNav";
+import ContNav from "../../Navbar/ContNav";
 
 // Lib
 

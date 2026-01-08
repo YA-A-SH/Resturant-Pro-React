@@ -1,33 +1,43 @@
-import { useContext, useEffect, useState } from "react";
+// Hooks
+import { useEffect, useState } from "react";
+
+//Lib
+
 import { useTheme } from "@mui/material";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
+
+// Comp
 import { fetchMeals } from "../RTK/MainSlice";
 import HomePre from "./PresenterHome";
-import { OpenSnackbarContext } from "../Context/MainContext";
 
 export default function ContHome() {
+  // Hooks Use
+  const [snackbar, setSnackbar] = useState({
+    open: false,
+    msg: "",
+    color: "",
+  });
+  const { meals, loading, error } = useSelector((state) => state.meals);
   const [popularMeals, setPopularMeals] = useState([]);
   const location = useLocation();
-  const { openSnackbar, setOpenSnackbar } = useContext(OpenSnackbarContext);
-  const navigate = useNavigate();
   const dispatch = useDispatch();
-  const { meals, loading, error } = useSelector((state) => state.meals);
   const theme = useTheme();
 
-  const handleCloseSnackbar = (reason) => {
-    if (reason === "clickaway") {
-      return;
-    }
-    setOpenSnackbar(false);
-  };
+  // Effects
+
   useEffect(() => {
     if (location.state?.loginSuccess) {
       // eslint-disable-next-line react-hooks/set-state-in-effect
-      // setOpen(true);
+      setSnackbar({
+        open: true,
+        msg: "Login successful 👋",
+        color: "success",
+      });
+
       window.history.replaceState({}, document.title);
     }
-  }, [location.state]);
+  }, [location.state, setSnackbar]);
 
   useEffect(() => {
     dispatch(fetchMeals());
@@ -54,6 +64,15 @@ export default function ContHome() {
     }
   }, [meals]);
 
+  // Functions
+
+  const handleCloseSnackbar = (reason) => {
+    if (reason === "clickaway") {
+      return;
+    }
+    setSnackbar({ open: false, msg: "", color: "" });
+  };
+
   function toggleFavorite(id) {
     const favFromLS = JSON.parse(localStorage.getItem("fav")) || [];
     const isFav = favFromLS.includes(id);
@@ -72,19 +91,19 @@ export default function ContHome() {
     );
   }
 
+  // Variables
+
   const isDark = theme.palette.mode === "dark";
 
   return (
     <HomePre
       loading={loading}
       error={error}
-      theme={theme}
       popularMeals={popularMeals}
       toggleFavorite={toggleFavorite}
       isDark={isDark}
-      openSnackbar={openSnackbar}
-      setOpenSnackbar={setOpenSnackbar}
-      navigate={navigate}
+      snackbar={snackbar}
+      setSnackbar={setSnackbar}
       handleCloseSnackbar={handleCloseSnackbar}
     />
   );

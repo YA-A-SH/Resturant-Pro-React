@@ -1,5 +1,4 @@
 import {
-  HourglassBottomOutlined,
   ShoppingBagOutlined,
   ReceiptLongRounded,
   DeleteSweepRounded,
@@ -17,7 +16,6 @@ import {
   Chip,
   IconButton,
   Tooltip,
-  Button,
 } from "@mui/material";
 // eslint-disable-next-line no-unused-vars
 import { AnimatePresence, motion } from "framer-motion";
@@ -40,7 +38,7 @@ export default function PaidOrder({
 
   return (
     <Box sx={{ width: "95%", mx: "auto", mt: 10, mb: 5 }}>
-      {/* Header القسم */}
+      {/* Header  */}
       <Stack direction="column" alignItems="center" spacing={1} mb={6}>
         <Typography
           variant="h3"
@@ -101,7 +99,7 @@ export default function PaidOrder({
                       : "0 15px 35px rgba(0,0,0,0.05)",
                   }}
                 >
-                  {/* --- Header الفاتورة (مع زر حذف الكل) --- */}
+                  {/* --- Header--- */}
                   <Box
                     sx={{
                       p: 3,

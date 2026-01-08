@@ -54,7 +54,7 @@ export default function MainNav({
 
         <Divider sx={{ my: 1.5, opacity: 0.6 }} />
 
-        {/* كرت التحكم في اللغة والـ Theme */}
+        {/* Selectors */}
         <Box
           sx={{
             p: 1,
@@ -115,6 +115,8 @@ export default function MainNav({
             </Button>
           </Stack>
         </Box>
+
+        {/* Logout */}
 
         <Button
           component={Link}

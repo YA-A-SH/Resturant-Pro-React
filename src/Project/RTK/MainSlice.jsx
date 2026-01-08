@@ -69,7 +69,7 @@ export const fetchDrinks = createAsyncThunk(
 const drinkSlice = createSlice({
   name: "drink",
   initialState: {
-    drinks: [],
+    meals: [],
     loading: false,
     error: null,
   },
@@ -78,10 +78,10 @@ const drinkSlice = createSlice({
     builder
       .addCase(fetchDrinks.pending, (state) => {
         state.loading = true;
-        (state.error = null), (state.drinks = []);
+        (state.error = null), (state.meals = []);
       })
       .addCase(fetchDrinks.fulfilled, (state, action) => {
-        (state.loading = false), (state.drinks = action.payload);
+        (state.loading = false), (state.meals = action.payload);
       })
       .addCase(fetchDrinks.rejected, (state, action) => {
         (state.loading = false),
@@ -107,7 +107,7 @@ export const fetchSweets = createAsyncThunk(
 const sweetSlice = createSlice({
   name: "sweet",
   initialState: {
-    sweets: [],
+    meals: [],
     loading: false,
     error: null,
   },
@@ -116,10 +116,10 @@ const sweetSlice = createSlice({
     builder
       .addCase(fetchSweets.pending, (state) => {
         state.loading = true;
-        (state.error = null), (state.sweets = []);
+        (state.error = null), (state.meals = []);
       })
       .addCase(fetchSweets.fulfilled, (state, action) => {
-        (state.loading = false), (state.sweets = action.payload);
+        (state.loading = false), (state.meals = action.payload);
       })
       .addCase(fetchSweets.rejected, (state, action) => {
         (state.loading = false),

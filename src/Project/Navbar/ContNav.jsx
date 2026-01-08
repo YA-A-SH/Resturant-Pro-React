@@ -46,11 +46,11 @@ export default function ContNav({ showNav, setShowNav, setMode }) {
     <>
       <PreNav
         showNav={showNav}
-        setMode={setMode}
         menuItems={menuItems}
+        location={location}
         closeNav={closeNav}
         isDark={isDark}
-        location={location}
+        setMode={setMode}
       />
     </>
   );

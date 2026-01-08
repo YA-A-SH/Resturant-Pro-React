@@ -10,7 +10,7 @@ import {
 // ************** Components ****************
 
 import ContApp from "./Project/Else/ContApp";
-import Theme from "./Project/Else/Theme";
+import Theme from "./Project/Else/Components/Theme";
 
 // ************* React **********************
 
@@ -19,7 +19,7 @@ import { useState } from "react";
 function App() {
   const [mode, setMode] = useState("light");
   return (
-    <> 
+    <>
       <Theme mode={mode}>
         <IsAdminProvider>
           <FavProvider>

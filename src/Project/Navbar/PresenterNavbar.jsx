@@ -1,7 +1,7 @@
 import { Box, Typography, Stack, IconButton } from "@mui/material";
 import { CloseRounded } from "@mui/icons-material";
 import { AnimatePresence, motion } from "framer-motion";
-import MainNav from "./MainNav";
+import MainNav from "./Components/MainNav";
 
 export default function PreNav({
   showNav,

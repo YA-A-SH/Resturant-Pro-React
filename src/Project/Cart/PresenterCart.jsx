@@ -22,11 +22,11 @@ import { AnimatePresence, motion } from "framer-motion";
 
 // Context
 
-import DialogCont from "./DialogContent";
+import DialogCont from "./Components/DialogContent";
 
 // Comp
 
-import IsEmpty from "./IsEmpty";
+import IsEmpty from "./Components/IsEmpty";
 import React from "react";
 
 const CartPre = React.memo(

@@ -1,37 +1,43 @@
 import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
-import { fetchDrinks } from "../RTK/MainSlice";
-import Base from "./AllComp";
+import { fetchDrinks, fetchSweets } from "../../RTK/MainSlice";
+import Base from "../AllComp";
 
-export default function Drinks() {
-  const { drinks, loading, error } = useSelector((st) => st.drinks);
-  const [preparedDrinks, setPreparedDrinks] = useState([]);
+export default function SweetsAndDrinks({ type }) {
+  const { meals, loading, error } = useSelector((st) =>
+    type === "drinks" ? st.drinks : st.sweet
+  );
+  const [preparedMeals, setPreparedMeals] = useState([]);
   const [sortAscending, setSortAscending] = useState(true);
 
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(fetchDrinks());
-  }, [dispatch]);
+    const fetchType = type === "drinks" ? fetchDrinks : fetchSweets;
+    dispatch(fetchType());
+  }, [dispatch, type]);
 
   useEffect(() => {
-    if (drinks.length) {
+    if (meals.length) {
       const favFromLS = JSON.parse(localStorage.getItem("fav")) || [];
 
-      const fixedDrinks = drinks.map((drink) => ({
-        id: drink.idDrink,
-        title: drink.strDrink,
-        image: drink.strDrinkThumb,
+      const fixedMeals = meals.map((meal) => ({
+        id: type === "drinks" ? meal.idDrink : meal.idMeal,
+        title: type === "drinks" ? meal.strDrink : meal.strMeal,
+        image: type === "drinks" ? meal.strDrinkThumb : meal.strMealThumb,
         price: Number((Math.random() * 15 + 5).toFixed(2)),
         rate: Number((Math.random() * 2 + 3).toFixed(1)),
-        favorite: favFromLS.includes(drink.idDrink),
+        favorite:
+          type === "drinks"
+            ? favFromLS.includes(meal.idDrink)
+            : favFromLS.includes(meal.idMeal),
       }));
       // eslint-disable-next-line react-hooks/set-state-in-effect
-      setPreparedDrinks(fixedDrinks);
+      setPreparedMeals(fixedMeals);
     }
-  }, [drinks]);
+  }, [meals, type]);
 
-  const sortedDrinks = [...preparedDrinks].sort((a, b) =>
+  const sortedMeals = [...preparedMeals].sort((a, b) =>
     sortAscending ? a.price - b.price : b.price - a.price
   );
 
@@ -46,7 +52,7 @@ export default function Drinks() {
       localStorage.setItem("fav", JSON.stringify([...favFromLS, id]));
     }
 
-    setPreparedDrinks((prevMeals) =>
+    setPreparedMeals((prevMeals) =>
       prevMeals.map((meal) =>
         meal.id === id ? { ...meal, favorite: !meal.favorite } : meal
       )
@@ -56,11 +62,15 @@ export default function Drinks() {
   return (
     <Base
       loading={loading}
-      data={sortedDrinks}
+      data={sortedMeals}
       error={error}
-      id={"2"}
-      msg="Our Drinks"
-      body=" Choose your perfect refreshment"
+      id="drinks"
+      msg={type === "drinks" ? "Our Drinks" : "Our Best Sweets"}
+      body={
+        type === "drinks"
+          ? " Choose your perfect refreshment"
+          : " Choose your perfect sweet"
+      }
       sortAscending={sortAscending}
       setSortAscending={setSortAscending}
       toggleFavorite={toggleFavorite}
