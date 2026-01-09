@@ -22,10 +22,10 @@ import { AnimatePresence, motion } from "framer-motion";
 
 export default function PaidOrder({
   paid,
-  setOpenOrder,
-  setIdForCart,
-  setIdForItem,
-  setOpenItem,
+  setDeletePopupInfo,
+  handleClose,
+  handleDelete,
+  handleDeleteItem,
 }) {
   const theme = useTheme();
   const isDark = theme.palette.mode === "dark";
@@ -152,8 +152,14 @@ export default function PaidOrder({
                           color="error"
                           size="small"
                           onClick={() => {
-                            setOpenOrder(true);
-                            setIdForCart(order.id);
+                            setDeletePopupInfo({
+                              id: order.id,
+                              open: true,
+                              handleClose: handleClose,
+                              handleDelete: handleDelete,
+                              msg1: "Confirm Action",
+                              msg2: "Are you sure you want to delete the order ? This action cannot be undone.",
+                            });
                           }}
                           sx={{
                             bgcolor: "error.soft",
@@ -166,7 +172,6 @@ export default function PaidOrder({
                     </Stack>
                   </Box>
 
-                  {/* --- قائمة العناصر الداخلية --- */}
                   <Box sx={{ p: 3 }}>
                     <Stack spacing={2}>
                       {order.cartItems.map((item) => (
@@ -220,7 +225,6 @@ export default function PaidOrder({
                             </Box>
                           </Stack>
 
-                          {/* أزرار الأكشن للعنصر الفردي */}
                           <Stack direction="row" spacing={1}>
                             <Tooltip title="Edit Item">
                               <IconButton
@@ -239,9 +243,15 @@ export default function PaidOrder({
                                 size="small"
                                 color="error"
                                 onClick={() => {
-                                  setOpenItem(true);
-                                  setIdForItem(item.id);
-                                  setIdForCart(order.id);
+                                  setDeletePopupInfo({
+                                    id: item.id,
+                                    open: true,
+                                    handleClose: handleClose,
+                                    handleDelete: () =>
+                                      handleDeleteItem(order.id, item.id),
+                                    msg1: "Confirm Action",
+                                    msg2: "Are you sure you want to delete this dish  ? This action cannot be undone.",
+                                  });
                                 }}
                                 sx={{ bgcolor: "error.soft" }}
                               >

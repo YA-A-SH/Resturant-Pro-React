@@ -10,12 +10,16 @@ import {
 } from "@mui/icons-material";
 
 export default function ContProfile() {
-  const [idForItem, setIdForItem] = useState("");
-  const [idForCart, setIdForCart] = useState("");
-  const theme = useTheme();
-  const [openDeleteOrderPopup, setOpenDeleteOrderPopup] = useState(false);
-  const [openDeleteItemPopup, setOpenDeleteItemPopup] = useState(false);
+  const [deletePopupInfo, setDeletePopupInfo] = useState({
+    id: "",
+    open: "",
+    handleClose: "",
+    handleDelete: "",
+    msg1: "",
+    msg2: "",
+  });
 
+  const theme = useTheme();
   const [paid, setPaid] = useState(() => {
     const saved = localStorage.getItem("payedItems");
     return saved ? JSON.parse(saved) : [];
@@ -122,22 +126,22 @@ export default function ContProfile() {
     );
   }
 
-  function handleDeleteItem(id) {
-    setPaid((prev) => {
-      const updated = prev
-        .map((order) =>
-          order.id === idForCart
-            ? {
-                ...order,
-                cartItems: order.cartItems.filter((item) => item.id !== id),
-              }
-            : order
-        )
-        .filter((order) => order.cartItems.length > 0);
-
-      return updated;
-    });
-  }
+function handleDeleteItem(cartId, itemId) {
+  setPaid((prev) =>
+    prev
+      .map((order) =>
+        order.id === cartId
+          ? {
+              ...order,
+              cartItems: order.cartItems.filter(
+                (item) => item.id !== itemId
+              ),
+            }
+          : order
+      )
+      .filter((order) => order.cartItems.length > 0)
+  );
+}
 
   function handleDeleteCartOrder(id) {
     setPaid((prev) => {
@@ -146,12 +150,8 @@ export default function ContProfile() {
     });
   }
 
-  function handleDeleteOrderClose() {
-    setOpenDeleteOrderPopup(false);
-  }
-
-  function handleDeleteItemClose() {
-    setOpenDeleteItemPopup(false);
+  function handleDeletePopupClose() {
+    setDeletePopupInfo({ ...deletePopupInfo, open: false });
   }
 
   // ================== Obj For Props  ==================
@@ -168,8 +168,7 @@ export default function ContProfile() {
     handleSave: handleSave,
     handleDeleteItem: handleDeleteItem,
     handleDeleteCartOrder: handleDeleteCartOrder,
-    handleDeleteItemClose: handleDeleteItemClose,
-    handleDeleteOrderClose: handleDeleteOrderClose,
+    handleDeletePopupClose: handleDeletePopupClose,
     toggleFavorite: toggleFavorite,
   };
 
@@ -180,18 +179,12 @@ export default function ContProfile() {
   const state = {
     editOpen: editOpen,
     paid: paid,
-    openDeleteOrderPopup: openDeleteOrderPopup,
-    idForItem: idForItem,
-    idForCart: idForCart,
-    openDeleteItemPopup: openDeleteItemPopup,
+    deletePopupInfo: deletePopupInfo,
   };
 
   const setState = {
     setUserMoreInfo: setUserMoreInfo,
-    setOpenDeleteOrderPopup: setOpenDeleteOrderPopup,
-    setIdForItem: setIdForItem,
-    setIdForCart: setIdForCart,
-    setOpenDeleteItemPopup: setOpenDeleteItemPopup,
+    setDeletePopupInfo: setDeletePopupInfo,
   };
 
   const variables = {

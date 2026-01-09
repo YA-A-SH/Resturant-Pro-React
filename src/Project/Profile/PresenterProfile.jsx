@@ -26,29 +26,15 @@ export default function PreProfile({
     handleSave,
     handleDeleteItem,
     handleDeleteCartOrder,
-    handleDeleteItemClose,
-    handleDeleteOrderClose,
+    handleDeletePopupClose,
     toggleFavorite,
   } = handlersAndToggles;
 
   const { fav } = mealsTypes;
 
-  const {
-    editOpen,
-    paid,
-    openDeleteOrderPopup,
-    idForItem,
-    idForCart,
-    openDeleteItemPopup,
-  } = state;
+  const { editOpen, paid, deletePopupInfo } = state;
 
-  const {
-    setUserMoreInfo,
-    setOpenDeleteOrderPopup,
-    setIdForItem,
-    setIdForCart,
-    setOpenDeleteItemPopup,
-  } = setState;
+  const { setUserMoreInfo, setDeletePopupInfo } = setState;
 
   const { theme, info, isDark } = variables;
 
@@ -89,10 +75,10 @@ export default function PreProfile({
           <Box sx={{ mt: 8 }}>
             <PaidOrder
               paid={paid}
-              setOpenOrder={setOpenDeleteOrderPopup}
-              setOpenItem={setOpenDeleteItemPopup}
-              setIdForCart={setIdForCart}
-              setIdForItem={setIdForItem}
+              setDeletePopupInfo={setDeletePopupInfo}
+              handleClose={handleDeletePopupClose}
+              handleDelete={handleDeleteCartOrder}
+              handleDeleteItem={handleDeleteItem}
             />
           </Box>
         )}
@@ -113,20 +99,12 @@ export default function PreProfile({
       />
 
       <DeletePopup
-        id={idForCart}
-        open={openDeleteOrderPopup}
-        handleClose={handleDeleteOrderClose}
-        handleDelete={handleDeleteCartOrder}
-        msg1="Confirm Action"
-        msg2="Are you sure you want to delete the order ? This action cannot be undone."
-      />
-      <DeletePopup
-        id={idForItem}
-        open={openDeleteItemPopup}
-        handleClose={handleDeleteItemClose}
-        handleDelete={handleDeleteItem}
-        msg1="Confirm Action"
-        msg2="Are you sure you want to delete this dish ? This action cannot be undone."
+        id={deletePopupInfo.id}
+        open={deletePopupInfo.open}
+        handleClose={deletePopupInfo.handleClose}
+        handleDelete={deletePopupInfo.handleDelete}
+        msg1={deletePopupInfo.msg1}
+        msg2={deletePopupInfo.msg2}
       />
     </Box>
   );

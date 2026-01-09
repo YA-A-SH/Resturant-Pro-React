@@ -15,7 +15,6 @@ const DeletePopup = ({ open, handleClose, handleDelete, id, msg1, msg2 }) => {
   const theme = useTheme();
   const isDark = theme.palette.mode === "dark";
 
-  console.log(id);
   return (
     <AnimatePresence>
       {open && (
