@@ -72,6 +72,7 @@ const CartPre = React.memo(
                 }`,
               },
             }}
+            aria-label="Cart Items"
           >
             <DialogTitle
               sx={{
@@ -99,6 +100,7 @@ const CartPre = React.memo(
                     : "rgba(0,0,0,0.05)",
                   "&:hover": { bgcolor: "error.main", color: "white" },
                 }}
+                aria-label="Close Cart"
               >
                 <Close fontSize="small" />
               </IconButton>
@@ -174,6 +176,7 @@ const CartPre = React.memo(
                       flex: 1,
                       py: 1.5,
                     }}
+                    aria-label="Clear Cart"
                   >
                     Clear Cart
                   </Button>
@@ -196,6 +199,7 @@ const CartPre = React.memo(
                       boxShadow: "0 12px 24px rgba(0,0,0,0.2)",
                       textTransform: "none",
                     }}
+                    aria-label="Proceed to Checkout"
                   >
                     Proceed to Checkout
                   </Button>

@@ -90,6 +90,7 @@ export default function FoodCard({
           backdropFilter: "blur(4px)",
           "&:hover": { backgroundColor: "primary.main", color: "#fff" },
         }}
+        aria-label="Add To Favorite"
       >
         {favorite ? (
           <FavoriteIcon color="error" />
@@ -147,6 +148,7 @@ export default function FoodCard({
                 boxShadow: "none",
               },
             }}
+            aria-label="Add"
           >
             Add
           </Button>
@@ -161,6 +163,7 @@ export default function FoodCard({
               px: 2,
               "&:hover": { borderColor: "primary.main" },
             }}
+            aria-label="More Info"
           >
             Info
           </Button>
@@ -200,6 +203,7 @@ export default function FoodCard({
             onClick={() => setOpenDet(false)}
             color="warning"
             variant="outlined"
+            aria-label="Close"
           >
             Close
           </Button>
@@ -207,6 +211,7 @@ export default function FoodCard({
             variant="contained"
             onClick={handleAddToCartClick}
             sx={{ borderRadius: "10px" }}
+            aria-label="Order Now"
           >
             Order Now
           </Button>

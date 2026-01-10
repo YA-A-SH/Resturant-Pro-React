@@ -83,6 +83,7 @@ export default function DialogCont({
                         size="small"
                         color="primary"
                         onClick={() => onDecrease(item.id)}
+                        aria-label="Decrease"
                       >
                         <RemoveCircleOutline fontSize="small" />
                       </IconButton>
@@ -93,6 +94,7 @@ export default function DialogCont({
                         size="small"
                         color="primary"
                         onClick={() => onIncrease(item.id)}
+                        aria-label="Increase"
                       >
                         <AddCircleOutline fontSize="small" />
                       </IconButton>

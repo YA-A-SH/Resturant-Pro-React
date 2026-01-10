@@ -204,10 +204,22 @@ export default function HeaderHome() {
                 },
               }}
             >
-              <Avatar src="https://randomuser.me/api/portraits/men/1.jpg" />
-              <Avatar src="https://randomuser.me/api/portraits/women/18.jpg" />
-              <Avatar src="https://randomuser.me/api/portraits/men/22.jpg" />
-              <Avatar src="https://randomuser.me/api/portraits/women/25.jpg" />
+              <Avatar
+                src="https://randomuser.me/api/portraits/men/1.jpg"
+                alt="user"
+              />
+              <Avatar
+                src="https://randomuser.me/api/portraits/women/18.jpg"
+                alt="user"
+              />
+              <Avatar
+                src="https://randomuser.me/api/portraits/men/22.jpg"
+                alt="user"
+              />
+              <Avatar
+                src="https://randomuser.me/api/portraits/women/25.jpg"
+                alt="user"
+              />
             </AvatarGroup>
 
             <Typography

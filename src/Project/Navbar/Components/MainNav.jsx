@@ -136,6 +136,7 @@ export default function MainNav({
             fontWeight: "bold",
             "&:hover": { bgcolor: "error.light", color: "white" },
           }}
+          
           aria-label="Logout BTN"
         >
           Log out
