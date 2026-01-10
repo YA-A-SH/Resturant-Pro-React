@@ -64,6 +64,10 @@ export default function ContHome() {
     }
   }, [meals]);
 
+  useEffect(() => {
+    document.title = "Zeus Restaurant | Home";
+  }, []);
+
   // Functions
 
   const handleCloseSnackbar = (reason) => {

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Login from "./Login";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
@@ -11,6 +11,10 @@ export default function ContLogin() {
 
   const navigate = useNavigate();
   const dispatch = useDispatch();
+
+  useEffect(() => {
+    document.title = "Zeus Restaurant | Login";
+  }, []);
 
   const { loading: googleLoading, error: googleError } = useSelector(
     (st) => st.google

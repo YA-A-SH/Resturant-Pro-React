@@ -13,6 +13,12 @@ export default function SweetsAndDrinks({ type }) {
   const dispatch = useDispatch();
 
   useEffect(() => {
+    type === "drinks"
+      ? (document.title = "Zeus Restaurant | Drinks")
+      : (document.title = "Zeus Restaurant | Sweets");
+  }, [type]);
+
+  useEffect(() => {
     const fetchType = type === "drinks" ? fetchDrinks : fetchSweets;
     dispatch(fetchType());
   }, [dispatch, type]);

@@ -4,7 +4,7 @@ import { lazy, Suspense } from "react";
 
 //************* */ MUI ******************
 
-import { Fab } from "@mui/material";
+import { Box, Fab } from "@mui/material";
 import { ShoppingCart } from "@mui/icons-material";
 
 // ************** Component ****************
@@ -46,7 +46,7 @@ export default function PreApp({
   setSnackbar,
 }) {
   return (
-    <>
+    <Box component="main">
       {/* //  Heading  */}
 
       <Head setMode={setMode} mode={mode} />
@@ -168,10 +168,11 @@ export default function PreApp({
           boxShadow: "0 0 20px rgba(255,152,0,0.6)",
         }}
         onClick={() => setShowCart(true)}
+        aria-label="Shopping Cart"
       >
         <ShoppingCart />
       </Fab>
       <ContCart setSnackbar={setSnackbar} />
-    </>
+    </Box>
   );
 }

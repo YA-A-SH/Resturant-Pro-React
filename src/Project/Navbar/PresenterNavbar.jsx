@@ -52,7 +52,7 @@ export default function PreNav({
             <Typography variant="h4" fontWeight="900" color="primary">
               Menu
             </Typography>
-            <IconButton size="small" onClick={closeNav}>
+            <IconButton size="small" onClick={closeNav} aria-label="CloseNav">
               <CloseRounded fontSize="inherit" />
             </IconButton>
           </Stack>

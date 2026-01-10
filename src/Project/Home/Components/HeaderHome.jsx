@@ -16,7 +16,7 @@ export default function HeaderHome() {
   const isDark = theme.palette.mode === "dark";
 
   return (
-    <>
+    <Box component="main">
       <Box
         sx={{
           display: "flex",
@@ -227,6 +227,6 @@ export default function HeaderHome() {
           </Stack>
         </Box>
       </Box>
-    </>
+    </Box>
   );
 }

@@ -27,6 +27,7 @@ export default function MainNav({
               fullWidth
               onClick={closeNav}
               startIcon={item.icon}
+              aria-label="itemsBTN"
               sx={{
                 justifyContent: "flex-start",
                 px: 2,
@@ -77,6 +78,7 @@ export default function MainNav({
                   fullWidth
                   size="small"
                   variant="text"
+                  aria-label="Lang Switch"
                   sx={{ borderRadius: 2, fontWeight: "bold" }}
                 >
                   {lang}
@@ -97,6 +99,7 @@ export default function MainNav({
                 bgcolor: isDark ? "background.paper" : "transparent",
                 boxShadow: isDark ? 2 : 0,
               }}
+              aria-label="Dark BTN"
             >
               Dark
             </Button>
@@ -110,6 +113,7 @@ export default function MainNav({
                 bgcolor: !isDark ? "background.paper" : "transparent",
                 boxShadow: !isDark ? 2 : 0,
               }}
+              aria-label="Light BTN"
             >
               Light
             </Button>
@@ -132,6 +136,7 @@ export default function MainNav({
             fontWeight: "bold",
             "&:hover": { bgcolor: "error.light", color: "white" },
           }}
+          aria-label="Logout BTN"
         >
           Log out
         </Button>

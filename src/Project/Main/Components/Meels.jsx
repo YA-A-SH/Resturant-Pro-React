@@ -40,6 +40,10 @@ export default function Meals() {
     }
   }, [meals]);
 
+  useEffect(() => {
+    document.title = "Zeus Restaurant | Meals";
+  }, []);
+
   const filteredMeals = preparedMeals.filter(
     (meal) => meal.type === selectedType
   );

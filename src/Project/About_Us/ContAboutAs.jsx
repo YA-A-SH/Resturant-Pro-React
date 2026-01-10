@@ -1,6 +1,7 @@
 import { useTheme } from "@mui/material";
 import AboutUs from "./PresenterAboutUs";
 import { useNavigate } from "react-router-dom";
+import { useEffect } from "react";
 
 export default function ContAboutUs() {
   const navigate = useNavigate();
@@ -29,6 +30,10 @@ export default function ContAboutUs() {
     { number: "10+", label: "Years Experience" },
     { number: "24/7", label: "Support", static: true }, // 👈
   ];
+
+  useEffect(() => {
+    document.title = "Zeus Restaurant | About Us";
+  }, []);
 
   // Original Theme For About Us Comp
 

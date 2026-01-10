@@ -68,6 +68,8 @@ export default function ContProfile() {
 
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setFavMeals(readyFav);
+
+    document.title = "Zeus Restaurant | Profile";
   }, []);
 
   // ================== USER INFO ==================
@@ -126,22 +128,20 @@ export default function ContProfile() {
     );
   }
 
-function handleDeleteItem(cartId, itemId) {
-  setPaid((prev) =>
-    prev
-      .map((order) =>
-        order.id === cartId
-          ? {
-              ...order,
-              cartItems: order.cartItems.filter(
-                (item) => item.id !== itemId
-              ),
-            }
-          : order
-      )
-      .filter((order) => order.cartItems.length > 0)
-  );
-}
+  function handleDeleteItem(cartId, itemId) {
+    setPaid((prev) =>
+      prev
+        .map((order) =>
+          order.id === cartId
+            ? {
+                ...order,
+                cartItems: order.cartItems.filter((item) => item.id !== itemId),
+              }
+            : order
+        )
+        .filter((order) => order.cartItems.length > 0)
+    );
+  }
 
   function handleDeleteCartOrder(id) {
     setPaid((prev) => {

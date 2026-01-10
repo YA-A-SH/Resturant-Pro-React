@@ -16,7 +16,7 @@ export default function Head({ setMode, mode }) {
   const [showNav, setShowNav] = useState(false);
   const navigate = useNavigate();
   return (
-    <>
+    <Box component="main">
       <Box
         sx={{
           height: 80,
@@ -50,12 +50,16 @@ export default function Head({ setMode, mode }) {
           ZEUS Restaurant
         </Typography>
 
-        <IconButton onClick={() => setShowNav(!showNav)} color="primary">
+        <IconButton
+          onClick={() => setShowNav(!showNav)}
+          color="primary"
+          aria-label="Nav Icon"
+        >
           {showNav ? <Close /> : <List />}
         </IconButton>
       </Box>
 
       <ContNav showNav={showNav} setMode={setMode} setShowNav={setShowNav} />
-    </>
+    </Box>
   );
 }

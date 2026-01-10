@@ -12,6 +12,7 @@ import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 import { logout } from "../RTK/MainSlice";
 import { motion, AnimatePresence } from "framer-motion";
+import { useEffect } from "react";
 
 export default function Logout() {
   const navigate = useNavigate();
@@ -26,6 +27,9 @@ export default function Logout() {
     }, 400);
   };
 
+  useEffect(() => {
+    document.title = "Zeus Restaurant | Logout";
+  }, []);
   return (
     <AnimatePresence>
       <Box
