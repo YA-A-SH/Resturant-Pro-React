@@ -1,12 +1,12 @@
-#🍽️ Restaurant Management Web Application (React)
-##📌 Overview
+# 🍽️ Restaurant Management Web Application (React)
+## 📌 Overview
 
 This project is a fully featured restaurant web application built with React, designed to demonstrate my approach to clean code, performance optimization, and real-world problem solving.
 
 The application simulates a modern restaurant experience, from browsing meals and placing orders to managing user profiles, while maintaining scalable architecture and an excellent user experience (UX).
 
-##✨ Key Features
-###🔐 Authentication & Security
+## ✨ Key Features
+### 🔐 Authentication & Security
 
 User authentication using Firebase Authentication
 
@@ -20,7 +20,7 @@ Navigation bar
 
 User profile page
 
-###🛒 Cart & Orders
+### 🛒 Cart & Orders
 
 Add items to the cart
 
@@ -34,7 +34,7 @@ Ability to delete orders in waiting status
 
 Only one order status (waiting) was implemented, since an order becomes successful only after delivery (which is out of scope)
 
-###❤️ Favorites Management
+### ❤️ Favorites Management
 
 Add and remove items from favorites
 
@@ -54,7 +54,7 @@ Profile
 
 Favorite status is persisted using LocalStorage
 
-###🍕 Products & UI
+### 🍕 Products & UI
 
 Meals displayed using modern Card-based UI
 
@@ -92,7 +92,7 @@ Ascending
 
 Descending
 
-###🎨 User Experience (UX)
+### 🎨 User Experience (UX)
 
 Modern Skeleton Loading instead of traditional loaders
 
@@ -122,13 +122,13 @@ Favorites
 
 Logout
 
-###📄 Additional Pages
+### 📄 Additional Pages
 
 ####About Us page
 
 Simple layout enhanced with subtle animations
 
-##🧠 Architecture & Code Quality
+## 🧠 Architecture & Code Quality
 
 Clean, maintainable, and scalable codebase
 
@@ -156,8 +156,8 @@ Proper cleanup to prevent memory leaks in useEffect
 
 State management using Redux Toolkit (RTK)
 
-##⚠️ Challenges & Solutions
-###1️⃣ API & Data Limitations
+## ⚠️ Challenges & Solutions
+### 1️⃣ API & Data Limitations
 
 No single free API provided:
 
@@ -179,7 +179,7 @@ Rating
 
 Favorite status (isFav)
 
-###2️⃣ Pricing & Rating Handling
+### 2️⃣ Pricing & Rating Handling
 
 Prices and ratings were generated using Math.round
 
@@ -193,7 +193,7 @@ Values initialized once inside useEffect
 
 This is a temporary workaround until a proper API is available
 
-###3️⃣ Favorites Synchronization
+### 3️⃣ Favorites Synchronization
 
 Items appear in multiple sections of the app
 
@@ -205,13 +205,13 @@ Persist favorite state in LocalStorage
 
 Rehydrate favorites on initial render
 
-##🧩 Technical Considerations
+## 🧩 Technical Considerations
 
 Considered using createEntityAdapter for normalized state
 
 Decided against it due to the relatively small data size
 
-##🚀 Future Improvements
+## 🚀 Future Improvements
 
 Migrate data fetching to RTK Query (fetchBaseQuery)
 
@@ -223,7 +223,7 @@ Planned as a separate module within the same project
 
 Add Guest Login functionality (under consideration)
 
-##🛠️ Tech Stack
+## 🛠️ Tech Stack
 
 Frontend:
 React, JavaScript
@@ -249,7 +249,7 @@ UUID
 API Testing:
 Postman
 
-##📦 Deployment Notes
+## 📦 Deployment Notes
 
 Added a vercel.json configuration
 
@@ -257,7 +257,7 @@ Redirects all routes to index.html
 
 Fixes 404 issues when refreshing non-home routes
 
-#🎯 Project Purpose
+# 🎯 Project Purpose
 
 This project was built as a practical showcase of my development mindset, focusing on how I structure applications, solve real-world problems, and optimize performance.
 
