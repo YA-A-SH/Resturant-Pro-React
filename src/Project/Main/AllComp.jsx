@@ -80,12 +80,14 @@ export default function Base({
     }
     return buttons;
   };
+
   const handleCloseSnackbar = (reason) => {
     if (reason === "clickaway") {
       return;
     }
     setOpenSnackbar(false);
   };
+
   return (
     <Box
       sx={{ minHeight: "100vh", background: gradientBackground, pt: 5, pb: 10 }}
@@ -128,7 +130,7 @@ export default function Base({
 
         {/* ===== Check if the Comp is Meals or Else===== */}
 
-        {id === "1" ? (
+        {id === "drinks" ? (
           <Stack spacing={1} alignItems="center" mb={6}>
             <Typography
               variant="h3"

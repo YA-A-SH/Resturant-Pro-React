@@ -1,6 +1,6 @@
 import { Box, Grid, Skeleton } from "@mui/material";
 
-export default function SweetsSkeleton() {
+export default function DrinksAndSweetsSkeleton() {
   return (
     <Box sx={{ pt: 5, px: { xs: 2, md: 6 } }}>
       <Skeleton width={300} height={55} sx={{ mx: "auto", mb: 2 }} />

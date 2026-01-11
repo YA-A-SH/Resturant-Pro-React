@@ -44,7 +44,15 @@ export default function Head({ setMode, mode }) {
           variant="h3"
           fontWeight={900}
           color="primary"
-          sx={{ cursor: "pointer" }}
+          sx={{
+            cursor: "pointer",
+            fontSize: {
+              xs: "2.2rem",
+              sm: "2.7rem",
+              md: "3.2rem",
+              lg: "4.1rem",
+            },
+          }}
           onClick={() => navigate("/")}
         >
           ZEUS Restaurant

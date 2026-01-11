@@ -70,7 +70,7 @@ export default function SweetsAndDrinks({ type }) {
       loading={loading}
       data={sortedMeals}
       error={error}
-      id="drinks"
+      id={type}
       msg={type === "drinks" ? "Our Drinks" : "Our Best Sweets"}
       body={
         type === "drinks"

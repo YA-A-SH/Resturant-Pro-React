@@ -9,6 +9,7 @@ export default function ProfileSkeleton() {
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
+        width: "100%",
       }}
     >
       <Box
@@ -30,7 +31,16 @@ export default function ProfileSkeleton() {
         <Skeleton variant="rounded" width={160} height={40} />
       </Box>
 
-      <Grid container spacing={3} sx={{ width: "90%" }}>
+      <Grid
+        container
+        spacing={3}
+        sx={{
+          width: "100%",
+          display: "flex",
+          alignItems: "center",
+          justifyContent: "center",
+        }}
+      >
         {[...Array(5)].map((_, i) => (
           <Grid item xs={12} sm={6} md={4} key={i}>
             <Card sx={{ p: 2, borderRadius: 3 }}>

@@ -30,8 +30,7 @@ import ProfileSkeleton from "../Skeleton/ProfileSkeleton";
 
 // ************** Skeleton ****************
 import MealsSkeleton from "../Skeleton/MealsSkeleton";
-import DrinksSkeleton from "../Skeleton/DrinksSkeleton";
-import SweetsSkiliton from "../Skeleton/SweetsSkiliton";
+import DrinksAndSweetsSkeleton from "../Skeleton/DrinksAndSweetsSkiliton";
 import { AnimatePresence } from "framer-motion";
 import PageWrapper from "../Routes/Wrapper";
 import SnackbarComp from "./Components/SnackbarComp";
@@ -82,7 +81,7 @@ export default function PreApp({
             path="/drinks"
             element={
               <PageWrapper>
-                <Suspense fallback={<DrinksSkeleton />}>
+                <Suspense fallback={<DrinksAndSweetsSkeleton />}>
                   <ProtectedRoute>
                     <Drinks />
                   </ProtectedRoute>
@@ -95,7 +94,7 @@ export default function PreApp({
             path="/sweet"
             element={
               <PageWrapper>
-                <Suspense fallback={<SweetsSkiliton />}>
+                <Suspense fallback={<DrinksAndSweetsSkeleton />}>
                   <ProtectedRoute>
                     <Sweets />
                   </ProtectedRoute>
