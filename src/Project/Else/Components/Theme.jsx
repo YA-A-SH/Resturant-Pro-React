@@ -50,6 +50,19 @@ export default function Theme({ mode, children }) {
             },
           },
         },
+        breakpoints: {
+          values: {
+            xxs: 0,
+            xs: 320,
+            ss: 500,
+            sm: 600,
+            ms: 800,
+            md: 900,
+            lg: 1200,
+            xl: 1536,
+            xxl: 2000,
+          },
+        },
       }),
     [mode]
   );

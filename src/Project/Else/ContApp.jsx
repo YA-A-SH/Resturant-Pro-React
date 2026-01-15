@@ -6,7 +6,7 @@ import { useContext, useState } from "react";
 import PreApp from "./PreApp";
 
 //Context
-import { ShowCart } from "../Context/MainContext";
+import { IsAdminContext, ShowCart } from "../User/Context/MainContext";
 
 //Lib
 import { useLocation } from "react-router-dom";
@@ -20,8 +20,9 @@ export default function ContApp({ mode, setMode }) {
     color: "success",
   });
   const { setShow } = useContext(ShowCart);
-  const location = useLocation();
+  const { isAdmin } = useContext(IsAdminContext);
 
+  const location = useLocation();
 
   // Functions
 
@@ -36,6 +37,7 @@ export default function ContApp({ mode, setMode }) {
   // UI
   return (
     <PreApp
+      isAdmin={isAdmin}
       mode={mode}
       setMode={setMode}
       setShowCart={setShow}

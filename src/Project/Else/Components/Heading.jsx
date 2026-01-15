@@ -1,20 +1,27 @@
 // Hooks
 
-import { useState } from "react";
+import { useContext, useState } from "react";
 
 //Component
 
-import ContNav from "../../Navbar/ContNav";
+import ContNav from "../../User/Navbar/ContNav";
 
 // Lib
 
 import { useNavigate } from "react-router-dom";
 import { Close, List } from "@mui/icons-material";
 import { Box, IconButton, Typography } from "@mui/material";
+import { useSelector } from "react-redux";
+import { IsAdminContext } from "../../User/Context/MainContext";
 
 export default function Head({ setMode, mode }) {
   const [showNav, setShowNav] = useState(false);
   const navigate = useNavigate();
+  const goUser = useSelector((state) => state.google.user);
+  const maUser = useSelector((state) => state.email.user);
+  const { isAdmin } = useContext(IsAdminContext);
+  const disabled = !!goUser || !!maUser || isAdmin;
+
   return (
     <Box component="main">
       <Box
@@ -41,27 +48,29 @@ export default function Head({ setMode, mode }) {
         }}
       >
         <Typography
-          variant="h3"
+          variant="h2"
           fontWeight={900}
           color="primary"
           sx={{
             cursor: "pointer",
             fontSize: {
-              xs: "2.2rem",
-              sm: "2.7rem",
-              md: "3.2rem",
+              xxs: "2rem",
+              xs: "3rem",
+              sm: "3.4rem",
+              md: "3.6rem",
               lg: "4.1rem",
             },
           }}
-          onClick={() => navigate("/")}
+          onClick={!isAdmin ? () => navigate("/") : () => navigate("/admin")}
         >
-          ZEUS Restaurant
+          {isAdmin ? "ZEUS-Admin" : "ZEUS Restaurant"}
         </Typography>
 
         <IconButton
           onClick={() => setShowNav(!showNav)}
           color="primary"
           aria-label="Nav Icon"
+          disabled={!disabled}
         >
           {showNav ? <Close /> : <List />}
         </IconButton>

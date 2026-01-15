@@ -9,31 +9,36 @@ import { ShoppingCart } from "@mui/icons-material";
 
 // ************** Component ****************
 
-const Head = lazy(() => import("./Components/Heading"));
-const ContCart = lazy(() => import("../Cart/ContCart"));
-const ContHome = lazy(() => import("../Home/ContHome"));
-const Meals = lazy(() => import("../Main/Components/Meels"));
-const Drinks = lazy(() => import("../Main/Components/Drinks"));
-const Sweets = lazy(() => import("../Main/Components/Sweet"));
-const Profile = lazy(() => import("../Profile/ContProfile"));
+const Head = lazy(() => import("../Else/Components/Heading"));
+const ContCart = lazy(() => import("../User/Cart/ContCart"));
+const ContHome = lazy(() => import("../User/Home/ContHome"));
+const Meals = lazy(() => import("../User/Main/Components/Meels"));
+const Drinks = lazy(() => import("../User/Main/Components/Drinks"));
+const Sweets = lazy(() => import("../User/Main/Components/Sweet"));
+const Profile = lazy(() => import("../User/Profile/ContProfile"));
+const ContAdmin = lazy(() => import("../Admin/ContAdmin"));
 
-import ProtectedRoute from "../Routes/ProtectedRoute";
-import ContAboutUs from "../About_Us/ContAboutAs";
-import ContLogin from "../Log/ContLogin";
-import Logout from "../Log/Logout";
-import Footer from "./Components/Footer";
+import ProtectedRoute from "../User/Routes/ProtectedRoute";
+import ContAboutUs from "../User/About_Us/ContAboutAs";
+import ContLogin from "../User/Log/ContLogin";
+import Logout from "../User/Log/Logout";
+import Footer from "../Else/Components/Footer";
+import SnackbarComp from "../Else/Components/SnackbarComp";
 
 // ************** Router ****************
 
 import { Route, Routes } from "react-router-dom";
-import ProfileSkeleton from "../Skeleton/ProfileSkeleton";
+import ProfileSkeleton from "../User/Skeleton/ProfileSkeleton";
+import PageWrapper from "../User/Routes/Wrapper";
 
 // ************** Skeleton ****************
-import MealsSkeleton from "../Skeleton/MealsSkeleton";
-import DrinksAndSweetsSkeleton from "../Skeleton/DrinksAndSweetsSkiliton";
+import MealsSkeleton from "../User/Skeleton/MealsSkeleton";
+import DrinksAndSweetsSkeleton from "../User/Skeleton/DrinksAndSweetsSkiliton";
+
+// ************** Else ****************
 import { AnimatePresence } from "framer-motion";
-import PageWrapper from "../Routes/Wrapper";
-import SnackbarComp from "./Components/SnackbarComp";
+import AdminProtectedRoute from "../User/Routes/AdminProtectedRoute";
+import ContUsers from "../Admin/ManageUsers/ContUsers";
 
 export default function PreApp({
   mode,
@@ -43,6 +48,7 @@ export default function PreApp({
   location,
   snackbar,
   setSnackbar,
+  isAdmin,
 }) {
   return (
     <Box component="main">
@@ -63,7 +69,57 @@ export default function PreApp({
               </PageWrapper>
             }
           />
-          {/* <Route path="/admin" element={<AdminPage />} /> */}
+          <Route
+            path="/admin"
+            element={
+              <PageWrapper>
+                <AdminProtectedRoute>
+                  <ContAdmin />
+                </AdminProtectedRoute>
+              </PageWrapper>
+            }
+          />
+
+          <Route
+            path="/admin/manageUsers"
+            element={
+              <PageWrapper>
+                <AdminProtectedRoute>
+                  <ContUsers />
+                </AdminProtectedRoute>
+              </PageWrapper>
+            }
+          />
+          <Route
+            path="/admin/manageMeals"
+            element={
+              <PageWrapper>
+                <AdminProtectedRoute>
+                  <ContAdmin />
+                </AdminProtectedRoute>
+              </PageWrapper>
+            }
+          />
+          <Route
+            path="/admin/manageDrinks"
+            element={
+              <PageWrapper>
+                <AdminProtectedRoute>
+                  <ContAdmin />
+                </AdminProtectedRoute>
+              </PageWrapper>
+            }
+          />
+          <Route
+            path="/admin/manageSweets"
+            element={
+              <PageWrapper>
+                <AdminProtectedRoute>
+                  <ContAdmin />
+                </AdminProtectedRoute>
+              </PageWrapper>
+            }
+          />
           <Route
             path="/meals"
             element={
@@ -76,7 +132,6 @@ export default function PreApp({
               </PageWrapper>
             }
           />
-
           <Route
             path="/drinks"
             element={
@@ -89,7 +144,6 @@ export default function PreApp({
               </PageWrapper>
             }
           />
-
           <Route
             path="/sweet"
             element={
@@ -102,7 +156,6 @@ export default function PreApp({
               </PageWrapper>
             }
           />
-
           <Route
             path="/profile"
             element={
@@ -115,7 +168,6 @@ export default function PreApp({
               </PageWrapper>
             }
           />
-
           <Route
             path="/aboutUs"
             element={
@@ -137,13 +189,11 @@ export default function PreApp({
             path="/logout"
             element={
               <PageWrapper>
-                <ProtectedRoute>
-                  <Logout />
-                </ProtectedRoute>
+                <Logout />
               </PageWrapper>
             }
           />
-        </Routes>
+        </Routes>{" "}
       </AnimatePresence>
 
       {/* Footer */}
@@ -158,19 +208,22 @@ export default function PreApp({
         handleClose={handleCloseSnackbar}
       />
 
-      <Fab
-        color="primary"
-        sx={{
-          position: "fixed",
-          bottom: 24,
-          right: 24,
-          boxShadow: "0 0 20px rgba(255,152,0,0.6)",
-        }}
-        onClick={() => setShowCart(true)}
-        aria-label="Shopping Cart"
-      >
-        <ShoppingCart />
-      </Fab>
+      {isAdmin ? null : (
+        <Fab
+          color="primary"
+          sx={{
+            position: "fixed",
+            bottom: 24,
+            right: 24,
+            boxShadow: "0 0 20px rgba(255,152,0,0.6)",
+          }}
+          onClick={() => setShowCart(true)}
+          aria-label="Shopping Cart"
+        >
+          <ShoppingCart />
+        </Fab>
+      )}
+
       <ContCart setSnackbar={setSnackbar} />
     </Box>
   );

@@ -1,11 +1,12 @@
 // ************** Contexts ****************
 
 import {
+  ChefsProvider,
   FavProvider,
   IsAdminProvider,
   OpenSnackbarProvider,
   ShowCartProvider,
-} from "./Project/Context/MainContext";
+} from "./Project/User/Context/MainContext";
 
 // ************** Components ****************
 
@@ -18,17 +19,20 @@ import { useState } from "react";
 
 function App() {
   const [mode, setMode] = useState("light");
+
   return (
     <>
       <Theme mode={mode}>
         <IsAdminProvider>
-          <FavProvider>
-            <ShowCartProvider>
-              <OpenSnackbarProvider>
-                <ContApp mode={mode} setMode={setMode} />
-              </OpenSnackbarProvider>
-            </ShowCartProvider>
-          </FavProvider>
+          <ChefsProvider>
+            <FavProvider>
+              <ShowCartProvider>
+                <OpenSnackbarProvider>
+                  <ContApp mode={mode} setMode={setMode} />
+                </OpenSnackbarProvider>
+              </ShowCartProvider>
+            </FavProvider>
+          </ChefsProvider>
         </IsAdminProvider>
       </Theme>
     </>
