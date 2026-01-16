@@ -2,70 +2,88 @@ import { createTheme, ThemeProvider, CssBaseline } from "@mui/material";
 import { useMemo } from "react";
 
 export default function Theme({ mode, children }) {
-  const theme = useMemo(
-    () =>
-      createTheme({
-        palette: {
-          mode: mode,
-          primary: {
-            main: mode === "dark" ? "#e6ba2aff" : "#B8860B",
-            contrastText: "#fff",
-          },
-          secondary: {
-            main: "#1e1e26",
-          },
-          background: {
-            default: mode === "dark" ? "#0D0D0D" : "#FAFAFA",
-            paper: mode === "dark" ? "#2e2e34ff" : "#ffffff",
-          },
-          text: {
-            primary: mode === "dark" ? "#E0E0E0" : "#1A1A1A",
-            secondary: mode === "dark" ? "#A0A0A0" : "#4A4A4A",
-          },
+  const theme = useMemo(() => {
+    const isDark = mode === "dark";
+
+    return createTheme({
+      palette: {
+        mode,
+        primary: {
+          main: isDark ? "#D4AF37" : "#B8860B",
+          light: "#E6C65D",
+          dark: "#996515",
+          contrastText: isDark ? "#000" : "#fff",
         },
-        typography: {
-          fontFamily: "'Playfair Display', 'Poppins', serif",
+        admin: {
+          main: "#6366F1", 
+          secondary: "#A855F7",
+          surface: isDark
+            ? "rgba(99, 102, 241, 0.05)"
+            : "rgba(99, 102, 241, 0.02)",
+          gradient: "linear-gradient(135deg, #6366F1 0%, #A855F7 100%)",
         },
-        components: {
-          MuiPaper: {
-            styleOverrides: {
-              root: {
-                backgroundImage: "none",
-                borderRadius: "16px",
-              },
+        status: {
+          success: "#10B981",
+          error: "#EF4444",
+          warning: "#F59E0B",
+          info: "#3B82F6",
+        },
+        background: {
+          default: isDark ? "#0A0A0B" : "#F8FAFC", // خلفية أعمق في الدارك
+          paper: isDark ? "#121214" : "#FFFFFF",
+          glass: isDark ? "rgba(18, 18, 20, 0.8)" : "rgba(255, 255, 255, 0.8)",
+        },
+        text: {
+          primary: isDark ? "#F8FAFC" : "#0F172A",
+          secondary: isDark ? "#94A3B8" : "#475569",
+        },
+      },
+      typography: {
+        fontFamily: "'Poppins', 'Playfair Display', serif",
+        h1: { fontFamily: "'Playfair Display', serif", fontWeight: 900 },
+        h2: { fontFamily: "'Playfair Display', serif", fontWeight: 800 },
+      },
+      components: {
+        MuiButton: {
+          styleOverrides: {
+            root: {
+              borderRadius: "12px",
+              textTransform: "none",
+              fontWeight: 600,
             },
           },
-          MuiCssBaseline: {
-            styleOverrides: {
-              body: {
-                scrollbarWidth: "thin",
-                scrollbarColor:
-                  mode === "dark" ? "#D4AF37 #0A0A0B" : "#B8860B #FAFAFA",
-                "&::-webkit-scrollbar": { width: "8px" },
-                "&::-webkit-scrollbar-thumb": {
-                  backgroundColor: mode === "dark" ? "#D4AF37" : "#B8860B",
-                  borderRadius: "20px",
-                },
-              },
+        },
+        MuiPaper: {
+          styleOverrides: {
+            root: {
+              backgroundImage: "none",
+              borderRadius: "20px",
+              border: `1px solid ${
+                isDark ? "rgba(255,255,255,0.05)" : "rgba(0,0,0,0.05)"
+              }`,
+              boxShadow: isDark
+                ? "0 10px 30px -10px rgba(0,0,0,0.5)"
+                : "0 10px 30px -10px rgba(148, 163, 184, 0.2)",
             },
           },
         },
-        breakpoints: {
-          values: {
-            xxs: 0,
-            xs: 320,
-            ss: 500,
-            sm: 600,
-            ms: 800,
-            md: 900,
-            lg: 1200,
-            xl: 1536,
-            xxl: 2000,
-          },
+      },
+      // الـ Breakpoints الخاصة بك
+      breakpoints: {
+        values: {
+          xxs: 0,
+          xs: 320,
+          ss: 500,
+          sm: 600,
+          ms: 800,
+          md: 900,
+          lg: 1200,
+          xl: 1536,
+          xxl: 2000,
         },
-      }),
-    [mode]
-  );
+      },
+    });
+  }, [mode]);
 
   return (
     <ThemeProvider theme={theme}>

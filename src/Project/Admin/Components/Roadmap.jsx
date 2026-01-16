@@ -1,14 +1,20 @@
-import { AddLocationAlt, AutoAwesome, Engineering } from "@mui/icons-material";
-import { Box, Grid, Paper, Stack, Typography } from "@mui/material";
+import {
+  AddLocationAlt,
+  AutoAwesome,
+  Engineering,
+  RocketLaunch,
+} from "@mui/icons-material";
+import { Box, Grid, Paper, Stack, Typography, useTheme } from "@mui/material";
 
-export default function Roadmap({ isDark, GRADIENTS }) {
-  
+export default function Roadmap({ isDark }) {
+  const theme = useTheme();
+
   const ideas = [
     {
       title: "New Branch: Dubai Mall",
       desc: "Expanding ZEUS to the heart of Dubai by Q3 2026.",
       icon: <AddLocationAlt />,
-      color: "#6366F1",
+      color: theme.palette.admin.main,
     },
     {
       title: "Master Chef Recruitment",
@@ -25,103 +31,136 @@ export default function Roadmap({ isDark, GRADIENTS }) {
   ];
 
   return (
-    <>
+    <Box
+      sx={{
+        width: "100%",
+        maxWidth: "1000px",
+        borderRadius: "40px",
+        position: "relative",
+        bgcolor: isDark ? "rgba(18, 18, 20, 0.4)" : "rgba(255, 255, 255, 0.6)",
+        backdropFilter: "blur(30px)",
+        border: "1px solid",
+        borderColor: isDark ? "rgba(255,255,255,0.05)" : "rgba(0,0,0,0.05)",
+        p: { xs: 3, md: 6 },
+        overflow: "hidden",
+      }}
+    >
+      {/* Decorative Gradient Line */}
       <Box
         sx={{
-          width: "100%",
-          maxWidth: "800px",
-          borderRadius: "30px",
-          bgcolor: isDark
-            ? "rgba(30, 41, 59, 0.5)"
-            : "rgba(255, 255, 255, 0.8)",
-          backdropFilter: "blur(20px)",
-          border: "1px solid",
-          borderColor: isDark ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.05)",
-          p: 4,
-          boxShadow: isDark
-            ? "0 20px 50px rgba(0,0,0,0.3)"
-            : "0 20px 50px rgba(148,163,184,0.1)",
+          position: "absolute",
+          top: 0,
+          left: 0,
+          right: 0,
+          height: "4px",
+          background: theme.palette.admin.gradient,
+        }}
+      />
+
+      <Stack
+        direction="row"
+        justifyContent="space-between"
+        alignItems="center"
+        mb={6}
+      >
+        <Box>
+          <Typography
+            variant="h3"
+            sx={{ fontWeight: 900, letterSpacing: "-1.5px", mb: 1 }}
+          >
+            Future Vision
+          </Typography>
+          <Typography variant="body1" color="text.secondary" fontWeight={500}>
+            The next chapter of the ZEUS culinary legacy.
+          </Typography>
+        </Box>
+        <Box
+          sx={{
+            p: 2,
+            borderRadius: "20px",
+            background: theme.palette.admin.gradient,
+            color: "white",
+            boxShadow: `0 10px 20px ${theme.palette.admin.main}40`,
+          }}
+        >
+          <RocketLaunch fontSize="large" />
+        </Box>
+      </Stack>
+
+      <Grid
+        container
+        spacing={4}
+        sx={{
+          display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
         }}
       >
-        <Stack
-          direction="row"
-          justifyContent="space-between"
-          alignItems="center"
-          mb={4}
-        >
-          <Typography
-            variant="h4"
-            sx={{ fontWeight: 900, letterSpacing: "-0.5px" }}
-          >
-            Roadmap & Innovations
-          </Typography>
-          <Box
-            sx={{
-              p: 1,
-              borderRadius: "12px",
-              background: GRADIENTS.primary,
-              color: "white",
-              display: "flex",
-            }}
-          >
-            <AutoAwesome />
-          </Box>
-        </Stack>
-
-        <Grid container spacing={3}>
-          {ideas.map((idea, index) => (
-            <Grid item xs={12} md={4} key={index}>
-              <Paper
-                elevation={0}
+        {ideas.map((idea, index) => (
+          <Grid item xs={12} md={4} key={index}>
+            <Paper
+              elevation={0}
+              sx={{
+                p: 4,
+                height: "100%",
+                borderRadius: "32px",
+                bgcolor: isDark ? "rgba(255,255,255,0.03)" : "#fff",
+                border: "1px solid",
+                borderColor: "transparent",
+                transition: "all 0.4s ease",
+                position: "relative",
+                "&:hover": {
+                  borderColor: idea.color,
+                  transform: "translateY(-10px) scale(1.02)",
+                  boxShadow: `0 20px 40px ${idea.color}15`,
+                },
+              }}
+            >
+              <Box
                 sx={{
-                  p: 3,
-                  height: "100%",
-                  borderRadius: "20px",
-                  bgcolor: isDark ? "rgba(255,255,255,0.03)" : "#f8fafc",
-                  borderLeft: `6px solid ${idea.color}`,
-                  transition: "all 0.3s ease",
-                  "&:hover": {
-                    transform: "translateY(-5px)",
-                    bgcolor: isDark ? "rgba(255,255,255,0.06)" : "#f1f5f9",
-                    boxShadow: "0 10px 20px rgba(0,0,0,0.05)",
-                  },
+                  width: 50,
+                  height: 50,
+                  borderRadius: "15px",
+                  display: "flex",
+                  alignItems: "center",
+                  justifyContent: "center",
+                  bgcolor: `${idea.color}15`,
+                  color: idea.color,
+                  mb: 3,
                 }}
               >
-                <Stack spacing={2}>
-                  <Box
-                    sx={{
-                      color: idea.color,
-                      bgcolor: `${idea.color}15`,
-                      width: "fit-content",
-                      p: 1,
-                      borderRadius: "10px",
-                      display: "flex",
-                    }}
-                  >
-                    {idea.icon}
-                  </Box>
-                  <Box>
-                    <Typography
-                      variant="subtitle1"
-                      fontWeight={800}
-                      gutterBottom
-                    >
-                      {idea.title}
-                    </Typography>
-                    <Typography
-                      variant="body2"
-                      color="text.secondary"
-                      sx={{ lineHeight: 1.6 }}
-                    >
-                      {idea.desc}
-                    </Typography>
-                  </Box>
-                </Stack>
-              </Paper>
-            </Grid>
-          ))}
-        </Grid>
-      </Box>
-    </>
+                {idea.icon}
+              </Box>
+
+              <Typography variant="h6" fontWeight={800} gutterBottom>
+                {idea.title}
+              </Typography>
+              <Typography
+                variant="body2"
+                color="text.secondary"
+                sx={{ lineHeight: 1.8, fontSize: "0.95rem" }}
+              >
+                {idea.desc}
+              </Typography>
+
+              <Typography
+                sx={{
+                  position: "absolute",
+                  bottom: 10,
+                  right: 20,
+                  fontSize: "4rem",
+                  fontWeight: 900,
+                  opacity: 0.03,
+                  color: idea.color,
+                  userSelect: "none",
+                }}
+              >
+                0{index + 1}
+              </Typography>
+            </Paper>
+          </Grid>
+        ))}
+      </Grid>
+    </Box>
   );
 }

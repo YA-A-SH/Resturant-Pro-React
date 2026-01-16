@@ -1,5 +1,4 @@
-import { useTheme } from "@emotion/react";
-import { Box, Paper, Typography } from "@mui/material";
+import { Box, Paper, Typography, useTheme } from "@mui/material";
 
 export default function ChartCard({ title, children, icon }) {
   const theme = useTheme();
@@ -9,7 +8,7 @@ export default function ChartCard({ title, children, icon }) {
     <Paper
       elevation={0}
       sx={{
-        p: { xs: 2, sm: 3 },
+        p: { xs: 3, sm: 4 },
         width: {
           xxs: 220,
           xs: 290,
@@ -20,50 +19,66 @@ export default function ChartCard({ title, children, icon }) {
           lg: 490,
           xl: 450,
         },
-        height: {
-          xxs: 280,
-          xs: 320,
-          sm: 460,
-          ss: 480,
-          md: 400,
-          ms: 400,
-          lg: 440,
-        },
-        borderRadius: 3,
-        background: isDark ? "rgba(255,255,255,0.03)" : "rgba(255,255,255,0.8)",
-        backdropFilter: "blur(20px)",
-        border: "1px solid",
-        borderColor: isDark ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.06)",
+        // minHeight: 400,
+        borderRadius: "28px",
         display: "flex",
         flexDirection: "column",
-        transition: "0.3s",
+        position: "relative",
+        bgcolor: isDark ? "rgba(18, 18, 20, 0.6)" : "rgba(255, 255, 255, 0.7)",
+        backdropFilter: "blur(20px)",
+        border: "1px solid",
+        borderColor: isDark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.05)",
+        transition: "all 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
         "&:hover": {
-          transform: "translateY(-6px)",
+          transform: "translateY(-8px)",
+          borderColor: "admin.main",
           boxShadow: isDark
-            ? "0 20px 40px rgba(0,0,0,0.4)"
-            : "0 20px 40px rgba(100,116,139,0.15)",
+            ? `0 20px 40px -10px rgba(99, 102, 241, 0.2)`
+            : `0 20px 40px -10px rgba(99, 102, 241, 0.1)`,
         },
       }}
     >
-      {/* Header */}
-      <Box sx={{ display: "flex", alignItems: "center", gap: 1.5, mb: 2 }}>
+      <Box
+        sx={{
+          position: "absolute",
+          top: -20,
+          right: -20,
+          width: 100,
+          height: 100,
+          background: isDark
+            ? "rgba(99, 102, 241, 0.03)"
+            : "rgba(99, 102, 241, 0.05)",
+          borderRadius: "50%",
+          filter: "blur(30px)",
+        }}
+      />
+      <Box
+        sx={{ display: "flex", alignItems: "center", gap: 2, mb: 3, zIndex: 1 }}
+      >
         <Box
           sx={{
-            p: 1,
-            borderRadius: 2,
-            bgcolor: isDark ? "rgba(255,255,255,0.06)" : "rgba(0,0,0,0.04)",
+            p: 1.2,
+            borderRadius: "14px",
+            background: isDark
+              ? "rgba(99, 102, 241, 0.15)"
+              : "rgba(99, 102, 241, 0.08)",
+            color: "admin.main",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
           }}
         >
           {icon}
         </Box>
-
-        <Typography fontWeight={700} fontSize="1rem">
+        <Typography
+          variant="h6"
+          fontWeight={800}
+          sx={{ letterSpacing: "-0.5px", fontSize: "1.1rem" }}
+        >
           {title}
         </Typography>
       </Box>
-
-      {/* Chart */}
-      <Box sx={{ flexGrow: 1, width: "100%" }}>{children}</Box>
+      <Box sx={{ flexGrow: 1, width: "100%", zIndex: 1 }}>{children}</Box>{" "}
     </Paper>
   );
 }

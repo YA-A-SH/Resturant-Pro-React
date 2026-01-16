@@ -1,34 +1,37 @@
-import { Grid } from "@mui/material";
+import { Box, Grid, useTheme } from "@mui/material";
 import ChartCard from "./ChartCard";
 import {
   Area,
   AreaChart,
   Bar,
   BarChart,
-  CartesianGrid,
   Cell,
   Legend,
-  Line,
-  LineChart,
   Pie,
   PieChart,
   ResponsiveContainer,
   Tooltip,
   XAxis,
 } from "recharts";
-import {
-  Group,
-  Restaurant,
-  SentimentVeryDissatisfied,
-  TrendingUp,
-} from "@mui/icons-material";
+import { Group, Restaurant, TrendingUp } from "@mui/icons-material";
 
-export default function Charts({ GRADIENTS, isDark }) {
+export default function Charts() {
+  const theme = useTheme();
+  const isDark = theme.palette.mode === "dark";
+
+  const CHART_COLORS = {
+    primary: theme.palette.admin.main,
+    secondary: "#2DD4BF",
+    warning: "#F59E0B",
+    error: "#EF4444",
+  };
+
   const percentageOfDishSales = [
     { name: "Meals", orders: 63 },
     { name: "Drinks", orders: 24 },
     { name: "Sweets", orders: 13 },
   ];
+
   const usersData = [
     { year: "2015", users: 400 },
     { year: "2020", users: 11650 },
@@ -48,160 +51,134 @@ export default function Charts({ GRADIENTS, isDark }) {
     { name: "Thai Coffee", Dish: 6329 },
     { name: "Pancakes", Dish: 9144 },
   ];
-  const worstFiveDishes = [
-    { name: "Šúĺlance", orders: 10 },
-    { name: "Skoleboller", orders: 3 },
-    { name: "Fritters", orders: 17 },
-    { name: "Speculaas", orders: 1 },
-    { name: "Donut", orders: 6 },
-  ];
-  const COLORS = ["#6366F1", "#2DD4BF", "#F59E0B", "#EF4444"];
+
+  const tooltipStyle = {
+    contentStyle: {
+      backgroundColor: isDark ? "#1e1e26" : "#fff",
+      borderRadius: "16px",
+      border: "none",
+      boxShadow: "0 10px 25px rgba(0,0,0,0.2)",
+      padding: "10px",
+    },
+    itemStyle: { fontWeight: 700 },
+  };
 
   return (
-    <>
-      <Grid
-        container
-        spacing={3}
-        sx={{
-          display: "flex",
-          justifyContent: "center",
-          alignItems: "center",
-          width: "100%",
-        }}
-      >
-        {/* User Growth */}
-        <Grid item xs={12} lg={7}>
-          <ChartCard
-            title="User Ecosystem Growth"
-            icon={<Group color="primary" />}
-            gradient={GRADIENTS.primary}
-          >
+    <Grid
+      container
+      spacing={4}
+      sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}
+    >
+      {/* 1. User Growth (Area Chart) */}
+      <Grid item xs={12} lg={8}>
+        <ChartCard title="User Ecosystem Evolution" icon={<Group />}>
+          <Box sx={{ width: "100%", height: 300, mt: 3, pr: 2 }}>
             <ResponsiveContainer width="100%" height="100%">
               <AreaChart data={usersData}>
                 <defs>
-                  <linearGradient id="colorUsers" x1="0" y1="0" x2="0" y2="1">
-                    <stop offset="5%" stopColor="#6366F1" stopOpacity={0.3} />
-                    <stop offset="95%" stopColor="#6366F1" stopOpacity={0} />
+                  <linearGradient id="colorAdmin" x1="0" y1="0" x2="0" y2="1">
+                    <stop
+                      offset="5%"
+                      stopColor={CHART_COLORS.primary}
+                      stopOpacity={0.3}
+                    />
+                    <stop
+                      offset="95%"
+                      stopColor={CHART_COLORS.primary}
+                      stopOpacity={0}
+                    />
                   </linearGradient>
                 </defs>
                 <XAxis
                   dataKey="year"
-                  hide={window.innerWidth < 500}
-                  tick={{ fill: isDark ? "#fff" : "#666", fontSize: 12 }}
                   axisLine={false}
                   tickLine={false}
+                  tick={{ fill: theme.palette.text.secondary, fontSize: 12 }}
                 />
-                <Tooltip
-                  labelKey="year"
-                  contentStyle={{
-                    borderRadius: "15px",
-                    border: "none",
-                    boxShadow: "0 10px 15px rgba(0,0,0,0.1)",
-                  }}
-                />
+                <Tooltip {...tooltipStyle} />
                 <Area
                   type="monotone"
                   dataKey="users"
-                  stroke="#6366F1"
+                  stroke={CHART_COLORS.primary}
                   strokeWidth={4}
                   fillOpacity={1}
-                  fill="url(#colorUsers)"
+                  fill="url(#colorAdmin)"
                 />
               </AreaChart>
             </ResponsiveContainer>
-          </ChartCard>
-        </Grid>
+          </Box>
+        </ChartCard>
+      </Grid>
 
-        {/* Sales Distribution */}
-        <Grid item xs={12} lg={5}>
-          <ChartCard
-            title="Revenue Stream"
-            icon={<TrendingUp color="secondary" />}
-          >
+      {/* 2. Revenue Stream (Pie Chart) */}
+      <Grid item xs={12} lg={4}>
+        <ChartCard title="Revenue Distribution" icon={<TrendingUp />}>
+          <Box sx={{ width: "100%", height: 300, mt: 3, pr: 2 }}>
             <ResponsiveContainer width="100%" height="100%">
               <PieChart>
                 <Pie
                   data={percentageOfDishSales}
-                  innerRadius="55%"
-                  outerRadius="80%"
-                  paddingAngle={8}
+                  innerRadius="65%"
+                  outerRadius="85%"
+                  paddingAngle={10}
                   dataKey="orders"
                 >
-                  {percentageOfDishSales.map((entry, index) => (
-                    <Cell
-                      key={`cell-${index}`}
-                      fill={COLORS[index % COLORS.length]}
-                      stroke="none"
-                    />
+                  {[
+                    CHART_COLORS.primary,
+                    CHART_COLORS.secondary,
+                    CHART_COLORS.warning,
+                  ].map((color, index) => (
+                    <Cell key={`cell-${index}`} fill={color} stroke="none" />
                   ))}
                 </Pie>
-                <Tooltip formatter={(v) => `${v}%`} />
-                <Legend verticalAlign="bottom" height={36} />
+                <Tooltip {...tooltipStyle} />
+                <Legend
+                  verticalAlign="bottom"
+                  wrapperStyle={{ paddingTop: "20px" }}
+                />
               </PieChart>
             </ResponsiveContainer>
-          </ChartCard>
-        </Grid>
+          </Box>
+        </ChartCard>
+      </Grid>
 
-        {/* Top Dishes */}
-        <Grid item xs={12} md={6}>
-          <ChartCard
-            title="Elite Performance Dishes"
-            icon={<Restaurant sx={{ color: "#10B981" }} />}
-          >
+      {/* 3. Top Dishes (Bar Chart) */}
+      <Grid item xs={12}>
+        <ChartCard title="Elite Culinary Performance" icon={<Restaurant />}>
+          <Box sx={{ width: "100%", height: 300, mt: 3, pr: 2 }}>
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={topTenDishes}>
                 <XAxis
                   dataKey="name"
-                  interval={0}
-                  angle={-30}
-                  textAnchor="end"
-                  height={60}
+                  axisLine={false}
+                  tickLine={false}
+                  tick={{ fontSize: 11 }}
                 />
-                <Tooltip cursor={{ fill: "rgba(255,255,255,0.1)" }} />
-                <Bar dataKey="Dish" radius={[10, 10, 0, 0]}>
-                  {topTenDishes.map((entry, index) => (
+                <Tooltip
+                  cursor={{
+                    fill: isDark
+                      ? "rgba(255,255,255,0.05)"
+                      : "rgba(0,0,0,0.02)",
+                  }}
+                  {...tooltipStyle}
+                />
+                <Bar dataKey="Dish" radius={[8, 8, 8, 8]} barSize={35}>
+                  {topTenDishes.map((_, index) => (
                     <Cell
                       key={`cell-${index}`}
-                      fill={index % 2 === 0 ? "#6366F1" : "#2DD4BF"}
+                      fill={
+                        index % 2 === 0
+                          ? CHART_COLORS.primary
+                          : CHART_COLORS.secondary
+                      }
                     />
                   ))}
                 </Bar>
               </BarChart>
             </ResponsiveContainer>
-          </ChartCard>
-        </Grid>
-
-        {/* Worst Dishes */}
-        <Grid item xs={12} md={6}>
-          <ChartCard
-            title="Underperforming Items"
-            icon={<SentimentVeryDissatisfied sx={{ color: "#EF4444" }} />}
-          >
-            <ResponsiveContainer width="100%" height="100%">
-              <LineChart data={worstFiveDishes}>
-                <CartesianGrid
-                  strokeDasharray="3 3"
-                  vertical={false}
-                  stroke="rgba(255,255,255,0.05)"
-                />
-                <XAxis
-                  dataKey="name"
-                  tick={{ fontSize: 10 }}
-                  hide={window.innerWidth < 500}
-                />
-                <Tooltip />
-                <Line
-                  type="step"
-                  dataKey="orders"
-                  stroke="#EF4444"
-                  strokeWidth={3}
-                  dot={{ r: 6, fill: "#EF4444" }}
-                />
-              </LineChart>
-            </ResponsiveContainer>
-          </ChartCard>
-        </Grid>
+          </Box>
+        </ChartCard>
       </Grid>
-    </>
+    </Grid>
   );
 }
