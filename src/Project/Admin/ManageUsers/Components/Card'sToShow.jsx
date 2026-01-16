@@ -1,6 +1,15 @@
-import { Box, Button, Grid, Typography, useTheme, Fade } from "@mui/material";
+import {
+  Box,
+  Button,
+  Grid,
+  Typography,
+  useTheme,
+  Fade,
+  Stack,
+} from "@mui/material";
 import CardBase from "./CardsBase";
 import CardBaseSkeleton from "./CardBaseSkeleton";
+import { useEffect, useState } from "react";
 
 export default function CardsToShowAndTaps({
   setSelectedTap,
@@ -19,7 +28,47 @@ export default function CardsToShowAndTaps({
     { id: "Chef's", label: "Master Chefs" },
     { id: "User's", label: "Community" },
   ];
+  const cardsPerPage = 8;
+  const totalPages = Math.ceil(users.length / cardsPerPage);
+  const [currentPage, setCurrentPage] = useState(1);
+  const startCard = (currentPage - 1) * cardsPerPage;
+  const usersToShow = users.slice(startCard, startCard + cardsPerPage);
 
+  const paginationButtons = () => {
+    let buttons = [];
+    if (totalPages <= 5) {
+      for (let i = 1; i <= totalPages; i++) buttons.push(i);
+    } else {
+      if (currentPage <= 2) {
+        buttons = [1, 2, 3, "...", totalPages];
+      } else if (currentPage >= totalPages - 2) {
+        buttons = [
+          1,
+          "...",
+          totalPages - 3,
+          totalPages - 2,
+          totalPages - 1,
+          totalPages,
+        ];
+      } else {
+        buttons = [
+          1,
+          "...",
+          currentPage - 1,
+          currentPage,
+          currentPage + 1,
+          "...",
+          totalPages,
+        ];
+      }
+    }
+    return buttons;
+  };
+
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setCurrentPage(1);
+  }, [selectedTap]);
   return (
     <>
       <Box
@@ -122,7 +171,7 @@ export default function CardsToShowAndTaps({
 
             {!loading &&
               !error &&
-              users.map((user, index) => (
+              usersToShow.map((user, index) => (
                 <Fade in timeout={500 + index * 50} key={user.name}>
                   <Grid item xs={12} sm={6} md={4} lg={3}>
                     <CardBase data={user} isDark={isDark} id="user" />
@@ -131,6 +180,87 @@ export default function CardsToShowAndTaps({
               ))}
           </>
         )}
+        {selectedTap === "User's" ? (
+          totalPages > 1 ? (
+            <Stack
+              direction="row"
+              spacing={1.2}
+              justifyContent="center"
+              alignItems="center"
+              mt={8}
+              mb={4}
+            >
+              {paginationButtons().map((btn, idx) => {
+                const isActive = currentPage === btn;
+                const isEllipsis = btn === "...";
+
+                return (
+                  <Button
+                    key={idx}
+                    disabled={isEllipsis}
+                    onClick={() => !isEllipsis && setCurrentPage(btn)}
+                    sx={{
+                      minWidth: isEllipsis ? "35px" : "48px",
+                      height: "48px",
+                      p: 0,
+
+                      borderRadius: "16px",
+                      fontWeight: 800,
+                      fontSize: "0.95rem",
+                      transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
+
+                      bgcolor: isActive
+                        ? "admin.main"
+                        : isDark
+                        ? "rgba(255, 255, 255, 0.05)"
+                        : "rgba(255, 255, 255, 0.8)",
+
+                      color: isActive
+                        ? "#fff"
+                        : isDark
+                        ? "rgba(255,255,255,0.7)"
+                        : "text.primary",
+
+                      border: "1px solid",
+                      borderColor: isActive
+                        ? "admin.main"
+                        : isDark
+                        ? "rgba(255,255,255,0.1)"
+                        : "rgba(0,0,0,0.06)",
+
+                      boxShadow: isActive
+                        ? `0 8px 20px -6px ${theme.palette.admin.main}`
+                        : "none",
+
+                      backdropFilter:
+                        !isActive && !isEllipsis ? "blur(8px)" : "none",
+
+                      "&:hover": {
+                        bgcolor: isActive ? "admin.main" : "admin.main",
+                        color: "#fff",
+                        transform: !isEllipsis ? "translateY(-4px)" : "none",
+                        boxShadow: !isEllipsis
+                          ? `0 12px 20px -8px ${theme.palette.admin.main}`
+                          : "none",
+                        borderColor: "admin.main",
+                      },
+
+                      "&.Mui-disabled": {
+                        color: isDark
+                          ? "rgba(255,255,255,0.3)"
+                          : "rgba(0,0,0,0.3)",
+                        border: "none",
+                        bgcolor: "transparent",
+                      },
+                    }}
+                  >
+                    {btn}
+                  </Button>
+                );
+              })}
+            </Stack>
+          ) : null
+        ) : null}
       </Grid>
     </>
   );
