@@ -1,4 +1,4 @@
-import { useEffect } from "react";
+import { useEffect, useState } from "react";
 import {
   Box,
   Typography,
@@ -20,6 +20,7 @@ import {
 import UsersCharts from "./Components/User'sCharts";
 import { fetchFakeUser } from "../../User/RTK/MainSlice";
 import CardsToShowAndTaps from "./Components/Card'sToShow";
+import AddChefModal from "./Components/AddChefComp";
 
 export default function PreUser({
   dispatch,
@@ -31,6 +32,7 @@ export default function PreUser({
   setSelectedTap,
   managers,
   chefs,
+  setChefs,
 }) {
   const theme = useTheme();
 
@@ -40,6 +42,7 @@ export default function PreUser({
     }
   }, [selectedTap, dispatch]);
 
+  const [openAddChefComp, setOpenAddChefComp] = useState(false);
   return (
     <Box
       sx={{
@@ -104,12 +107,19 @@ export default function PreUser({
                 transform: "translateY(-3px)",
                 boxShadow: `0 15px 30px ${theme.palette.admin.main}60`,
               },
+              transition: "0.5s",
             }}
+            onClick={() => setOpenAddChefComp(true)}
           >
-            Add New Staff
+            Add New Chef
           </Button>
         </Stack>
-
+        <AddChefModal
+          open={openAddChefComp}
+          setChefs={setChefs}
+          chefs={chefs}
+          handleClose={() => setOpenAddChefComp(false)}
+        />
         {/* --- Charts --- */}
         <Box sx={{ mb: 6 }}>
           <UsersCharts isDark={isDark} />

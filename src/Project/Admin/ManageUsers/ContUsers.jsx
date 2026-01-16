@@ -30,7 +30,7 @@ export default function ContUsers() {
     },
   ];
 
-  const { chefs } = useContext(ChefsContext);
+  const { chefs, setChefs } = useContext(ChefsContext);
 
   return (
     <>
@@ -44,6 +44,7 @@ export default function ContUsers() {
         dispatch={dispatch}
         managers={managers}
         chefs={chefs}
+        setChefs={setChefs}
       />
     </>
   );
