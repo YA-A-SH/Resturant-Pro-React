@@ -19,14 +19,14 @@ export const fetchMeals = createAsyncThunk(
   async (_, thunkAPI) => {
     try {
       const res = await axios.get(
-        "https://www.themealdb.com/api/json/v1/1/search.php?s="
+        "https://www.themealdb.com/api/json/v1/1/search.php?s=",
       );
       localStorage.setItem("meals", JSON.stringify(res.data.meals));
       return res.data.meals;
     } catch (err) {
       return thunkAPI.rejectWithValue(err.message);
     }
-  }
+  },
 );
 const mealsSlice = createSlice({
   name: "meal",
@@ -40,14 +40,14 @@ const mealsSlice = createSlice({
     builder
       .addCase(fetchMeals.pending, (state) => {
         state.loading = true;
-        (state.error = null), (state.meals = []);
+        ((state.error = null), (state.meals = []));
       })
       .addCase(fetchMeals.fulfilled, (state, action) => {
-        (state.loading = false), (state.meals = action.payload);
+        ((state.loading = false), (state.meals = action.payload));
       })
       .addCase(fetchMeals.rejected, (state, action) => {
-        (state.loading = false),
-          (state.error = action.payload || "Unknown Error");
+        ((state.loading = false),
+          (state.error = action.payload || "Unknown Error"));
       });
   },
 });
@@ -57,14 +57,14 @@ export const fetchDrinks = createAsyncThunk(
   async (_, thunkAPI) => {
     try {
       const res = await axios.get(
-        "https://www.thecocktaildb.com/api/json/v1/1/filter.php?a=Non_Alcoholic"
+        "https://www.thecocktaildb.com/api/json/v1/1/filter.php?a=Non_Alcoholic",
       );
       localStorage.setItem("drinks", JSON.stringify(res.data.drinks));
       return res.data.drinks;
     } catch (err) {
       return thunkAPI.rejectWithValue(err.message);
     }
-  }
+  },
 );
 const drinkSlice = createSlice({
   name: "drink",
@@ -78,14 +78,14 @@ const drinkSlice = createSlice({
     builder
       .addCase(fetchDrinks.pending, (state) => {
         state.loading = true;
-        (state.error = null), (state.meals = []);
+        ((state.error = null), (state.meals = []));
       })
       .addCase(fetchDrinks.fulfilled, (state, action) => {
-        (state.loading = false), (state.meals = action.payload);
+        ((state.loading = false), (state.meals = action.payload));
       })
       .addCase(fetchDrinks.rejected, (state, action) => {
-        (state.loading = false),
-          (state.error = action.payload || "Unknown Error");
+        ((state.loading = false),
+          (state.error = action.payload || "Unknown Error"));
       });
   },
 });
@@ -95,14 +95,14 @@ export const fetchSweets = createAsyncThunk(
   async (_, thunkAPI) => {
     try {
       const res = await axios.get(
-        "https://www.themealdb.com/api/json/v1/1/filter.php?c=Dessert"
+        "https://www.themealdb.com/api/json/v1/1/filter.php?c=Dessert",
       );
       localStorage.setItem("sweets", JSON.stringify(res.data.meals));
       return res.data.meals;
     } catch (err) {
       return thunkAPI.rejectWithValue(err.message);
     }
-  }
+  },
 );
 const sweetSlice = createSlice({
   name: "sweet",
@@ -116,14 +116,14 @@ const sweetSlice = createSlice({
     builder
       .addCase(fetchSweets.pending, (state) => {
         state.loading = true;
-        (state.error = null), (state.meals = []);
+        ((state.error = null), (state.meals = []));
       })
       .addCase(fetchSweets.fulfilled, (state, action) => {
-        (state.loading = false), (state.meals = action.payload);
+        ((state.loading = false), (state.meals = action.payload));
       })
       .addCase(fetchSweets.rejected, (state, action) => {
-        (state.loading = false),
-          (state.error = action.payload || "Unknown Error");
+        ((state.loading = false),
+          (state.error = action.payload || "Unknown Error"));
       });
   },
 });
@@ -156,7 +156,7 @@ export const loginWithGoogle = createAsyncThunk(
     } catch (err) {
       return thunkAPI.rejectWithValue(err.message);
     }
-  }
+  },
 );
 
 const googleSlice = createSlice({
@@ -172,7 +172,7 @@ const googleSlice = createSlice({
     builder
       .addCase(loginWithGoogle.pending, (state) => {
         state.loading = true;
-        (state.error = null), (state.user = null);
+        ((state.error = null), (state.user = null));
       })
       .addCase(loginWithGoogle.fulfilled, (state, action) => {
         state.loading = false;
@@ -180,8 +180,8 @@ const googleSlice = createSlice({
         localStorage.setItem("user", JSON.stringify(action.payload));
       })
       .addCase(loginWithGoogle.rejected, (state, action) => {
-        (state.loading = false),
-          (state.error = action.payload || "Unknown Error");
+        ((state.loading = false),
+          (state.error = action.payload || "Unknown Error"));
       });
   },
 });
@@ -236,7 +236,7 @@ export const loginWithEmail = createAsyncThunk(
       const result = await signInWithEmailAndPassword(
         auth,
         email.trim(),
-        password.trim()
+        password.trim(),
       );
 
       localStorage.setItem("user", JSON.stringify(result.user));
@@ -245,7 +245,7 @@ export const loginWithEmail = createAsyncThunk(
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
-  }
+  },
 );
 
 const emailSlice = createSlice({
@@ -261,7 +261,7 @@ const emailSlice = createSlice({
     builder
       .addCase(loginWithEmail.pending, (state) => {
         state.loading = true;
-        (state.error = null), (state.user = null);
+        ((state.error = null), (state.user = null));
       })
       .addCase(loginWithEmail.fulfilled, (state, action) => {
         state.loading = false;
@@ -269,8 +269,8 @@ const emailSlice = createSlice({
         localStorage.setItem("user", JSON.stringify(action.payload)); // ✅ حفظ بعد login
       })
       .addCase(loginWithEmail.rejected, (state, action) => {
-        (state.loading = false),
-          (state.error = action.payload || "Unknown Error");
+        ((state.loading = false),
+          (state.error = action.payload || "Unknown Error"));
       });
   },
 });
@@ -284,7 +284,7 @@ export const resetPassword = createAsyncThunk(
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);
     }
-  }
+  },
 );
 const resetSlice = createSlice({
   name: "reset",
@@ -360,7 +360,7 @@ export const fetchFakeUser = createAsyncThunk(
     } catch (err) {
       return thunkAPI.rejectWithValue(err.message);
     }
-  }
+  },
 );
 
 const usersSlice = createSlice({
@@ -375,14 +375,14 @@ const usersSlice = createSlice({
     builder
       .addCase(fetchFakeUser.pending, (state) => {
         state.loading = true;
-        (state.error = null), (state.users = []);
+        ((state.error = null), (state.users = []));
       })
       .addCase(fetchFakeUser.fulfilled, (state, action) => {
-        (state.loading = false), (state.users = action.payload);
+        ((state.loading = false), (state.users = action.payload));
       })
       .addCase(fetchFakeUser.rejected, (state, action) => {
-        (state.loading = false),
-          (state.error = action.payload || "Unknown Error");
+        ((state.loading = false),
+          (state.error = action.payload || "Unknown Error"));
       });
   },
 });

@@ -112,7 +112,7 @@ export default function PreAdmin({ isDark }) {
                 boxShadow: `0 12px 30px ${
                   isDark ? "rgba(99, 102, 241, 0.4)" : "rgba(99, 102, 241, 0.2)"
                 }`,
-                transition: "all 0.3s ease",
+                transition: "0.5s",
                 "&:hover": {
                   transform: "translateY(-5px)",
                   boxShadow: `0 15px 40px ${

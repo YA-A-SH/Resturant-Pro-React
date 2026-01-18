@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
 import {
   Box,
   Typography,
@@ -9,13 +9,12 @@ import {
   TextField,
   InputAdornment,
   Button,
-  useTheme,
 } from "@mui/material";
 import {
   SearchRounded,
-  FilterListRounded,
   AdminPanelSettingsRounded,
   GroupAddRounded,
+  Clear,
 } from "@mui/icons-material";
 import UsersCharts from "./Components/User'sCharts";
 import { fetchFakeUser } from "../../User/RTK/MainSlice";
@@ -25,24 +24,39 @@ import AddChefModal from "./Components/AddChefComp";
 export default function PreUser({
   dispatch,
   isDark,
-  users,
+  theme,
   loading,
   error,
   selectedTap,
   setSelectedTap,
-  managers,
   chefs,
   setChefs,
+  openAddChefComp,
+  setOpenAddChefComp,
+  handleSearch,
+  searchText,
+  setSearchText,
+  chefSearch,
+  text,
+  ChefsShow,
+  ManagersShow,
+  UsersShow,
 }) {
-  const theme = useTheme();
+  useEffect(() => {
+    dispatch(fetchFakeUser());
+  }, [dispatch]);
 
   useEffect(() => {
-    if (selectedTap === "User's") {
-      dispatch(fetchFakeUser());
-    }
-  }, [selectedTap, dispatch]);
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    handleSearch();
+  }, [searchText]);
 
-  const [openAddChefComp, setOpenAddChefComp] = useState(false);
+  useEffect(() => {
+    // setIsFiltered(false);
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setSearchText("");
+  }, [selectedTap]);
+
   return (
     <Box
       sx={{
@@ -209,7 +223,9 @@ export default function PreUser({
           <Stack direction={{ xs: "column", md: "row" }} spacing={2}>
             <TextField
               fullWidth
-              placeholder="Search by name, email or role..."
+              value={searchText}
+              onChange={(e) => setSearchText(e.target.value)}
+              placeholder={text}
               InputProps={{
                 startAdornment: (
                   <InputAdornment position="start">
@@ -228,17 +244,12 @@ export default function PreUser({
             />
             <Button
               variant="outlined"
-              startIcon={<FilterListRounded />}
-              sx={{
-                borderRadius: "16px",
-                px: 4,
-                borderColor: "divider",
-                color: "text.primary",
-                fontWeight: "bold",
-                "&:hover": { borderColor: "admin.main", color: "admin.main" },
-              }}
+              startIcon={<Clear />}
+              color="error"
+              sx={{ minWidth: "100px" }}
+              onClick={() => setSearchText("")}
             >
-              Filters
+              Clear
             </Button>
           </Stack>
         </Card>
@@ -247,12 +258,14 @@ export default function PreUser({
         <CardsToShowAndTaps
           setSelectedTap={setSelectedTap}
           selectedTap={selectedTap}
-          chefs={chefs}
-          managers={managers}
-          users={users}
+          chefs={ChefsShow}
+          managers={ManagersShow}
+          users={UsersShow}
           loading={loading}
           error={error}
           isDark={isDark}
+          searchText={searchText}
+          chefSearch={chefSearch}
         />
       </Container>
     </Box>

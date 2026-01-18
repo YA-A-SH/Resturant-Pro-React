@@ -15,7 +15,7 @@ export default function Theme({ mode, children }) {
           contrastText: isDark ? "#000" : "#fff",
         },
         admin: {
-          main: "#6366F1", 
+          main: "#6366F1",
           secondary: "#A855F7",
           surface: isDark
             ? "rgba(99, 102, 241, 0.05)"
@@ -68,7 +68,6 @@ export default function Theme({ mode, children }) {
           },
         },
       },
-      // الـ Breakpoints الخاصة بك
       breakpoints: {
         values: {
           xxs: 0,

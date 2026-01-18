@@ -18,16 +18,33 @@ export default function Footer() {
       </Typography>{" "}
       <Stack direction="row" justifyContent="center" spacing={2} mt={1}>
         {" "}
-        <IconButton color="primary">
+        <IconButton
+          color="primary"
+          component="a"
+          href="https://www.facebook.com/yaser.shkfa"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           {" "}
           <Facebook />{" "}
         </IconButton>{" "}
-        <IconButton color="primary">
+        <IconButton
+          color="primary"
+          component="a"
+          href="https://www.linkedin.com/in/ya-a-sh-4494743a3"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           {" "}
           <LinkedIn />{" "}
         </IconButton>{" "}
-        <IconButton color="primary">
-          {" "}
+        <IconButton
+          color="primary"
+          component="a"
+          href="https://github.com/YA-A-SH"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           <GitHub />{" "}
         </IconButton>{" "}
       </Stack>{" "}

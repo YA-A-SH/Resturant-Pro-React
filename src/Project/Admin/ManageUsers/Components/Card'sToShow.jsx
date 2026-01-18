@@ -29,10 +29,10 @@ export default function CardsToShowAndTaps({
     { id: "User's", label: "Community" },
   ];
   const cardsPerPage = 8;
-  const totalPages = Math.ceil(users.length / cardsPerPage);
+  const totalPages = Math.ceil(users?.length / cardsPerPage);
   const [currentPage, setCurrentPage] = useState(1);
   const startCard = (currentPage - 1) * cardsPerPage;
-  const usersToShow = users.slice(startCard, startCard + cardsPerPage);
+  const usersToShow = users?.slice(startCard, startCard + cardsPerPage);
 
   const paginationButtons = () => {
     let buttons = [];
@@ -80,6 +80,8 @@ export default function CardsToShowAndTaps({
           bgcolor: isDark ? "rgba(255,255,255,0.03)" : "rgba(0,0,0,0.03)",
           backdropFilter: "blur(10px)",
           display: "flex",
+          justifyContent: "center",
+          alignItems: "center",
           gap: 1,
           border: "1px solid",
           borderColor: isDark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.05)",
@@ -116,8 +118,8 @@ export default function CardsToShowAndTaps({
                   bgcolor: isActive
                     ? "none"
                     : isDark
-                    ? "rgba(255,255,255,0.08)"
-                    : "rgba(0,0,0,0.06)",
+                      ? "rgba(255,255,255,0.08)"
+                      : "rgba(0,0,0,0.06)",
                   color: isActive ? "#fff" : "text.primary",
                   transform: isActive ? "scale(1.05)" : "none",
                 },
@@ -171,7 +173,7 @@ export default function CardsToShowAndTaps({
 
             {!loading &&
               !error &&
-              usersToShow.map((user, index) => (
+              usersToShow?.map((user, index) => (
                 <Fade in timeout={500 + index * 50} key={user.name}>
                   <Grid item xs={12} sm={6} md={4} lg={3}>
                     <CardBase data={user} isDark={isDark} id="user" />
@@ -180,7 +182,11 @@ export default function CardsToShowAndTaps({
               ))}
           </>
         )}
-        {selectedTap === "User's" ? (
+
+
+       
+      </Grid>
+       {selectedTap === "User's" ? (
           totalPages > 1 ? (
             <Stack
               direction="row"
@@ -212,21 +218,21 @@ export default function CardsToShowAndTaps({
                       bgcolor: isActive
                         ? "admin.main"
                         : isDark
-                        ? "rgba(255, 255, 255, 0.05)"
-                        : "rgba(255, 255, 255, 0.8)",
+                          ? "rgba(255, 255, 255, 0.05)"
+                          : "rgba(255, 255, 255, 0.8)",
 
                       color: isActive
                         ? "#fff"
                         : isDark
-                        ? "rgba(255,255,255,0.7)"
-                        : "text.primary",
+                          ? "rgba(255,255,255,0.7)"
+                          : "text.primary",
 
                       border: "1px solid",
                       borderColor: isActive
                         ? "admin.main"
                         : isDark
-                        ? "rgba(255,255,255,0.1)"
-                        : "rgba(0,0,0,0.06)",
+                          ? "rgba(255,255,255,0.1)"
+                          : "rgba(0,0,0,0.06)",
 
                       boxShadow: isActive
                         ? `0 8px 20px -6px ${theme.palette.admin.main}`
@@ -261,7 +267,6 @@ export default function CardsToShowAndTaps({
             </Stack>
           ) : null
         ) : null}
-      </Grid>
     </>
   );
 }

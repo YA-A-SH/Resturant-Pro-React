@@ -58,7 +58,7 @@ export const IsAdminContext = createContext();
 
 export const IsAdminProvider = ({ children }) => {
   const [isAdmin, setIsAdmin] = useState(
-    () => JSON.parse(localStorage.getItem("isAdmin")) || false
+    () => JSON.parse(localStorage.getItem("isAdmin")) || false,
   );
 
   return (
@@ -76,7 +76,7 @@ export const ChefsProvider = ({ children }) => {
     () =>
       JSON.parse(localStorage.getItem("chefs")) || [
         {
-          name: "Chef S.Ramos",
+          name: "Ramos",
           role: "Head Chef",
           salary: "5200$",
           city: "Spain",
@@ -99,7 +99,7 @@ export const ChefsProvider = ({ children }) => {
           mail: "aliMail@gmail.com",
           img: "https://randomuser.me/api/portraits/men/2.jpg",
         },
-      ]
+      ],
   );
 
   return (

@@ -1,18 +1,28 @@
 import { useDispatch, useSelector } from "react-redux";
 import PreUsers from "./PreUsers";
 import { useTheme } from "@emotion/react";
-import { useContext, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 import { ChefsContext } from "../../User/Context/MainContext";
 
 export default function ContUsers() {
+  // Hooks
+
+  const { chefs, setChefs } = useContext(ChefsContext);
+  const [selectedTap, setSelectedTap] = useState("Manager's");
+  const [openAddChefComp, setOpenAddChefComp] = useState(false);
+  const [isFiltered, setIsFiltered] = useState(false);
+  const [searchText, setSearchText] = useState("");
+  const [chefSearch, setChefSearch] = useState([]);
+  const [managerSearch, setManagerSearch] = useState([]);
+  const [userSearch, setUserSearch] = useState([]);
+  const dispatch = useDispatch();
+  const theme = useTheme();
+
+  //  Selectors
   const { users, loading, error } = useSelector((st) => st.users);
 
-  const theme = useTheme();
+  // Variables
   const isDark = theme.palette.mode === "dark";
-
-  const [selectedTap, setSelectedTap] = useState("Chef's");
-  const dispatch = useDispatch();
-
   const managers = [
     {
       name: "Yaser",
@@ -29,22 +39,70 @@ export default function ContUsers() {
       age: "35",
     },
   ];
+  const text = `Search by ${selectedTap} name`;
+  const ChefsShow = selectedTap === "Chef's" && isFiltered ? chefSearch : chefs;
+  const ManagersShow =
+    selectedTap === "Manager's" && isFiltered ? managerSearch : managers;
+  const UsersShow = selectedTap === "User's" && isFiltered ? userSearch : users;
 
-  const { chefs, setChefs } = useContext(ChefsContext);
+  // Effects
+
+  useEffect(() => {
+    document.title = "Zeus | Admin => Manage User's";
+  }, []);
+
+  // Functions
+  function handleSearch() {
+    if (!searchText.trim()) {
+      setIsFiltered(false);
+      return;
+    }
+
+    if (selectedTap === "Chef's") {
+      setChefSearch(
+        chefs.filter((e) =>
+          e.name.toLowerCase().includes(searchText.toLowerCase()),
+        ),
+      );
+    } else if (selectedTap === "Manager's") {
+      setManagerSearch(
+        managers.filter((e) =>
+          e.name.toLowerCase().includes(searchText.toLowerCase()),
+        ),
+      );
+    } else if (selectedTap === "User's") {
+      setUserSearch(
+        users.filter((e) => {
+          return e.name.toLowerCase().includes(searchText.toLowerCase());
+        }),
+      );
+    }
+
+    setIsFiltered(true);
+  }
 
   return (
     <>
       <PreUsers
         isDark={isDark}
-        users={users}
+        theme={theme}
         loading={loading}
         error={error}
+        text={text}
+        ChefsShow={ChefsShow}
+        ManagersShow={ManagersShow}
+        UsersShow={UsersShow}
+        searchText={searchText}
         selectedTap={selectedTap}
-        setSelectedTap={setSelectedTap}
         dispatch={dispatch}
-        managers={managers}
         chefs={chefs}
+        chefSearch={chefSearch}
+        openAddChefComp={openAddChefComp}
+        handleSearch={handleSearch}
         setChefs={setChefs}
+        setOpenAddChefComp={setOpenAddChefComp}
+        setSearchText={setSearchText}
+        setSelectedTap={setSelectedTap}
       />
     </>
   );
