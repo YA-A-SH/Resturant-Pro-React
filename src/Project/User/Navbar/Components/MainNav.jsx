@@ -81,7 +81,7 @@ export default function MainNav({
               key={lang}
               fullWidth
               size="small"
-              variant={lang === "EN" ? "contained" : "text"} // مثال لتحديد اللغة النشطة
+              variant={lang === "EN" ? "contained" : "text"}
               sx={{
                 borderRadius: "10px",
                 fontWeight: "800",

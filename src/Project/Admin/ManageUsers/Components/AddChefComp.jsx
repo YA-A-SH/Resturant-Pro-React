@@ -20,12 +20,14 @@ import {
   CloudUploadRounded,
   PersonAddRounded,
 } from "@mui/icons-material";
+import { v4 as uuidv4 } from "uuid";
 
 export default function AddChefModal({ open, chefs, setChefs, handleClose }) {
   const theme = useTheme();
   const isDark = theme.palette.mode === "dark";
 
   const [formData, setFormData] = useState({
+    id: uuidv4(),
     name: "",
     role: "",
     salary: "",

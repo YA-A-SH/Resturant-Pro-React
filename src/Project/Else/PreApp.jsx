@@ -16,7 +16,16 @@ const Meals = lazy(() => import("../User/Main/Components/Meels"));
 const Drinks = lazy(() => import("../User/Main/Components/Drinks"));
 const Sweets = lazy(() => import("../User/Main/Components/Sweet"));
 const Profile = lazy(() => import("../User/Profile/ContProfile"));
-const ContAdmin = lazy(() => import("../Admin/ContAdmin"));
+const ContAdmin = lazy(() => import("../Admin/Main/ContAdmin"));
+const ChefProfile = lazy(
+  () => import("../Admin/ManageUsers/Components/ProfilePages/ChefProfile"),
+);
+const UserProfile = lazy(
+  () => import("../Admin/ManageUsers/Components/ProfilePages/UserProfile"),
+);
+const ManagerProfile = lazy(
+  () => import("../Admin/ManageUsers/Components/ProfilePages/ManagerProfile"),
+);
 
 import ProtectedRoute from "../User/Routes/ProtectedRoute";
 import ContAboutUs from "../User/About_Us/ContAboutAs";
@@ -79,13 +88,42 @@ export default function PreApp({
               </PageWrapper>
             }
           />
-
           <Route
-            path="/admin/manageUsers"
+            path="/admin/manage-users"
             element={
               <PageWrapper>
                 <AdminProtectedRoute>
                   <ContUsers />
+                </AdminProtectedRoute>
+              </PageWrapper>
+            }
+          />
+          <Route
+            path="/admin/manage-users/chef"
+            element={
+              <PageWrapper>
+                <AdminProtectedRoute>
+                  <ChefProfile />
+                </AdminProtectedRoute>
+              </PageWrapper>
+            }
+          />{" "}
+          <Route
+            path="/admin/manage-users/manager"
+            element={
+              <PageWrapper>
+                <AdminProtectedRoute>
+                  <ManagerProfile />
+                </AdminProtectedRoute>
+              </PageWrapper>
+            }
+          />{" "}
+          <Route
+            path="/admin/manage-users/user"
+            element={
+              <PageWrapper>
+                <AdminProtectedRoute>
+                  <UserProfile />
                 </AdminProtectedRoute>
               </PageWrapper>
             }

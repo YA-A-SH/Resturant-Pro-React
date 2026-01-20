@@ -22,10 +22,10 @@ export default function PreNav({
           transition={{ type: "spring", damping: 20, stiffness: 300 }}
           sx={{
             position: "fixed",
-            top: "90px", // مسافة بسيطة عن الهيدر ليعطي شعور الطفو
-            right: "20px",
+            top: isAdmin ? "90px" : "70px",
+            right: "10px",
             width: 300,
-            bgcolor: "background.glass", // استخدام قيمة الزجاج من الثيم
+            bgcolor: "background.glass",
             backdropFilter: "blur(20px)",
             borderRadius: "24px",
             border: "1px solid",
@@ -41,7 +41,7 @@ export default function PreNav({
             direction="row"
             justifyContent="space-between"
             alignItems="center"
-            sx={{ p: 2.5, pb: 1.5 }}
+            sx={{ p: 1.5, pb: 1.5 }}
           >
             <Typography
               variant="h6"

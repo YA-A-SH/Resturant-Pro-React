@@ -1,31 +1,27 @@
-import { cloneElement } from "react";
+import { cloneElement, useState } from "react";
 import {
-  BlockRounded,
   MailRounded,
-  VerifiedUserRounded,
-  ArrowForwardIosRounded,
   LocationOnRounded,
   BadgeRounded,
   PaymentsRounded,
   WcRounded,
-  AdminPanelSettingsRounded,
   StarRounded,
 } from "@mui/icons-material";
 import {
   Avatar,
   Box,
-  Button,
   Card,
   Chip,
   Stack,
-  Tooltip,
   Typography,
   alpha,
   useTheme,
 } from "@mui/material";
 
-import { InfoRow, ActionButton } from "./OtherCompForCard'sBase";
+import { InfoRow } from "./OtherCompForCard'sBase";
 import FooterCardBase from "./FooterCardBase";
+import EditSalaryPopup from "./EditSalaryPopup";
+import DeleteChefPopup from "./DeleteChefPopup";
 
 export default function CardBase({ isDark, data, id }) {
   const theme = useTheme();
@@ -36,27 +32,27 @@ export default function CardBase({ isDark, data, id }) {
       gradient: "linear-gradient(135deg, #10B981 0%, #059669 100%)",
       label: data?.role || "Master Chef",
       specialInfo: {
-        label: "Monthly Salary",
-        value: data?.salary || "$4,500",
+        label: "Monthly Salary : ",
+        value: ` ${data?.salary}$`,
         icon: <PaymentsRounded />,
       },
     },
     manager: {
-      mainColor: theme.palette.admin.main, // لون الأدمن الأساسي (الأزرق النيلي)
+      mainColor: theme.palette.admin.main,
       gradient: theme.palette.admin.gradient,
       label: "System Administrator",
       specialInfo: {
-        label: "Experience",
-        value: `${data?.age || 5} Years`,
+        label: "Experience : ",
+        value: ` ${data?.age || 5} Years`,
         icon: <BadgeRounded />,
       },
     },
     user: {
-      mainColor: "#F59E0B", // لون برتقالي/ذهبي للمجتمع
+      mainColor: "#F59E0B",
       gradient: "linear-gradient(135deg, #F59E0B 0%, #D97706 100%)",
       label: "Community Member",
       specialInfo: {
-        label: "Gender",
+        label: "Gender : ",
         value: data?.gender || "Not Set",
         icon: <WcRounded />,
       },
@@ -68,6 +64,10 @@ export default function CardBase({ isDark, data, id }) {
     specialInfo: { label: "Info", value: "Standard", icon: <StarRounded /> },
   };
 
+  const [openEditSalaryPopup, setOpenEditSalaryPopup] = useState(false);
+  const [openDeleteChefPopup, setOpenDeleteChefPopup] = useState(false);
+
+  console.log("CardBase data:", id === "chef" ? data?.id : null);
   return (
     <Card
       sx={{
@@ -85,7 +85,7 @@ export default function CardBase({ isDark, data, id }) {
         boxShadow: isDark
           ? "0 15px 35px rgba(0,0,0,0.2)"
           : "0 15px 35px rgba(148,163,184,0.1)",
-        transition: "all 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
+        transition: "0.7s",
         "&:hover": {
           transform: "translateY(-12px)",
           borderColor: alpha(configs.mainColor, 0.4),
@@ -214,7 +214,26 @@ export default function CardBase({ isDark, data, id }) {
         </Stack>
       </Box>
       {/* Footer Actions */}
-      <FooterCardBase isDark={isDark} id={id} theme={theme} configs={configs} />
+      <FooterCardBase
+        isDark={isDark}
+        data={data}
+        id={id}
+        theme={theme}
+        configs={configs}
+        setOpenEditSalaryPopup={setOpenEditSalaryPopup}
+        setOpenDeleteChefPopup={setOpenDeleteChefPopup}
+      />
+      <EditSalaryPopup
+        id={data?.id}
+        open={openEditSalaryPopup}
+        setOpenEditSalaryPopup={setOpenEditSalaryPopup}
+        mainColor={configs.mainColor}
+      />
+      <DeleteChefPopup
+        data={data}
+        open={openDeleteChefPopup}
+        setOpenDeleteChefPopup={setOpenDeleteChefPopup}
+      />
     </Card>
   );
 }

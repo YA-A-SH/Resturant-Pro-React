@@ -348,6 +348,7 @@ export const fetchFakeUser = createAsyncThunk(
       const res = await axios.get("https://randomuser.me/api/?results=100");
 
       const users = res.data.results.map((u) => ({
+        id: u.login.uuid,
         name: `${u.name.first} ${u.name.last}`,
         gender: u.gender,
         email: u.email,

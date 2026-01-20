@@ -34,6 +34,9 @@ export default function Meals() {
         rate: Number((Math.random() * 2 + 3).toFixed(1)),
         type: getMealType(meal.strCategory),
         favorite: favFromLS.includes(meal.idMeal),
+        moreInfo: meal.strInstructions
+          ? meal.strInstructions.substring(0, 100) + "..."
+          : `A delicious ${meal.strArea} ${meal.strCategory} dish.`,
       }));
       // eslint-disable-next-line react-hooks/set-state-in-effect
       setPreparedMeals(fixedMeals);
@@ -45,11 +48,11 @@ export default function Meals() {
   }, []);
 
   const filteredMeals = preparedMeals.filter(
-    (meal) => meal.type === selectedType
+    (meal) => meal.type === selectedType,
   );
 
   const sortedMeals = [...filteredMeals].sort((a, b) =>
-    sortAscending ? a.price - b.price : b.price - a.price
+    sortAscending ? a.price - b.price : b.price - a.price,
   );
 
   function toggleFavorite(id) {
@@ -65,8 +68,8 @@ export default function Meals() {
 
     setPreparedMeals((prevMeals) =>
       prevMeals.map((meal) =>
-        meal.id === id ? { ...meal, favorite: !meal.favorite } : meal
-      )
+        meal.id === id ? { ...meal, favorite: !meal.favorite } : meal,
+      ),
     );
   }
 

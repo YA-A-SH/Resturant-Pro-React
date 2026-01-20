@@ -138,7 +138,7 @@ export default function CardsToShowAndTaps({
       >
         {selectedTap === "Manager's" &&
           managers.map((manager, index) => (
-            <Fade in timeout={500 + index * 100} key={manager.name}>
+            <Fade in timeout={500 + index * 100} key={manager.id}>
               <Grid item xs={12} sm={6} md={4} lg={3}>
                 <CardBase data={manager} isDark={isDark} id="manager" />
               </Grid>
@@ -147,9 +147,18 @@ export default function CardsToShowAndTaps({
 
         {selectedTap === "Chef's" &&
           chefs.map((chef, index) => (
-            <Fade in timeout={500 + index * 100} key={chef.name}>
+            <Fade
+              in
+              timeout={500 + index * 100}
+              key={`${chef.id || chef.email}-${index}`}
+            >
               <Grid item xs={12} sm={6} md={4} lg={3}>
-                <CardBase data={chef} isDark={isDark} id="chef" />
+                <CardBase
+                  data={chef}
+                  isDark={isDark}
+                  id="chef"
+                  chefId={chef.id}
+                />
               </Grid>
             </Fade>
           ))}
@@ -174,7 +183,11 @@ export default function CardsToShowAndTaps({
             {!loading &&
               !error &&
               usersToShow?.map((user, index) => (
-                <Fade in timeout={500 + index * 50} key={user.name}>
+                <Fade
+                  in
+                  timeout={500 + index * 50}
+                  key={`${user.id || user.email}-${index}`}
+                >
                   <Grid item xs={12} sm={6} md={4} lg={3}>
                     <CardBase data={user} isDark={isDark} id="user" />
                   </Grid>
@@ -182,91 +195,88 @@ export default function CardsToShowAndTaps({
               ))}
           </>
         )}
-
-
-       
       </Grid>
-       {selectedTap === "User's" ? (
-          totalPages > 1 ? (
-            <Stack
-              direction="row"
-              spacing={1.2}
-              justifyContent="center"
-              alignItems="center"
-              mt={8}
-              mb={4}
-            >
-              {paginationButtons().map((btn, idx) => {
-                const isActive = currentPage === btn;
-                const isEllipsis = btn === "...";
+      {selectedTap === "User's" ? (
+        totalPages > 1 ? (
+          <Stack
+            direction="row"
+            spacing={1.2}
+            justifyContent="center"
+            alignItems="center"
+            mt={8}
+            mb={4}
+          >
+            {paginationButtons().map((btn, idx) => {
+              const isActive = currentPage === btn;
+              const isEllipsis = btn === "...";
 
-                return (
-                  <Button
-                    key={idx}
-                    disabled={isEllipsis}
-                    onClick={() => !isEllipsis && setCurrentPage(btn)}
-                    sx={{
-                      minWidth: isEllipsis ? "35px" : "48px",
-                      height: "48px",
-                      p: 0,
+              return (
+                <Button
+                  key={idx}
+                  disabled={isEllipsis}
+                  onClick={() => !isEllipsis && setCurrentPage(btn)}
+                  sx={{
+                    minWidth: isEllipsis ? "35px" : "48px",
+                    height: "48px",
+                    p: 0,
 
-                      borderRadius: "16px",
-                      fontWeight: 800,
-                      fontSize: "0.95rem",
-                      transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
+                    borderRadius: "16px",
+                    fontWeight: 800,
+                    fontSize: "0.95rem",
+                    transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
 
-                      bgcolor: isActive
-                        ? "admin.main"
-                        : isDark
-                          ? "rgba(255, 255, 255, 0.05)"
-                          : "rgba(255, 255, 255, 0.8)",
+                    bgcolor: isActive
+                      ? "admin.main"
+                      : isDark
+                        ? "rgba(255, 255, 255, 0.05)"
+                        : "rgba(255, 255, 255, 0.8)",
 
-                      color: isActive
-                        ? "#fff"
-                        : isDark
-                          ? "rgba(255,255,255,0.7)"
-                          : "text.primary",
+                    color: isActive
+                      ? "#fff"
+                      : isDark
+                        ? "rgba(255,255,255,0.7)"
+                        : "text.primary",
 
-                      border: "1px solid",
-                      borderColor: isActive
-                        ? "admin.main"
-                        : isDark
-                          ? "rgba(255,255,255,0.1)"
-                          : "rgba(0,0,0,0.06)",
+                    border: "1px solid",
+                    borderColor: isActive
+                      ? "admin.main"
+                      : isDark
+                        ? "rgba(255,255,255,0.1)"
+                        : "rgba(0,0,0,0.06)",
 
-                      boxShadow: isActive
-                        ? `0 8px 20px -6px ${theme.palette.admin.main}`
+                    boxShadow: isActive
+                      ? `0 8px 20px -6px ${theme.palette.admin.main}`
+                      : "none",
+
+                    backdropFilter:
+                      !isActive && !isEllipsis ? "blur(8px)" : "none",
+
+                    "&:hover": {
+                      bgcolor: isActive ? "admin.main" : "admin.main",
+                      color: "#fff",
+                      transform: !isEllipsis ? "translateY(-4px)" : "none",
+                      boxShadow: !isEllipsis
+                        ? `0 12px 20px -8px ${theme.palette.admin.main}`
                         : "none",
+                      borderColor: "admin.main",
+                    },
 
-                      backdropFilter:
-                        !isActive && !isEllipsis ? "blur(8px)" : "none",
-
-                      "&:hover": {
-                        bgcolor: isActive ? "admin.main" : "admin.main",
-                        color: "#fff",
-                        transform: !isEllipsis ? "translateY(-4px)" : "none",
-                        boxShadow: !isEllipsis
-                          ? `0 12px 20px -8px ${theme.palette.admin.main}`
-                          : "none",
-                        borderColor: "admin.main",
-                      },
-
-                      "&.Mui-disabled": {
-                        color: isDark
-                          ? "rgba(255,255,255,0.3)"
-                          : "rgba(0,0,0,0.3)",
-                        border: "none",
-                        bgcolor: "transparent",
-                      },
-                    }}
-                  >
-                    {btn}
-                  </Button>
-                );
-              })}
-            </Stack>
-          ) : null
-        ) : null}
+                    "&.Mui-disabled": {
+                      color: isDark
+                        ? "rgba(255,255,255,0.3)"
+                        : "rgba(0,0,0,0.3)",
+                      border: "none",
+                      bgcolor: "transparent",
+                    },
+                  }}
+                >
+                  {btn}
+                </Button>
+              );
+            })}
+          </Stack>
+        ) : null
+      ) : null}
     </>
   );
 }

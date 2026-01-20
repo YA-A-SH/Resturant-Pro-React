@@ -2,12 +2,29 @@ import {
   AdminPanelSettingsRounded,
   ArrowForwardIosRounded,
   BlockRounded,
+  CancelSharp,
+  TrendingUp,
   VerifiedUserRounded,
 } from "@mui/icons-material";
 import { alpha, Box, Button, Stack, Tooltip } from "@mui/material";
 import { ActionButton } from "./OtherCompForCard'sBase";
+import { useNavigate } from "react-router-dom";
 
-export default function FooterCardBase({ isDark, id, theme, configs }) {
+export default function FooterCardBase({
+  data,
+  isDark,
+  id,
+  theme,
+  configs,
+  setOpenEditSalaryPopup,
+  setOpenDeleteChefPopup,
+}) {
+  const navigate = useNavigate();
+  console.log("FooterCardBase data:", data);
+  const handleViewProfile = () => {
+    navigate(`/admin/manage-users/${id}`, { state: { userData: data } });
+  };
+
   return (
     <>
       <Stack
@@ -39,7 +56,7 @@ export default function FooterCardBase({ isDark, id, theme, configs }) {
                 />
               </Box>
             </Tooltip>
-          ) : (
+          ) : id === "user" ? (
             <>
               <ActionButton
                 icon={<VerifiedUserRounded />}
@@ -49,7 +66,22 @@ export default function FooterCardBase({ isDark, id, theme, configs }) {
               <ActionButton
                 icon={<BlockRounded />}
                 color="#EF4444"
-                title="Restrict Access"
+                title="Block User"
+              />
+            </>
+          ) : (
+            <>
+              <ActionButton
+                icon={<TrendingUp />}
+                color="#10B981"
+                title="Update Salary $"
+                handle={() => setOpenEditSalaryPopup(true)}
+              />
+              <ActionButton
+                icon={<CancelSharp />}
+                color="#EF4444"
+                title="Fire Chef 👨‍🍳"
+                handle={() => setOpenDeleteChefPopup(true)}
               />
             </>
           )}
@@ -63,16 +95,17 @@ export default function FooterCardBase({ isDark, id, theme, configs }) {
           }
           sx={{
             borderRadius: "14px",
-            textTransform: "none",
+            transition: "0.3s",
             fontWeight: 800,
             px: 2.5,
-            bgcolor: isDark ? "rgba(255,255,255,0.1)" : "#1e1e1e",
             color: "#fff",
+            background: configs.gradient,
             "&:hover": {
-              background: configs.gradient,
+              transform: "translate(5px,0px)",
               boxShadow: `0 8px 20px ${configs.mainColor}40`,
             },
           }}
+          onClick={handleViewProfile}
         >
           View Profile
         </Button>

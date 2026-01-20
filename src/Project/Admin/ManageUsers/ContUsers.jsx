@@ -25,18 +25,30 @@ export default function ContUsers() {
   const isDark = theme.palette.mode === "dark";
   const managers = [
     {
+      id: "1",
       name: "Yaser",
       mail: "yasermail@gmail.com",
       city: "Rafah",
       img: "https://randomuser.me/api/portraits/men/1.jpg",
       age: "21",
+      income: [
+        { month: "Jan", income: 10043 },
+        { month: "Feb", income: 13955 },
+        { month: "Mar", income: 22240 },
+      ],
     },
     {
+      id: "2",
       name: "عصملي",
       mail: "عصمليmail@gmail.com",
       city: "Rafah",
       img: "https://randomuser.me/api/portraits/men/24.jpg",
       age: "35",
+      income: [
+        { month: "Jan", incomes: 17043 },
+        { month: "Feb", incomes: 8955 },
+        { month: "Mar", incomes: 11240 },
+      ],
     },
   ];
   const text = `Search by ${selectedTap} name`;

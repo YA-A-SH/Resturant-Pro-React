@@ -65,7 +65,7 @@ export function InfoRow({ icon, text, label, isDark }) {
   );
 }
 
-export function ActionButton({ icon, color, title }) {
+export function ActionButton({ icon, color, title, handle }) {
   return (
     <Tooltip
       title={title}
@@ -85,6 +85,7 @@ export function ActionButton({ icon, color, title }) {
       }}
     >
       <IconButton
+        onClick={handle}
         size="medium"
         sx={{
           bgcolor: alpha(color, 0.08),

@@ -1,5 +1,4 @@
 import {
-  Container,
   Grid,
   Paper,
   Box,
@@ -8,12 +7,8 @@ import {
   useTheme,
   Stack,
 } from "@mui/material";
-import ChartCard from "../../Components/ChartCard"; // تأكد أن هذا المكون يقبل الأنماط الجديدة
-import {
-  BlockRounded,
-  VerifiedRounded,
-  TrendingUpRounded,
-} from "@mui/icons-material";
+import ChartCard from "../../Main/Components/ChartCard";
+import { BlockRounded, TrendingUpRounded } from "@mui/icons-material";
 import {
   Bar,
   BarChart,

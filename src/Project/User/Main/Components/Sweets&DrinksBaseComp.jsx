@@ -5,7 +5,7 @@ import Base from "../AllComp";
 
 export default function SweetsAndDrinks({ type }) {
   const { meals, loading, error } = useSelector((st) =>
-    type === "drinks" ? st.drinks : st.sweet
+    type === "drinks" ? st.drinks : st.sweet,
   );
   const [preparedMeals, setPreparedMeals] = useState([]);
   const [sortAscending, setSortAscending] = useState(true);
@@ -33,18 +33,27 @@ export default function SweetsAndDrinks({ type }) {
         image: type === "drinks" ? meal.strDrinkThumb : meal.strMealThumb,
         price: Number((Math.random() * 15 + 5).toFixed(2)),
         rate: Number((Math.random() * 2 + 3).toFixed(1)),
+        moreInfo:
+          type === "drinks"
+            ? meal.strInstructions
+              ? meal.strInstructions.substring(0, 100) + "..."
+              : `A refreshing drink to quench your thirst.`
+            : meal.strInstructions
+              ? meal.strInstructions.substring(0, 100) + "..."
+              : `A delightful sweet treat to satisfy your cravings.`,
         favorite:
           type === "drinks"
             ? favFromLS.includes(meal.idDrink)
             : favFromLS.includes(meal.idMeal),
       }));
+
       // eslint-disable-next-line react-hooks/set-state-in-effect
       setPreparedMeals(fixedMeals);
     }
   }, [meals, type]);
 
   const sortedMeals = [...preparedMeals].sort((a, b) =>
-    sortAscending ? a.price - b.price : b.price - a.price
+    sortAscending ? a.price - b.price : b.price - a.price,
   );
 
   function toggleFavorite(id) {
@@ -60,8 +69,8 @@ export default function SweetsAndDrinks({ type }) {
 
     setPreparedMeals((prevMeals) =>
       prevMeals.map((meal) =>
-        meal.id === id ? { ...meal, favorite: !meal.favorite } : meal
-      )
+        meal.id === id ? { ...meal, favorite: !meal.favorite } : meal,
+      ),
     );
   }
 

@@ -6,6 +6,7 @@ import {
   CardContent,
   useTheme,
   Stack,
+  alpha,
 } from "@mui/material";
 import LogoutIcon from "@mui/icons-material/Logout";
 import { useNavigate } from "react-router-dom";
@@ -19,7 +20,14 @@ export default function Logout() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const theme = useTheme();
-  const { setIsAdmin } = useContext(IsAdminContext);
+  const { isAdmin, setIsAdmin } = useContext(IsAdminContext); // سحبنا قيمة isAdmin
+  const isDark = theme.palette.mode === "dark";
+
+  // تحديد اللون الأساسي بناءً على الرتبة
+  // إذا كان أدمن نستخدم الموف (admin.main)، إذا عادي نستخدم (primary.main)
+  const mainColor = isAdmin
+    ? theme.palette.admin.main
+    : theme.palette.primary.main;
 
   const handleLogout = () => {
     dispatch(logout());
@@ -32,6 +40,7 @@ export default function Logout() {
   useEffect(() => {
     document.title = "Zeus Restaurant | Logout";
   }, []);
+
   return (
     <AnimatePresence>
       <Box
@@ -45,95 +54,113 @@ export default function Logout() {
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
-          background: `radial-gradient(circle at top,
-            ${theme.palette.primary.main}22,
-            ${theme.palette.background.default})`,
+          background: isDark
+            ? `radial-gradient(circle at center, ${alpha(mainColor, 0.12)} 0%, #0a0a0c 100%)`
+            : `radial-gradient(circle at center, ${alpha(mainColor, 0.05)} 0%, #f4f6f8 100%)`,
         }}
       >
         <Card
           component={motion.div}
-          initial={{ scale: 0.85, opacity: 0, y: 40 }}
+          initial={{ scale: 0.9, opacity: 0, y: 20 }}
           animate={{ scale: 1, opacity: 1, y: 0 }}
-          exit={{ scale: 0.85, opacity: 0, y: 40 }}
-          transition={{ type: "spring", stiffness: 120, damping: 15 }}
           sx={{
-            width: 420,
-            borderRadius: 4,
-            backdropFilter: "blur(18px)",
-            backgroundColor: theme.palette.background.paper,
-            boxShadow: `0 0 40px ${theme.palette.primary.main}55`,
-            border: `1px solid ${theme.palette.primary.main}22`,
+            width: { xs: "90%", sm: 400 },
+            borderRadius: "32px",
+            backdropFilter: "blur(20px)",
+            backgroundColor: isDark
+              ? "rgba(22, 22, 26, 0.8)"
+              : "rgba(255, 255, 255, 0.9)",
+            boxShadow: `0 20px 50px ${alpha(mainColor, isDark ? 0.3 : 0.1)}`,
+            border: "1px solid",
+            borderColor: alpha(mainColor, 0.2),
+            position: "relative",
+            overflow: "hidden",
           }}
         >
-          <CardContent sx={{ p: 4 }}>
-            <Stack spacing={2} alignItems="center">
+          {/* تأثير توهج خلفي علوي باللون المختار */}
+          <Box
+            sx={{
+              position: "absolute",
+              top: -50,
+              right: -50,
+              width: 140,
+              height: 140,
+              background: alpha(mainColor, 0.15),
+              filter: "blur(40px)",
+              borderRadius: "50%",
+            }}
+          />
+
+          <CardContent
+            sx={{ p: { xs: 4, sm: 6 }, position: "relative", zIndex: 1 }}
+          >
+            <Stack spacing={3} alignItems="center">
               <Box
                 component={motion.div}
-                animate={{ rotate: [0, -10, 10, 0] }}
-                transition={{ duration: 0.6 }}
+                whileHover={{ rotate: -10, scale: 1.05 }}
                 sx={{
-                  width: 90,
-                  height: 90,
-                  borderRadius: "50%",
+                  width: 80,
+                  height: 80,
+                  borderRadius: "24px",
                   display: "flex",
                   alignItems: "center",
                   justifyContent: "center",
-                  background: `${theme.palette.primary.main}22`,
-                  boxShadow: `0 0 25px ${theme.palette.primary.main}66`,
+                  background: alpha(mainColor, 0.1),
+                  color: mainColor, // اللون هنا صار ديناميكي
                 }}
               >
-                <LogoutIcon
-                  sx={{
-                    fontSize: 44,
-                    color: theme.palette.primary.main,
-                  }}
-                />
+                <LogoutIcon sx={{ fontSize: 40 }} />
               </Box>
 
-              <Typography variant="h5" fontWeight={700}>
-                Logout ?
-              </Typography>
+              <Box textAlign="center">
+                <Typography variant="h5" fontWeight={900} gutterBottom>
+                  Logout?
+                </Typography>
+                <Typography variant="body2" color="text.secondary">
+                  {isAdmin
+                    ? "Admin session will be terminated. Continue?"
+                    : "Are you sure you want to logout from your account?"}
+                </Typography>
+              </Box>
 
-              <Typography
-                variant="body2"
-                color="text.secondary"
-                textAlign="center"
-              >
-                Are you sure you want to logout from your account?
-              </Typography>
+              <Stack direction="column" spacing={2} width="100%">
+                <Button
+                  component={motion.button}
+                  whileHover={{ y: -3 }}
+                  whileTap={{ scale: 0.97 }}
+                  variant="contained"
+                  fullWidth
+                  onClick={handleLogout}
+                  sx={{
+                    bgcolor: mainColor, // الزر بياخد الموف للأدمن والأزرق للعادي
+                    py: 1.5,
+                    borderRadius: "14px",
+                    fontWeight: 800,
+                    boxShadow: `0 8px 20px ${alpha(mainColor, 0.4)}`,
+                    "&:hover": {
+                      bgcolor: mainColor,
+                      filter: "brightness(1.1)",
+                    },
+                  }}
+                >
+                  Yes, Log me out
+                </Button>
 
-              <Button
-                component={motion.button}
-                whileHover={{ scale: 1.03 }}
-                whileTap={{ scale: 0.95 }}
-                variant="contained"
-                fullWidth
-                size="large"
-                sx={{
-                  mt: 2,
-                  py: 1.2,
-                  boxShadow: `0 0 20px ${theme.palette.primary.main}77`,
-                }}
-                onClick={handleLogout}
-              >
-                Logout
-              </Button>
-
-              <Button
-                component={motion.button}
-                whileHover={{ scale: 1.03 }}
-                whileTap={{ scale: 0.95 }}
-                variant="outlined"
-                fullWidth
-                size="large"
-                sx={{
-                  borderColor: theme.palette.divider,
-                  color: "text.primary",
-                }}
-                onClick={() => navigate(-1)}
-              >
-                Cancel
-              </Button>
+                <Button
+                  variant="text"
+                  fullWidth
+                  onClick={() => navigate(-1)}
+                  sx={{
+                    py: 1.2,
+                    borderRadius: "14px",
+                    color: "text.secondary",
+                    fontWeight: 700,
+                    "&:hover": { bgcolor: alpha(mainColor, 0.05) },
+                  }}
+                >
+                  Cancel
+                </Button>
+              </Stack>
             </Stack>
           </CardContent>
         </Card>

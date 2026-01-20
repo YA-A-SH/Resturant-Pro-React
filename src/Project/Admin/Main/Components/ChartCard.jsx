@@ -1,6 +1,6 @@
 import { Box, Paper, Typography, useTheme } from "@mui/material";
 
-export default function ChartCard({ title, children, icon }) {
+export default function ChartCard({ title, children, icon, sentColor }) {
   const theme = useTheme();
   const isDark = theme.palette.mode === "dark";
 
@@ -31,7 +31,7 @@ export default function ChartCard({ title, children, icon }) {
         transition: "all 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
         "&:hover": {
           transform: "translateY(-8px)",
-          borderColor: "admin.main",
+          borderColor: sentColor || "admin.main",
           boxShadow: isDark
             ? `0 20px 40px -10px rgba(99, 102, 241, 0.2)`
             : `0 20px 40px -10px rgba(99, 102, 241, 0.1)`,
@@ -62,7 +62,7 @@ export default function ChartCard({ title, children, icon }) {
             background: isDark
               ? "rgba(99, 102, 241, 0.15)"
               : "rgba(99, 102, 241, 0.08)",
-            color: "admin.main",
+            color: sentColor || "admin.main",
             display: "flex",
             alignItems: "center",
             justifyContent: "center",

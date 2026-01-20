@@ -32,7 +32,7 @@ export default function ContNav({ showNav, setShowNav, setMode }) {
         },
         {
           label: "Manage Users",
-          path: "/admin/manageUsers",
+          path: "/admin/manage-users",
           icon: <SupervisedUserCircle fontSize="small" />,
         },
         {

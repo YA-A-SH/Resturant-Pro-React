@@ -101,7 +101,7 @@ export default function PreAdmin({ isDark }) {
               variant="contained"
               size="large"
               startIcon={<TrendingUp />}
-              onClick={() => navigate("/admin/manageUsers")}
+              onClick={() => navigate("/admin/manage-users")}
               sx={{
                 px: 5,
                 py: 1.8,

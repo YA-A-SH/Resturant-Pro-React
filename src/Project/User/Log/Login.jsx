@@ -47,6 +47,7 @@ export default function Login({
           initial={{ y: 20, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           sx={{
+            scale: "0.9",
             width: 1,
             maxWidth: 420,
             p: { xs: 3, sm: 5 },

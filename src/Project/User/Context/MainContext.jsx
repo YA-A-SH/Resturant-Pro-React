@@ -1,4 +1,5 @@
 import { createContext, useState } from "react";
+import { v4 as uuidv4 } from "uuid";
 
 // eslint-disable-next-line react-refresh/only-export-components
 export const User = createContext({
@@ -76,28 +77,46 @@ export const ChefsProvider = ({ children }) => {
     () =>
       JSON.parse(localStorage.getItem("chefs")) || [
         {
+          id: uuidv4(),
           name: "Ramos",
           role: "Head Chef",
-          salary: "5200$",
+          salary: "5200",
           city: "Spain",
           mail: "ramosMail@gmail.com",
-          img: "https://randomuser.me/api/portraits/men/12.jpg",
+          img: "https://randomuser.me/api/portraits/men/21.jpg",
+          rate: [
+            { month: "Jan", rate: 8.9 },
+            { month: "Feb", rate: 9.6 },
+            { month: "Mar", rate: 9.1 },
+          ],
         },
         {
+          id: uuidv4(),
           name: "Sara",
           role: "Pastry Chef",
-          salary: "4100$",
+          salary: "4100",
           city: "London",
           mail: "saraMail@gmail.com",
-          img: "https://randomuser.me/api/portraits/women/1.jpg",
+          img: "https://randomuser.me/api/portraits/women/8.jpg",
+          rate: [
+            { month: "Jan", rate: 9 },
+            { month: "Feb", rate: 9 },
+            { month: "Mar", rate: 9.2 },
+          ],
         },
         {
+          id: uuidv4(),
           name: "Ali",
           role: "Sous Chef",
-          salary: "3400$",
+          salary: "3400",
           city: "Rafah",
           mail: "aliMail@gmail.com",
-          img: "https://randomuser.me/api/portraits/men/2.jpg",
+          img: "https://randomuser.me/api/portraits/men/4.jpg",
+          rate: [
+            { month: "Jan", rate: 7.4 },
+            { month: "Feb", rate: 7.9 },
+            { month: "Mar", rate: 8.1 },
+          ],
         },
       ],
   );
