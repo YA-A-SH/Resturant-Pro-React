@@ -14,24 +14,38 @@ import {
   LocalFireDepartmentRounded,
   GppBadRounded,
 } from "@mui/icons-material";
-import { motion, AnimatePresence } from "framer-motion";
+import { motion } from "framer-motion";
 import { useContext } from "react";
 import { ChefsContext } from "../../../User/Context/MainContext";
+import { useNavigate } from "react-router-dom";
 
 export default function DeleteChefPopup({
   open,
   data,
   setOpenDeleteChefPopup,
+  isInProfile,
+  setIsProfile,
 }) {
+  const navigate = useNavigate();
+
+ 
   const { chefs, setChefs } = useContext(ChefsContext);
 
   const handleDelete = () => {
     const updatedChefs = chefs.filter((chef) => {
       return chef.id !== data?.id;
     });
-
-    setChefs(updatedChefs);
-    setOpenDeleteChefPopup(false);
+    if (isInProfile) {
+      navigate(`/admin/manage-users`);
+      setIsProfile(false);
+      setTimeout(() => {
+        setChefs(updatedChefs);
+        setOpenDeleteChefPopup(false);
+      }, 1000);
+    } else {
+      setChefs(updatedChefs);
+      setOpenDeleteChefPopup(false);
+    }
   };
   const theme = useTheme();
   const dangerColor = "#ff3d00";

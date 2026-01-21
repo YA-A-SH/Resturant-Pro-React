@@ -35,6 +35,7 @@ export default function EditSalaryPopup({
   const onClose = () => {
     setOpenEditSalaryPopup(false);
   };
+  
   useEffect(() => {
     if (open && theChef) {
       // eslint-disable-next-line react-hooks/set-state-in-effect
@@ -108,6 +109,7 @@ export default function EditSalaryPopup({
             fullWidth
             variant="outlined"
             label="Monthly Salary"
+            type="number"
             value={value}
             onChange={(e) => setValue(e.target.value)}
             placeholder="e.g. $5,000"

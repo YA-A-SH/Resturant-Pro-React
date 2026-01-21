@@ -20,9 +20,10 @@ export default function FooterCardBase({
   setOpenDeleteChefPopup,
 }) {
   const navigate = useNavigate();
-  console.log("FooterCardBase data:", data);
   const handleViewProfile = () => {
-    navigate(`/admin/manage-users/${id}`, { state: { userData: data } });
+    navigate(`/admin/manage-users/${id}`, {
+      state: { userData: data },
+    });
   };
 
   return (

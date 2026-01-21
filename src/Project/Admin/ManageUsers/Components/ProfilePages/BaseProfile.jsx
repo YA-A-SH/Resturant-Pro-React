@@ -10,8 +10,19 @@ import {
 import BaseHeader from "./BaseHeader";
 import BaseCharts from "./BaseCharts";
 import BaseDetails from "./BaseDetails";
+import EditSalaryPopup from "../EditSalaryPopup";
+import DeleteChefPopup from "../DeleteChefPopup";
 
-export default function ProfileView({ data, type }) {
+export default function ProfileView({
+  data,
+  type,
+  setState1,
+  setState2,
+  state1,
+  state2,
+  isInProfile,
+  setIsProfile,
+}) {
   const theme = useTheme();
   const isDark = theme.palette.mode === "dark";
   const navigate = useNavigate();
@@ -57,15 +68,14 @@ export default function ProfileView({ data, type }) {
 
   const chartData =
     type === "chef"
-      ? data.rate
+      ? data?.rate
       : type === "manager"
-        ? data.income
+        ? data?.income
         : [
             { month: "Jan", value: 10 },
             { month: "Feb", value: 15 },
             { month: "Mar", value: 20 },
           ];
-  console.log("chartData in ProfileView:", data.income);
   return (
     <Container maxWidth="lg" sx={{ py: 4 }}>
       <IconButton
@@ -80,7 +90,15 @@ export default function ProfileView({ data, type }) {
 
       {/* --- Header Card --- */}
 
-      <BaseHeader configs={configs} data={data} isDark={isDark} theme={theme} />
+      <BaseHeader
+        configs={configs}
+        data={data}
+        isDark={isDark}
+        theme={theme}
+        type={type}
+        setSalaryState={setState1}
+        setDeleteState={setState2}
+      />
 
       {/* --- Main Content Grid --- */}
 
@@ -101,6 +119,19 @@ export default function ProfileView({ data, type }) {
           chartData={chartData}
         />
         <BaseDetails configs={configs} type={type} />
+        <EditSalaryPopup
+          id={data.id}
+          open={state1}
+          setOpenEditSalaryPopup={setState1}
+          mainColor="#10B981"
+        />
+        <DeleteChefPopup
+          open={state2}
+          setOpenDeleteChefPopup={ setState2}
+          data={data}
+          isInProfile={isInProfile}
+          setIsProfile={setIsProfile}
+        />
       </Grid>
     </Container>
   );
