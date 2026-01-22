@@ -3,7 +3,6 @@ import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
 import {
   GoogleAuthProvider,
-  FacebookAuthProvider,
   signInWithPopup,
   signInWithEmailAndPassword,
 } from "firebase/auth";
@@ -347,7 +346,7 @@ export const fetchFakeUser = createAsyncThunk(
     try {
       const res = await axios.get("https://randomuser.me/api/?results=100");
 
-      const users = res.data.results.map((u) => ({
+      const user = res.data.results.map((u) => ({
         id: u.login.uuid,
         name: `${u.name.first} ${u.name.last}`,
         gender: u.gender,
@@ -355,9 +354,11 @@ export const fetchFakeUser = createAsyncThunk(
         phone: u.cell,
         city: u.location.city,
         image: u.picture.large,
+        isBlocked: false,
+        isVerified: false,
       }));
 
-      return users;
+      return user;
     } catch (err) {
       return thunkAPI.rejectWithValue(err.message);
     }
@@ -371,21 +372,39 @@ const usersSlice = createSlice({
     loading: false,
     error: null,
   },
-  reducers: {},
+  reducers: {
+    toggleVerified: (state, action) => {
+      const userId = action.payload;
+      const user = state.users.find((user) => user.id === userId);
+      if (user) {
+        user.isVerified = !user.isVerified;
+      }
+    },
+    toggleBlocked: (state, action) => {
+      const userId = action.payload;
+      const user = state.users.find((user) => user.id === userId);
+      if (user) {
+        user.isBlocked = !user.isBlocked;
+      }
+    },
+  },
   extraReducers: (builder) => {
     builder
       .addCase(fetchFakeUser.pending, (state) => {
         state.loading = true;
-        ((state.error = null), (state.users = []));
+        state.error = null;
       })
       .addCase(fetchFakeUser.fulfilled, (state, action) => {
-        ((state.loading = false), (state.users = action.payload));
+        state.loading = false;
+        state.users = action.payload;
       })
       .addCase(fetchFakeUser.rejected, (state, action) => {
-        ((state.loading = false),
-          (state.error = action.payload || "Unknown Error"));
+        state.loading = false;
+        state.error = action.payload || "Unknown Error";
       });
   },
 });
 
 export const usersReducer = usersSlice.reducer;
+export const { toggleVerified } = usersSlice.actions;
+export const { toggleBlocked } = usersSlice.actions;

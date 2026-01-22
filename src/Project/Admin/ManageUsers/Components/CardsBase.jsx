@@ -25,7 +25,8 @@ import DeleteChefPopup from "./DeleteChefPopup";
 
 export default function CardBase({ isDark, data, id }) {
   const theme = useTheme();
-
+  const isUserVerified = id === "user" && data?.isVerified;
+  const isBlocked = data?.isBlocked;
   const configs = {
     chef: {
       mainColor: "#10B981",
@@ -48,9 +49,17 @@ export default function CardBase({ isDark, data, id }) {
       },
     },
     user: {
-      mainColor: "#F59E0B",
-      gradient: "linear-gradient(135deg, #F59E0B 0%, #D97706 100%)",
-      label: "Community Member",
+      mainColor: isBlocked ? "#ef4444" : isUserVerified ? "#10B981" : "#F59E0B",
+      gradient: isBlocked
+        ? "linear-gradient(135deg, #ef4444 0%, #991b1b 100%)"
+        : isUserVerified
+          ? "linear-gradient(135deg, #10B981 0%, #059669 100%)"
+          : "linear-gradient(135deg, #F59E0B 0%, #D97706 100%)",
+      label: isBlocked
+        ? "Blocked User"
+        : isUserVerified
+          ? "Verified Member"
+          : "Community Member",
       specialInfo: {
         label: "Gender : ",
         value: data?.gender || "Not Set",
@@ -59,15 +68,14 @@ export default function CardBase({ isDark, data, id }) {
     },
   }[id] || {
     mainColor: "#6366F1",
-    gradient: "linear-gradient(135deg, #6366F1 0%, #4F46E5 100%)",
     label: "Member",
+    gradient: "linear-gradient(135deg, #6366F1 0%, #4F46E5 100%)",
     specialInfo: { label: "Info", value: "Standard", icon: <StarRounded /> },
   };
 
   const [openEditSalaryPopup, setOpenEditSalaryPopup] = useState(false);
   const [openDeleteChefPopup, setOpenDeleteChefPopup] = useState(false);
 
-  console.log("CardBase data:", id === "chef" ? data?.id : null);
   return (
     <Card
       sx={{
@@ -79,29 +87,29 @@ export default function CardBase({ isDark, data, id }) {
         bgcolor: isDark ? "rgba(255, 255, 255, 0.02)" : "#ffffff",
         backdropFilter: "blur(20px)",
         border: "1px solid",
-        borderColor: isDark
-          ? "rgba(255, 255, 255, 0.08)"
-          : "rgba(0, 0, 0, 0.05)",
+        // لو محظور خلي الحدود حمراء خفيفة
+        borderColor: isBlocked
+          ? alpha("#ef4444", 0.3)
+          : isDark
+            ? "rgba(255, 255, 255, 0.08)"
+            : "rgba(0, 0, 0, 0.05)",
         boxShadow: isDark
           ? "0 15px 35px rgba(0,0,0,0.2)"
           : "0 15px 35px rgba(148,163,184,0.1)",
         transition: "0.7s",
+        // تأثير عند الحظر يجعل البطاقة تبدو "مطفاة"
+        filter: isBlocked ? "saturate(0.8)" : "none",
         "&:hover": {
           transform: "translateY(-12px)",
           borderColor: alpha(configs.mainColor, 0.4),
-          boxShadow: `0 20px 40px ${alpha(configs.mainColor, 0.15)}`,
-          "& .avatar-frame": { transform: "rotate(10deg) scale(1.1)" },
-          "& .footer-action": {
-            bgcolor: isDark
-              ? "rgba(255,255,255,0.03)"
-              : alpha(configs.mainColor, 0.03),
-          },
+          boxShadow: `0 20px 40px ${alpha(configs.mainColor, 0.25)}`,
+          "& .avatar-frame": { transform: "rotate(8deg) scale(1.05)" },
         },
       }}
     >
       <Box sx={{ height: 6, width: "100%", background: configs.gradient }} />
       <Box sx={{ p: 3.5 }}>
-        {/* Header: Avatar & Name */}
+        {/* Header Section */}
         <Stack direction="row" spacing={2.5} alignItems="center" mb={3}>
           <Box
             className="avatar-frame"
@@ -109,7 +117,8 @@ export default function CardBase({ isDark, data, id }) {
               p: "3px",
               borderRadius: "22px",
               background: configs.gradient,
-              transition: "all 0.5s ease",
+              position: "relative",
+              transition: "0.5s ease",
             }}
           >
             <Avatar
@@ -119,38 +128,54 @@ export default function CardBase({ isDark, data, id }) {
                 height: 70,
                 borderRadius: "20px",
                 border: `3px solid ${isDark ? "#1a1a1c" : "#fff"}`,
+                filter: isBlocked ? "grayscale(100%)" : "none",
+                opacity: isBlocked ? 0.6 : 1,
               }}
             />
           </Box>
 
           <Box sx={{ flex: 1, minWidth: 0 }}>
-            <Typography
-              variant="h6"
-              fontWeight={900}
-              noWrap
-              sx={{ letterSpacing: -0.8, mb: 0.5 }}
-            >
-              {data?.name}
-            </Typography>
-            <Chip
-              label={configs.label}
-              size="small"
-              sx={{
-                height: 22,
-                fontSize: "0.65rem",
-                fontWeight: 900,
-                letterSpacing: 0.5,
-                textTransform: "uppercase",
-                bgcolor: alpha(configs.mainColor, 0.1),
-                color: configs.mainColor,
-                border: `1px solid ${alpha(configs.mainColor, 0.2)}`,
-              }}
-            />
+            <Stack direction="row" alignItems="center" spacing={0.5}>
+              <Typography
+                variant="h6"
+                fontWeight={900}
+                noWrap
+                sx={{
+                  letterSpacing: -0.8,
+                  textDecoration: isBlocked ? "line-through" : "none", // خط على الاسم لو محظور
+                  color: isBlocked ? "text.disabled" : "inherit",
+                }}
+              >
+                {data?.name}
+              </Typography>
+            </Stack>
+
+            <Stack direction="row" spacing={0.5} mt={0.5}>
+              <Chip
+                label={configs.label}
+                size="small"
+                sx={{
+                  height: 22,
+                  fontSize: "0.65rem",
+                  fontWeight: 900,
+                  bgcolor: alpha(configs.mainColor, 0.1),
+                  color: configs.mainColor,
+                }}
+              />
+              {isBlocked && (
+                <Chip
+                  label="BANNED"
+                  size="small"
+                  color="error"
+                  sx={{ height: 22, fontSize: "0.6rem", fontWeight: 900 }}
+                />
+              )}
+            </Stack>
           </Box>
         </Stack>
 
-        {/* Info Rows */}
-        <Stack spacing={2}>
+        {/* Info Content */}
+        <Stack spacing={2} sx={{ opacity: isBlocked ? 0.5 : 1 }}>
           <InfoRow
             icon={<MailRounded />}
             text={data?.email || data?.mail}
@@ -170,10 +195,12 @@ export default function CardBase({ isDark, data, id }) {
               mt: 1,
               p: 2,
               borderRadius: "20px",
-              bgcolor: isDark
-                ? "rgba(0,0,0,0.2)"
-                : alpha(configs.mainColor, 0.04),
-              border: "1px dashed",
+              bgcolor: isBlocked
+                ? alpha("#ef4444", 0.05)
+                : isDark
+                  ? alpha(configs.mainColor, 0.05)
+                  : alpha(configs.mainColor, 0.04),
+              border: isBlocked ? "1px solid" : "1px dashed",
               borderColor: alpha(configs.mainColor, 0.3),
               display: "flex",
               alignItems: "center",
@@ -198,7 +225,6 @@ export default function CardBase({ isDark, data, id }) {
                 variant="caption"
                 fontWeight={800}
                 color="text.secondary"
-                sx={{ textTransform: "uppercase" }}
               >
                 {configs.specialInfo.label}
               </Typography>
@@ -208,12 +234,12 @@ export default function CardBase({ isDark, data, id }) {
               fontWeight={900}
               sx={{ color: configs.mainColor }}
             >
-              {configs.specialInfo.value}
+              {isBlocked ? "DISABLED" : configs.specialInfo.value}
             </Typography>
           </Box>
         </Stack>
       </Box>
-      {/* Footer Actions */}
+      {/* Footer & Popups */}
       <FooterCardBase
         isDark={isDark}
         data={data}
@@ -233,7 +259,7 @@ export default function CardBase({ isDark, data, id }) {
         data={data}
         open={openDeleteChefPopup}
         setOpenDeleteChefPopup={setOpenDeleteChefPopup}
-      />
+      />{" "}
     </Card>
   );
 }

@@ -24,9 +24,9 @@ export default function CardsToShowAndTaps({
   const theme = useTheme();
 
   const tabs = [
-    { id: "Manager's", label: "Managers" },
-    { id: "Chef's", label: "Master Chefs" },
-    { id: "User's", label: "Community" },
+    { id: "Manager's", label: "Managers", color: "#7a61f3" },
+    { id: "Chef's", label: "Master Chefs", color: "#0dae7a" },
+    { id: "User's", label: "Community", color: "#e78a09" },
   ];
   const cardsPerPage = 8;
   const totalPages = Math.ceil(users?.length / cardsPerPage);
@@ -69,6 +69,10 @@ export default function CardsToShowAndTaps({
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setCurrentPage(1);
   }, [selectedTap]);
+
+  useEffect(() => {
+    localStorage.setItem("tap", JSON.stringify(selectedTap));
+  }, [selectedTap]);
   return (
     <>
       <Box
@@ -106,9 +110,7 @@ export default function CardsToShowAndTaps({
                 textTransform: "capitalize",
                 transition: "all 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
 
-                background: isActive
-                  ? theme.palette.admin.gradient
-                  : "transparent",
+                background: isActive ? tab.color : "transparent",
                 color: isActive ? "#fff" : "text.secondary",
                 boxShadow: isActive
                   ? `0 10px 20px ${theme.palette.admin.main}40`

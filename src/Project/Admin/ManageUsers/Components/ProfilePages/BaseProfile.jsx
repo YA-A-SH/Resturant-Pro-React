@@ -27,6 +27,9 @@ export default function ProfileView({
   const isDark = theme.palette.mode === "dark";
   const navigate = useNavigate();
 
+  const isUserVerified = type === "user" && data?.isVerified;
+  const isBlocked = type === "user" && data?.isBlocked;
+
   const configs = {
     chef: {
       mainColor: "#10B981",
@@ -53,12 +56,20 @@ export default function ProfileView({
       ],
     },
     user: {
-      mainColor: "#F59E0B",
-      gradient: "linear-gradient(135deg, #F59E0B 0%, #D97706 100%)",
-      tag: "Vip Member",
+      mainColor: isUserVerified ? "#10B981" : "#F59E0B",
+      gradient: isUserVerified
+        ? "linear-gradient(135deg, #10B981 0%, #059669 100%)"
+        : "linear-gradient(135deg, #F59E0B 0%, #D97706 100%)",
+      tag: isUserVerified ? "Verified VIP" : "Vip Member",
       chartLabel: "Total Orders",
       icon: <ShoppingBagRounded />,
-      details: ["Top 5% of Customers", "Favorite: Pasta", "Member since 2024"],
+      details: [
+        isUserVerified
+          ? "Trust Level: Identity Verified"
+          : "Trust Level: Pending",
+        "Top 5% of Customers",
+        "Member since 2024",
+      ],
     },
   }[type] || {
     mainColor: "#6366F1",
@@ -118,16 +129,21 @@ export default function ProfileView({
           theme={theme}
           chartData={chartData}
         />
-        <BaseDetails configs={configs} type={type} />
+        <BaseDetails
+          configs={configs}
+          type={type}
+          isVerified={isUserVerified}
+          isBlocked={isBlocked}
+        />
         <EditSalaryPopup
-          id={data.id}
+          id={data?.id}
           open={state1}
           setOpenEditSalaryPopup={setState1}
           mainColor="#10B981"
         />
         <DeleteChefPopup
           open={state2}
-          setOpenDeleteChefPopup={ setState2}
+          setOpenDeleteChefPopup={setState2}
           data={data}
           isInProfile={isInProfile}
           setIsProfile={setIsProfile}

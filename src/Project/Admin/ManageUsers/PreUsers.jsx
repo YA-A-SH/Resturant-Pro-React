@@ -41,22 +41,18 @@ export default function PreUser({
   ChefsShow,
   ManagersShow,
   UsersShow,
-  
 }) {
   useEffect(() => {
     dispatch(fetchFakeUser());
   }, [dispatch]);
 
   useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
     handleSearch();
-  }, [searchText]);
+  }, [handleSearch, searchText]);
 
   useEffect(() => {
-    // setIsFiltered(false);
-    // eslint-disable-next-line react-hooks/set-state-in-effect
     setSearchText("");
-  }, [selectedTap]);
+  }, [setSearchText]);
 
   return (
     <Box

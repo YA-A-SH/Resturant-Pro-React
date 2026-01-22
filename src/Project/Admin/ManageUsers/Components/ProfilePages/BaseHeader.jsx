@@ -3,6 +3,8 @@ import {
   PersonOffRounded,
   VerifiedUserRounded,
   LocalFireDepartmentRounded,
+  GppGoodRounded,
+  BlockRounded,
 } from "@mui/icons-material";
 import {
   alpha,
@@ -12,8 +14,11 @@ import {
   Chip,
   Stack,
   Typography,
+  Tooltip,
 } from "@mui/material";
 import { motion } from "framer-motion";
+import { useDispatch } from "react-redux";
+import { toggleBlocked, toggleVerified } from "../../../../User/RTK/MainSlice";
 
 export default function BaseHeader({
   configs,
@@ -23,6 +28,9 @@ export default function BaseHeader({
   setSalaryState,
   setDeleteState,
 }) {
+  const dispatch = useDispatch();
+  const isUserVerified = type === "user" && data?.isVerified;
+
   const renderActions = () => {
     if (type === "chef") {
       return (
@@ -43,9 +51,7 @@ export default function BaseHeader({
                 transform: "translateY(-2px)",
               },
             }}
-            onClick={() => {
-              setSalaryState(true);
-            }}
+            onClick={() => setSalaryState(true)}
           >
             Update Salary
           </Button>
@@ -65,9 +71,7 @@ export default function BaseHeader({
                 bgcolor: alpha("#ff3d00", 0.05),
               },
             }}
-            onClick={() => {
-              setDeleteState(true);
-            }}
+            onClick={() => setDeleteState(true)}
           >
             Fire Chef
           </Button>
@@ -80,22 +84,30 @@ export default function BaseHeader({
         <>
           <Button
             variant="contained"
-            startIcon={<VerifiedUserRounded />}
+            startIcon={
+              data?.isVerified ? <GppGoodRounded /> : <VerifiedUserRounded />
+            }
             sx={{
               borderRadius: "14px",
               px: 3,
               py: 1.2,
-              bgcolor: "#10B981",
+              bgcolor: data?.isVerified ? "#059669" : "#10B981",
               fontWeight: 800,
               textTransform: "none",
+              boxShadow: data?.isVerified
+                ? `0 8px 20px ${alpha("#059669", 0.3)}`
+                : "none",
               "&:hover": { bgcolor: "#059669" },
             }}
+            onClick={() => dispatch(toggleVerified(data.id))}
           >
-            Verify User
+            {data?.isVerified ? "Verified Account" : "Verify User"}
           </Button>
           <Button
             variant="contained"
-            startIcon={<PersonOffRounded />}
+            startIcon={
+              data?.isBlocked ? <PersonOffRounded /> : <BlockRounded />
+            }
             sx={{
               borderRadius: "14px",
               px: 3,
@@ -105,13 +117,14 @@ export default function BaseHeader({
               textTransform: "none",
               "&:hover": { bgcolor: "#dc2626" },
             }}
+            onClick={() => dispatch(toggleBlocked(data.id))}
           >
-            Block User
+            {" "}
+            {data?.isBlocked ? "UnBlock User" : "Block User"}
           </Button>
         </>
       );
     }
-
     return null;
   };
 
@@ -158,30 +171,95 @@ export default function BaseHeader({
             spacing={3}
             alignItems="center"
           >
-            <Avatar
-              src={data?.img || data?.image}
-              sx={{
-                width: 160,
-                height: 160,
-                borderRadius: "40px",
-                border: `6px solid ${isDark ? "#16161a" : "#fff"}`,
-                boxShadow: "0 15px 35px rgba(0,0,0,0.2)",
-              }}
-            />
+            {/* Avatar with Floating Verified Badge */}
+            <Box sx={{ position: "relative" }}>
+              <Avatar
+                src={data?.img || data?.image}
+                sx={{
+                  width: 160,
+                  height: 160,
+                  borderRadius: "40px",
+                  border: `6px solid ${isDark ? "#16161a" : "#fff"}`,
+                  filter: data?.isBlocked ? "grayscale(100%)" : "none", // جعل الصورة رمادية عند الحظر
+                  opacity: data?.isBlocked ? 0.6 : 1,
+                }}
+              />
+
+              {data?.isBlocked && (
+                <Box
+                  sx={{
+                    position: "absolute",
+                    inset: 0,
+                    display: "flex",
+                    alignItems: "center",
+                    justifyContent: "center",
+                    borderRadius: "40px",
+                    bgcolor: "rgba(0,0,0,0.4)",
+                  }}
+                >
+                  <BlockRounded
+                    sx={{ color: "#fff", fontSize: 60, opacity: 0.8 }}
+                  />
+                </Box>
+              )}
+
+              {isUserVerified && (
+                <Tooltip title="Identity Verified">
+                  <Box
+                    sx={{
+                      position: "absolute",
+                      bottom: 10,
+                      right: -10,
+                      bgcolor: "#10B981",
+                      color: "white",
+                      p: 1,
+                      borderRadius: "12px",
+                      border: `4px solid ${isDark ? "#16161a" : "#fff"}`,
+                      display: "flex",
+                      boxShadow: "0 4px 12px rgba(0,0,0,0.3)",
+                    }}
+                  >
+                    <VerifiedUserRounded fontSize="medium" />
+                  </Box>
+                </Tooltip>
+              )}
+            </Box>
+
             <Box sx={{ textAlign: { xs: "center", md: "left" } }}>
-              <Typography
-                variant="h3"
-                fontWeight={900}
-                sx={{ letterSpacing: -1.5 }}
+              <Stack
+                direction="row"
+                spacing={1}
+                alignItems="center"
+                justifyContent={{ xs: "center", md: "flex-start" }}
               >
-                {data?.name}
-              </Typography>
+                <Typography
+                  variant="h3"
+                  fontWeight={900}
+                  sx={{ letterSpacing: -1.5 }}
+                >
+                  {data?.name}
+                </Typography>
+                {isUserVerified && (
+                  <VerifiedUserRounded
+                    sx={{ color: "#10B981", fontSize: 35 }}
+                  />
+                )}
+              </Stack>
+
               <Typography variant="h6" color="text.secondary" fontWeight={500}>
                 {data?.email || data?.mail}
               </Typography>
-              <Typography variant="h6" color="text.secondary" fontWeight={500}>
-                Salary : {data?.salary}$
-              </Typography>
+
+              {type === "chef" && (
+                <Typography
+                  variant="h6"
+                  color="text.secondary"
+                  fontWeight={500}
+                >
+                  Salary : {data?.salary}$
+                </Typography>
+              )}
+
               <Stack
                 direction="row"
                 spacing={1}
@@ -190,11 +268,18 @@ export default function BaseHeader({
               >
                 <Chip
                   label={configs.tag}
+                  icon={
+                    isUserVerified ? (
+                      <GppGoodRounded style={{ color: "inherit" }} />
+                    ) : (
+                      configs.icon
+                    )
+                  }
                   sx={{
                     bgcolor: alpha(configs.mainColor, 0.15),
                     color: configs.mainColor,
                     fontWeight: 900,
-                    fontSize: "0.75rem",
+                    px: 1,
                     textTransform: "uppercase",
                   }}
                 />
@@ -207,11 +292,10 @@ export default function BaseHeader({
             </Box>
           </Stack>
 
-          {/* Action Buttons Container */}
           <Stack
             direction={{ xs: "column", sm: "row" }}
             spacing={2}
-            sx={{ width: { xs: "100%", lg: "auto" }, mt: { xs: 2, lg: 0 } }}
+            alignItems="center"
           >
             {renderActions()}
           </Stack>

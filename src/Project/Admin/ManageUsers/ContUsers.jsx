@@ -8,7 +8,9 @@ export default function ContUsers() {
   // Hooks
 
   const { chefs, setChefs } = useContext(ChefsContext);
-  const [selectedTap, setSelectedTap] = useState("Manager's");
+  const [selectedTap, setSelectedTap] = useState(
+    () => JSON.parse(localStorage.getItem("tap")) || "Manager's",
+  );
   const [openAddChefComp, setOpenAddChefComp] = useState(false);
   const [isFiltered, setIsFiltered] = useState(false);
   const [searchText, setSearchText] = useState("");

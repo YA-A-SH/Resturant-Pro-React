@@ -3,12 +3,15 @@ import {
   ArrowForwardIosRounded,
   BlockRounded,
   CancelSharp,
+  CancelTwoTone,
   TrendingUp,
   VerifiedUserRounded,
 } from "@mui/icons-material";
 import { alpha, Box, Button, Stack, Tooltip } from "@mui/material";
 import { ActionButton } from "./OtherCompForCard'sBase";
 import { useNavigate } from "react-router-dom";
+import { toggleBlocked, toggleVerified } from "../../../User/RTK/MainSlice";
+import { useDispatch } from "react-redux";
 
 export default function FooterCardBase({
   data,
@@ -25,7 +28,21 @@ export default function FooterCardBase({
       state: { userData: data },
     });
   };
+  const dispatch = useDispatch();
 
+  const handleVerifiedUser = () => {
+    if (id === "user") {
+      dispatch(toggleVerified(data.id));
+    }
+    return null;
+  };
+
+  const handleBlockedUser = () => {
+    if (id === "user") {
+      dispatch(toggleBlocked(data.id));
+    }
+    return null;
+  };
   return (
     <>
       <Stack
@@ -60,14 +77,18 @@ export default function FooterCardBase({
           ) : id === "user" ? (
             <>
               <ActionButton
-                icon={<VerifiedUserRounded />}
-                color="#10B981"
-                title="Verify User"
+                icon={
+                  data?.isVerified ? <CancelSharp /> : <VerifiedUserRounded />
+                }
+                color={data?.isVerified ? "#EF4444" : "#10B981"}
+                title={data?.isVerified ? "Unverify User" : "Verify User"}
+                handle={handleVerifiedUser}
               />
               <ActionButton
-                icon={<BlockRounded />}
-                color="#EF4444"
-                title="Block User"
+                icon={data?.isBlocked ? <CancelTwoTone /> : <BlockRounded />}
+                color={data?.isBlocked ? "#0ad69c" : "#EF4444"}
+                title={data?.isBlocked ? "Unblock User" : "Block User"}
+                handle={handleBlockedUser}
               />
             </>
           ) : (
