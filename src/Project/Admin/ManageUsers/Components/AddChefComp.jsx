@@ -23,9 +23,7 @@ import {
 import { v4 as uuidv4 } from "uuid";
 
 export default function AddChefModal({ open, chefs, setChefs, handleClose }) {
-  const theme = useTheme();
-  const isDark = theme.palette.mode === "dark";
-
+  // Hooks
   const [formData, setFormData] = useState({
     id: uuidv4(),
     name: "",
@@ -35,8 +33,18 @@ export default function AddChefModal({ open, chefs, setChefs, handleClose }) {
     mail: "",
     img: null,
   });
-
   const [errors, setErrors] = useState({});
+  const theme = useTheme();
+
+  // Effects
+  useEffect(() => {
+    localStorage.setItem("chefs", JSON.stringify(chefs));
+  }, [chefs]);
+
+  // Variables
+  const isDark = theme.palette.mode === "dark";
+
+  // Functions
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -78,6 +86,7 @@ export default function AddChefModal({ open, chefs, setChefs, handleClose }) {
       });
     }
   };
+
   const handleImageUpload = (file) => {
     const reader = new FileReader();
     reader.onloadend = () => {
@@ -87,9 +96,6 @@ export default function AddChefModal({ open, chefs, setChefs, handleClose }) {
     reader.readAsDataURL(file);
   };
 
-  useEffect(() => {
-    localStorage.setItem("chefs", JSON.stringify(chefs));
-  }, [chefs]);
   return (
     <Dialog
       open={open}
@@ -107,6 +113,8 @@ export default function AddChefModal({ open, chefs, setChefs, handleClose }) {
         },
       }}
     >
+      {/* Head */}
+
       <DialogTitle
         sx={{
           display: "flex",
@@ -134,6 +142,8 @@ export default function AddChefModal({ open, chefs, setChefs, handleClose }) {
         </IconButton>
       </DialogTitle>
 
+      {/* Main Content */}
+
       <DialogContent sx={{ mt: 1 }}>
         <Grid
           container
@@ -145,6 +155,7 @@ export default function AddChefModal({ open, chefs, setChefs, handleClose }) {
             flexDirection: "column",
           }}
         >
+          {/* Add Image */}
           <Grid item xs={12} sx={{ textAlign: "center", mb: 2 }}>
             <Box sx={{ position: "relative", display: "inline-block" }}>
               <Avatar
@@ -156,6 +167,7 @@ export default function AddChefModal({ open, chefs, setChefs, handleClose }) {
                   bgcolor: alpha(theme.palette.admin.main, 0.05),
                 }}
               />
+
               <IconButton
                 component="label"
                 sx={{
@@ -184,6 +196,9 @@ export default function AddChefModal({ open, chefs, setChefs, handleClose }) {
               </Typography>
             )}
           </Grid>
+
+          {/* Text Fields */}
+
           <Box
             sx={{
               display: "flex",
@@ -254,6 +269,7 @@ export default function AddChefModal({ open, chefs, setChefs, handleClose }) {
         </Grid>
       </DialogContent>
 
+      {/* Actions */}
       <DialogActions sx={{ p: 3, gap: 1 }}>
         <Button
           onClick={handleClose}

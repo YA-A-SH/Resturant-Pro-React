@@ -20,6 +20,19 @@ import { motion, AnimatePresence } from "framer-motion";
 
 export default function BaseCharts({ type, isDark, chartData }) {
   const theme = useTheme();
+  const hasData = chartData && chartData.length > 0;
+  const tooltipStyle = {
+    contentStyle: {
+      backgroundColor: isDark ? "#1e1e26" : "#fff",
+      borderRadius: "16px",
+      border: "none",
+      boxShadow: "0 10px 25px rgba(0,0,0,0.2)",
+      padding: "10px",
+    },
+    itemStyle: { fontWeight: 700, color: assets.color },
+  };
+  const dataKey =
+    type === "manager" ? "income" : type === "chef" ? "rate" : "value";
 
   const getThemeAssets = () => {
     switch (type) {
@@ -51,23 +64,7 @@ export default function BaseCharts({ type, isDark, chartData }) {
         };
     }
   };
-
   const assets = getThemeAssets();
-  const hasData = chartData && chartData.length > 0;
-
-  const tooltipStyle = {
-    contentStyle: {
-      backgroundColor: isDark ? "#1e1e26" : "#fff",
-      borderRadius: "16px",
-      border: "none",
-      boxShadow: "0 10px 25px rgba(0,0,0,0.2)",
-      padding: "10px",
-    },
-    itemStyle: { fontWeight: 700, color: assets.color },
-  };
-
-  const dataKey =
-    type === "manager" ? "income" : type === "chef" ? "rate" : "value";
 
   return (
     <Grid item xs={12} lg={8}>
@@ -87,7 +84,6 @@ export default function BaseCharts({ type, isDark, chartData }) {
         >
           <AnimatePresence mode="wait">
             {hasData ? (
-              // حالة وجود بيانات
               <Box
                 component={motion.div}
                 key="chart"
@@ -143,7 +139,6 @@ export default function BaseCharts({ type, isDark, chartData }) {
                 </ResponsiveContainer>
               </Box>
             ) : (
-              // حالة عدم وجود بيانات (Empty State)
               <Box
                 component={motion.div}
                 key="empty"

@@ -22,13 +22,14 @@ export default function FooterCardBase({
   setOpenEditSalaryPopup,
   setOpenDeleteChefPopup,
 }) {
+  const dispatch = useDispatch();
   const navigate = useNavigate();
+  
   const handleViewProfile = () => {
     navigate(`/admin/manage-users/${id}`, {
       state: { userData: data },
     });
   };
-  const dispatch = useDispatch();
 
   const handleVerifiedUser = () => {
     if (id === "user") {

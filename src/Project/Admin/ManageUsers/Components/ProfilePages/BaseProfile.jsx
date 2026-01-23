@@ -23,9 +23,9 @@ export default function ProfileView({
   isInProfile,
   setIsProfile,
 }) {
+  const navigate = useNavigate();
   const theme = useTheme();
   const isDark = theme.palette.mode === "dark";
-  const navigate = useNavigate();
 
   const isUserVerified = type === "user" && data?.isVerified;
   const isBlocked = type === "user" && data?.isBlocked;

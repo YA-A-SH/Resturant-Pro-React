@@ -24,7 +24,13 @@ import EditSalaryPopup from "./EditSalaryPopup";
 import DeleteChefPopup from "./DeleteChefPopup";
 
 export default function CardBase({ isDark, data, id }) {
+  // Hooks
+
+  const [openEditSalaryPopup, setOpenEditSalaryPopup] = useState(false);
+  const [openDeleteChefPopup, setOpenDeleteChefPopup] = useState(false);
   const theme = useTheme();
+
+  // Variables
   const isUserVerified = id === "user" && data?.isVerified;
   const isBlocked = data?.isBlocked;
   const configs = {
@@ -72,9 +78,6 @@ export default function CardBase({ isDark, data, id }) {
     gradient: "linear-gradient(135deg, #6366F1 0%, #4F46E5 100%)",
     specialInfo: { label: "Info", value: "Standard", icon: <StarRounded /> },
   };
-
-  const [openEditSalaryPopup, setOpenEditSalaryPopup] = useState(false);
-  const [openDeleteChefPopup, setOpenDeleteChefPopup] = useState(false);
 
   return (
     <Card
@@ -142,7 +145,7 @@ export default function CardBase({ isDark, data, id }) {
                 noWrap
                 sx={{
                   letterSpacing: -0.8,
-                  textDecoration: isBlocked ? "line-through" : "none", // خط على الاسم لو محظور
+                  textDecoration: isBlocked ? "line-through" : "none",
                   color: isBlocked ? "text.disabled" : "inherit",
                 }}
               >

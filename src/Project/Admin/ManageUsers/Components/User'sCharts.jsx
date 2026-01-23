@@ -39,7 +39,7 @@ export default function UsersCharts({ isDark }) {
     { year: "2020", ban: 190 },
     { year: "2022", ban: 163 },
     { year: "2024", ban: 220 },
-    { year: "2026", ban: 45 }, // عدلت القيمة لتظهر بشكل أوضح في الشارت
+    { year: "2026", ban: 45 }, 
   ];
 
   return (
@@ -210,7 +210,6 @@ export default function UsersCharts({ isDark }) {
   );
 }
 
-// --- Custom Tooltip المطور ---
 const CustomTooltip = ({ active, payload, label, isDark }) => {
   if (active && payload && payload.length) {
     return (

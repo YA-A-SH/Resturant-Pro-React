@@ -2,7 +2,7 @@ import {
   HistoryEduRounded,
   WorkspacePremiumRounded,
   GppMaybeRounded,
-  PersonOffRounded, // أيقونة للحساب المحظور
+  PersonOffRounded,
 } from "@mui/icons-material";
 import {
   alpha,
@@ -15,13 +15,12 @@ import {
 } from "@mui/material";
 
 export default function BaseDetails({ configs, type, isVerified, isBlocked }) {
-  // دالة لتحديد محتوى كرت الثقة بناءً على الأولوية (الحظر أولاً)
   const getTrustStatus = () => {
     if (isBlocked) {
       return {
         title: "Account Restricted",
         subtitle: "This user is currently Blocked",
-        color: "#EF4444", // Red
+        color: "#EF4444",
         icon: <PersonOffRounded sx={{ fontSize: 50, color: "#EF4444" }} />,
         bg: `linear-gradient(to right bottom, ${alpha("#EF4444", 0.1)}, transparent)`,
       };
@@ -30,7 +29,7 @@ export default function BaseDetails({ configs, type, isVerified, isBlocked }) {
       return {
         title: "Trust Level",
         subtitle: "Identity Verified",
-        color: "#10B981", // Green
+        color: "#10B981",
         icon: (
           <WorkspacePremiumRounded sx={{ fontSize: 50, color: "#10B981" }} />
         ),
@@ -59,7 +58,7 @@ export default function BaseDetails({ configs, type, isVerified, isBlocked }) {
               borderRadius: "30px",
               border: "1px solid",
               borderColor: "divider",
-              opacity: isBlocked ? 0.7 : 1, // جعل الكرت باهت قليلاً إذا كان محظوراً
+              opacity: isBlocked ? 0.7 : 1,
             }}
           >
             <Typography
@@ -145,7 +144,7 @@ export default function BaseDetails({ configs, type, isVerified, isBlocked }) {
           </Card>
         </Stack>
 
-        {/* INFO Grid - الأرقام بالأسفل */}
+        {/* INFO Grid */}
         <Grid
           container
           spacing={2}
@@ -154,7 +153,7 @@ export default function BaseDetails({ configs, type, isVerified, isBlocked }) {
             display: "flex",
             justifyContent: "space-evenly",
             alignItems: "center",
-            filter: isBlocked ? "grayscale(1)" : "none", // جعل الأرقام رمادية إذا كان محظوراً
+            filter: isBlocked ? "grayscale(1)" : "none",
             opacity: isBlocked ? 0.6 : 1,
           }}
         >

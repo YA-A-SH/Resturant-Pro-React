@@ -109,13 +109,11 @@ export default function CardsToShowAndTaps({
                 fontSize: "0.9rem",
                 textTransform: "capitalize",
                 transition: "all 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
-
                 background: isActive ? tab.color : "transparent",
                 color: isActive ? "#fff" : "text.secondary",
                 boxShadow: isActive
                   ? `0 10px 20px ${theme.palette.admin.main}40`
                   : "none",
-
                 "&:hover": {
                   bgcolor: isActive
                     ? "none"
@@ -221,38 +219,31 @@ export default function CardsToShowAndTaps({
                     minWidth: isEllipsis ? "35px" : "48px",
                     height: "48px",
                     p: 0,
-
                     borderRadius: "16px",
                     fontWeight: 800,
                     fontSize: "0.95rem",
                     transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
-
                     bgcolor: isActive
                       ? "admin.main"
                       : isDark
                         ? "rgba(255, 255, 255, 0.05)"
                         : "rgba(255, 255, 255, 0.8)",
-
                     color: isActive
                       ? "#fff"
                       : isDark
                         ? "rgba(255,255,255,0.7)"
                         : "text.primary",
-
                     border: "1px solid",
                     borderColor: isActive
                       ? "admin.main"
                       : isDark
                         ? "rgba(255,255,255,0.1)"
                         : "rgba(0,0,0,0.06)",
-
                     boxShadow: isActive
                       ? `0 8px 20px -6px ${theme.palette.admin.main}`
                       : "none",
-
                     backdropFilter:
                       !isActive && !isEllipsis ? "blur(8px)" : "none",
-
                     "&:hover": {
                       bgcolor: isActive ? "admin.main" : "admin.main",
                       color: "#fff",
@@ -262,7 +253,6 @@ export default function CardsToShowAndTaps({
                         : "none",
                       borderColor: "admin.main",
                     },
-
                     "&.Mui-disabled": {
                       color: isDark
                         ? "rgba(255,255,255,0.3)"

@@ -6,11 +6,11 @@ import EliteLoader from "./Loader";
 
 export default function UserProfile() {
   const location = useLocation();
+  const navigate = useNavigate();
   const userId = location.state?.userData?.id;
   const user = useSelector((state) =>
     state.users.users.find((u) => u.id === userId),
   );
-  const navigate = useNavigate();
 
   useEffect(() => {
     const timeout = setTimeout(() => {

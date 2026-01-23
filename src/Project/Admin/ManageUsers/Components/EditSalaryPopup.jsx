@@ -27,15 +27,9 @@ export default function EditSalaryPopup({
   id,
 }) {
   const { chefs, setChefs } = useContext(ChefsContext);
-
+  const [value, setValue] = useState("");
   const theChef = chefs.find((chef) => String(chef.id) === String(id));
 
-  const [value, setValue] = useState("");
-
-  const onClose = () => {
-    setOpenEditSalaryPopup(false);
-  };
-  
   useEffect(() => {
     if (open && theChef) {
       // eslint-disable-next-line react-hooks/set-state-in-effect
@@ -55,6 +49,9 @@ export default function EditSalaryPopup({
     setOpenEditSalaryPopup(false);
   };
 
+  const onClose = () => {
+    setOpenEditSalaryPopup(false);
+  };
   return (
     <Dialog
       open={open}

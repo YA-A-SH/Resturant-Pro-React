@@ -5,15 +5,14 @@ import ProfileView from "./BaseProfile";
 import EliteLoader from "./Loader";
 
 export default function ChefProfile() {
-  const location = useLocation();
-  const chefId = location.state?.userData?.id;
+  const [openDelete, setOpenDelete] = useState(false);
+  const [openEdit, setOpenEdit] = useState(false);
   const { chefs } = useContext(ChefsContext);
+  const location = useLocation();
   const navigate = useNavigate();
 
   const chef = chefs.find((c) => String(c.id) === String(chefId));
-
-  const [openEdit, setOpenEdit] = useState(false);
-  const [openDelete, setOpenDelete] = useState(false);
+  const chefId = location.state?.userData?.id;
 
   useEffect(() => {
     const timeout = setTimeout(() => {

@@ -26,10 +26,11 @@ export default function DeleteChefPopup({
   isInProfile,
   setIsProfile,
 }) {
-  const navigate = useNavigate();
-
- 
   const { chefs, setChefs } = useContext(ChefsContext);
+
+  const navigate = useNavigate();
+  const theme = useTheme();
+  const dangerColor = "#ff3d00";
 
   const handleDelete = () => {
     const updatedChefs = chefs.filter((chef) => {
@@ -47,8 +48,6 @@ export default function DeleteChefPopup({
       setOpenDeleteChefPopup(false);
     }
   };
-  const theme = useTheme();
-  const dangerColor = "#ff3d00";
 
   const handleClose = () => setOpenDeleteChefPopup(false);
 
@@ -81,7 +80,6 @@ export default function DeleteChefPopup({
           <CloseRounded fontSize="small" />
         </IconButton>
 
-        {/* أيقونة الطرد المركزية */}
         <Box sx={{ position: "relative", mb: 4 }}>
           <Box
             component={motion.div}

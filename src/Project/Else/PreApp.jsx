@@ -48,6 +48,9 @@ import DrinksAndSweetsSkeleton from "../User/Skeleton/DrinksAndSweetsSkiliton";
 import { AnimatePresence } from "framer-motion";
 import AdminProtectedRoute from "../User/Routes/AdminProtectedRoute";
 import ContUsers from "../Admin/ManageUsers/ContUsers";
+import ManageMeals from "../Admin/ManageDishes/ManageMeals";
+import ManageDrinks from "../Admin/ManageDishes/ManageDrinks";
+import ManageSweets from "../Admin/ManageDishes/ManageSweets";
 
 export default function PreApp({
   mode,
@@ -133,7 +136,7 @@ export default function PreApp({
             element={
               <PageWrapper>
                 <AdminProtectedRoute>
-                  <ContAdmin />
+                  <ManageMeals />
                 </AdminProtectedRoute>
               </PageWrapper>
             }
@@ -143,7 +146,7 @@ export default function PreApp({
             element={
               <PageWrapper>
                 <AdminProtectedRoute>
-                  <ContAdmin />
+                  <ManageDrinks />
                 </AdminProtectedRoute>
               </PageWrapper>
             }
@@ -153,7 +156,7 @@ export default function PreApp({
             element={
               <PageWrapper>
                 <AdminProtectedRoute>
-                  <ContAdmin />
+                  <ManageSweets />
                 </AdminProtectedRoute>
               </PageWrapper>
             }
