@@ -20,6 +20,8 @@ import {
 import KpiCard from "./BaseComponents/Cards.jsx";
 import FooterSection from "./BaseComponents/Footer.jsx";
 import Charts from "./BaseComponents/Charts.jsx";
+import { useState } from "react";
+import AddDishModal from "./BaseComponents/AddDishModal.jsx";
 
 export default function BaseManage({
   theme,
@@ -39,6 +41,7 @@ export default function BaseManage({
   topDishOrders,
   todayOrders,
 }) {
+  const [openAddDish, setOpenAddDish] = useState(false);
   return (
     <Box
       sx={{
@@ -107,11 +110,13 @@ export default function BaseManage({
                 fontWeight: 800,
                 boxShadow: theme.shadows[4],
               }}
+              onClick={() => setOpenAddDish(true)}
             >
               Add New Dish
             </Button>
           </Stack>
         </Stack>
+        <AddDishModal open={openAddDish} setOpen={setOpenAddDish} type={type} />
 
         {/* Stats Cards*/}
         <Grid
