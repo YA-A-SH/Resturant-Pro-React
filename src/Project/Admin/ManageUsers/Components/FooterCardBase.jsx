@@ -24,7 +24,7 @@ export default function FooterCardBase({
 }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
-  
+
   const handleViewProfile = () => {
     navigate(`/admin/manage-users/${id}`, {
       state: { userData: data },
@@ -121,6 +121,7 @@ export default function FooterCardBase({
             transition: "0.3s",
             fontWeight: 800,
             px: 2.5,
+            scale: { xxs: 0.8, xs: 0.85, sm: 1 },
             color: "#fff",
             background: configs.gradient,
             "&:hover": {

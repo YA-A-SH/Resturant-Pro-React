@@ -6,20 +6,11 @@ import {
   GppGoodRounded,
   BlockRounded,
 } from "@mui/icons-material";
-import {
-  alpha,
-  Avatar,
-  Box,
-  Button,
-  Chip,
-  Stack,
-  Typography,
-  Tooltip,
-} from "@mui/material";
+import { alpha, Box, Button } from "@mui/material";
 import { motion } from "framer-motion";
 import { useDispatch } from "react-redux";
 import { toggleBlocked, toggleVerified } from "../../../../User/RTK/MainSlice";
-
+import HeaderContent from "./HeaderContent";
 export default function BaseHeader({
   configs,
   data,

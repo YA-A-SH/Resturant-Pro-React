@@ -21,7 +21,7 @@ export default function HomePre({
         background: isDark ? "#050505" : "#f8f9fa",
         position: "relative",
         overflow: "hidden",
-        pt: { xs: 10, md: 15 },
+        pt: { xxs: 10, md: 15 },
         pb: 8,
       }}
     >

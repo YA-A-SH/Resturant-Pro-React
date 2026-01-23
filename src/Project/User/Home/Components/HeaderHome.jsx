@@ -20,40 +20,26 @@ export default function HeaderHome() {
       <Box
         sx={{
           display: "flex",
-          flexDirection: { xs: "column", md: "row-reverse" },
+          flexDirection: { xxs: "column", md: "row-reverse" },
           alignItems: "center",
           justifyContent: "space-between",
-          textAlign: { xs: "center", md: "left" },
+          textAlign: { xxs: "center", md: "left" },
           width: "100%",
-          gap: { xs: 5, md: 15, lg: 25, xl: 35 },
+          gap: { xxs: 5, md: 15, lg: 25, xl: 35 },
           maxWidth: "1400px",
           mx: "auto",
         }}
       >
-        {/* --- Logo --- */}
-        <Box
-          component="img"
-          src="/favBig.png"
-          alt="Logo"
-          sx={{
-            height: {
-              xs: 280,
-              sm: 320,
-              md: 390,
-              lg: 440,
-            },
-            filter: isDark
-              ? "brightness(1.2) drop-shadow(0 0 20px rgba(255,255,255,0.1))"
-              : "none",
-            transition: "all 0.4s ease",
-            "&:hover": { transform: "rotate(5deg) scale(1.1)" },
-            order: { xs: -1, xl: 2 },
-          }}
-        />
-
         {/* --- Head Title--- */}
 
-        <Box sx={{ display: "flex", flexDirection: "column", gap: "15px" }}>
+        <Box
+          sx={{
+            display: "flex",
+            flexDirection: "column",
+            gap: "15px",
+            alignItems: { xxs: "center", md: "flex-start" },
+          }}
+        >
           <Typography
             variant="overline"
             sx={{
@@ -61,7 +47,7 @@ export default function HeaderHome() {
               fontWeight: 800,
               letterSpacing: { xs: 1, md: 3 },
               fontSize: {
-                xs: "0.7rem",
+                xxs: "0.7rem",
                 sm: "0.8rem",
                 md: "0.9rem",
                 lg: "1rem",
@@ -75,7 +61,7 @@ export default function HeaderHome() {
             variant="h1"
             sx={{
               fontSize: {
-                xs: "2.2rem",
+                xxs: "2.2rem",
                 sm: "2.7rem",
                 md: "3.2rem",
                 lg: "4.1rem",
@@ -108,7 +94,7 @@ export default function HeaderHome() {
             variant="body1"
             sx={{
               color: "text.secondary",
-              maxWidth: { xs: "90%", md: 550 },
+              maxWidth: { xxs: "90%", md: 550 },
               lineHeight: 1.7,
               fontSize: { xs: "0.95rem", md: "1.1rem" },
               fontWeight: 400,
@@ -120,7 +106,7 @@ export default function HeaderHome() {
 
           {/* --- Buttons --- */}
           <Stack
-            direction={{ xs: "column", sm: "row" }}
+            direction={{ xxs: "column", sm: "row" }}
             spacing={2}
             sx={{
               width: "100%",
@@ -134,9 +120,9 @@ export default function HeaderHome() {
               size="large"
               endIcon={<LocalMall />}
               sx={{
-                width: { xs: "100%", sm: "200px", md: "auto" },
+                width: { xxs: "100%", sm: "200px", md: "auto" },
                 borderRadius: 3,
-                px: { xs: 2, md: 5 },
+                px: { xxs: 2, md: 5 },
                 py: 1.8,
                 fontSize: { xs: "0.9rem", md: "1rem" },
                 textTransform: "none",
@@ -154,11 +140,11 @@ export default function HeaderHome() {
               color="primary"
               endIcon={<ArrowForward />}
               sx={{
-                width: { xs: "100%", sm: "200px", md: "auto" },
+                width: { xxs: "100%", sm: "200px", md: "auto" },
                 borderRadius: 3,
-                px: { xs: 2, md: 5 },
+                px: { xxs: 2, md: 5 },
                 py: 1.8,
-                fontSize: { xs: "0.9rem", md: "1rem" },
+                fontSize: { xxs: "0.9rem", md: "1rem" },
                 textTransform: "none",
                 whiteSpace: "nowrap",
                 "&:hover": {
@@ -174,7 +160,7 @@ export default function HeaderHome() {
 
           {/* --- Social Proof --- */}
           <Stack
-            direction={{ xs: "column", sm: "row" }}
+            direction={{ xxs: "column", sm: "row" }}
             alignItems="center"
             spacing={2}
             sx={{
@@ -227,7 +213,7 @@ export default function HeaderHome() {
               color="text.secondary"
               sx={{
                 fontWeight: 600,
-                textAlign: { xs: "center", sm: "left" }, // النص نفسه يتوسط في الموبايل
+                textAlign: { xxs: "center", sm: "left" }, // النص نفسه يتوسط في الموبايل
               }}
             >
               Join{" "}
@@ -238,6 +224,26 @@ export default function HeaderHome() {
             </Typography>
           </Stack>
         </Box>
+        {/* --- Logo --- */}
+        <Box
+          component="img"
+          src="/favBig.png"
+          alt="Logo"
+          sx={{
+            height: {
+              xxs: 280,
+              sm: 320,
+              md: 390,
+              lg: 440,
+            },
+            filter: isDark
+              ? "brightness(1.2) drop-shadow(0 0 20px rgba(255,255,255,0.1))"
+              : "none",
+            transition: "all 0.4s ease",
+            "&:hover": { transform: "rotate(5deg) scale(1.1)" },
+            order: { xs: -1, xl: 2 },
+          }}
+        />
       </Box>
     </Box>
   );

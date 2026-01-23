@@ -44,7 +44,7 @@ export default function FoodCard({
       const found = prev.find((e) => e.id === id);
       if (found) {
         return prev.map((e) =>
-          e.id === id ? { ...e, quantity: e.quantity + 1 } : e
+          e.id === id ? { ...e, quantity: e.quantity + 1 } : e,
         );
       }
       return [...prev, { id, image, title, price, quantity: 1 }];
@@ -63,7 +63,8 @@ export default function FoodCard({
   return (
     <Card
       sx={{
-        width: 300,
+        width: { xxs: 250, xs: 300 },
+        // scale: { xxs: 0.9, sm: 1 },
         position: "relative",
         overflow: "hidden",
         transition: "all 0.3s ease-in-out",

@@ -77,7 +77,7 @@ export default function CardsToShowAndTaps({
     <>
       <Box
         sx={{
-          width: { xs: "100%", sm: "fit-content" },
+          width: { xxs: "100%", sm: "fit-content" },
           m: "0 auto 60px auto",
           p: 1,
           borderRadius: "100px",
@@ -103,7 +103,7 @@ export default function CardsToShowAndTaps({
               disableRipple
               sx={{
                 borderRadius: "100px",
-                px: { xs: 3, sm: 6 },
+                px: { xxs: 3, sm: 6 },
                 py: 1.5,
                 fontWeight: 800,
                 fontSize: "0.9rem",
@@ -139,7 +139,7 @@ export default function CardsToShowAndTaps({
         {selectedTap === "Manager's" &&
           managers.map((manager, index) => (
             <Fade in timeout={500 + index * 100} key={manager.id}>
-              <Grid item xs={12} sm={6} md={4} lg={3}>
+              <Grid item xxs={12} sm={6} md={4} lg={3}>
                 <CardBase data={manager} isDark={isDark} id="manager" />
               </Grid>
             </Fade>
@@ -152,7 +152,7 @@ export default function CardsToShowAndTaps({
               timeout={500 + index * 100}
               key={`${chef.id || chef.email}-${index}`}
             >
-              <Grid item xs={12} sm={6} md={4} lg={3}>
+              <Grid item xxs={12} sm={6} md={4} lg={3}>
                 <CardBase
                   data={chef}
                   isDark={isDark}
@@ -167,7 +167,7 @@ export default function CardsToShowAndTaps({
           <>
             {loading &&
               [...Array(8)].map((_, i) => (
-                <Grid item xs={12} sm={6} md={4} lg={3} key={i}>
+                <Grid item xxs={12} sm={6} md={4} lg={3} key={i}>
                   <CardBaseSkeleton isDark={isDark} />
                 </Grid>
               ))}
@@ -188,7 +188,7 @@ export default function CardsToShowAndTaps({
                   timeout={500 + index * 50}
                   key={`${user.id || user.email}-${index}`}
                 >
-                  <Grid item xs={12} sm={6} md={4} lg={3}>
+                  <Grid item xxs={12} sm={6} md={4} lg={3}>
                     <CardBase data={user} isDark={isDark} id="user" />
                   </Grid>
                 </Fade>

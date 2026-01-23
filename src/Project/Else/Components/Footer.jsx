@@ -1,6 +1,10 @@
 import { Facebook, GitHub, LinkedIn } from "@mui/icons-material";
 import { Box, IconButton, Stack, Typography } from "@mui/material";
+import { useContext } from "react";
+import { IsAdminContext } from "../../User/Context/MainContext";
 export default function Footer() {
+  const { isAdmin } = useContext(IsAdminContext);
+
   return (
     <Box
       sx={{
@@ -19,31 +23,31 @@ export default function Footer() {
       <Stack direction="row" justifyContent="center" spacing={2} mt={1}>
         {" "}
         <IconButton
-          color="primary"
           component="a"
           href="https://www.facebook.com/yaser.shkfa"
           target="_blank"
           rel="noopener noreferrer"
+          sx={{ color: isAdmin ? "#7960f3" : "primary.main" }}
         >
           {" "}
           <Facebook />{" "}
         </IconButton>{" "}
         <IconButton
-          color="primary"
           component="a"
           href="https://www.linkedin.com/in/ya-a-sh-4494743a3"
           target="_blank"
           rel="noopener noreferrer"
+          sx={{ color: isAdmin ? "#7960f3" : "primary.main" }}
         >
           {" "}
           <LinkedIn />{" "}
         </IconButton>{" "}
         <IconButton
-          color="primary"
           component="a"
           href="https://github.com/YA-A-SH"
           target="_blank"
           rel="noopener noreferrer"
+          sx={{ color: isAdmin ? "#7960f3" : "primary.main" }}
         >
           <GitHub />{" "}
         </IconButton>{" "}

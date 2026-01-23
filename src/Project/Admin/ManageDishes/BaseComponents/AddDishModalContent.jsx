@@ -157,7 +157,7 @@ export default function Content({
 }
 
 const uploadBoxStyle = (theme, hasImage, isError) => ({
-  width: "300px",
+  width: { xxs: "250px", xs: "200", sm: "250", md: "300" },
   height: { xs: 200 },
   minHeight: 250,
   borderRadius: "24px",

@@ -61,29 +61,51 @@ export default function BaseManage({
         <Stack
           direction={{ xs: "column", md: "row" }}
           justifyContent="space-between"
-          alignItems={{ xs: "flex-start", md: "center" }}
+          // جعل العناصر في المنتصف في الموبايل وفوق بعض
+          alignItems={{ xs: "stretch", md: "center" }}
           spacing={3}
           mb={5}
         >
-          <Box>
+          <Box sx={{ textAlign: { xs: "center", md: "left" } }}>
             <Typography
               variant="h3"
               fontWeight={950}
-              sx={{ letterSpacing: "-2px" }}
+              sx={{
+                textAlign: { xxs: "center" },
+                letterSpacing: "-2px",
+                fontSize: { xs: "2.8rem", sm: "2.5rem", md: "3rem" },
+              }}
             >
               Analytics Overview
             </Typography>
-            <Typography variant="body1" color="text.secondary" fontWeight={500}>
+            <Typography
+              variant="body1"
+              color="text.secondary"
+              fontWeight={500}
+              sx={{ textAlign: { xxs: "center" }, mt: 3 }}
+            >
               Monitoring performance for{" "}
               <span style={{ color: theme.palette.primary.main }}>{type}</span>{" "}
               category
             </Typography>
           </Box>
 
-          <Stack direction="row" spacing={2} alignItems="center">
+          <Stack
+            direction={{ xs: "column", sm: "row" }}
+            spacing={2}
+            alignItems="center"
+            sx={{ width: { xs: "100%", md: "auto" } }}
+          >
             {/* Time Filter */}
-
-            <FormControl size="small" sx={{ minWidth: 150 }}>
+            <FormControl
+              size="small"
+              sx={{
+                minWidth: { xs: "100%", sm: 150 }, // عرض كامل للموبايل
+                flex: { xs: 1, md: "none" },
+                mt: 2,
+                mb: 2,
+              }}
+            >
               <Select
                 value={timeFilter}
                 onChange={(e) => setTimeFilter(e.target.value)}
@@ -103,12 +125,14 @@ export default function BaseManage({
             <Button
               variant="contained"
               startIcon={<AddRounded />}
+              fullWidth={{ xs: true, sm: false }} // زر عريض في الموبايل
               sx={{
                 borderRadius: "12px",
-                px: 3,
+                px: 4,
                 py: 1.2,
                 fontWeight: 800,
                 boxShadow: theme.shadows[4],
+                whiteSpace: "nowrap", // عشان النص ما ينزل سطر جديد
               }}
               onClick={() => setOpenAddDish(true)}
             >
@@ -116,6 +140,7 @@ export default function BaseManage({
             </Button>
           </Stack>
         </Stack>
+
         <AddDishModal open={openAddDish} setOpen={setOpenAddDish} type={type} />
 
         {/* Stats Cards*/}

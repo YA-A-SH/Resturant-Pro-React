@@ -156,7 +156,7 @@ export default function AddChefModal({ open, chefs, setChefs, handleClose }) {
           }}
         >
           {/* Add Image */}
-          <Grid item xs={12} sx={{ textAlign: "center", mb: 2 }}>
+          <Grid item xxs={12} sx={{ textAlign: "center", mb: 2 }}>
             <Box sx={{ position: "relative", display: "inline-block" }}>
               <Avatar
                 src={formData.img || ""}
@@ -209,7 +209,7 @@ export default function AddChefModal({ open, chefs, setChefs, handleClose }) {
               width: "100%",
             }}
           >
-            <Grid item xs={12} sm={6} sx={{ width: "100%" }}>
+            <Grid item xxs={12} sm={6} sx={{ width: "100%" }}>
               <TextField
                 fullWidth
                 label="Name"
@@ -220,7 +220,7 @@ export default function AddChefModal({ open, chefs, setChefs, handleClose }) {
                 helperText={errors.name}
               />
             </Grid>
-            <Grid item xs={12} sm={6} sx={{ width: "100%" }}>
+            <Grid item xxs={12} sm={6} sx={{ width: "100%" }}>
               <TextField
                 fullWidth
                 label="Role"
@@ -231,7 +231,7 @@ export default function AddChefModal({ open, chefs, setChefs, handleClose }) {
                 helperText={errors.role}
               />
             </Grid>
-            <Grid item xs={12} sx={{ width: "100%" }}>
+            <Grid item xxs={12} sx={{ width: "100%" }}>
               <TextField
                 fullWidth
                 label="Email"
@@ -242,7 +242,7 @@ export default function AddChefModal({ open, chefs, setChefs, handleClose }) {
                 helperText={errors.mail}
               />
             </Grid>
-            <Grid item xs={12} sm={6} sx={{ width: "100%" }}>
+            <Grid item xxs={12} sm={6} sx={{ width: "100%" }}>
               <TextField
                 fullWidth
                 label="Salary"
@@ -254,7 +254,7 @@ export default function AddChefModal({ open, chefs, setChefs, handleClose }) {
                 helperText={errors.salary}
               />
             </Grid>
-            <Grid item xs={12} sm={6} sx={{ width: "100%" }}>
+            <Grid item xxs={12} sm={6} sx={{ width: "100%" }}>
               <TextField
                 label="Choose The City"
                 error={!!errors.city}

@@ -58,7 +58,7 @@ export default function PreUser({
     <Box
       sx={{
         minHeight: "100vh",
-        pt: { xs: 12, md: 15 },
+        pt: { xxs: 12, md: 15 },
         pb: 8,
         background: isDark
           ? `radial-gradient(circle at top right, ${theme.palette.admin.main}15, transparent)`
@@ -69,9 +69,9 @@ export default function PreUser({
         {/* --- Header Section --- */}
 
         <Stack
-          direction={{ xs: "column", md: "row" }}
+          direction={{ xxs: "column", md: "row" }}
           justifyContent="space-between"
-          alignItems={{ xs: "flex-start", md: "flex-end" }}
+          alignItems={{ xxs: "flex-start", md: "flex-end" }}
           spacing={3}
           mb={8}
         >
@@ -86,9 +86,18 @@ export default function PreUser({
               </Typography>
             </Stack>
             <Typography
-              variant="h2"
+              variant="h3"
               fontWeight={900}
-              sx={{ letterSpacing: -2, lineHeight: 1 }}
+              sx={{
+                letterSpacing: -2,
+                lineHeight: 1,
+                fontSize: {
+                  xxs: "1.8rem",
+                  xs: "2.6rem",
+                  md: "3.5rem",
+                  lg: "4.5rem",
+                },
+              }}
             >
               Management{" "}
               <Box component="span" sx={{ color: "admin.main" }}>
@@ -111,6 +120,7 @@ export default function PreUser({
             sx={{
               borderRadius: "16px",
               px: 4,
+              mt: { xxs: 2, xs: 2, md: 0 },
               py: 2,
               fontWeight: 800,
               background: theme.palette.admin.gradient,

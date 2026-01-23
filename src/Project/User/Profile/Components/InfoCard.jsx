@@ -16,7 +16,7 @@ export default function InfoCards({ info }) {
         }}
       >
         {info.map((item, i) => (
-          <Grid item xs={12} sm={6} md={4} key={i}>
+          <Grid item xxs={12} sm={6} md={4} key={i}>
             <Card
               sx={{
                 p: 2.5,

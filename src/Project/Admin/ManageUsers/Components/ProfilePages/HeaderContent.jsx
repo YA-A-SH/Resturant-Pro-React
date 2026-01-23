@@ -23,15 +23,15 @@ export default function HeaderContent({
 }) {
   return (
     <>
-      <Box sx={{ p: { xs: 3, md: 5 }, mt: -10, position: "relative" }}>
+      <Box sx={{ p: { xxs: 3, md: 5 }, mt: -10, position: "relative" }}>
         <Stack
-          direction={{ xs: "column", lg: "row" }}
+          direction={{ xxs: "column", lg: "row" }}
           spacing={4}
-          alignItems={{ xs: "center", lg: "flex-end" }}
+          alignItems={{ xxs: "center", lg: "flex-end" }}
           justifyContent="space-between"
         >
           <Stack
-            direction={{ xs: "column", md: "row" }}
+            direction={{ xxs: "column", md: "row" }}
             spacing={3}
             alignItems="center"
           >
@@ -89,12 +89,12 @@ export default function HeaderContent({
               )}
             </Box>
 
-            <Box sx={{ textAlign: { xs: "center", md: "left" } }}>
+            <Box sx={{ textAlign: { xxs: "center", md: "left" } }}>
               <Stack
                 direction="row"
                 spacing={1}
                 alignItems="center"
-                justifyContent={{ xs: "center", md: "flex-start" }}
+                justifyContent={{ xxs: "center", md: "flex-start" }}
               >
                 <Typography
                   variant="h3"
@@ -128,7 +128,7 @@ export default function HeaderContent({
                 direction="row"
                 spacing={1}
                 mt={1.5}
-                justifyContent={{ xs: "center", md: "flex-start" }}
+                justifyContent={{ xxs: "center", md: "flex-start" }}
               >
                 <Chip
                   label={configs.tag}
@@ -157,7 +157,7 @@ export default function HeaderContent({
           </Stack>
 
           <Stack
-            direction={{ xs: "column", sm: "row" }}
+            direction={{ xxs: "column", sm: "row" }}
             spacing={2}
             alignItems="center"
           >

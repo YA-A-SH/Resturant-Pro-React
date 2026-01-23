@@ -101,7 +101,9 @@ export default function AddDishModal({ open, setOpen, type = "meal" }) {
             top: "50%",
             left: "50%",
             transform: "translate(-50%, -50%)",
-            width: { xs: "95%", sm: 700 },
+            width: { xxs: "95%", md: "70%", lg: "600px" },
+            maxHeight: "80%",
+            // scale: { xxs: 0.7, sm: 1 },
             bgcolor: "background.paper",
             borderRadius: "32px",
             boxShadow: "0 20px 60px rgba(0,0,0,0.2)",
@@ -129,7 +131,13 @@ export default function AddDishModal({ open, setOpen, type = "meal" }) {
               >
                 <FastfoodRounded />
               </Box>
-              <Typography variant="h5" fontWeight={900}>
+              <Typography
+                variant="h5"
+                fontWeight={900}
+                sx={{
+                  fontSize: { xxs: "1rem", xs: "1.3rem", sm: "2.6rem" },
+                }}
+              >
                 Add New {type}
               </Typography>
             </Stack>
@@ -171,6 +179,7 @@ export default function AddDishModal({ open, setOpen, type = "meal" }) {
                 borderRadius: "12px",
                 px: 6,
                 py: 1.5,
+                scale: { xxs: 0.8, xs: 0.85, md: 1 },
                 fontWeight: 900,
                 boxShadow: theme.shadows[4],
                 bgcolor: theme.palette.primary.main,

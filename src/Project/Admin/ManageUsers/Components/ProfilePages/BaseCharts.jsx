@@ -2,7 +2,6 @@ import {
   Money,
   Restaurant,
   Star,
-  AutoGraphRounded,
   HistoryToggleOffRounded,
 } from "@mui/icons-material";
 import { Box, Grid, useTheme, Typography, alpha, Stack } from "@mui/material";
@@ -21,18 +20,6 @@ import { motion, AnimatePresence } from "framer-motion";
 export default function BaseCharts({ type, isDark, chartData }) {
   const theme = useTheme();
   const hasData = chartData && chartData.length > 0;
-  const tooltipStyle = {
-    contentStyle: {
-      backgroundColor: isDark ? "#1e1e26" : "#fff",
-      borderRadius: "16px",
-      border: "none",
-      boxShadow: "0 10px 25px rgba(0,0,0,0.2)",
-      padding: "10px",
-    },
-    itemStyle: { fontWeight: 700, color: assets.color },
-  };
-  const dataKey =
-    type === "manager" ? "income" : type === "chef" ? "rate" : "value";
 
   const getThemeAssets = () => {
     switch (type) {
@@ -66,8 +53,22 @@ export default function BaseCharts({ type, isDark, chartData }) {
   };
   const assets = getThemeAssets();
 
+  const tooltipStyle = {
+    contentStyle: {
+      backgroundColor: isDark ? "#1e1e26" : "#fff",
+      borderRadius: "16px",
+      border: "none",
+      boxShadow: "0 10px 25px rgba(0,0,0,0.2)",
+      padding: "10px",
+    },
+
+    itemStyle: { fontWeight: 700, color: assets.color },
+  };
+  const dataKey =
+    type === "manager" ? "income" : type === "chef" ? "rate" : "value";
+
   return (
-    <Grid item xs={12} lg={8}>
+    <Grid item xxs={12} lg={8}>
       <ChartCard
         sentColor={assets.color}
         title={assets.title}

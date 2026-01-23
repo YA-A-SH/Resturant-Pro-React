@@ -8,7 +8,7 @@ export default function ChartCard({ title, children, icon, sentColor }) {
     <Paper
       elevation={0}
       sx={{
-        p: { xs: 3, sm: 4 },
+        p: { xxs: 2, xs: 3, sm: 4 },
         width: {
           xxs: 220,
           xs: 290,
@@ -19,7 +19,6 @@ export default function ChartCard({ title, children, icon, sentColor }) {
           lg: 490,
           xl: 450,
         },
-        // minHeight: 400,
         borderRadius: "28px",
         display: "flex",
         flexDirection: "column",

@@ -39,7 +39,7 @@ export default function UsersCharts({ isDark }) {
     { year: "2020", ban: 190 },
     { year: "2022", ban: 163 },
     { year: "2024", ban: 220 },
-    { year: "2026", ban: 45 }, 
+    { year: "2026", ban: 45 },
   ];
 
   return (
@@ -146,7 +146,7 @@ export default function UsersCharts({ isDark }) {
           </ChartCard>
         </Grid>
 
-        <Grid item xs={12} lg={4}>
+        <Grid item xxs={12} lg={8}>
           <ChartCard
             title="Security Center"
             subtitle="Account restriction history"
@@ -154,10 +154,7 @@ export default function UsersCharts({ isDark }) {
           >
             <Box sx={{ width: "100%", height: 380, mt: 3 }}>
               <ResponsiveContainer width="100%" height="100%">
-                <BarChart
-                  data={banUsers}
-                  margin={{ top: 10, right: 10, left: -20, bottom: 0 }}
-                >
+                <BarChart data={banUsers} margin="10px">
                   <CartesianGrid
                     strokeDasharray="3 3"
                     vertical={false}

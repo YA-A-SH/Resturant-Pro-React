@@ -36,7 +36,7 @@ const DeletePopup = ({ open, handleClose, handleDelete, id, msg1, msg2 }) => {
           >
             <Box
               sx={{
-                width: { xs: "90vw", sm: 400 },
+                width: { xxs: "90vw", sm: 400 },
                 background: isDark
                   ? "linear-gradient(135deg, rgba(40,40,40,0.9), rgba(20,20,20,0.95))"
                   : "linear-gradient(135deg, rgba(255,255,255,0.9), rgba(240,240,240,0.95))",

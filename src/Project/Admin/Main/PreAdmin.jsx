@@ -1,22 +1,10 @@
-import {
-  Box,
-  Button,
-  Container,
-  Grid,
-  Stack,
-  Typography,
-  useTheme,
-} from "@mui/material";
+import { Box, Button, Container, Grid, Stack, Typography } from "@mui/material";
 import { TrendingUp, DashboardCustomize } from "@mui/icons-material";
-import { useNavigate } from "react-router-dom";
 import Charts from "./Components/Charts";
 import Roadmap from "./Components/Roadmap";
 import StatusCards from "./Components/StatusCards";
 
-export default function PreAdmin({ isDark }) {
-  const navigate = useNavigate();
-  const theme = useTheme();
-
+export default function PreAdmin({ isDark, theme, navigate }) {
   return (
     <Box
       sx={{
@@ -136,7 +124,7 @@ export default function PreAdmin({ isDark }) {
         {/* Charts Section */}
         <Box
           sx={{
-            p: { xs: 1, md: 3 },
+            p: { xxs: 1, xs: 1, md: 3 },
             bgcolor: "background.paper",
             borderRadius: "32px",
             border: "1px solid",

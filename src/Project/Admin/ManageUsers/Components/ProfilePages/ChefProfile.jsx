@@ -11,8 +11,9 @@ export default function ChefProfile() {
   const location = useLocation();
   const navigate = useNavigate();
 
-  const chef = chefs.find((c) => String(c.id) === String(chefId));
+
   const chefId = location.state?.userData?.id;
+  const chef = chefs.find((c) => String(c.id) === String(chefId));
 
   useEffect(() => {
     const timeout = setTimeout(() => {

@@ -41,7 +41,7 @@ export default function Roadmap({ isDark }) {
         backdropFilter: "blur(30px)",
         border: "1px solid",
         borderColor: isDark ? "rgba(255,255,255,0.05)" : "rgba(0,0,0,0.05)",
-        p: { xs: 3, md: 6 },
+        p: { xxs: 2, xs: 3, md: 6 },
         overflow: "hidden",
       }}
     >

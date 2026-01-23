@@ -24,12 +24,14 @@ export default function Head({ setMode, mode }) {
     : theme.palette.background.glass;
 
   return (
-    <Box component="header">
+    <>
       <Box
+        component="header"
         sx={{
           height: 80,
-          px: { xs: 2, md: 4 },
+          px: { xxs: 2, xs: 2, md: 4 },
           display: "flex",
+
           alignItems: "center",
           justifyContent: "space-between",
           position: "sticky",
@@ -60,8 +62,8 @@ export default function Head({ setMode, mode }) {
             WebkitBackgroundClip: "text",
             WebkitTextFillColor: "transparent",
             fontSize: {
-              xxs: "1.8rem",
-              xs: "2.8rem",
+              xxs: "1.7rem",
+              xs: "2rem",
               sm: "3.2rem",
               md: "3.5rem",
             },
@@ -92,6 +94,7 @@ export default function Head({ setMode, mode }) {
             "&.Mui-disabled": {
               opacity: 0.3,
             },
+            scale: { xxs: 0.84, sm: 1 },
           }}
         >
           {showNav ? <Close /> : <List />}
@@ -99,6 +102,6 @@ export default function Head({ setMode, mode }) {
       </Box>
 
       <ContNav showNav={showNav} setMode={setMode} setShowNav={setShowNav} />
-    </Box>
+    </>
   );
 }

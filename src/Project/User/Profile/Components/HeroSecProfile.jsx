@@ -25,7 +25,7 @@ export default function HeroSecProfile({
       <Box
         sx={{
           position: "relative",
-          height: { xs: 450, md: 500 },
+          height: { xxs: 450, md: 500 },
           width: "100%",
           display: "flex",
           justifyContent: "center",
@@ -36,12 +36,12 @@ export default function HeroSecProfile({
           sx={{
             position: "absolute",
             top: 0,
-            width: { xs: "100%", md: "85%" },
+            width: { xxs: "100%", md: "85%" },
             height: "100%",
             background: isDark
               ? `linear-gradient(180deg, ${theme.palette.primary.dark} 0%, ${theme.palette.background.default} 100%)`
               : `linear-gradient(180deg, ${theme.palette.primary.light} 0%, ${theme.palette.background.default} 100%)`,
-            borderRadius: { xs: "0 0 50px 50px", md: "0 0 120px 120px" },
+            borderRadius: { xxs: "0 0 50px 50px", md: "0 0 120px 120px" },
             opacity: isDark ? 0.3 : 0.6,
             zIndex: 0,
           }}
@@ -57,8 +57,8 @@ export default function HeroSecProfile({
               <Avatar
                 src={u?.photoURL}
                 sx={{
-                  width: { xs: 140, md: 160 },
-                  height: { xs: 140, md: 160 },
+                  width: { xxs: 140, md: 160 },
+                  height: { xxs: 140, md: 160 },
                   border: `6px solid ${theme.palette.background.default}`,
                   boxShadow: `0 20px 40px ${theme.palette.primary.main}40`,
                 }}

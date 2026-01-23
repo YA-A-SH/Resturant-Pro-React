@@ -22,9 +22,10 @@ export default function PreNav({
           transition={{ type: "spring", damping: 20, stiffness: 300 }}
           sx={{
             position: "fixed",
-            top: isAdmin ? "90px" : "70px",
-            right: "10px",
-            width: 300,
+            top: { xxs: "20px", xs: "30px", sm: "70px", md: "80px" },
+            right: { xxs: "-10px", xs: "-10px", md: "20px" },
+            scale: { xxs: 0.8, xs: 0.84, sm: 1 },
+            width: { xxs: 220, xs: 250, md: 300 },
             bgcolor: "background.glass",
             backdropFilter: "blur(20px)",
             borderRadius: "24px",

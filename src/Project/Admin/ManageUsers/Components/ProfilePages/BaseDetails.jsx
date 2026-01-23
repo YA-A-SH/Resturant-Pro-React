@@ -49,7 +49,7 @@ export default function BaseDetails({ configs, type, isVerified, isBlocked }) {
 
   return (
     <>
-      <Grid item xs={12} md={5}>
+      <Grid item xxs={12} md={5}>
         <Stack spacing={4}>
           {/* Info Card */}
           <Card
@@ -157,7 +157,7 @@ export default function BaseDetails({ configs, type, isVerified, isBlocked }) {
             opacity: isBlocked ? 0.6 : 1,
           }}
         >
-          <Grid item xs={6}>
+          <Grid item xxs={6}>
             <Box
               sx={{
                 p: 2,
@@ -182,7 +182,7 @@ export default function BaseDetails({ configs, type, isVerified, isBlocked }) {
               </Typography>
             </Box>
           </Grid>
-          <Grid item xs={6}>
+          <Grid item xxs={6}>
             <Box
               sx={{
                 p: 2,

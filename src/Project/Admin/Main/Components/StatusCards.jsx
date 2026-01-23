@@ -59,7 +59,7 @@ export default function StatusCards({ isDark }) {
               borderRadius: "28px",
               display: "flex",
               flexDirection: "column",
-              alignItems: "flex-start",
+              alignItems: "center",
               gap: 2,
               position: "relative",
               overflow: "hidden",
@@ -119,6 +119,7 @@ export default function StatusCards({ isDark }) {
                   fontWeight: 700,
                   textTransform: "uppercase",
                   letterSpacing: 1,
+                  textAlign: "center",
                 }}
               >
                 {e.title}
@@ -126,7 +127,7 @@ export default function StatusCards({ isDark }) {
               <Typography
                 variant="h4"
                 fontWeight={900}
-                sx={{ my: 0.5, letterSpacing: "-1px" }}
+                sx={{ my: 0.5, letterSpacing: "-1px", textAlign: "center" }}
               >
                 {e.value}
               </Typography>

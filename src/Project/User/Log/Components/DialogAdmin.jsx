@@ -47,6 +47,7 @@ export default function DialogAdmin({
         sx: {
           borderRadius: 3,
           bgcolor: "background.paper",
+          p: 2,
         },
       }}
     >
