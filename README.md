@@ -135,7 +135,7 @@ Simple and clean layout
 
 Subtle animations for better visual experience
 
-🛠️ Admin Dashboard
+### 🛠️ Admin Dashboard
 
 A fully implemented Admin Dashboard is included as part of the project.
 It is logically and visually separated from the user-facing application and designed to manage the system efficiently.
