@@ -1,46 +1,48 @@
 # 🍽️ Restaurant Management Web Application (React)
 ## 📌 Overview
 
-This project is a fully featured restaurant web application built with React, designed to demonstrate my approach to clean code, performance optimization, and real-world problem solving.
+This project is a full-featured Restaurant Management Web Application built with React, designed to simulate a real-world restaurant system with a strong focus on clean code, scalable architecture, performance optimization, and user experience.
 
-The application simulates a modern restaurant experience, from browsing meals and placing orders to managing user profiles, while maintaining scalable architecture and an excellent user experience (UX).
+The application includes a complete customer-facing experience (browsing products, managing orders and favorites, user profiles) as well as a fully implemented Admin Dashboard for managing the system.
 
-## ✨ Key Features
+## ✨ Core Features
+
 ### 🔐 Authentication & Security
 
 User authentication using Firebase Authentication
 
 Password reset functionality
 
-Protected Routes for all pages that perform real actions
+Protected routes for all sensitive actions
 
-Logout functionality available from:
+Logout available from:
 
 Navigation bar
 
 User profile page
 
-### 🛒 Cart & Orders
+🛒 Cart & Orders
 
-Add items to the cart
+Add products to cart
 
-Persist cart items until the user completes the purchase
+Persist cart items until checkout
 
-Update item quantity inside the cart (increase / decrease)
+Update item quantities (increase / decrease)
 
-Items are automatically removed when quantity reaches zero
+Automatically remove items when quantity reaches zero
 
-Ability to delete orders in waiting status
+Delete orders with waiting status
 
-Only one order status (waiting) was implemented, since an order becomes successful only after delivery (which is out of scope)
+Only one order status implemented (waiting)
+(Order success depends on delivery, which is out of scope)
 
 ### ❤️ Favorites Management
 
 Add and remove items from favorites
 
-Manage favorites directly from the Profile page
+Manage favorites from the Profile page
 
-Favorites state is synchronized across all pages:
+Favorites are synchronized across:
 
 Home
 
@@ -52,15 +54,17 @@ Sweets
 
 Profile
 
-Favorite status is persisted using LocalStorage
+Favorite state persisted using LocalStorage
+
+Favorites rehydrated on app initialization
 
 ### 🍕 Products & UI
 
-Meals displayed using modern Card-based UI
+Products displayed using a modern Card-based UI
 
 Each card includes:
 
-Meal image
+Image
 
 Name
 
@@ -68,13 +72,15 @@ Rating
 
 Price
 
-Actions:
+Available actions:
 
 Purchase
 
 Add to favorites
 
-View more details
+View details
+
+Filtering & Sorting
 
 Category filtering:
 
@@ -84,7 +90,7 @@ Lunch
 
 Dinner
 
-Pagination when the number of items exceeds 12
+Pagination when items exceed 12
 
 Price sorting:
 
@@ -94,23 +100,23 @@ Descending
 
 ### 🎨 User Experience (UX)
 
-Modern Skeleton Loading instead of traditional loaders
+Skeleton loading instead of traditional loaders
 
-Global Snackbar & Alert system for user feedback
+Global Snackbar & Alert system
 
-Automatic Scroll to Top on route change
+Automatic scroll-to-top on route change
 
 Dynamic document title updates
 
 Animated navigation bar with modern icons
 
-Support for Light / Dark themes
+Light / Dark mode support
 
-Smooth animations across the app using Framer Motion
+Smooth animations using Framer Motion
 
-Page transition animations included
+Page transition animations
 
-###👤 User Profile
+### 👤 User Profile
 
 Limited profile editing based on authentication method
 
@@ -123,10 +129,61 @@ Favorites
 Logout
 
 ### 📄 Additional Pages
+About Us
 
-####About Us page
+Simple and clean layout
 
-Simple layout enhanced with subtle animations
+Subtle animations for better visual experience
+
+🛠️ Admin Dashboard
+
+A fully implemented Admin Dashboard is included as part of the project.
+It is logically and visually separated from the user-facing application and designed to manage the system efficiently.
+
+Key Features:
+
+Admin Authentication
+
+Login using a private admin-only access code
+
+All admin routes are fully protected
+
+Main Dashboard
+
+General statistics (revenue, users, orders, stock)
+
+Stats Cards for quick insights
+
+Export reports functionality
+
+Users Management
+
+View users with full details
+
+Search users by name
+
+Enable / disable users
+
+Verify users with a single action
+
+Staff (Chefs) Management
+
+Add and edit chef information
+
+Manage salaries and employment status
+
+Professional Admin UX
+
+Dedicated admin interface
+
+Light / Dark mode support
+
+Fully responsive design across all devices
+
+Smooth animations and transitions
+
+## ⚠️ Note:
+Multi-language support is planned but not implemented yet in the Admin Dashboard.
 
 ## 🧠 Architecture & Code Quality
 
@@ -134,131 +191,102 @@ Clean, maintainable, and scalable codebase
 
 Applied Container / Presenter pattern
 
-Performance optimization through memoization
+Performance optimizations using:
 
-Usage of:
+useMemo
 
-useMemo for expensive calculations
+useCallback
 
-useCallback to prevent unnecessary function recreation
+React.memo
 
-React.memo to reduce unnecessary re-renders
-
-useRef for animation control
+useRef
 
 Lazy loading with React.lazy and Suspense
 
-Lazy initialization
-
 Functional state updates to avoid stale state
 
-Proper cleanup to prevent memory leaks in useEffect
+Proper cleanup in useEffect to prevent memory leaks
 
 State management using Redux Toolkit (RTK)
 
 ## ⚠️ Challenges & Solutions
-### 1️⃣ API & Data Limitations
+API Limitations
 
-No single free API provided:
+No single free API provided meals, drinks, and desserts
 
-Meals
+Solution: Integrated three different APIs
 
-Drinks
+Pricing & Rating
 
-Desserts
+Values generated temporarily
 
-Solution:
+Initialized once inside useEffect to prevent changes on re-render
 
-Integrated three different APIs, one for each category
+Favorites Synchronization
 
-API data lacked:
+Solved using LocalStorage
 
-Price
-
-Rating
-
-Favorite status (isFav)
-
-### 2️⃣ Pricing & Rating Handling
-
-Prices and ratings were generated using Math.round
-
-Issue encountered:
-
-Values changed on every re-render
-
-Solution:
-
-Values initialized once inside useEffect
-
-This is a temporary workaround until a proper API is available
-
-### 3️⃣ Favorites Synchronization
-
-Items appear in multiple sections of the app
-
-Changes must be reflected globally
-
-Solution:
-
-Persist favorite state in LocalStorage
-
-Rehydrate favorites on initial render
-
-## 🧩 Technical Considerations
-
-Considered using createEntityAdapter for normalized state
-
-Decided against it due to the relatively small data size
+Favorites restored on initial render
 
 ## 🚀 Future Improvements
 
-Migrate data fetching to RTK Query (fetchBaseQuery)
+Migrate data fetching to RTK Query
 
-Add multi-language support using i18n (Arabic / English)
+Add multi-language support (Arabic / English)
 
-Build an Admin Dashboard
-
-Planned as a separate module within the same project
-
-Add Guest Login functionality (under consideration)
+Add Login as Guest functionality
 
 ## 🛠️ Tech Stack
+Frontend
 
-Frontend:
-React, JavaScript
+React
 
-State Management:
+JavaScript
+
+State Management
+
 Redux Toolkit (RTK)
 
-Routing:
+Routing
+
 React Router
 
-UI & Animations:
-Material UI (MUI), Framer Motion
+UI & Animations
 
-Data Fetching:
+Material UI (MUI)
+
+Framer Motion
+
+Data Fetching
+
 Axios
 
-Authentication:
+Authentication
+
 Firebase
 
-Utilities:
+## 🧰 Additional Tools
+
 UUID
 
-API Testing:
 Postman
 
-## 📦 Deployment Notes
+Recharts
 
-Added a vercel.json configuration
+i18n
 
-Redirects all routes to index.html
+## 📦 Deployment
+
+vercel.json configuration added
+
+All routes redirected to index.html
 
 Fixes 404 issues when refreshing non-home routes
 
-# 🎯 Project Purpose
+## 🎯 Project Purpose
 
-This project was built as a practical showcase of my development mindset, focusing on how I structure applications, solve real-world problems, and optimize performance.
+This project was built as a practical showcase of my development mindset, focusing on application structure, real-world problem solving, and performance optimization.
 
-Over roughly a month of development, many challenges were identified and resolved, and what initially seemed complex has now become part of my everyday workflow.
+Over approximately one month of development, multiple challenges were identified and resolved, turning complex requirements into a solid and reusable workflow.
+
+# AI-assisted design enhancements were used in selected parts of the application to improve the overall UI and user experience.
