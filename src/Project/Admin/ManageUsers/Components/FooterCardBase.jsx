@@ -21,6 +21,7 @@ export default function FooterCardBase({
   configs,
   setOpenEditSalaryPopup,
   setOpenDeleteChefPopup,
+  setSnackbarAlert,
 }) {
   const dispatch = useDispatch();
   const navigate = useNavigate();
@@ -34,6 +35,13 @@ export default function FooterCardBase({
   const handleVerifiedUser = () => {
     if (id === "user") {
       dispatch(toggleVerified(data.id));
+      setSnackbarAlert({
+        openSnackbar: true,
+        message: data?.isVerified
+          ? "User Unverified Successfully!"
+          : "User Verified Successfully!",
+        color: data?.isVerified ? "error" : "success",
+      });
     }
     return null;
   };
@@ -41,6 +49,13 @@ export default function FooterCardBase({
   const handleBlockedUser = () => {
     if (id === "user") {
       dispatch(toggleBlocked(data.id));
+      setSnackbarAlert({
+        openSnackbar: true,
+        message: data?.isBlocked
+          ? "User Unblocked Successfully!"
+          : "User Blocked Successfully!",
+        color: data?.isBlocked ? "error" : "success",
+      });
     }
     return null;
   };

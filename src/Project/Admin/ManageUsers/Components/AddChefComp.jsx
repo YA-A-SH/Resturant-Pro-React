@@ -22,7 +22,13 @@ import {
 } from "@mui/icons-material";
 import { v4 as uuidv4 } from "uuid";
 
-export default function AddChefModal({ open, chefs, setChefs, handleClose }) {
+export default function AddChefModal({
+  open,
+  chefs,
+  setChefs,
+  handleClose,
+  setOpenSnackbar,
+}) {
   // Hooks
   const [formData, setFormData] = useState({
     id: uuidv4(),
@@ -75,6 +81,11 @@ export default function AddChefModal({ open, chefs, setChefs, handleClose }) {
     if (validate()) {
       handleClose();
       setChefs([...chefs, formData]);
+      setOpenSnackbar({
+        openSnackbar: true,
+        message: "Chef Added Successfully!",
+        color: "success",
+      });
 
       setFormData({
         name: "",

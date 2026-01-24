@@ -31,7 +31,13 @@ export const ShowCartProvider = ({ children }) => {
 export const OpenSnackbarContext = createContext();
 
 export const OpenSnackbarProvider = ({ children }) => {
-  const [openSnackbar, setOpenSnackbar] = useState(false);
+  const [openSnackbar, setOpenSnackbar] = useState({
+    openSnackbar: false,
+    message: "",
+    color: "",
+    handleClose: () => {},
+  });
+
   return (
     <OpenSnackbarContext.Provider value={{ openSnackbar, setOpenSnackbar }}>
       {children}

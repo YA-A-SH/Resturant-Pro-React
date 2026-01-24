@@ -2,11 +2,12 @@ import { useDispatch, useSelector } from "react-redux";
 import PreUsers from "./PreUsers";
 import { useTheme } from "@emotion/react";
 import { useContext, useEffect, useState } from "react";
-import { ChefsContext } from "../../User/Context/MainContext";
+import { ChefsContext, OpenSnackbarContext } from "../../User/Context/MainContext";
 
 export default function ContUsers() {
   // Hooks
 
+  const { openSnackbar, setOpenSnackbar } = useContext(OpenSnackbarContext);
   const { chefs, setChefs } = useContext(ChefsContext);
   const [selectedTap, setSelectedTap] = useState(
     () => JSON.parse(localStorage.getItem("tap")) || "Manager's",
@@ -17,6 +18,10 @@ export default function ContUsers() {
   const [chefSearch, setChefSearch] = useState([]);
   const [managerSearch, setManagerSearch] = useState([]);
   const [userSearch, setUserSearch] = useState([]);
+
+  const handleCloseSnackbar = () => {
+    setOpenSnackbar(false);
+  };
   const dispatch = useDispatch();
   const theme = useTheme();
 
@@ -117,6 +122,9 @@ export default function ContUsers() {
         setOpenAddChefComp={setOpenAddChefComp}
         setSearchText={setSearchText}
         setSelectedTap={setSelectedTap}
+        openSnackbar={openSnackbar}
+        handleCloseSnackbar={handleCloseSnackbar}
+        setOpenSnackbar={setOpenSnackbar}
       />
     </>
   );

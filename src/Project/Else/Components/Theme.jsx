@@ -29,9 +29,9 @@ export default function Theme({ mode, children }) {
           info: "#3B82F6",
         },
         background: {
-          default: isDark ? "#0A0A0B" : "#F8FAFC", // خلفية أعمق في الدارك
-          paper: isDark ? "#121214" : "#FFFFFF",
-          glass: isDark ? "rgba(18, 18, 20, 0.8)" : "rgba(255, 255, 255, 0.8)",
+          default: isDark ? "#0A0A0B" : "#F8FAFC",
+          paper: isDark ? "#313132" : "#FFFFFF",
+          glass: isDark ? "rgba(57, 57, 60, 1)" : "rgba(255, 255, 255, 0.8)",
         },
         text: {
           primary: isDark ? "#F8FAFC" : "#0F172A",

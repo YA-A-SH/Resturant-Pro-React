@@ -76,7 +76,7 @@ export default function DialogAdmin({
       </DialogActions>
 
       <SnackbarComp
-        openSnackbar={openSnackbar}
+        openSnackbar={openSnackbar.openSnackbar}
         msg={
           trys === 0
             ? "You Use All You'r Attempts Try Again Later "

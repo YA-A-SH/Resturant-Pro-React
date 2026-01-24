@@ -20,7 +20,7 @@ export default function ContAdminDialog({ open, setOpen }) {
 
   const handleSnackbarClose = (_, reason) => {
     if (reason === "clickaway") return;
-    setOpenSnackbar(false);
+    setOpenSnackbar({ ...openSnackbar, openSnackbar: false });
   };
   const handleCheck = () => {
     if (secNum === secreteNumber) {

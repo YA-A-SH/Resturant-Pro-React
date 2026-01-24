@@ -20,9 +20,10 @@ import {
 import KpiCard from "./BaseComponents/Cards.jsx";
 import FooterSection from "./BaseComponents/Footer.jsx";
 import Charts from "./BaseComponents/Charts.jsx";
-import { useState } from "react";
+import { useContext, useState } from "react";
 import AddDishModal from "./BaseComponents/AddDishModal.jsx";
-
+import { OpenSnackbarContext } from "../../User/Context/MainContext.jsx";
+import SnackbarComp from "../../Else/Components/SnackbarComp.jsx";
 export default function BaseManage({
   theme,
   timeFilter,
@@ -42,6 +43,15 @@ export default function BaseManage({
   todayOrders,
 }) {
   const [openAddDish, setOpenAddDish] = useState(false);
+  const { openSnackbar, setOpenSnackbar } = useContext(OpenSnackbarContext);
+
+  const handleCloseSnackbar = () => {
+    setOpenSnackbar({
+      openSnackbar: false,
+      message: "",
+      color: "",
+    });
+  };
   return (
     <Box
       sx={{
@@ -69,15 +79,24 @@ export default function BaseManage({
           <Box sx={{ textAlign: { xs: "center", md: "left" } }}>
             <Typography
               variant="h3"
-              fontWeight={950}
+              fontWeight={900}
               sx={{
-                textAlign: { xxs: "center" },
-                letterSpacing: "-2px",
-                fontSize: { xs: "2.8rem", sm: "2.5rem", md: "3rem" },
+                letterSpacing: -2,
+                lineHeight: 1,
+                fontSize: {
+                  xxs: "1.8rem",
+                  xs: "2.6rem",
+                  md: "3.5rem",
+                  lg: "4.5rem",
+                },
               }}
             >
-              Analytics Overview
+              Analytics{" "}
+              <Box component="span" sx={{ color: "admin.main" }}>
+                Overview
+              </Box>
             </Typography>
+
             <Typography
               variant="body1"
               color="text.secondary"
@@ -85,7 +104,7 @@ export default function BaseManage({
               sx={{ textAlign: { xxs: "center" }, mt: 3 }}
             >
               Monitoring performance for{" "}
-              <span style={{ color: theme.palette.primary.main }}>{type}</span>{" "}
+              <span style={{ color: theme.palette.admin.main }}>{type}</span>{" "}
               category
             </Typography>
           </Box>
@@ -100,7 +119,7 @@ export default function BaseManage({
             <FormControl
               size="small"
               sx={{
-                minWidth: { xs: "100%", sm: 150 }, // عرض كامل للموبايل
+                minWidth: { xs: "100%", sm: 150 },
                 flex: { xs: 1, md: "none" },
                 mt: 2,
                 mb: 2,
@@ -125,14 +144,15 @@ export default function BaseManage({
             <Button
               variant="contained"
               startIcon={<AddRounded />}
-              fullWidth={{ xs: true, sm: false }} // زر عريض في الموبايل
+              fullWidth={{ xs: true, sm: false }}
               sx={{
                 borderRadius: "12px",
                 px: 4,
                 py: 1.2,
                 fontWeight: 800,
                 boxShadow: theme.shadows[4],
-                whiteSpace: "nowrap", // عشان النص ما ينزل سطر جديد
+                whiteSpace: "nowrap",
+                bgcolor: theme.palette.admin.main,
               }}
               onClick={() => setOpenAddDish(true)}
             >
@@ -141,7 +161,12 @@ export default function BaseManage({
           </Stack>
         </Stack>
 
-        <AddDishModal open={openAddDish} setOpen={setOpenAddDish} type={type} />
+        <AddDishModal
+          open={openAddDish}
+          setOpen={setOpenAddDish}
+          type={type}
+          setOpenSnackbar={setOpenSnackbar}
+        />
 
         {/* Stats Cards*/}
         <Grid
@@ -233,8 +258,14 @@ export default function BaseManage({
           }
         />
         {/* Footer  */}
-        <FooterSection />
+        <FooterSection theme={theme} />
       </Box>
+      <SnackbarComp
+        openSnackbar={openSnackbar.openSnackbar}
+        msg={openSnackbar.message}
+        color={openSnackbar.color}
+        handleClose={handleCloseSnackbar}
+      />
     </Box>
   );
 }

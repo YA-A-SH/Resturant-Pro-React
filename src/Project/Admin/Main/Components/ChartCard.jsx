@@ -11,7 +11,7 @@ export default function ChartCard({ title, children, icon, sentColor }) {
         p: { xxs: 2, xs: 3, sm: 4 },
         width: {
           xxs: 220,
-          xs: 290,
+          xs: 250,
           sm: 490,
           ss: 450,
           md: 400,

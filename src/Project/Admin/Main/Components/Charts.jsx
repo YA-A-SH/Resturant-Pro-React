@@ -131,7 +131,10 @@ export default function Charts() {
                     <Cell key={`cell-${index}`} fill={color} stroke="none" />
                   ))}
                 </Pie>
-                <Tooltip {...tooltipStyle} />
+                <Tooltip
+                  formatter={(value, name) => [`${value}%`, name]}
+                  {...tooltipStyle}
+                />
                 <Legend
                   verticalAlign="bottom"
                   wrapperStyle={{ paddingTop: "20px" }}

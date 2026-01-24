@@ -25,6 +25,7 @@ export default function DeleteChefPopup({
   setOpenDeleteChefPopup,
   isInProfile,
   setIsProfile,
+  setSnackbarAlert,
 }) {
   const { chefs, setChefs } = useContext(ChefsContext);
 
@@ -47,6 +48,11 @@ export default function DeleteChefPopup({
       setChefs(updatedChefs);
       setOpenDeleteChefPopup(false);
     }
+    setSnackbarAlert({
+      openSnackbar: true,
+      message: "Chef Fired Done ",
+      color: "error",
+    });
   };
 
   const handleClose = () => setOpenDeleteChefPopup(false);

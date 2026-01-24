@@ -24,7 +24,7 @@ import {
 } from "@mui/icons-material";
 import Content from "./AddDishModalContent";
 
-export default function AddDishModal({ open, setOpen, type = "meal" }) {
+export default function AddDishModal({ open, setOpen, type, setOpenSnackbar }) {
   const theme = useTheme();
   const fileInputRef = useRef(null);
 
@@ -74,9 +74,13 @@ export default function AddDishModal({ open, setOpen, type = "meal" }) {
 
     setLoading(true);
     setTimeout(() => {
-      console.log("Dish Submitted:", formData);
       setLoading(false);
       setOpen(false);
+      setOpenSnackbar({
+        openSnackbar: true,
+        message: "Dish Added Successfully",
+        color: "success",
+      });
       setFormData({ name: "", price: "", instructions: "", image: null });
     }, 2000);
   };

@@ -25,6 +25,7 @@ export default function EditSalaryPopup({
   mainColor,
   setOpenEditSalaryPopup,
   id,
+  setSnackbarAlert,
 }) {
   const { chefs, setChefs } = useContext(ChefsContext);
   const [value, setValue] = useState("");
@@ -47,6 +48,11 @@ export default function EditSalaryPopup({
 
     setChefs(updatedChefs);
     setOpenEditSalaryPopup(false);
+    setSnackbarAlert({
+      openSnackbar: true,
+      message: "Chef Salary Updated Successfully",
+      color: "info",
+    });
   };
 
   const onClose = () => {
@@ -69,7 +75,7 @@ export default function EditSalaryPopup({
           bgcolor: (theme) => alpha(theme.palette.background.paper, 0.9),
           boxShadow: `0 20px 60px ${alpha("#000", 0.3)}`,
           backgroundImage: "none",
-          zIndex: 99999,
+          zIndex: 1000,
         },
       }}
     >

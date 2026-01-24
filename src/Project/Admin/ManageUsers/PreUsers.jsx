@@ -20,7 +20,7 @@ import UsersCharts from "./Components/User'sCharts";
 import { fetchFakeUser } from "../../User/RTK/MainSlice";
 import CardsToShowAndTaps from "./Components/Card'sToShow";
 import AddChefModal from "./Components/AddChefComp";
-
+import SnackbarComp from "../../Else/Components/SnackbarComp";
 export default function PreUser({
   dispatch,
   isDark,
@@ -41,6 +41,9 @@ export default function PreUser({
   ChefsShow,
   ManagersShow,
   UsersShow,
+  openSnackbar,
+  handleCloseSnackbar,
+  setOpenSnackbar,
 }) {
   useEffect(() => {
     dispatch(fetchFakeUser());
@@ -137,6 +140,7 @@ export default function PreUser({
           </Button>
         </Stack>
         <AddChefModal
+          setOpenSnackbar={setOpenSnackbar}
           open={openAddChefComp}
           setChefs={setChefs}
           chefs={chefs}
@@ -274,6 +278,12 @@ export default function PreUser({
           isDark={isDark}
           searchText={searchText}
           chefSearch={chefSearch}
+        />
+        <SnackbarComp
+          openSnackbar={openSnackbar.openSnackbar}
+          msg={openSnackbar.message}
+          color={openSnackbar.color}
+          handleClose={handleCloseSnackbar}
         />
       </Container>
     </Box>

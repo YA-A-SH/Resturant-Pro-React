@@ -1,14 +1,24 @@
 import { ArrowForwardRounded, AssessmentRounded } from "@mui/icons-material";
-import { alpha, Box, Button, Divider, Grid, Stack, Typography } from "@mui/material";
+import {
+  alpha,
+  Box,
+  Button,
+  Divider,
+  Grid,
+  Stack,
+  Typography,
+} from "@mui/material";
+import { useNavigate } from "react-router-dom";
 
-export default function FooterSection() {
+export default function FooterSection({ theme }) {
+  const navigate = useNavigate();
   return (
     <Box
       sx={{
         mt: 8,
         p: 4,
         borderRadius: "40px",
-        bgcolor: "primary.main",
+        bgcolor: theme.palette.admin.main,
         color: "white",
         position: "relative",
         overflow: "hidden",
@@ -32,7 +42,7 @@ export default function FooterSection() {
             variant="contained"
             sx={{
               bgcolor: "white",
-              color: "primary.main",
+              color: theme.palette.admin.main,
               fontWeight: 900,
               px: 4,
               py: 2,
@@ -40,6 +50,7 @@ export default function FooterSection() {
               "&:hover": { bgcolor: alpha("#fff", 0.9) },
             }}
             endIcon={<ArrowForwardRounded />}
+            onClick={() => navigate("/admin")}
           >
             Export Reports
           </Button>

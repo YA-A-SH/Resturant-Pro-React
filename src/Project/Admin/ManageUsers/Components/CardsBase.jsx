@@ -1,4 +1,4 @@
-import { cloneElement, useState } from "react";
+import { cloneElement, useContext, useState } from "react";
 import {
   MailRounded,
   LocationOnRounded,
@@ -22,15 +22,19 @@ import { InfoRow } from "./OtherCompForCard'sBase";
 import FooterCardBase from "./FooterCardBase";
 import EditSalaryPopup from "./EditSalaryPopup";
 import DeleteChefPopup from "./DeleteChefPopup";
+import SnackbarComp from "../../../Else/Components/SnackbarComp";
+import { OpenSnackbarContext } from "../../../User/Context/MainContext";
 
 export default function CardBase({ isDark, data, id }) {
   // Hooks
+  const { setOpenSnackbar } = useContext(OpenSnackbarContext);
 
   const [openEditSalaryPopup, setOpenEditSalaryPopup] = useState(false);
   const [openDeleteChefPopup, setOpenDeleteChefPopup] = useState(false);
   const theme = useTheme();
 
   // Variables
+
   const isUserVerified = id === "user" && data?.isVerified;
   const isBlocked = data?.isBlocked;
   const configs = {
@@ -90,7 +94,6 @@ export default function CardBase({ isDark, data, id }) {
         bgcolor: isDark ? "rgba(255, 255, 255, 0.02)" : "#ffffff",
         backdropFilter: "blur(20px)",
         border: "1px solid",
-        // لو محظور خلي الحدود حمراء خفيفة
         borderColor: isBlocked
           ? alpha("#ef4444", 0.3)
           : isDark
@@ -100,7 +103,6 @@ export default function CardBase({ isDark, data, id }) {
           ? "0 15px 35px rgba(0,0,0,0.2)"
           : "0 15px 35px rgba(148,163,184,0.1)",
         transition: "0.7s",
-        // تأثير عند الحظر يجعل البطاقة تبدو "مطفاة"
         filter: isBlocked ? "saturate(0.8)" : "none",
         "&:hover": {
           transform: "translateY(-12px)",
@@ -251,17 +253,20 @@ export default function CardBase({ isDark, data, id }) {
         configs={configs}
         setOpenEditSalaryPopup={setOpenEditSalaryPopup}
         setOpenDeleteChefPopup={setOpenDeleteChefPopup}
+        setSnackbarAlert={setOpenSnackbar}
       />
       <EditSalaryPopup
         id={data?.id}
         open={openEditSalaryPopup}
         setOpenEditSalaryPopup={setOpenEditSalaryPopup}
         mainColor={configs.mainColor}
+        setSnackbarAlert={setOpenSnackbar}
       />
       <DeleteChefPopup
         data={data}
         open={openDeleteChefPopup}
         setOpenDeleteChefPopup={setOpenDeleteChefPopup}
+        setSnackbarAlert={setOpenSnackbar}
       />{" "}
     </Card>
   );
