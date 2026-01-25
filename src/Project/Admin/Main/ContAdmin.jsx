@@ -2,10 +2,12 @@ import { useEffect } from "react";
 import PreAdmin from "./PreAdmin";
 import { useTheme } from "@emotion/react";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 export default function ContAdmin() {
+  const { t } = useTranslation();
   useEffect(() => {
-    document.title = "Zeus Restaurant | Admin";
+    document.title = t("Zeus Restaurant | Admin");
   }, []);
   const theme = useTheme();
   const isDark = theme.palette.mode === "dark";
@@ -13,7 +15,7 @@ export default function ContAdmin() {
 
   return (
     <>
-      <PreAdmin theme={theme} isDark={isDark} navigate={navigate} />
+      <PreAdmin theme={theme} isDark={isDark} navigate={navigate} t={t} />
     </>
   );
 }

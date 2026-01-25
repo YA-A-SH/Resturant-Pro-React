@@ -2,7 +2,11 @@ import { useDispatch, useSelector } from "react-redux";
 import PreUsers from "./PreUsers";
 import { useTheme } from "@emotion/react";
 import { useContext, useEffect, useState } from "react";
-import { ChefsContext, OpenSnackbarContext } from "../../User/Context/MainContext";
+import {
+  ChefsContext,
+  OpenSnackbarContext,
+} from "../../User/Context/MainContext";
+import { useTranslation } from "react-i18next";
 
 export default function ContUsers() {
   // Hooks
@@ -18,10 +22,8 @@ export default function ContUsers() {
   const [chefSearch, setChefSearch] = useState([]);
   const [managerSearch, setManagerSearch] = useState([]);
   const [userSearch, setUserSearch] = useState([]);
+  const { t } = useTranslation();
 
-  const handleCloseSnackbar = () => {
-    setOpenSnackbar(false);
-  };
   const dispatch = useDispatch();
   const theme = useTheme();
 
@@ -58,7 +60,7 @@ export default function ContUsers() {
       ],
     },
   ];
-  const text = `Search by ${selectedTap} name`;
+  const text = `${t("Search by")} ${selectedTap} ${t("name")}`;
   const ChefsShow = selectedTap === "Chef's" && isFiltered ? chefSearch : chefs;
   const ManagersShow =
     selectedTap === "Manager's" && isFiltered ? managerSearch : managers;
@@ -67,7 +69,7 @@ export default function ContUsers() {
   // Effects
 
   useEffect(() => {
-    document.title = "Zeus | Admin => Manage User's";
+    document.title = t("Zeus | Admin => Manage User's");
   }, []);
 
   // Functions
@@ -99,10 +101,13 @@ export default function ContUsers() {
 
     setIsFiltered(true);
   }
-
+  const handleCloseSnackbar = () => {
+    setOpenSnackbar(false);
+  };
   return (
     <>
       <PreUsers
+        t={t}
         isDark={isDark}
         theme={theme}
         loading={loading}

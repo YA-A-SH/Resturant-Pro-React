@@ -18,6 +18,7 @@ import { motion } from "framer-motion";
 import { useContext } from "react";
 import { ChefsContext } from "../../../User/Context/MainContext";
 import { useNavigate } from "react-router-dom";
+import { useTranslation } from "react-i18next";
 
 export default function DeleteChefPopup({
   open,
@@ -28,7 +29,7 @@ export default function DeleteChefPopup({
   setSnackbarAlert,
 }) {
   const { chefs, setChefs } = useContext(ChefsContext);
-
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const theme = useTheme();
   const dangerColor = "#ff3d00";
@@ -50,7 +51,7 @@ export default function DeleteChefPopup({
     }
     setSnackbarAlert({
       openSnackbar: true,
-      message: "Chef Fired Done ",
+      message: t("Chef Fired Done"),
       color: "error",
     });
   };
@@ -122,7 +123,7 @@ export default function DeleteChefPopup({
           fontWeight="900"
           sx={{ mb: 1, letterSpacing: -1 }}
         >
-          Relieve Chef?
+          {t("Relieve Chef?")}
         </Typography>
 
         <Typography
@@ -130,7 +131,7 @@ export default function DeleteChefPopup({
           color="text.secondary"
           sx={{ mb: 4, px: 2 }}
         >
-          Are you sure you want to remove{" "}
+          {t("Are you sure you want to remove")}{" "}
           <strong style={{ color: "#000" }}>{data?.name}</strong> from staff?
         </Typography>
 
@@ -151,7 +152,7 @@ export default function DeleteChefPopup({
               "&:hover": { bgcolor: dangerColor, filter: "brightness(1.1)" },
             }}
           >
-            Confirm Termination
+            {t("Confirm Termination")}
           </Button>
 
           <Button
@@ -159,7 +160,7 @@ export default function DeleteChefPopup({
             onClick={handleClose}
             sx={{ fontWeight: 800, color: "text.secondary" }}
           >
-            Keep Staff Member
+            {t("Keep Staff Member")}
           </Button>
         </Stack>
 
@@ -172,7 +173,7 @@ export default function DeleteChefPopup({
         >
           <GppBadRounded sx={{ fontSize: 16, color: dangerColor }} />
           <Typography variant="caption" fontWeight={700}>
-            Admin Authorization Required
+            {t("Admin Authorization Required")}
           </Typography>
         </Stack>
       </Box>

@@ -23,7 +23,7 @@ import {
   Area,
 } from "recharts";
 
-export default function UsersCharts({ isDark }) {
+export default function UsersCharts({ t, isDark }) {
   const theme = useTheme();
 
   const verifyUsers = [
@@ -51,8 +51,8 @@ export default function UsersCharts({ isDark }) {
       >
         <Grid item xs={12} lg={8}>
           <ChartCard
-            title="User Growth Analysis"
-            subtitle="Real-time verification metrics"
+            title={t("User Growth Analysis")}
+            subtitle={t("Real-time verification metrics")}
             icon={<TrendingUpRounded sx={{ color: "admin.main" }} />}
           >
             <Box sx={{ width: "100%", height: 380, mt: 3, pr: 2 }}>
@@ -109,7 +109,7 @@ export default function UsersCharts({ isDark }) {
                     tick={{ fill: theme.palette.text.secondary, fontSize: 12 }}
                   />
                   <Tooltip
-                    content={<CustomTooltip isDark={isDark} />}
+                    content={<CustomTooltip isDark={isDark} t={t} />}
                     cursor={{
                       stroke: theme.palette.admin.main,
                       strokeWidth: 2,
@@ -124,7 +124,7 @@ export default function UsersCharts({ isDark }) {
 
                   <Area
                     type="monotone"
-                    name="Total Community"
+                    name={t("Total Community")}
                     dataKey="users"
                     stroke={theme.palette.admin.main}
                     strokeWidth={3}
@@ -133,7 +133,7 @@ export default function UsersCharts({ isDark }) {
                   />
                   <Area
                     type="monotone"
-                    name="Verified Accounts"
+                    name={t("Verified Accounts")}
                     dataKey="verifyUsers"
                     stroke="#10B981"
                     strokeWidth={3}
@@ -148,8 +148,8 @@ export default function UsersCharts({ isDark }) {
 
         <Grid item xxs={12} lg={8}>
           <ChartCard
-            title="Security Center"
-            subtitle="Account restriction history"
+            title={t("Security Center")}
+            subtitle={t("Account restriction history")}
             icon={<BlockRounded sx={{ color: "#ef4444" }} />}
           >
             <Box sx={{ width: "100%", height: 380, mt: 3 }}>
@@ -178,7 +178,7 @@ export default function UsersCharts({ isDark }) {
                         ? "rgba(255,255,255,0.03)"
                         : "rgba(0,0,0,0.02)",
                     }}
-                    content={<CustomTooltip isDark={isDark} />}
+                    content={<CustomTooltip isDark={isDark} t={t} />}
                   />
                   <Bar
                     dataKey="ban"
@@ -207,7 +207,7 @@ export default function UsersCharts({ isDark }) {
   );
 }
 
-const CustomTooltip = ({ active, payload, label, isDark }) => {
+const CustomTooltip = ({ t, active, payload, label, isDark }) => {
   if (active && payload && payload.length) {
     return (
       <Paper
@@ -228,7 +228,7 @@ const CustomTooltip = ({ active, payload, label, isDark }) => {
           variant="subtitle2"
           sx={{ mb: 1.5, fontWeight: 900, color: isDark ? "#fff" : "#000" }}
         >
-          Timeline: {label}
+          {t("Timeline:")} {label}
         </Typography>
         <Stack spacing={1}>
           {payload.map((entry, index) => (

@@ -22,6 +22,7 @@ import CardsToShowAndTaps from "./Components/Card'sToShow";
 import AddChefModal from "./Components/AddChefComp";
 import SnackbarComp from "../../Else/Components/SnackbarComp";
 export default function PreUser({
+  t,
   dispatch,
   isDark,
   theme,
@@ -85,7 +86,7 @@ export default function PreUser({
                 variant="overline"
                 sx={{ fontWeight: 800, color: "admin.main", letterSpacing: 2 }}
               >
-                Staff & Community
+                {t("Staff & Community")}
               </Typography>
             </Stack>
             <Typography
@@ -102,9 +103,9 @@ export default function PreUser({
                 },
               }}
             >
-              Management{" "}
+              {t("Management")}{" "}
               <Box component="span" sx={{ color: "admin.main" }}>
-                Portal
+                {t("Portal")}
               </Box>
             </Typography>
             <Typography
@@ -112,8 +113,7 @@ export default function PreUser({
               color="text.secondary"
               sx={{ mt: 2, maxWidth: 500, opacity: 0.8 }}
             >
-              Comprehensive oversight of your culinary team and community
-              members. Track activities, roles, and status in real-time.
+              {t("desc 16")}
             </Typography>
           </Box>
 
@@ -136,7 +136,7 @@ export default function PreUser({
             }}
             onClick={() => setOpenAddChefComp(true)}
           >
-            Add New Chef
+            {t("Add New Chef")}
           </Button>
         </Stack>
         <AddChefModal
@@ -148,7 +148,7 @@ export default function PreUser({
         />
         {/* --- Charts --- */}
         <Box sx={{ mb: 6 }}>
-          <UsersCharts isDark={isDark} />
+          <UsersCharts t={t} isDark={isDark} />
         </Box>
 
         {/* --- Quick Stats Cards --- */}
@@ -164,12 +164,12 @@ export default function PreUser({
         >
           {[
             {
-              label: "Total Users",
+              label: t("Total Users"),
               value: "55,930",
               color: theme.palette.admin.main,
             },
-            { label: "Active Now", value: "8,540", color: "#10B981" },
-            { label: "Restricted", value: "120", color: "#EF4444" },
+            { label: t("Active Now"), value: "8,540", color: "#10B981" },
+            { label: t("Restricted"), value: "120", color: "#EF4444" },
           ].map((stat) => (
             <Grid item xs={12} sm={4} key={stat.label}>
               <Card
@@ -261,13 +261,14 @@ export default function PreUser({
               sx={{ minWidth: "100px" }}
               onClick={() => setSearchText("")}
             >
-              Clear
+              {t("Clear")}
             </Button>
           </Stack>
         </Card>
 
         {/* --- Taps && Show Cards--- */}
         <CardsToShowAndTaps
+          t={t}
           setSelectedTap={setSelectedTap}
           selectedTap={selectedTap}
           chefs={ChefsShow}

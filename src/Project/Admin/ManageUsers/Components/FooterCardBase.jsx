@@ -14,6 +14,7 @@ import { toggleBlocked, toggleVerified } from "../../../User/RTK/MainSlice";
 import { useDispatch } from "react-redux";
 
 export default function FooterCardBase({
+  t,
   data,
   isDark,
   id,
@@ -38,8 +39,8 @@ export default function FooterCardBase({
       setSnackbarAlert({
         openSnackbar: true,
         message: data?.isVerified
-          ? "User Unverified Successfully!"
-          : "User Verified Successfully!",
+          ? t("User Unverified Successfully!")
+          : t("User Verified Successfully!"),
         color: data?.isVerified ? "error" : "success",
       });
     }
@@ -52,9 +53,9 @@ export default function FooterCardBase({
       setSnackbarAlert({
         openSnackbar: true,
         message: data?.isBlocked
-          ? "User Unblocked Successfully!"
-          : "User Blocked Successfully!",
-        color: data?.isBlocked ? "error" : "success",
+          ? t("User Unblocked Successfully!")
+          : t("User Blocked Successfully!"),
+        color: data?.isBlocked ? "success" : "error",
       });
     }
     return null;
@@ -76,7 +77,7 @@ export default function FooterCardBase({
       >
         <Stack direction="row" spacing={1}>
           {id === "manager" ? (
-            <Tooltip title="Full Admin Privileges">
+            <Tooltip title={t("Full Admin Privileges")}>
               <Box
                 sx={{
                   p: 1,
@@ -97,13 +98,13 @@ export default function FooterCardBase({
                   data?.isVerified ? <CancelSharp /> : <VerifiedUserRounded />
                 }
                 color={data?.isVerified ? "#EF4444" : "#10B981"}
-                title={data?.isVerified ? "Unverify User" : "Verify User"}
+                title={data?.isVerified ? t("Unverify User") : t("Verify User")}
                 handle={handleVerifiedUser}
               />
               <ActionButton
                 icon={data?.isBlocked ? <CancelTwoTone /> : <BlockRounded />}
                 color={data?.isBlocked ? "#0ad69c" : "#EF4444"}
-                title={data?.isBlocked ? "Unblock User" : "Block User"}
+                title={data?.isBlocked ? t("Unblock User"): t("Block User")}
                 handle={handleBlockedUser}
               />
             </>
@@ -112,13 +113,13 @@ export default function FooterCardBase({
               <ActionButton
                 icon={<TrendingUp />}
                 color="#10B981"
-                title="Update Salary $"
+                title={t("Update Salary $")}
                 handle={() => setOpenEditSalaryPopup(true)}
               />
               <ActionButton
                 icon={<CancelSharp />}
                 color="#EF4444"
-                title="Fire Chef 👨‍🍳"
+                title={t("Fire Chef 👨‍🍳")}
                 handle={() => setOpenDeleteChefPopup(true)}
               />
             </>
@@ -146,7 +147,7 @@ export default function FooterCardBase({
           }}
           onClick={handleViewProfile}
         >
-          View Profile
+          {t("View Profile")}
         </Button>
       </Stack>
     </>

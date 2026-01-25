@@ -12,6 +12,7 @@ import {
   Tooltip,
   Typography,
 } from "@mui/material";
+import { useTranslation } from "react-i18next";
 
 export default function HeaderContent({
   data,
@@ -21,6 +22,7 @@ export default function HeaderContent({
   renderActions,
   configs,
 }) {
+  const { t } = useTranslation();
   return (
     <>
       <Box sx={{ p: { xxs: 3, md: 5 }, mt: -10, position: "relative" }}>
@@ -68,7 +70,7 @@ export default function HeaderContent({
               )}
 
               {isUserVerified && (
-                <Tooltip title="Identity Verified">
+                <Tooltip title={t("Identity Verified")}>
                   <Box
                     sx={{
                       position: "absolute",
@@ -120,7 +122,7 @@ export default function HeaderContent({
                   color="text.secondary"
                   fontWeight={500}
                 >
-                  Salary : {data?.salary}$
+                  {t("Salary :")} {data?.salary}$
                 </Typography>
               )}
 

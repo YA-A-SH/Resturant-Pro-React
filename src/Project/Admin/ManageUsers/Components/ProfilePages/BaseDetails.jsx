@@ -14,12 +14,18 @@ import {
   Typography,
 } from "@mui/material";
 
-export default function BaseDetails({ configs, type, isVerified, isBlocked }) {
+export default function BaseDetails({
+  t,
+  configs,
+  type,
+  isVerified,
+  isBlocked,
+}) {
   const getTrustStatus = () => {
     if (isBlocked) {
       return {
-        title: "Account Restricted",
-        subtitle: "This user is currently Blocked",
+        title: t("Account Restricted"),
+        subtitle: t("This user is currently Blocked"),
         color: "#EF4444",
         icon: <PersonOffRounded sx={{ fontSize: 50, color: "#EF4444" }} />,
         bg: `linear-gradient(to right bottom, ${alpha("#EF4444", 0.1)}, transparent)`,
@@ -27,8 +33,8 @@ export default function BaseDetails({ configs, type, isVerified, isBlocked }) {
     }
     if (isVerified) {
       return {
-        title: "Trust Level",
-        subtitle: "Identity Verified",
+        title: t("Trust Level"),
+        subtitle: t("Identity Verified"),
         color: "#10B981",
         icon: (
           <WorkspacePremiumRounded sx={{ fontSize: 50, color: "#10B981" }} />
@@ -37,8 +43,8 @@ export default function BaseDetails({ configs, type, isVerified, isBlocked }) {
       };
     }
     return {
-      title: "Trust Level",
-      subtitle: "Verification Pending",
+      title: t("Trust Level"),
+      subtitle: t("Verification Pending"),
       color: "#F59E0B", // Orange
       icon: <GppMaybeRounded sx={{ fontSize: 50, color: "#F59E0B" }} />,
       bg: `linear-gradient(to right bottom, ${alpha("#F59E0B", 0.1)}, transparent)`,
@@ -72,7 +78,7 @@ export default function BaseDetails({ configs, type, isVerified, isBlocked }) {
               <HistoryEduRounded
                 sx={{ color: isBlocked ? "text.disabled" : configs.mainColor }}
               />
-              Personal Biography
+              {t("Personal Biography")}
             </Typography>
             <Stack spacing={2.5}>
               {configs.details.map((detail, index) => (
@@ -100,7 +106,7 @@ export default function BaseDetails({ configs, type, isVerified, isBlocked }) {
             </Stack>
             <Divider sx={{ my: 3 }} />
             <Typography variant="body2" color="text.secondary">
-              Registered on:{" "}
+              {t("Registered on:")}{" "}
               {new Date().toLocaleDateString("en-US", {
                 year: "numeric",
                 month: "long",
@@ -175,10 +181,10 @@ export default function BaseDetails({ configs, type, isVerified, isBlocked }) {
               </Typography>
               <Typography variant="caption" fontWeight={700}>
                 {type === "chef"
-                  ? "Avg Rating"
+                  ? t("Avg Rating")
                   : type === "user"
-                    ? "Points"
-                    : "System Uptime"}
+                    ? t("Points")
+                    : t("System Uptime")}
               </Typography>
             </Box>
           </Grid>
@@ -197,15 +203,15 @@ export default function BaseDetails({ configs, type, isVerified, isBlocked }) {
                 color={configs.mainColor}
               >
                 {isBlocked
-                  ? "Suspended"
+                  ? t("Suspended")
                   : type === "chef"
                     ? "24"
                     : type === "user"
                       ? "2"
-                      : "Active"}
+                      : t("Active")}
               </Typography>
               <Typography variant="caption" fontWeight={700}>
-                Status
+                {t("Status")}
               </Typography>
             </Box>
           </Grid>

@@ -17,7 +17,7 @@ import {
 import ChartCard from "../../../Main/Components/ChartCard";
 import { motion, AnimatePresence } from "framer-motion";
 
-export default function BaseCharts({ type, isDark, chartData }) {
+export default function BaseCharts({ t, type, isDark, chartData }) {
   const theme = useTheme();
   const hasData = chartData && chartData.length > 0;
 
@@ -27,27 +27,25 @@ export default function BaseCharts({ type, isDark, chartData }) {
         return {
           color: theme.palette.admin?.main || "#6366F1",
           icon: <Money />,
-          title: "Manager Income Evolution",
-          emptyMsg: "Financial records are still being processed.",
-          subMsg:
-            "Income data will appear once the next billing cycle completes.",
+          title: t("Manager Income Evolution"),
+          emptyMsg: t("Financial records are still being processed."),
+          subMsg: t("desc 18"),
         };
       case "chef":
         return {
           color: "#10B981",
           icon: <Star />,
-          title: "Chef Rating Performance",
-          emptyMsg: "Fresh Talent - No Reviews Yet.",
-          subMsg:
-            "It would be unfair to judge this chef's art before their first signature dish!",
+          title: t("Chef Rating Performance"),
+          emptyMsg: t("Fresh Talent - No Reviews Yet."),
+          subMsg: t("desc 19"),
         };
       default:
         return {
           color: "#F59E0B",
           icon: <Restaurant />,
-          title: "Total Orders History",
-          emptyMsg: "No orders recorded in this period.",
-          subMsg: "Wait for the rush hour to see the performance metrics live.",
+          title: t("Total Orders History"),
+          emptyMsg: t("No orders recorded in this period."),
+          subMsg: t("desc 20"),
         };
     }
   };

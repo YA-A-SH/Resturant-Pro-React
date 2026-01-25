@@ -24,6 +24,7 @@ import { useContext, useState } from "react";
 import AddDishModal from "./BaseComponents/AddDishModal.jsx";
 import { OpenSnackbarContext } from "../../User/Context/MainContext.jsx";
 import SnackbarComp from "../../Else/Components/SnackbarComp.jsx";
+import { useTranslation } from "react-i18next";
 export default function BaseManage({
   theme,
   timeFilter,
@@ -42,6 +43,8 @@ export default function BaseManage({
   topDishOrders,
   todayOrders,
 }) {
+  const { t } = useTranslation();
+
   const [openAddDish, setOpenAddDish] = useState(false);
   const { openSnackbar, setOpenSnackbar } = useContext(OpenSnackbarContext);
 
@@ -71,7 +74,6 @@ export default function BaseManage({
         <Stack
           direction={{ xs: "column", md: "row" }}
           justifyContent="space-between"
-          // جعل العناصر في المنتصف في الموبايل وفوق بعض
           alignItems={{ xs: "stretch", md: "center" }}
           spacing={3}
           mb={5}
@@ -91,9 +93,9 @@ export default function BaseManage({
                 },
               }}
             >
-              Analytics{" "}
+              {t("Analytics")}{" "}
               <Box component="span" sx={{ color: "admin.main" }}>
-                Overview
+                {t("Overview")}
               </Box>
             </Typography>
 
@@ -103,9 +105,9 @@ export default function BaseManage({
               fontWeight={500}
               sx={{ textAlign: { xxs: "center" }, mt: 3 }}
             >
-              Monitoring performance for{" "}
+              {t("Monitoring performance for")}{" "}
               <span style={{ color: theme.palette.admin.main }}>{type}</span>{" "}
-              category
+              {t("category")}
             </Typography>
           </Box>
 
@@ -135,9 +137,9 @@ export default function BaseManage({
                 }}
                 IconComponent={CalendarMonthRounded}
               >
-                <MenuItem value="today">Today</MenuItem>
-                <MenuItem value="week">This Week</MenuItem>
-                <MenuItem value="month">This Month</MenuItem>
+                <MenuItem value="today">{t("Today")}</MenuItem>
+                <MenuItem value="week">{t("This Week")}</MenuItem>
+                <MenuItem value="month">{t("This Month")}</MenuItem>
               </Select>
             </FormControl>
 
@@ -156,12 +158,13 @@ export default function BaseManage({
               }}
               onClick={() => setOpenAddDish(true)}
             >
-              Add New Dish
+              {t("Add New Dish")}
             </Button>
           </Stack>
         </Stack>
 
         <AddDishModal
+          t={t}
           open={openAddDish}
           setOpen={setOpenAddDish}
           type={type}
@@ -181,7 +184,7 @@ export default function BaseManage({
         >
           <Grid item xs={12} sm={6} md={4} lg={2.4}>
             <KpiCard
-              title="Total Sales"
+              title={t("Total Sales")}
               value={totalSales}
               icon={<MonetizationOnRounded />}
               trend="+14%"
@@ -191,7 +194,7 @@ export default function BaseManage({
           </Grid>
           <Grid item xs={12} sm={6} md={4} lg={2.4}>
             <KpiCard
-              title="Total Costs"
+              title={t("Total Costs")}
               value={totalCosts}
               icon={<AccountBalanceWalletRounded />}
               trend="+5%"
@@ -201,7 +204,7 @@ export default function BaseManage({
           </Grid>
           <Grid item xs={12} sm={6} md={4} lg={2.4}>
             <KpiCard
-              title="Net Profit"
+              title={t("Net Profit")}
               value={netProfit}
               icon={<TrendingUpRounded />}
               trend="+18%"
@@ -214,10 +217,10 @@ export default function BaseManage({
             <KpiCard
               title={
                 timeFilter === "today"
-                  ? "Today's Orders"
+                  ? t("Today's Orders")
                   : timeFilter === "week"
-                    ? "This Week's Orders"
-                    : "This Month's Orders"
+                    ? t("This Week's Orders")
+                    : t("This Month's Orders")
               }
               value={todayOrders}
               icon={<ShoppingCartRounded />}
@@ -228,7 +231,7 @@ export default function BaseManage({
           </Grid>
           <Grid item xs={12} sm={6} md={4} lg={2.4}>
             <KpiCard
-              title="Top Dish"
+              title={t("Top Dish")}
               value={topDish}
               icon={<FastfoodRounded />}
               subValue={`${topDishOrders} Orders`}
@@ -240,6 +243,7 @@ export default function BaseManage({
         {/* Charts */}
 
         <Charts
+          t={t}
           theme={theme}
           time={timeFilter}
           firstChartData={
@@ -258,7 +262,7 @@ export default function BaseManage({
           }
         />
         {/* Footer  */}
-        <FooterSection theme={theme} />
+        <FooterSection t={t} theme={theme} />
       </Box>
       <SnackbarComp
         openSnackbar={openSnackbar.openSnackbar}

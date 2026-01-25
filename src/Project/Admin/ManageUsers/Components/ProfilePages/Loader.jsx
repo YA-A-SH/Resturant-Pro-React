@@ -1,7 +1,9 @@
 import { alpha, Box, Typography } from "@mui/material";
 import { motion } from "framer-motion";
+import { useTranslation } from "react-i18next";
 
 export default function EliteLoader({ color = "#10B981" }) {
+  const { t } = useTranslation();
   return (
     <>
       <Box
@@ -55,7 +57,7 @@ export default function EliteLoader({ color = "#10B981" }) {
               fontWeight: 900,
             }}
           >
-            ZEUS
+            {t("ZEUS")}
           </Box>
         </Box>
 
@@ -73,7 +75,7 @@ export default function EliteLoader({ color = "#10B981" }) {
             textTransform: "uppercase",
           }}
         >
-          Preparing Culinary Profile...
+          {t("Preparing Culinary Profile...")}
         </Typography>
       </Box>
     </>

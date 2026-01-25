@@ -6,25 +6,25 @@ import {
 } from "@mui/icons-material";
 import { Box, Grid, Paper, Stack, Typography, useTheme } from "@mui/material";
 
-export default function Roadmap({ isDark }) {
+export default function Roadmap({ isDark, t }) {
   const theme = useTheme();
 
   const ideas = [
     {
-      title: "New Branch: Dubai Mall",
-      desc: "Expanding ZEUS to the heart of Dubai by Q3 2026.",
+      title: t("New Branch: Dubai Mall"),
+      desc: t("desc 12"),
       icon: <AddLocationAlt />,
       color: theme.palette.admin.main,
     },
     {
-      title: "Master Chef Recruitment",
-      desc: "Hiring a 3-Michelin star chef for the Italian section.",
+      title: t("Master Chef Recruitment"),
+      desc: t("desc 13"),
       icon: <Engineering />,
       color: "#F59E0B",
     },
     {
-      title: "AI Ordering System",
-      desc: "Implementing smart voice recognition for table orders.",
+      title: t("AI Ordering System"),
+      desc: t("desc 14"),
       icon: <AutoAwesome />,
       color: "#10B981",
     },
@@ -68,10 +68,10 @@ export default function Roadmap({ isDark }) {
             variant="h3"
             sx={{ fontWeight: 900, letterSpacing: "-1.5px", mb: 1 }}
           >
-            Future Vision
+            {t("Future Vision")}
           </Typography>
           <Typography variant="body1" color="text.secondary" fontWeight={500}>
-            The next chapter of the ZEUS culinary legacy.
+            {t("desc 15")}
           </Typography>
         </Box>
         <Box

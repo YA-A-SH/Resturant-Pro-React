@@ -7,40 +7,40 @@ import {
 } from "@mui/icons-material";
 import { Box, Grid, Paper, Typography, useTheme } from "@mui/material";
 
-export default function StatusCards({ isDark }) {
+export default function StatusCards({t, isDark }) {
   const theme = useTheme();
 
   const statusCardInfo = [
     {
-      title: "Total Revenue",
+      title: t("Total Revenue"),
       value: "$154,230",
       growth: "+12%",
       icon: <TrendingUp />,
       color: theme.palette.admin.main,
     },
     {
-      title: "New Customers",
+      title: t("New Customers"),
       value: "7,240",
       growth: "+11%",
       icon: <Group />,
       color: "#F59E0B",
     },
     {
-      title: "Total Customers",
+      title: t("Total Customers"),
       value: "55,930",
       growth: "+7%",
       icon: <People />,
       color: theme.palette.admin.secondary || "#A855F7",
     },
     {
-      title: "Low Stock",
+      title: t("Low Stock"),
       value: "8 Items",
       growth: "-3%",
       icon: <Inventory />,
       color: "#EF4444",
     },
     {
-      title: "Active Orders",
+      title: t("Active Orders"),
       value: "4,642",
       growth: "+19%",
       icon: <ShoppingCart />,
@@ -148,7 +148,7 @@ export default function StatusCards({ isDark }) {
                   {e.growth}
                 </Typography>
                 <Typography variant="caption" color="text.secondary">
-                  vs last month
+                  {t("vs last month")}
                 </Typography>
               </Box>
             </Box>

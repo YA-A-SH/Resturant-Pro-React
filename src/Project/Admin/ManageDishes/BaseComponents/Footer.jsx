@@ -10,7 +10,7 @@ import {
 } from "@mui/material";
 import { useNavigate } from "react-router-dom";
 
-export default function FooterSection({ theme }) {
+export default function FooterSection({t, theme }) {
   const navigate = useNavigate();
   return (
     <Box
@@ -30,12 +30,11 @@ export default function FooterSection({ theme }) {
       <Grid container spacing={4} alignItems="center">
         <Grid item xs={12} md={8}>
           <Typography variant="h4" fontWeight={900} mb={1}>
-            Ready to scale your business?
+            {t("Ready to scale your business?")}
           </Typography>
           <Typography variant="body1" sx={{ opacity: 0.9, maxWidth: 500 }}>
-            All your data is synced in real-time. Use these insights to optimize
-            your menu and increase customer satisfaction.
-          </Typography>
+          {t("desc 21")}
+        </Typography>
         </Grid>
         <Grid item xs={12} md={4} textAlign={{ md: "right" }}>
           <Button
@@ -52,7 +51,7 @@ export default function FooterSection({ theme }) {
             endIcon={<ArrowForwardRounded />}
             onClick={() => navigate("/admin")}
           >
-            Export Reports
+            {t("Export Reports")}
           </Button>
         </Grid>
       </Grid>
@@ -63,7 +62,7 @@ export default function FooterSection({ theme }) {
         sx={{ opacity: 0.8 }}
       >
         <Typography variant="caption" fontWeight={700}>
-          © 2024 Admin Panel Dashboard
+         {t(" © 2024 Admin Panel Dashboard")}
         </Typography>
         <Stack direction="row" spacing={3}>
           <Typography
@@ -71,14 +70,14 @@ export default function FooterSection({ theme }) {
             fontWeight={700}
             sx={{ cursor: "pointer" }}
           >
-            Support
+            {t("Support")}
           </Typography>
           <Typography
             variant="caption"
             fontWeight={700}
             sx={{ cursor: "pointer" }}
           >
-            Privacy Policy
+            {t("Privacy Policy")}
           </Typography>
         </Stack>
       </Stack>

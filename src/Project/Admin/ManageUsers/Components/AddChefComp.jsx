@@ -21,6 +21,7 @@ import {
   PersonAddRounded,
 } from "@mui/icons-material";
 import { v4 as uuidv4 } from "uuid";
+import { useTranslation } from "react-i18next";
 
 export default function AddChefModal({
   open,
@@ -41,7 +42,7 @@ export default function AddChefModal({
   });
   const [errors, setErrors] = useState({});
   const theme = useTheme();
-
+  const { t } = useTranslation();
   // Effects
   useEffect(() => {
     localStorage.setItem("chefs", JSON.stringify(chefs));
@@ -60,17 +61,17 @@ export default function AddChefModal({
 
   const validate = () => {
     let tempErrors = {};
-    if (!formData.name) tempErrors.name = "Name Required";
-    if (!formData.role) tempErrors.role = "Role Required";
+    if (!formData.name) tempErrors.name = t("Name Required");
+    if (!formData.role) tempErrors.role = t("Role Required");
     if (!formData.salary || formData.salary <= 0)
-      tempErrors.salary = "Salary Must Be More Than 0";
-    if (!formData.city) tempErrors.city = "Please Select The City";
+      tempErrors.salary = t("Salary Must Be More Than 0");
+    if (!formData.city) tempErrors.city = t("Please Select The City");
     if (!formData.mail) {
-      tempErrors.mail = "Email Required";
+      tempErrors.mail = t("Email Required");
     } else if (!/\S+@\S+\.\S+/.test(formData.mail)) {
-      tempErrors.mail = "Please Write A Correct Email";
+      tempErrors.mail = t("Please Write A Correct Email");
     }
-    if (!formData.img) tempErrors.img = "Please Upload Chef Photo";
+    if (!formData.img) tempErrors.img = t("Please Upload Chef Photo");
 
     setErrors(tempErrors);
     return Object.keys(tempErrors).length === 0;
@@ -83,7 +84,7 @@ export default function AddChefModal({
       setChefs([...chefs, formData]);
       setOpenSnackbar({
         openSnackbar: true,
-        message: "Chef Added Successfully!",
+        message: t("Chef Added Successfully!"),
         color: "success",
       });
 
@@ -145,7 +146,7 @@ export default function AddChefModal({
             <PersonAddRounded />
           </Box>
           <Typography variant="h6" fontWeight={800}>
-            Add New Chef
+            {t("Add New Chef")}
           </Typography>
         </Box>
         <IconButton onClick={handleClose}>
@@ -223,7 +224,7 @@ export default function AddChefModal({
             <Grid item xxs={12} sm={6} sx={{ width: "100%" }}>
               <TextField
                 fullWidth
-                label="Name"
+                label={t("Name")}
                 name="name"
                 value={formData.name}
                 onChange={handleChange}
@@ -234,7 +235,7 @@ export default function AddChefModal({
             <Grid item xxs={12} sm={6} sx={{ width: "100%" }}>
               <TextField
                 fullWidth
-                label="Role"
+                label={t("Role")}
                 name="role"
                 value={formData.role}
                 onChange={handleChange}
@@ -245,7 +246,7 @@ export default function AddChefModal({
             <Grid item xxs={12} sx={{ width: "100%" }}>
               <TextField
                 fullWidth
-                label="Email"
+                label={t("Email")}
                 name="mail"
                 value={formData.mail}
                 onChange={handleChange}
@@ -256,7 +257,7 @@ export default function AddChefModal({
             <Grid item xxs={12} sm={6} sx={{ width: "100%" }}>
               <TextField
                 fullWidth
-                label="Salary"
+                label={t("Salary")}
                 name="salary"
                 type="number"
                 value={formData.salary}
@@ -267,7 +268,7 @@ export default function AddChefModal({
             </Grid>
             <Grid item xxs={12} sm={6} sx={{ width: "100%" }}>
               <TextField
-                label="Choose The City"
+                label={t("Choose The City")}
                 error={!!errors.city}
                 helperText={errors.city}
                 fullWidth
@@ -286,7 +287,7 @@ export default function AddChefModal({
           onClick={handleClose}
           sx={{ color: "text.secondary", fontWeight: 700 }}
         >
-          Cancel
+          {t("Cancel")}
         </Button>
         <Button
           variant="contained"
@@ -304,7 +305,7 @@ export default function AddChefModal({
             },
           }}
         >
-          Add
+          {t("Add")}
         </Button>
       </DialogActions>
     </Dialog>

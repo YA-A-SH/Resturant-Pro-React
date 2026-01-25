@@ -12,6 +12,7 @@ import BaseCharts from "./BaseCharts";
 import BaseDetails from "./BaseDetails";
 import EditSalaryPopup from "../EditSalaryPopup";
 import DeleteChefPopup from "../DeleteChefPopup";
+import { useTranslation } from "react-i18next";
 
 export default function ProfileView({
   data,
@@ -23,6 +24,7 @@ export default function ProfileView({
   isInProfile,
   setIsProfile,
 }) {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const theme = useTheme();
   const isDark = theme.palette.mode === "dark";
@@ -34,13 +36,13 @@ export default function ProfileView({
     chef: {
       mainColor: "#10B981",
       gradient: "linear-gradient(135deg, #10B981 0%, #059669 100%)",
-      tag: "Master Chef",
-      chartLabel: "Recipes Created",
+      tag: t("Master Chef"),
+      chartLabel: t("Recipes Created"),
       icon: <RestaurantMenuRounded />,
       details: [
-        "Certified Sous Chef",
-        "Worked at Hilton (5 yrs)",
-        "Expert in Italian Cuisine",
+        t("Certified Sous Chef"),
+        t("Worked at Hilton (5 yrs)"),
+        t("Expert in Italian Cuisine"),
       ],
     },
     manager: {
@@ -50,9 +52,9 @@ export default function ProfileView({
       chartLabel: "System Logins",
       icon: <AdminPanelSettingsRounded />,
       details: [
-        "Access Level: Full",
-        "Last Audit: 2 days ago",
-        "Manager since 2021",
+        t("Access Level: Full"),
+        t("Last Audit: 2 days ago"),
+        t("Manager since 2021"),
       ],
     },
     user: {
@@ -61,14 +63,14 @@ export default function ProfileView({
         ? "linear-gradient(135deg, #10B981 0%, #059669 100%)"
         : "linear-gradient(135deg, #F59E0B 0%, #D97706 100%)",
       tag: isUserVerified ? "Verified VIP" : "Vip Member",
-      chartLabel: "Total Orders",
+      chartLabel: t("Total Orders"),
       icon: <ShoppingBagRounded />,
       details: [
         isUserVerified
-          ? "Trust Level: Identity Verified"
-          : "Trust Level: Pending",
-        "Top 5% of Customers",
-        "Member since 2024",
+          ? t("Trust Level: Identity Verified")
+          : t("Trust Level: Pending"),
+        t("Top 5% of Customers"),
+        t("Member since 2024"),
       ],
     },
   }[type] || {
@@ -102,6 +104,7 @@ export default function ProfileView({
       {/* --- Header Card --- */}
 
       <BaseHeader
+        t={t}
         configs={configs}
         data={data}
         isDark={isDark}
@@ -124,12 +127,14 @@ export default function ProfileView({
       >
         {" "}
         <BaseCharts
+          t={t}
           type={type}
           configs={configs}
           theme={theme}
           chartData={chartData}
         />
         <BaseDetails
+          t={t}
           configs={configs}
           type={type}
           isVerified={isUserVerified}

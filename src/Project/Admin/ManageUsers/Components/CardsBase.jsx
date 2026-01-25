@@ -25,10 +25,9 @@ import DeleteChefPopup from "./DeleteChefPopup";
 import SnackbarComp from "../../../Else/Components/SnackbarComp";
 import { OpenSnackbarContext } from "../../../User/Context/MainContext";
 
-export default function CardBase({ isDark, data, id }) {
+export default function CardBase({ t, isDark, data, id }) {
   // Hooks
   const { setOpenSnackbar } = useContext(OpenSnackbarContext);
-
   const [openEditSalaryPopup, setOpenEditSalaryPopup] = useState(false);
   const [openDeleteChefPopup, setOpenDeleteChefPopup] = useState(false);
   const theme = useTheme();
@@ -41,9 +40,9 @@ export default function CardBase({ isDark, data, id }) {
     chef: {
       mainColor: "#10B981",
       gradient: "linear-gradient(135deg, #10B981 0%, #059669 100%)",
-      label: data?.role || "Master Chef",
+      label: data?.role || t("Master Chef"),
       specialInfo: {
-        label: "Monthly Salary : ",
+        label: t("Monthly Salary : "),
         value: ` ${data?.salary}$`,
         icon: <PaymentsRounded />,
       },
@@ -51,9 +50,9 @@ export default function CardBase({ isDark, data, id }) {
     manager: {
       mainColor: theme.palette.admin.main,
       gradient: theme.palette.admin.gradient,
-      label: "System Administrator",
+      label: t("System Administrator"),
       specialInfo: {
-        label: "Experience : ",
+        label: t("Experience : "),
         value: ` ${data?.age || 5} Years`,
         icon: <BadgeRounded />,
       },
@@ -66,21 +65,21 @@ export default function CardBase({ isDark, data, id }) {
           ? "linear-gradient(135deg, #10B981 0%, #059669 100%)"
           : "linear-gradient(135deg, #F59E0B 0%, #D97706 100%)",
       label: isBlocked
-        ? "Blocked User"
+        ? t("Blocked User")
         : isUserVerified
-          ? "Verified Member"
-          : "Community Member",
+          ? t("Verified Member")
+          : t("Community Member"),
       specialInfo: {
         label: "Gender : ",
-        value: data?.gender || "Not Set",
+        value: data?.gender || t("Not Set"),
         icon: <WcRounded />,
       },
     },
   }[id] || {
     mainColor: "#6366F1",
-    label: "Member",
+    label: t("Member"),
     gradient: "linear-gradient(135deg, #6366F1 0%, #4F46E5 100%)",
-    specialInfo: { label: "Info", value: "Standard", icon: <StarRounded /> },
+    specialInfo: { label: t("Info"), value: "Standard", icon: <StarRounded /> },
   };
 
   return (
@@ -170,7 +169,7 @@ export default function CardBase({ isDark, data, id }) {
               />
               {isBlocked && (
                 <Chip
-                  label="BANNED"
+                  label={t("BANNED")}
                   size="small"
                   color="error"
                   sx={{ height: 22, fontSize: "0.6rem", fontWeight: 900 }}
@@ -185,13 +184,13 @@ export default function CardBase({ isDark, data, id }) {
           <InfoRow
             icon={<MailRounded />}
             text={data?.email || data?.mail}
-            label="Contact"
+            label={t("Contact")}
             isDark={isDark}
           />
           <InfoRow
             icon={<LocationOnRounded />}
-            text={data?.city || "Unknown"}
-            label="Resident"
+            text={data?.city || t("Unknown")}
+            label={t("Resident")}
             isDark={isDark}
           />
 
@@ -240,13 +239,14 @@ export default function CardBase({ isDark, data, id }) {
               fontWeight={900}
               sx={{ color: configs.mainColor }}
             >
-              {isBlocked ? "DISABLED" : configs.specialInfo.value}
+              {isBlocked ? t("DISABLED") : configs.specialInfo.value}
             </Typography>
           </Box>
         </Stack>
       </Box>
       {/* Footer & Popups */}
       <FooterCardBase
+        t={t}
         isDark={isDark}
         data={data}
         id={id}
@@ -257,6 +257,7 @@ export default function CardBase({ isDark, data, id }) {
         setSnackbarAlert={setOpenSnackbar}
       />
       <EditSalaryPopup
+        t={t}
         id={data?.id}
         open={openEditSalaryPopup}
         setOpenEditSalaryPopup={setOpenEditSalaryPopup}
@@ -264,6 +265,7 @@ export default function CardBase({ isDark, data, id }) {
         setSnackbarAlert={setOpenSnackbar}
       />
       <DeleteChefPopup
+        t={t}
         data={data}
         open={openDeleteChefPopup}
         setOpenDeleteChefPopup={setOpenDeleteChefPopup}

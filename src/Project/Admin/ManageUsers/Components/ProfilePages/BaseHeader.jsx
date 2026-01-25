@@ -12,6 +12,7 @@ import { useDispatch } from "react-redux";
 import { toggleBlocked, toggleVerified } from "../../../../User/RTK/MainSlice";
 import HeaderContent from "./HeaderContent";
 export default function BaseHeader({
+  t,
   configs,
   data,
   isDark,
@@ -44,7 +45,7 @@ export default function BaseHeader({
             }}
             onClick={() => setSalaryState(true)}
           >
-            Update Salary
+            {t("Update Salary")}
           </Button>
           <Button
             variant="outlined"
@@ -64,7 +65,7 @@ export default function BaseHeader({
             }}
             onClick={() => setDeleteState(true)}
           >
-            Fire Chef
+            {t("Fire Chef")}
           </Button>
         </>
       );
@@ -92,7 +93,7 @@ export default function BaseHeader({
             }}
             onClick={() => dispatch(toggleVerified(data.id))}
           >
-            {data?.isVerified ? "Verified Account" : "Verify User"}
+            {data?.isVerified ? t("Verified Account") : t("Verify User")}
           </Button>
           <Button
             variant="contained"
@@ -111,7 +112,7 @@ export default function BaseHeader({
             onClick={() => dispatch(toggleBlocked(data.id))}
           >
             {" "}
-            {data?.isBlocked ? "UnBlock User" : "Block User"}
+            {data?.isBlocked ? t("UnBlock User") : t("Block User")}
           </Button>
         </>
       );

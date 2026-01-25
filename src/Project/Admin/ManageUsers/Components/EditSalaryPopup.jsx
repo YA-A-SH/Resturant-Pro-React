@@ -19,6 +19,7 @@ import {
 } from "@mui/icons-material";
 import { motion } from "framer-motion";
 import { ChefsContext } from "../../../User/Context/MainContext";
+import { useTranslation } from "react-i18next";
 
 export default function EditSalaryPopup({
   open,
@@ -30,7 +31,7 @@ export default function EditSalaryPopup({
   const { chefs, setChefs } = useContext(ChefsContext);
   const [value, setValue] = useState("");
   const theChef = chefs.find((chef) => String(chef.id) === String(id));
-
+  const { t } = useTranslation();
   useEffect(() => {
     if (open && theChef) {
       // eslint-disable-next-line react-hooks/set-state-in-effect
@@ -50,7 +51,7 @@ export default function EditSalaryPopup({
     setOpenEditSalaryPopup(false);
     setSnackbarAlert({
       openSnackbar: true,
-      message: "Chef Salary Updated Successfully",
+      message: t("Chef Salary Updated Successfully"),
       color: "info",
     });
   };
@@ -90,7 +91,7 @@ export default function EditSalaryPopup({
         }}
       >
         <Typography variant="h6" fontWeight={900}>
-          Update Salary
+          {t("Update Salary")}
         </Typography>
         <IconButton
           onClick={onClose}
@@ -104,14 +105,13 @@ export default function EditSalaryPopup({
       <DialogContent>
         <Box sx={{ py: 1 }}>
           <Typography variant="body2" color="text.secondary" mb={3}>
-            Adjust the monthly compensation for this chef. Changes will be
-            reflected in payroll.
+            {t("desc 17")}
           </Typography>
 
           <TextField
             fullWidth
             variant="outlined"
-            label="Monthly Salary"
+            label={t("Monthly Salary")}
             type="number"
             value={value}
             onChange={(e) => setValue(e.target.value)}
@@ -159,7 +159,7 @@ export default function EditSalaryPopup({
             "&:hover": { bgcolor: mainColor, filter: "brightness(1.1)" },
           }}
         >
-          Confirm
+          {t("Confirm")}
         </Button>
       </DialogActions>
     </Dialog>

@@ -14,6 +14,7 @@ import {
 } from "@mui/material";
 
 export default function Content({
+  t,
   formData,
   handleInputChange,
   handleImageChange,
@@ -35,7 +36,7 @@ export default function Content({
         {/* Left side: Image Upload */}
         <Grid item xs={12} md={5} sx={{ minWidth: "250px" }}>
           <Typography variant="body2" fontWeight={800} mb={1.5}>
-            Dish Image
+            {t("Dish Image")}
           </Typography>
 
           <Box
@@ -67,7 +68,7 @@ export default function Content({
                   color="text.disabled"
                   fontWeight={700}
                 >
-                  Click to upload (PNG, JPG)
+                  {t("Click to upload (PNG, JPG)")}
                 </Typography>
               </Stack>
             )}
@@ -96,19 +97,19 @@ export default function Content({
           <Stack spacing={3}>
             <TextField
               fullWidth
-              label="Dish Name"
+              label={t("Dish Name")}
               name="name"
               value={formData.name}
               onChange={handleInputChange}
               error={!!errors.name}
               helperText={errors.name}
-              placeholder="e.g. Signature Beef Burger"
+              placeholder={t("e.g. Signature Beef Burger")}
               InputProps={{ sx: { borderRadius: "14px" } }}
             />
 
             <TextField
               fullWidth
-              label="Price"
+              label={t("Price")}
               name="price"
               type="number"
               value={formData.price}
@@ -128,7 +129,7 @@ export default function Content({
 
             <TextField
               fullWidth
-              label="Recipe / Instructions"
+              label={t("Recipe / Instructions")}
               name="instructions"
               multiline
               rows={4}
@@ -136,7 +137,7 @@ export default function Content({
               onChange={handleInputChange}
               error={!!errors.instructions}
               helperText={errors.instructions}
-              placeholder="Describe how to prepare this dish..."
+              placeholder={t("Describe how to prepare this dish...")}
               InputProps={{
                 startAdornment: (
                   <InputAdornment

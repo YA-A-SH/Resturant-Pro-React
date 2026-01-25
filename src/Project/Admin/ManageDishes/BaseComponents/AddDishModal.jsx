@@ -15,16 +15,16 @@ import {
   Divider,
   CircularProgress,
 } from "@mui/material";
-import {
-  CloseRounded,
-  CloudUploadRounded,
-  FastfoodRounded,
-  MonetizationOnRounded,
-  DescriptionRounded,
-} from "@mui/icons-material";
+import { CloseRounded, FastfoodRounded } from "@mui/icons-material";
 import Content from "./AddDishModalContent";
 
-export default function AddDishModal({ open, setOpen, type, setOpenSnackbar }) {
+export default function AddDishModal({
+  t,
+  open,
+  setOpen,
+  type,
+  setOpenSnackbar,
+}) {
   const theme = useTheme();
   const fileInputRef = useRef(null);
 
@@ -49,7 +49,7 @@ export default function AddDishModal({ open, setOpen, type, setOpenSnackbar }) {
     const file = e.target.files[0];
     if (file) {
       if (file.size > 2 * 1024 * 1024) {
-        alert("Image size is too large (Max 2MB)");
+        alert(t("Image size is too large (Max 2MB)"));
         return;
       }
       setFormData({ ...formData, image: URL.createObjectURL(file) });
@@ -58,12 +58,12 @@ export default function AddDishModal({ open, setOpen, type, setOpenSnackbar }) {
 
   const validate = () => {
     let tempErrors = {};
-    if (!formData.name.trim()) tempErrors.name = "Dish name is required";
+    if (!formData.name.trim()) tempErrors.name = t("Dish name is required");
     if (!formData.price || formData.price <= 0)
       tempErrors.price = "Enter a valid price";
     if (!formData.instructions.trim())
-      tempErrors.instructions = "Recipe instructions are required";
-    if (!formData.image) tempErrors.image = "Please upload an image";
+      tempErrors.instructions = t("Recipe instructions are required");
+    if (!formData.image) tempErrors.image = t("Please upload an image");
 
     setErrors(tempErrors);
     return Object.keys(tempErrors).length === 0;
@@ -78,7 +78,7 @@ export default function AddDishModal({ open, setOpen, type, setOpenSnackbar }) {
       setOpen(false);
       setOpenSnackbar({
         openSnackbar: true,
-        message: "Dish Added Successfully",
+        message: t("Dish Added Successfully"),
         color: "success",
       });
       setFormData({ name: "", price: "", instructions: "", image: null });
@@ -107,7 +107,6 @@ export default function AddDishModal({ open, setOpen, type, setOpenSnackbar }) {
             transform: "translate(-50%, -50%)",
             width: { xxs: "95%", md: "70%", lg: "600px" },
             maxHeight: "80%",
-            // scale: { xxs: 0.7, sm: 1 },
             bgcolor: "background.paper",
             borderRadius: "32px",
             boxShadow: "0 20px 60px rgba(0,0,0,0.2)",
@@ -142,7 +141,7 @@ export default function AddDishModal({ open, setOpen, type, setOpenSnackbar }) {
                   fontSize: { xxs: "1rem", xs: "1.3rem", sm: "2.6rem" },
                 }}
               >
-                Add New {type}
+                {t("Add New")} {type}
               </Typography>
             </Stack>
             <IconButton onClick={() => setOpen(false)} disabled={loading}>
@@ -154,6 +153,7 @@ export default function AddDishModal({ open, setOpen, type, setOpenSnackbar }) {
 
           {/* Form Content */}
           <Content
+            t={t}
             handleImageChange={handleImageChange}
             formData={formData}
             handleInputChange={handleInputChange}
@@ -173,7 +173,7 @@ export default function AddDishModal({ open, setOpen, type, setOpenSnackbar }) {
                 color: "text.secondary",
               }}
             >
-              Cancel
+              {t("Cancel")}
             </Button>
             <Button
               variant="contained"
@@ -192,7 +192,7 @@ export default function AddDishModal({ open, setOpen, type, setOpenSnackbar }) {
               {loading ? (
                 <CircularProgress size={24} color="inherit" />
               ) : (
-                "Save Dish"
+                t("Save Dish")
               )}
             </Button>
           </Stack>

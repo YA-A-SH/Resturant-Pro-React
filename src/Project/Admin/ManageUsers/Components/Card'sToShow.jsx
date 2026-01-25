@@ -12,6 +12,7 @@ import CardBaseSkeleton from "./CardBaseSkeleton";
 import { useEffect, useState } from "react";
 
 export default function CardsToShowAndTaps({
+  t,
   setSelectedTap,
   selectedTap,
   chefs,
@@ -24,9 +25,9 @@ export default function CardsToShowAndTaps({
   const theme = useTheme();
 
   const tabs = [
-    { id: "Manager's", label: "Managers", color: "#7a61f3" },
-    { id: "Chef's", label: "Master Chefs", color: "#0dae7a" },
-    { id: "User's", label: "Community", color: "#e78a09" },
+    { id: "Manager's", label: t("Managers"), color: "#7a61f3" },
+    { id: "Chef's", label: t("Master Chefs"), color: "#0dae7a" },
+    { id: "User's", label: t("Community"), color: "#e78a09" },
   ];
   const cardsPerPage = 8;
   const totalPages = Math.ceil(users?.length / cardsPerPage);
@@ -140,7 +141,7 @@ export default function CardsToShowAndTaps({
           managers.map((manager, index) => (
             <Fade in timeout={500 + index * 100} key={manager.id}>
               <Grid item xxs={12} sm={6} md={4} lg={3}>
-                <CardBase data={manager} isDark={isDark} id="manager" />
+                <CardBase t={t} data={manager} isDark={isDark} id="manager" />
               </Grid>
             </Fade>
           ))}
@@ -154,6 +155,7 @@ export default function CardsToShowAndTaps({
             >
               <Grid item xxs={12} sm={6} md={4} lg={3}>
                 <CardBase
+                  t={t}
                   data={chef}
                   isDark={isDark}
                   id="chef"
@@ -189,7 +191,7 @@ export default function CardsToShowAndTaps({
                   key={`${user.id || user.email}-${index}`}
                 >
                   <Grid item xxs={12} sm={6} md={4} lg={3}>
-                    <CardBase data={user} isDark={isDark} id="user" />
+                    <CardBase t={t} data={user} isDark={isDark} id="user" />
                   </Grid>
                 </Fade>
               ))}
@@ -239,9 +241,7 @@ export default function CardsToShowAndTaps({
                       : isDark
                         ? "rgba(255,255,255,0.1)"
                         : "rgba(0,0,0,0.06)",
-                    boxShadow: isActive
-                      ? `0 8px 20px -6px#F59E0B`
-                      : "none",
+                    boxShadow: isActive ? `0 8px 20px -6px#F59E0B` : "none",
                     backdropFilter:
                       !isActive && !isEllipsis ? "blur(8px)" : "none",
                     "&:hover": {

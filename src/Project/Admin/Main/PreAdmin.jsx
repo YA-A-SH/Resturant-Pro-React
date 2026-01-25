@@ -4,7 +4,7 @@ import Charts from "./Components/Charts";
 import Roadmap from "./Components/Roadmap";
 import StatusCards from "./Components/StatusCards";
 
-export default function PreAdmin({ isDark, theme, navigate }) {
+export default function PreAdmin({ isDark, theme, navigate, t }) {
   return (
     <Box
       sx={{
@@ -48,7 +48,7 @@ export default function PreAdmin({ isDark, theme, navigate }) {
               variant="overline"
               sx={{ fontWeight: 800, color: "admin.main", letterSpacing: 3 }}
             >
-              Executive Dashboard
+              {t("Executive Dashboard")}
             </Typography>
           </Stack>
 
@@ -66,7 +66,7 @@ export default function PreAdmin({ isDark, theme, navigate }) {
               zIndex: 1,
             }}
           >
-            Visionary Analytics
+            {t("Visionary Analytics")}
           </Typography>
 
           <Typography
@@ -80,8 +80,7 @@ export default function PreAdmin({ isDark, theme, navigate }) {
               opacity: 0.9,
             }}
           >
-            Monitor the pulse of your culinary empire with real-time insights
-            and precision analytics tailored for elite management.
+            {t("desc 11")}
           </Typography>
 
           <Stack direction="row" spacing={2} justifyContent="center" mt={5}>
@@ -111,14 +110,14 @@ export default function PreAdmin({ isDark, theme, navigate }) {
                 },
               }}
             >
-              User's Reports
+              {t("User's Reports")}
             </Button>
           </Stack>
         </Box>
 
         {/* Status Cards */}
         <Box sx={{ mb: 6 }}>
-          <StatusCards isDark={isDark} />
+          <StatusCards t={t} isDark={isDark} />
         </Box>
 
         {/* Charts Section */}
@@ -134,13 +133,13 @@ export default function PreAdmin({ isDark, theme, navigate }) {
               : "0 20px 60px rgba(0,0,0,0.05)",
           }}
         >
-          <Charts isDark={isDark} />
+          <Charts t={t} isDark={isDark} />
         </Box>
 
         {/* Roadmap Section */}
         <Grid container justifyContent="center" sx={{ mt: 10 }}>
           <Grid item xs={12} lg={10}>
-            <Roadmap isDark={isDark} />
+            <Roadmap t={t} isDark={isDark} />
           </Grid>
         </Grid>
       </Container>

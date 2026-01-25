@@ -29,9 +29,7 @@ export default function MainNav({
   useEffect(() => {
     localStorage.setItem("lang", JSON.stringify(language));
   }, [language]);
-  useEffect(() => {
-    language === "AR" ? i18n.changeLanguage("ar") : i18n.changeLanguage("en");
-  }, []);
+
   return (
     <Stack spacing={0.8} sx={{ px: 2, pb: 2.5 }}>
       {menuItems.map((item) => {
@@ -97,6 +95,7 @@ export default function MainNav({
               sx={{
                 borderRadius: "10px",
                 fontWeight: "800",
+                color: isDark ? "white" : lang === language ? "white" : "black",
                 bgcolor: lang === language ? activeColor : "transparent",
                 "&:hover": {
                   bgcolor: lang === language ? activeColor : "action.hover",

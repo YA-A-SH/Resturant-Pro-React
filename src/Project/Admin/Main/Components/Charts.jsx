@@ -15,7 +15,7 @@ import {
 } from "recharts";
 import { Group, Restaurant, TrendingUp } from "@mui/icons-material";
 
-export default function Charts() {
+export default function Charts({ t }) {
   const theme = useTheme();
   const isDark = theme.palette.mode === "dark";
 
@@ -27,9 +27,9 @@ export default function Charts() {
   };
 
   const percentageOfDishSales = [
-    { name: "Meals", orders: 63 },
-    { name: "Drinks", orders: 24 },
-    { name: "Sweets", orders: 13 },
+    { name: t("Meals"), orders: 63 },
+    { name: t("Drinks"), orders: 24 },
+    { name: t("Sweets"), orders: 13 },
   ];
 
   const usersData = [
@@ -71,7 +71,7 @@ export default function Charts() {
     >
       {/* 1. User Growth (Area Chart) */}
       <Grid item xs={12} lg={8}>
-        <ChartCard title="User Ecosystem Evolution" icon={<Group />}>
+        <ChartCard title={t("User Ecosystem Evolution")} icon={<Group />}>
           <Box sx={{ width: "100%", height: 300, mt: 3, pr: 2 }}>
             <ResponsiveContainer width="100%" height="100%">
               <AreaChart data={usersData}>
@@ -112,7 +112,7 @@ export default function Charts() {
 
       {/* 2. Revenue Stream (Pie Chart) */}
       <Grid item xs={12} lg={4}>
-        <ChartCard title="Revenue Distribution" icon={<TrendingUp />}>
+        <ChartCard title={t("Revenue Distribution")} icon={<TrendingUp />}>
           <Box sx={{ width: "100%", height: 300, mt: 3, pr: 2 }}>
             <ResponsiveContainer width="100%" height="100%">
               <PieChart>
@@ -147,7 +147,7 @@ export default function Charts() {
 
       {/* 3. Top Dishes (Bar Chart) */}
       <Grid item xs={12}>
-        <ChartCard title="Elite Culinary Performance" icon={<Restaurant />}>
+        <ChartCard title={t("Elite Culinary Performance")} icon={<Restaurant />}>
           <Box sx={{ width: "100%", height: 300, mt: 3, pr: 2 }}>
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={topTenDishes}>

@@ -13,7 +13,7 @@ import {
 } from "recharts";
 import { Restaurant, Sell } from "@mui/icons-material";
 
-export default function Charts({ time, firstChartData, secondChartData }) {
+export default function Charts({ t, time, firstChartData, secondChartData }) {
   const theme = useTheme();
   const isDark = theme.palette.mode === "dark";
 
@@ -45,10 +45,10 @@ export default function Charts({ time, firstChartData, secondChartData }) {
           <ChartCard
             title={
               time === "today"
-                ? "Today Sells"
+                ? t("Today Sells")
                 : time === "week"
-                  ? "This Week Sells"
-                  : "This Month Sells"
+                  ? t("This Week Sells")
+                  : t("This Month Sells")
             }
             icon={<Sell />}
           >
@@ -82,10 +82,10 @@ export default function Charts({ time, firstChartData, secondChartData }) {
           <ChartCard
             title={
               time === "today"
-                ? "Today Top Dishes"
+                ? t("Today Top Dishes")
                 : time === "week"
-                  ? "This Week Top Dishes"
-                  : "This Month Top Dishes"
+                  ? t("This Week Top Dishes")
+                  : t("This Month Top Dishes")
             }
             icon={<Restaurant />}
           >
