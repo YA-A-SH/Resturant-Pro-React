@@ -1,6 +1,6 @@
 import { Box, Card, Grid, Stack, Typography } from "@mui/material";
 
-export default function InfoCards({ info }) {
+export default function InfoCards({ info ,t }) {
   return (
     <>
       <Grid
@@ -31,7 +31,7 @@ export default function InfoCards({ info }) {
                     {item.label}
                   </Typography>
                   <Typography fontWeight="bold">
-                    {item.value || "Not provided"}
+                    {item.value ||t("Not provided")}
                   </Typography>
                 </Box>
               </Stack>

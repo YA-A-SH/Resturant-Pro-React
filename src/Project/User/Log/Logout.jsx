@@ -15,16 +15,16 @@ import { logout } from "../RTK/MainSlice";
 import { motion, AnimatePresence } from "framer-motion";
 import { useContext, useEffect } from "react";
 import { IsAdminContext } from "../Context/MainContext";
+import { useTranslation } from "react-i18next";
 
 export default function Logout() {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const theme = useTheme();
   const { isAdmin, setIsAdmin } = useContext(IsAdminContext); // سحبنا قيمة isAdmin
   const isDark = theme.palette.mode === "dark";
 
-  // تحديد اللون الأساسي بناءً على الرتبة
-  // إذا كان أدمن نستخدم الموف (admin.main)، إذا عادي نستخدم (primary.main)
   const mainColor = isAdmin
     ? theme.palette.admin.main
     : theme.palette.primary.main;
@@ -38,7 +38,7 @@ export default function Logout() {
   };
 
   useEffect(() => {
-    document.title = "Zeus Restaurant | Logout";
+    document.title = t("Zeus Restaurant | Logout");
   }, []);
 
   return (
@@ -77,7 +77,6 @@ export default function Logout() {
             overflow: "hidden",
           }}
         >
-          {/* تأثير توهج خلفي علوي باللون المختار */}
           <Box
             sx={{
               position: "absolute",
@@ -106,7 +105,7 @@ export default function Logout() {
                   alignItems: "center",
                   justifyContent: "center",
                   background: alpha(mainColor, 0.1),
-                  color: mainColor, // اللون هنا صار ديناميكي
+                  color: mainColor,
                 }}
               >
                 <LogoutIcon sx={{ fontSize: 40 }} />
@@ -114,12 +113,12 @@ export default function Logout() {
 
               <Box textAlign="center">
                 <Typography variant="h5" fontWeight={900} gutterBottom>
-                  Logout?
+                  {t("Logout?")}
                 </Typography>
                 <Typography variant="body2" color="text.secondary">
                   {isAdmin
-                    ? "Admin session will be terminated. Continue?"
-                    : "Are you sure you want to logout from your account?"}
+                    ? t("Admin session will be terminated. Continue?")
+                    : t("Are you sure you want to logout from your account?")}
                 </Typography>
               </Box>
 
@@ -132,7 +131,7 @@ export default function Logout() {
                   fullWidth
                   onClick={handleLogout}
                   sx={{
-                    bgcolor: mainColor, // الزر بياخد الموف للأدمن والأزرق للعادي
+                    bgcolor: mainColor,
                     py: 1.5,
                     borderRadius: "14px",
                     fontWeight: 800,
@@ -143,7 +142,7 @@ export default function Logout() {
                     },
                   }}
                 >
-                  Yes, Log me out
+                  {t("Yes, Log me out")}
                 </Button>
 
                 <Button
@@ -158,7 +157,7 @@ export default function Logout() {
                     "&:hover": { bgcolor: alpha(mainColor, 0.05) },
                   }}
                 >
-                  Cancel
+                  {t("Cancel")}
                 </Button>
               </Stack>
             </Stack>

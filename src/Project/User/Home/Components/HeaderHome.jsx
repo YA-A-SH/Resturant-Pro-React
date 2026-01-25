@@ -8,9 +8,11 @@ import {
   Typography,
   useTheme,
 } from "@mui/material";
+import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 
 export default function HeaderHome() {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   const theme = useTheme();
   const isDark = theme.palette.mode === "dark";
@@ -54,12 +56,13 @@ export default function HeaderHome() {
               },
             }}
           >
-            Pure Taste, Pure Quality
+            {t("head Title")}
           </Typography>
 
           <Typography
             variant="h1"
             sx={{
+              p: 2,
               fontSize: {
                 xxs: "2.2rem",
                 sm: "2.7rem",
@@ -76,7 +79,7 @@ export default function HeaderHome() {
               WebkitTextFillColor: "transparent",
             }}
           >
-            Experience Real <br />
+            {t("Experience Real")} <br />
             <Box
               component="span"
               sx={{
@@ -84,9 +87,9 @@ export default function HeaderHome() {
                 WebkitTextFillColor: "initial",
               }}
             >
-              Taste
+              {t("Taste")}
             </Box>{" "}
-            in Gaza
+            {t("in Gaza")}
           </Typography>
 
           {/* --- Description --- */}
@@ -100,8 +103,7 @@ export default function HeaderHome() {
               fontWeight: 400,
             }}
           >
-            Discover a world of premium flavors crafted with passion. From our
-            kitchen to your doorstep, with love and Palestinian pride.
+            {t("desc 1")}
           </Typography>
 
           {/* --- Buttons --- */}
@@ -131,7 +133,7 @@ export default function HeaderHome() {
               }}
               onClick={() => navigate("/meals")}
             >
-              Order Now
+              {t("Order Now")}
             </Button>
 
             <Button
@@ -149,12 +151,12 @@ export default function HeaderHome() {
                 whiteSpace: "nowrap",
                 "&:hover": {
                   borderColor: "primary.main",
-                  bgcolor: "rgba(255, 87, 34, 0.04)", // خلفية خفيفة جداً عند الحوم
+                  bgcolor: "rgba(255, 87, 34, 0.04)",
                 },
               }}
               onClick={() => navigate("/aboutUs")}
             >
-              About Us
+              {t("About Us")}
             </Button>
           </Stack>
 
@@ -216,11 +218,11 @@ export default function HeaderHome() {
                 textAlign: { xxs: "center", sm: "left" }, // النص نفسه يتوسط في الموبايل
               }}
             >
-              Join{" "}
+              {t("Join")}{" "}
               <Box component="span" sx={{ color: "primary.main" }}>
-                2,000+
+                {t("2,000+")}
               </Box>{" "}
-              happy foodies
+              {t("happy foodies")}
             </Typography>
           </Stack>
         </Box>

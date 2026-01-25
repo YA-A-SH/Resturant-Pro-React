@@ -36,7 +36,7 @@ import SnackbarComp from "../Else/Components/SnackbarComp";
 
 // ************** Router ****************
 
-import { Route, Routes } from "react-router-dom";
+import { Navigate, Route, Routes } from "react-router-dom";
 import ProfileSkeleton from "../User/Skeleton/ProfileSkeleton";
 import PageWrapper from "../User/Routes/Wrapper";
 
@@ -74,11 +74,15 @@ export default function PreApp({
           <Route
             path="/"
             element={
-              <PageWrapper>
-                <ProtectedRoute>
-                  <ContHome />
-                </ProtectedRoute>
-              </PageWrapper>
+              isAdmin ? (
+                <Navigate to="/admin" replace />
+              ) : (
+                <PageWrapper>
+                  <ProtectedRoute>
+                    <ContHome />
+                  </ProtectedRoute>
+                </PageWrapper>
+              )
             }
           />
           <Route
@@ -221,9 +225,13 @@ export default function PreApp({
           <Route
             path="/login"
             element={
-              <PageWrapper>
-                <ContLogin />
-              </PageWrapper>
+              isAdmin ? (
+                <Navigate to="/admin" replace />
+              ) : (
+                <PageWrapper>
+                  <ContLogin />
+                </PageWrapper>
+              )
             }
           />
           <Route

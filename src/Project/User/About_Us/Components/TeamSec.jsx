@@ -1,14 +1,14 @@
 import { GroupsRounded } from "@mui/icons-material";
 import { Avatar, Box, Container, Grid, Stack, Typography } from "@mui/material";
 
-export default function TeamSec({ teamMembers }) {
+export default function TeamSec({ teamMembers, t }) {
   return (
     <>
       <Container maxWidth="lg">
         <Stack direction="row" alignItems="center" spacing={2} mb={6}>
           <GroupsRounded sx={{ fontSize: 40, color: "primary.main" }} />
           <Typography variant="h3" fontWeight="900" sx={{ letterSpacing: -1 }}>
-            The Architects of Taste
+            {t("The Architects of Taste")}
           </Typography>
         </Stack>
 

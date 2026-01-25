@@ -12,6 +12,7 @@ export default function AboutUs({
   teamMembers,
   stats,
   isDark,
+  t,
 }) {
   return (
     <Box sx={{ minHeight: "100vh", bgcolor: "background.default", pb: 10 }}>
@@ -22,10 +23,8 @@ export default function AboutUs({
       <Container maxWidth="lg" sx={{ mb: 12 }}>
         <Grid container spacing={4}>
           <Mission
-            msg="Our Mission"
-            msgBody="We believe food is an art. Our mission is to combine the
-                freshest ingredients with creative recipes to bring joy to every
-                table."
+            msg={t("Our Mission")}
+            msgBody={t("desc 4")}
             cardBg={cardBg}
             theme={theme}
             textSecondary={textSecondary}
@@ -33,9 +32,8 @@ export default function AboutUs({
 
           <Grid item xs={12} md={6} sx={{ mt: { md: 6 } }}>
             <Mission
-              msg="Our Vision"
-              msgBody="To redefine the future of dining by making gourmet quality
-                accessible to everyone, anywhere, anytime."
+              msg={t("Our Vision")}
+              msgBody={t("desc 5")}
               cardBg={cardBg}
               theme={theme}
               textSecondary={textSecondary}
@@ -124,7 +122,7 @@ export default function AboutUs({
         </Container>
       </Box>
       {/* ===== TEAM SECTION ===== */}
-      <TeamSec teamMembers={teamMembers} />
+      <TeamSec teamMembers={teamMembers} t={t} />
     </Box>
   );
 }

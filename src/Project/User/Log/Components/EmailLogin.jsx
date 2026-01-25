@@ -5,11 +5,12 @@ export default function EmailLogin({
   setUser,
   handleEmailLogin,
   mailLoading,
+  t,
 }) {
   return (
     <>
       <TextField
-        label="Email Address"
+        label={t("Email Address")}
         fullWidth
         sx={{ mb: 3 }}
         value={user?.email}
@@ -17,7 +18,7 @@ export default function EmailLogin({
       />
 
       <TextField
-        label="Password"
+        label={t("Password")}
         type="password"
         fullWidth
         sx={{ mb: 3 }}
@@ -43,7 +44,7 @@ export default function EmailLogin({
         }}
         startIcon={mailLoading && <CircularProgress size={20} />}
       >
-        Login
+        {t("Login")}
       </Button>
     </>
   );

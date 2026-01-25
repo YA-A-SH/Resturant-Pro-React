@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { fetchMeals } from "../../RTK/MainSlice";
 import { useDispatch, useSelector } from "react-redux";
 import Base from "../AllComp";
+import { useTranslation } from "react-i18next";
 
 function getMealType(category) {
   if (category === "Breakfast" || category === "Side" || category === "Starter")
@@ -16,7 +17,7 @@ export default function Meals() {
   const { meals, loading, error } = useSelector((state) => state.meals);
   const [preparedMeals, setPreparedMeals] = useState([]);
   const [sortAscending, setSortAscending] = useState(true);
-
+  const { t } = useTranslation();
   const dispatch = useDispatch();
   useEffect(() => {
     dispatch(fetchMeals());
@@ -34,9 +35,6 @@ export default function Meals() {
         rate: Number((Math.random() * 2 + 3).toFixed(1)),
         type: getMealType(meal.strCategory),
         favorite: favFromLS.includes(meal.idMeal),
-        moreInfo: meal.strInstructions
-          ? meal.strInstructions.substring(0, 100) + "..."
-          : `A delicious ${meal.strArea} ${meal.strCategory} dish.`,
       }));
       // eslint-disable-next-line react-hooks/set-state-in-effect
       setPreparedMeals(fixedMeals);
@@ -44,7 +42,7 @@ export default function Meals() {
   }, [meals]);
 
   useEffect(() => {
-    document.title = "Zeus Restaurant | Meals";
+    document.title = t("Zeus Restaurant | Meals");
   }, []);
 
   const filteredMeals = preparedMeals.filter(

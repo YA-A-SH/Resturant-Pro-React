@@ -10,6 +10,7 @@ export default function PreNav({
   isDark,
   location,
   isAdmin,
+  t,
 }) {
   return (
     <AnimatePresence>
@@ -51,9 +52,15 @@ export default function PreNav({
                 color: isAdmin ? "admin.main" : "primary.main",
                 textTransform: "uppercase",
                 letterSpacing: "1px",
+                fontSize: {
+                  xxs: "1.4rem",
+                  xs: "1.6rem",
+                  sm: "1.8rem",
+                  md: "2rem",
+                },
               }}
             >
-              {isAdmin ? "Admin Suite" : "Guest Menu"}
+              {isAdmin ? t("Admin Suite") : t("Guest Menu")}
             </Typography>
             <IconButton
               size="small"
@@ -65,6 +72,7 @@ export default function PreNav({
           </Stack>
 
           <MainNav
+            t={t}
             menuItems={menuItems}
             closeNav={closeNav}
             isDark={isDark}

@@ -4,6 +4,7 @@ import App from "./App.jsx";
 import { BrowserRouter } from "react-router-dom";
 import { store } from "./Project/User/RTK/store.jsx";
 import { Provider } from "react-redux";
+import "./Project/Else/Components/i18n.js";
 import ScrollToTop from "./Project/User/Routes/ScrollToTop.jsx";
 createRoot(document.getElementById("root")).render(
   <StrictMode>
@@ -13,5 +14,5 @@ createRoot(document.getElementById("root")).render(
         <App />
       </BrowserRouter>
     </Provider>
-  </StrictMode>
+  </StrictMode>,
 );

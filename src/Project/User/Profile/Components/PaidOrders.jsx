@@ -21,6 +21,7 @@ import {
 import { AnimatePresence, motion } from "framer-motion";
 
 export default function PaidOrder({
+  t,
   paid,
   setDeletePopupInfo,
   handleClose,
@@ -50,10 +51,10 @@ export default function PaidOrder({
             WebkitTextFillColor: "transparent",
           }}
         >
-          Active Orders
+          {t("Active Orders")}
         </Typography>
         <Typography variant="body1" color="text.secondary">
-          Manage your orders and individual items
+          {t("Manage your orders and individual items")}
         </Typography>
       </Stack>
 
@@ -72,7 +73,7 @@ export default function PaidOrder({
             sx={{ fontSize: 80, color: "text.disabled", mb: 2 }}
           />
           <Typography variant="h5" fontWeight="bold">
-            No orders found
+            {t("No orders found")}
           </Typography>
         </Box>
       ) : (
@@ -128,7 +129,7 @@ export default function PaidOrder({
                           color="text.secondary"
                           fontWeight="900"
                         >
-                          ORDER GROUP
+                          {t("ORDER GROUP")}
                         </Typography>
                         <Typography
                           variant="h6"
@@ -147,7 +148,7 @@ export default function PaidOrder({
                         size="small"
                         sx={{ fontWeight: 800, borderRadius: "8px" }}
                       />
-                      <Tooltip title="Cancel Entire Order">
+                      <Tooltip title={t("Cancel Entire Order")}>
                         <IconButton
                           color="error"
                           size="small"
@@ -157,8 +158,8 @@ export default function PaidOrder({
                               open: true,
                               handleClose: handleClose,
                               handleDelete: handleDelete,
-                              msg1: "Confirm Action",
-                              msg2: "Are you sure you want to delete the order ? This action cannot be undone.",
+                              msg1: t("Confirm Action"),
+                              msg2: t("desc 9"),
                             });
                           }}
                           sx={{
@@ -220,13 +221,13 @@ export default function PaidOrder({
                                 variant="body2"
                                 color="text.secondary"
                               >
-                                Qty: {item.quantity} • ${item.price}
+                                {t("Qty:")} {item.quantity} • ${item.price}
                               </Typography>
                             </Box>
                           </Stack>
 
                           <Stack direction="row" spacing={1}>
-                            <Tooltip title="Edit Item">
+                            <Tooltip title={t("Edit Item")}>
                               <IconButton
                                 size="small"
                                 sx={{
@@ -238,7 +239,7 @@ export default function PaidOrder({
                               </IconButton>
                             </Tooltip>
 
-                            <Tooltip title="Remove Item">
+                            <Tooltip title={t("Remove Item")}>
                               <IconButton
                                 size="small"
                                 color="error"
@@ -249,8 +250,10 @@ export default function PaidOrder({
                                     handleClose: handleClose,
                                     handleDelete: () =>
                                       handleDeleteItem(order.id, item.id),
-                                    msg1: "Confirm Action",
-                                    msg2: "Are you sure you want to delete this dish  ? This action cannot be undone.",
+                                    msg1: t("Confirm Action"),
+                                    msg2: t(
+                                      "Are you sure you want to delete this dish  ? This action cannot be undone.",
+                                    ),
                                   });
                                 }}
                                 sx={{ bgcolor: "error.soft" }}
@@ -279,7 +282,7 @@ export default function PaidOrder({
                       fontWeight="700"
                       color="text.secondary"
                     >
-                      Total Payment
+                      {t("Total Payment")}
                     </Typography>
                     <Typography
                       variant="h4"

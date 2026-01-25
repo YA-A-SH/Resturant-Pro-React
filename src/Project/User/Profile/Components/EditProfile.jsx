@@ -8,6 +8,7 @@ import {
 } from "@mui/material";
 
 export default function EditProfile({
+  t,
   editOpen,
   handleEditClose,
   userMoreInfo,
@@ -18,29 +19,31 @@ export default function EditProfile({
 }) {
   return (
     <Dialog open={editOpen} onClose={handleEditClose}>
-      <DialogTitle textAlign="center">Edit Profile</DialogTitle>
+      <DialogTitle textAlign="center">{t("Edit Profile")}</DialogTitle>
       <DialogContent
         sx={{
           display: "flex",
           flexDirection: "column",
           gap: 2,
           minWidth: 400,
+          p: 3,
         }}
       >
         <TextField
-          label="Your Name"
+          label={t("Your Name")}
           value={
             accType === "Google Account" ? u.displayName : userMoreInfo.name
           }
           onChange={(e) =>
             setUserMoreInfo({ ...userMoreInfo, name: e.target.value })
           }
+          sx={{ mt: 2 }}
           fullWidth
           disabled={accType === "Google Account" ? true : false}
         />
         <TextField
           type="number"
-          label="Phone"
+          label={t("Phone")}
           value={userMoreInfo.phone}
           onChange={(e) =>
             setUserMoreInfo({ ...userMoreInfo, phone: e.target.value })
@@ -48,7 +51,7 @@ export default function EditProfile({
           fullWidth
         />
         <TextField
-          label="Address"
+          label={t("Address")}
           value={userMoreInfo.address}
           onChange={(e) =>
             setUserMoreInfo({ ...userMoreInfo, address: e.target.value })
@@ -56,7 +59,7 @@ export default function EditProfile({
           fullWidth
         />
         <TextField
-          label="Email"
+          label={t("Email")}
           type="email"
           value={userMoreInfo.mail}
           onChange={(e) =>
@@ -70,7 +73,7 @@ export default function EditProfile({
       <DialogActions>
         <Button onClick={handleEditClose}>Cancel</Button>
         <Button variant="contained" onClick={handleSave}>
-          Save
+          {t("Save")}
         </Button>
       </DialogActions>
     </Dialog>

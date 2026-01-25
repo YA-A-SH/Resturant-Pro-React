@@ -1,5 +1,5 @@
 // Hooks
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useState } from "react";
 
 //Lib
 
@@ -10,16 +10,17 @@ import { useDispatch, useSelector } from "react-redux";
 // Comp
 import { fetchMeals } from "../RTK/MainSlice";
 import HomePre from "./PresenterHome";
+import { useTranslation } from "react-i18next";
+import { OpenSnackbarContext } from "../Context/MainContext";
 
 export default function ContHome() {
   // Hooks Use
-  const [snackbar, setSnackbar] = useState({
-    open: false,
-    msg: "",
-    color: "",
-  });
+
+  const { openSnackbar, setOpenSnackbar } = useContext(OpenSnackbarContext);
+
   const { meals, loading, error } = useSelector((state) => state.meals);
   const [popularMeals, setPopularMeals] = useState([]);
+  const { t } = useTranslation();
   const location = useLocation();
   const dispatch = useDispatch();
   const theme = useTheme();
@@ -29,15 +30,16 @@ export default function ContHome() {
   useEffect(() => {
     if (location.state?.loginSuccess) {
       // eslint-disable-next-line react-hooks/set-state-in-effect
-      setSnackbar({
-        open: true,
-        msg: "Login successful 👋",
+      setOpenSnackbar({
+        openSnackbar: true,
+        message: t("login"),
         color: "success",
       });
+      
 
       window.history.replaceState({}, document.title);
     }
-  }, [location.state, setSnackbar]);
+  }, [location.state, setOpenSnackbar, t]);
 
   useEffect(() => {
     dispatch(fetchMeals());
@@ -65,7 +67,7 @@ export default function ContHome() {
   }, [meals]);
 
   useEffect(() => {
-    document.title = "Zeus Restaurant | Home";
+    document.title = t("title");
   }, []);
 
   // Functions
@@ -74,7 +76,7 @@ export default function ContHome() {
     if (reason === "clickaway") {
       return;
     }
-    setSnackbar({ open: false, msg: "", color: "" });
+    setOpenSnackbar({ openSnackbar: false, message: "", color: "" });
   };
 
   function toggleFavorite(id) {
@@ -90,8 +92,8 @@ export default function ContHome() {
 
     setPopularMeals((prevMeals) =>
       prevMeals.map((meal) =>
-        meal.id === id ? { ...meal, favorite: !meal.favorite } : meal
-      )
+        meal.id === id ? { ...meal, favorite: !meal.favorite } : meal,
+      ),
     );
   }
 
@@ -106,9 +108,10 @@ export default function ContHome() {
       popularMeals={popularMeals}
       toggleFavorite={toggleFavorite}
       isDark={isDark}
-      snackbar={snackbar}
-      setSnackbar={setSnackbar}
+      openSnackbar={openSnackbar}
+      setOpenSnackbar={setOpenSnackbar}
       handleCloseSnackbar={handleCloseSnackbar}
+      t={t}
     />
   );
 }

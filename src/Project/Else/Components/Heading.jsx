@@ -5,10 +5,12 @@ import { Close, List } from "@mui/icons-material";
 import { Box, IconButton, Typography, useTheme } from "@mui/material";
 import { useSelector } from "react-redux";
 import { IsAdminContext } from "../../User/Context/MainContext";
+import { useTranslation } from "react-i18next";
 
 export default function Head({ setMode, mode }) {
   const [showNav, setShowNav] = useState(false);
   const navigate = useNavigate();
+  const { t } = useTranslation();
   const theme = useTheme();
   const isDark = mode === "dark";
 
@@ -73,7 +75,7 @@ export default function Head({ setMode, mode }) {
             },
           }}
         >
-          {isAdmin ? "ZEUS Admin" : "ZEUS Restaurant"}
+          {isAdmin ? t("ZEUS Admin") : t("ZEUS Restaurant")}
         </Typography>
 
         <IconButton

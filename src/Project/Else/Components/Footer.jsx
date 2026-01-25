@@ -2,8 +2,10 @@ import { Facebook, GitHub, LinkedIn } from "@mui/icons-material";
 import { Box, IconButton, Stack, Typography } from "@mui/material";
 import { useContext } from "react";
 import { IsAdminContext } from "../../User/Context/MainContext";
+import { useTranslation } from "react-i18next";
 export default function Footer() {
   const { isAdmin } = useContext(IsAdminContext);
+  const { t } = useTranslation();
 
   return (
     <Box
@@ -18,7 +20,7 @@ export default function Footer() {
       {" "}
       <Typography variant="h6" color="text.secondary">
         {" "}
-        © 2025 ZEUS Restaurant — Crafted by YA.A.SH{" "}
+        {t("footer Text")}{" "}
       </Typography>{" "}
       <Stack direction="row" justifyContent="center" spacing={2} mt={1}>
         {" "}

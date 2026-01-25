@@ -10,9 +10,10 @@ export default function HomePre({
   popularMeals,
   toggleFavorite,
   isDark,
-  snackbar,
-  setSnackbar,
+  openSnackbar,
+  setOpenSnackbar,
   handleCloseSnackbar,
+  t,
 }) {
   return (
     <Box
@@ -70,10 +71,10 @@ export default function HomePre({
               gutterBottom
               color="primary.main"
             >
-              Popular Dishes
+              {t("Popular Dishes")}
             </Typography>
             <Typography variant="body1" color="text.secondary">
-              Most ordered items this week
+              {t("Most ordered items this week")}
             </Typography>
           </Box>
         </Stack>
@@ -113,7 +114,7 @@ export default function HomePre({
                 <FoodCard
                   {...meal}
                   toggleFavorite={toggleFavorite}
-                  setOpenSnackbar={setSnackbar}
+                  setOpenSnackbar={setOpenSnackbar}
                 />
               </Box>
             ))
@@ -142,16 +143,15 @@ export default function HomePre({
               color: "text.secondary",
             }}
           >
-            "Based in Gaza, we deliver premium-quality food with care, passion,
-            and modern presentation."
+            {t("desc 2")}
           </Typography>
         </Box>
       </Container>
 
       <SnackbarComp
-        openSnackbar={snackbar.open}
-        msg={snackbar.msg}
-        color={snackbar.color}
+        openSnackbar={openSnackbar.openSnackbar}
+        msg={openSnackbar.message}
+        color={openSnackbar.color}
         handleClose={handleCloseSnackbar}
       />
     </Box>

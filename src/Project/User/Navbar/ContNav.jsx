@@ -15,6 +15,7 @@ import { useLocation } from "react-router-dom";
 import { useTheme } from "@mui/material";
 import { useContext } from "react";
 import { IsAdminContext } from "../Context/MainContext";
+import { useTranslation } from "react-i18next";
 
 export default function ContNav({ showNav, setShowNav, setMode }) {
   const theme = useTheme();
@@ -22,59 +23,59 @@ export default function ContNav({ showNav, setShowNav, setMode }) {
   const isDark = theme.palette.mode === "dark";
   const closeNav = () => setShowNav(false);
   const { isAdmin } = useContext(IsAdminContext);
-
+  const { t } = useTranslation();
   const menuItems = isAdmin
     ? [
         {
-          label: "Admin Dashboard",
+          label: t("Admin Dashboard"),
           path: "/admin",
           icon: <AdminPanelSettings fontSize="small" />,
         },
         {
-          label: "Manage Users",
+          label: t("Manage Users"),
           path: "/admin/manage-users",
           icon: <SupervisedUserCircle fontSize="small" />,
         },
         {
-          label: "Manage Meals",
+          label: t("ManageMeals"),
           path: "/admin/manageMeals",
           icon: <RestaurantMenu fontSize="small" />,
         },
         {
-          label: "Manage Drinks",
+          label: t("Manage Drinks"),
           path: "/admin/manageDrinks",
           icon: <LocalBar fontSize="small" />,
         },
         {
-          label: "Manage Sweets",
+          label: t("Manage Sweets"),
           path: "/admin/manageSweets",
           icon: <CakeRounded fontSize="small" />,
         },
       ]
     : [
-        { label: "Home", path: "/", icon: <HomeRounded fontSize="small" /> },
+        { label: t("Home"), path: "/", icon: <HomeRounded fontSize="small" /> },
         {
-          label: "Profile",
+          label: t("Profile"),
           path: "/profile",
           icon: <PersonRounded fontSize="small" />,
         },
         {
-          label: "Meals",
+          label: t("Meals"),
           path: "/meals",
           icon: <RestaurantRounded fontSize="small" />,
         },
         {
-          label: "Drinks",
+          label: t("Drinks"),
           path: "/drinks",
           icon: <LocalBarRounded fontSize="small" />,
         },
         {
-          label: "Sweets",
+          label: t("Sweets"),
           path: "/sweet",
           icon: <CakeRounded fontSize="small" />,
         },
         {
-          label: "About us",
+          label: t("About us"),
           path: "/aboutUs",
           icon: <InfoRounded fontSize="small" />,
         },
@@ -83,6 +84,7 @@ export default function ContNav({ showNav, setShowNav, setMode }) {
   return (
     <>
       <PreNav
+        t={t}
         showNav={showNav}
         menuItems={menuItems}
         location={location}

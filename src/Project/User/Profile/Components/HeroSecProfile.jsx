@@ -19,6 +19,7 @@ export default function HeroSecProfile({
   accType,
   userMoreInfo,
   handleEditOpen,
+  t,
 }) {
   return (
     <>
@@ -103,13 +104,14 @@ export default function HeroSecProfile({
                 fontSize: "1rem",
                 fontWeight: "bold",
                 boxShadow: `0 10px 20px ${theme.palette.primary.main}40`,
+                transition: "0.3s",
                 "&:hover": {
                   transform: "translateY(-2px)",
                   boxShadow: `0 15px 25px ${theme.palette.primary.main}60`,
                 },
               }}
             >
-              Edit Profile
+              {t("Edit Profile")}
             </Button>
           </Stack>
         </Container>

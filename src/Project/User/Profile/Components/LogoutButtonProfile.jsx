@@ -1,7 +1,7 @@
 import { LogoutRounded } from "@mui/icons-material";
 import { Box, Button, Typography } from "@mui/material";
 
-export default function LogoutBTNProfile({ Link, theme }) {
+export default function LogoutBTNProfile({ t, Link, theme }) {
   return (
     <>
       <Box sx={{ mt: 15, textAlign: "center" }}>
@@ -28,14 +28,14 @@ export default function LogoutBTNProfile({ Link, theme }) {
             },
           }}
         >
-          Log out from account
+          {t("Log out from account")}
         </Button>
         <Typography
           variant="body2"
           color="text.secondary"
           sx={{ mt: 3, opacity: 0.6 }}
         >
-          Version 2.0.4 • Secured Profile Data
+          {t("Version 2.0.4 • Secured Profile Data")}
         </Typography>
       </Box>
     </>

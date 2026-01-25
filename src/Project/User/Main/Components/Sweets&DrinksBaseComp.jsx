@@ -2,6 +2,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { useEffect, useState } from "react";
 import { fetchDrinks, fetchSweets } from "../../RTK/MainSlice";
 import Base from "../AllComp";
+import { useTranslation } from "react-i18next";
 
 export default function SweetsAndDrinks({ type }) {
   const { meals, loading, error } = useSelector((st) =>
@@ -9,13 +10,13 @@ export default function SweetsAndDrinks({ type }) {
   );
   const [preparedMeals, setPreparedMeals] = useState([]);
   const [sortAscending, setSortAscending] = useState(true);
-
+  const { t } = useTranslation();
   const dispatch = useDispatch();
 
   useEffect(() => {
     type === "drinks"
-      ? (document.title = "Zeus Restaurant | Drinks")
-      : (document.title = "Zeus Restaurant | Sweets");
+      ? (document.title = t("Zeus Restaurant | Drinks"))
+      : (document.title = t("Zeus Restaurant | Sweets"));
   }, [type]);
 
   useEffect(() => {
@@ -33,14 +34,6 @@ export default function SweetsAndDrinks({ type }) {
         image: type === "drinks" ? meal.strDrinkThumb : meal.strMealThumb,
         price: Number((Math.random() * 15 + 5).toFixed(2)),
         rate: Number((Math.random() * 2 + 3).toFixed(1)),
-        moreInfo:
-          type === "drinks"
-            ? meal.strInstructions
-              ? meal.strInstructions.substring(0, 100) + "..."
-              : `A refreshing drink to quench your thirst.`
-            : meal.strInstructions
-              ? meal.strInstructions.substring(0, 100) + "..."
-              : `A delightful sweet treat to satisfy your cravings.`,
         favorite:
           type === "drinks"
             ? favFromLS.includes(meal.idDrink)
@@ -80,11 +73,11 @@ export default function SweetsAndDrinks({ type }) {
       data={sortedMeals}
       error={error}
       id={type}
-      msg={type === "drinks" ? "Our Drinks" : "Our Best Sweets"}
+      msg={type === "drinks" ? t("Our Drinks") : t("Our Best Sweets")}
       body={
         type === "drinks"
-          ? " Choose your perfect refreshment"
-          : " Choose your perfect sweet"
+          ? t(" Choose your perfect refreshment")
+          : t(" Choose your perfect sweet")
       }
       sortAscending={sortAscending}
       setSortAscending={setSortAscending}

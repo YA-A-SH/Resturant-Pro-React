@@ -1,10 +1,11 @@
 import {
   DarkModeRounded,
-  LanguageRounded,
   LightModeRounded,
   LogoutRounded,
 } from "@mui/icons-material";
 import { Box, Button, Divider, Stack } from "@mui/material";
+import { useEffect, useState } from "react";
+import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
 export default function MainNav({
@@ -13,13 +14,24 @@ export default function MainNav({
   closeNav,
   isDark,
   setMode,
+  t,
   isAdmin,
 }) {
+  const { i18n } = useTranslation();
+  const [language, setLang] = useState(
+    () => JSON.parse(localStorage.getItem("lang")) || "EN",
+  );
   const activeColor = isAdmin ? "admin.main" : "primary.main";
   const activeGradient = isAdmin
     ? "linear-gradient(135deg, #6366F1 0%, #A855F7 100%)"
     : "linear-gradient(135deg, #B8860B 0%, #D4AF37 100%)";
 
+  useEffect(() => {
+    localStorage.setItem("lang", JSON.stringify(language));
+  }, [language]);
+  useEffect(() => {
+    language === "AR" ? i18n.changeLanguage("ar") : i18n.changeLanguage("en");
+  }, []);
   return (
     <Stack spacing={0.8} sx={{ px: 2, pb: 2.5 }}>
       {menuItems.map((item) => {
@@ -81,17 +93,23 @@ export default function MainNav({
               key={lang}
               fullWidth
               size="small"
-              variant={lang === "EN" ? "contained" : "text"}
+              variant={lang === language ? "contained" : "text"}
               sx={{
                 borderRadius: "10px",
                 fontWeight: "800",
-                bgcolor: lang === "EN" ? activeColor : "transparent",
+                bgcolor: lang === language ? activeColor : "transparent",
                 "&:hover": {
-                  bgcolor: lang === "EN" ? activeColor : "action.hover",
+                  bgcolor: lang === language ? activeColor : "action.hover",
                 },
               }}
+              onClick={() => {
+                lang === "AR"
+                  ? i18n.changeLanguage("ar")
+                  : i18n.changeLanguage("en");
+                setLang(lang);
+              }}
             >
-              {lang}
+              {lang === "EN" ? t("EN") : t("AR")}
             </Button>
           ))}
         </Stack>
@@ -111,7 +129,7 @@ export default function MainNav({
               borderColor: activeColor,
             }}
           >
-            Dark
+            {t("Dark")}
           </Button>
           <Button
             fullWidth
@@ -126,7 +144,7 @@ export default function MainNav({
               borderColor: activeColor,
             }}
           >
-            Light
+            {t("Light")}
           </Button>
         </Stack>
       </Box>
@@ -153,7 +171,7 @@ export default function MainNav({
           transition: "0.2s",
         }}
       >
-        Sign Out
+        {t("Sign Out")}
       </Button>
     </Stack>
   );

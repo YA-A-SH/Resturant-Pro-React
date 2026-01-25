@@ -3,7 +3,7 @@ import DialogAdmin from "./DialogAdmin";
 import { useNavigate } from "react-router-dom";
 import { IsAdminContext, OpenSnackbarContext } from "../../Context/MainContext";
 
-export default function ContAdminDialog({ open, setOpen }) {
+export default function ContAdminDialog({ open, setOpen, t }) {
   const [secNum, setSecNum] = useState("");
   const { openSnackbar, setOpenSnackbar } = useContext(OpenSnackbarContext);
 
@@ -48,6 +48,7 @@ export default function ContAdminDialog({ open, setOpen }) {
         handleCheck={handleCheck}
         openSnackbar={openSnackbar}
         setOpenSnackbar={setOpenSnackbar}
+        t={t}
       />
     </>
   );

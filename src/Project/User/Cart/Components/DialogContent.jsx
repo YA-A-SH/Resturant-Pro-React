@@ -19,6 +19,7 @@ export default function DialogCont({
   cartItems,
   onDecrease,
   onIncrease,
+  t,
 }) {
   return (
     <>
@@ -33,15 +34,15 @@ export default function DialogCont({
           <Table size={fullScreen ? "small" : "medium"}>
             <TableHead>
               <TableRow>
-                <TableCell>Product</TableCell>
-                <TableCell align="center">Quantity</TableCell>
+                <TableCell>{t("Product")}</TableCell>
+                <TableCell align="center">{t("Quantity")}</TableCell>
                 <TableCell
                   align="center"
                   sx={{ display: { xs: "none", sm: "table-cell" } }}
                 >
-                  Price
+                  {t("Price")}
                 </TableCell>
-                <TableCell align="center">Total</TableCell>
+                <TableCell align="center">{t("Total")}</TableCell>
               </TableRow>
             </TableHead>
             <TableBody>
@@ -83,7 +84,7 @@ export default function DialogCont({
                         size="small"
                         color="primary"
                         onClick={() => onDecrease(item.id)}
-                        aria-label="Decrease"
+                        aria-label={t("Decrease")}
                       >
                         <RemoveCircleOutline fontSize="small" />
                       </IconButton>
@@ -94,7 +95,7 @@ export default function DialogCont({
                         size="small"
                         color="primary"
                         onClick={() => onIncrease(item.id)}
-                        aria-label="Increase"
+                        aria-label={t("Increase")}
                       >
                         <AddCircleOutline fontSize="small" />
                       </IconButton>

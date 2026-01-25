@@ -17,6 +17,7 @@ export default function PreProfile({
   state,
   setState,
   variables,
+  t,
 }) {
   const { u, userMoreInfo, accType } = user;
 
@@ -49,6 +50,7 @@ export default function PreProfile({
     >
       {/* ================= HEADER  ================= */}
       <HeroSecProfile
+        t={t}
         isDark={isDark}
         theme={theme}
         u={u}
@@ -62,18 +64,19 @@ export default function PreProfile({
         {/* ================= INFO CARDS ================= */}
 
         <Box sx={{ mt: 5 }}>
-          <InfoCards info={info} />
+          <InfoCards t={t} info={info} />
         </Box>
 
         {/* ================= FAVORITES ================= */}
         <Box sx={{ mt: 8 }}>
-          <FavoriteComp fav={fav} toggleFavorite={toggleFavorite} />
+          <FavoriteComp t={t} fav={fav} toggleFavorite={toggleFavorite} />
         </Box>
 
         {/* ================= PAID ORDERS ================= */}
         {paid && (
           <Box sx={{ mt: 8 }}>
             <PaidOrder
+              t={t}
               paid={paid}
               setDeletePopupInfo={setDeletePopupInfo}
               handleClose={handleDeletePopupClose}
@@ -84,11 +87,12 @@ export default function PreProfile({
         )}
 
         {/* ================= LOGOUT  ================= */}
-        <LogoutBTNProfile Link={Link} theme={theme} />
+        <LogoutBTNProfile t={t} Link={Link} theme={theme} />
       </Container>
 
       {/* ================= MODALS & POPUPS ================= */}
       <EditProfile
+        t={t}
         editOpen={editOpen}
         handleEditClose={handleEditClose}
         userMoreInfo={userMoreInfo}
@@ -99,6 +103,7 @@ export default function PreProfile({
       />
 
       <DeletePopup
+        t={t}
         id={deletePopupInfo.id}
         open={deletePopupInfo.open}
         handleClose={deletePopupInfo.handleClose}

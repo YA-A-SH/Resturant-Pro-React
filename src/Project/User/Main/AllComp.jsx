@@ -16,6 +16,7 @@ import FoodCardSkeleton from "../Skeleton/FoodCardSkeleton";
 import { motion, AnimatePresence } from "framer-motion";
 import SnackbarComp from "../../Else/Components/SnackbarComp";
 import ButtonsAllComp from "./Components/ButtonsAllComp";
+import { useTranslation } from "react-i18next";
 
 export default function Base({
   loading,
@@ -35,6 +36,7 @@ export default function Base({
   const { openSnackbar, setOpenSnackbar } = useContext(OpenSnackbarContext);
   const [currentPage, setCurrentPage] = useState(1);
   const theme = useTheme();
+  const { t } = useTranslation();
 
   // Variables
 
@@ -43,13 +45,13 @@ export default function Base({
   const gradientBackground = isDark
     ? "radial-gradient(circle at top, #1a002a 0%, #0b0b0f 45%, #000 100%)"
     : "radial-gradient(circle at top, #fff5e6 0%, #ffffff 100%)";
-
   const currentData = useMemo(() => {
     const startIdx = (currentPage - 1) * itemsPerPage;
     return data.slice(startIdx, startIdx + itemsPerPage);
   }, [data, currentPage, itemsPerPage]);
 
   // Functions
+
   const getPaginationButtons = () => {
     let buttons = [];
     if (totalPages <= 5) {
@@ -85,7 +87,7 @@ export default function Base({
     if (reason === "clickaway") {
       return;
     }
-    setOpenSnackbar(false);
+    setOpenSnackbar({  openSnackbar: false });
   };
 
   return (
@@ -115,15 +117,16 @@ export default function Base({
                 ? "0 10px 30px rgba(0,0,0,0.5)"
                 : "0 10px 20px rgba(0,0,0,0.05)",
               textTransform: "none",
+              transition: "0.4s",
               "&:hover": {
                 transform: "translateY(-2px)",
                 bgcolor: isDark ? "rgba(255,255,255,0.1)" : "#fff",
               },
             }}
           >
-            Price:{" "}
+            {t("Price:")}{" "}
             <strong style={{ marginLeft: "5px" }}>
-              {sortAscending ? "Low to High" : "High to Low"}
+              {sortAscending ? t("Low to High") : t("High to Low")}
             </strong>
           </Button>
         </Box>
@@ -146,6 +149,7 @@ export default function Base({
           </Stack>
         ) : (
           <ButtonsAllComp
+            t={t}
             selectedType={selectedType}
             setSelectedType={setSelectedType}
             isDark={isDark}
@@ -234,8 +238,8 @@ export default function Base({
       {/* ===== Snackbar ===== */}
 
       <SnackbarComp
-        openSnackbar={openSnackbar}
-        msg="Tasty choice! Added to your cart 🍔"
+        openSnackbar={openSnackbar.openSnackbar}
+        msg={t("Tasty choice! Added to your cart 🍔")}
         color="success"
         handleClose={handleCloseSnackbar}
       />

@@ -43,8 +43,8 @@ const CartPre = React.memo(
     onPay,
     handelClear,
     handleClose,
+    t,
   }) => {
-  
     return (
       <AnimatePresence>
         {show && (
@@ -73,7 +73,7 @@ const CartPre = React.memo(
                 }`,
               },
             }}
-            aria-label="Cart Items"
+            aria-label={t("Cart Items")}
           >
             <DialogTitle
               sx={{
@@ -89,7 +89,7 @@ const CartPre = React.memo(
               <Box sx={{ display: "flex", alignItems: "center", gap: 1.5 }}>
                 <ShoppingCartCheckout color="primary" sx={{ fontSize: 32 }} />
                 <Typography variant="h5" fontWeight="900" letterSpacing={-0.5}>
-                  My Cart
+                  {t("My Cart")}
                 </Typography>
               </Box>
 
@@ -101,7 +101,7 @@ const CartPre = React.memo(
                     : "rgba(0,0,0,0.05)",
                   "&:hover": { bgcolor: "error.main", color: "white" },
                 }}
-                aria-label="Close Cart"
+                aria-label={t("Close Cart")}
               >
                 <Close fontSize="small" />
               </IconButton>
@@ -111,7 +111,7 @@ const CartPre = React.memo(
 
             <Box sx={{ flexGrow: 1, overflowY: "auto", p: 1 }}>
               {cartItems.length === 0 ? (
-                <IsEmpty navigate={navigate} setShow={setShow} />
+                <IsEmpty navigate={navigate} setShow={setShow} t={t} />
               ) : (
                 <DialogCont
                   fullScreen={fullScreen}
@@ -119,6 +119,7 @@ const CartPre = React.memo(
                   onDecrease={onDecrease}
                   onIncrease={onIncrease}
                   totalPrice={totalPrice}
+                  t={t}
                 />
               )}
             </Box>
@@ -146,7 +147,7 @@ const CartPre = React.memo(
                     color="text.secondary"
                     fontWeight="600"
                   >
-                    Total Amount:
+                    {t("Total Amount:")}
                   </Typography>
                   <Typography
                     variant="h5"
@@ -177,9 +178,9 @@ const CartPre = React.memo(
                       flex: 1,
                       py: 1.5,
                     }}
-                    aria-label="Clear Cart"
+                    aria-label={t("Clear Cart")}
                   >
-                    Clear Cart
+                    {t("Clear Cart")}
                   </Button>
 
                   <Button
@@ -200,9 +201,9 @@ const CartPre = React.memo(
                       boxShadow: "0 12px 24px rgba(0,0,0,0.2)",
                       textTransform: "none",
                     }}
-                    aria-label="Proceed to Checkout"
+                    aria-label={t("Proceed to Checkout")}
                   >
-                    Proceed to Checkout
+                    {t("Proceed to Checkout")}
                   </Button>
                 </DialogActions>
               </Box>
@@ -211,7 +212,7 @@ const CartPre = React.memo(
         )}
       </AnimatePresence>
     );
-  }
+  },
 );
 
 export default CartPre;

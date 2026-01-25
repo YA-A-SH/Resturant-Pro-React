@@ -38,10 +38,9 @@ export default function Theme({ mode, children }) {
           secondary: isDark ? "#94A3B8" : "#475569",
         },
       },
+
       typography: {
-        fontFamily: "'Poppins', 'Playfair Display', serif",
-        h1: { fontFamily: "'Playfair Display', serif", fontWeight: 900 },
-        h2: { fontFamily: "'Playfair Display', serif", fontWeight: 800 },
+        fontFamily: "'Playpen Sans Arabic', sans-serif",
       },
       components: {
         MuiButton: {

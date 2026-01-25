@@ -24,10 +24,10 @@ export default function Login({
   openReset,
   setOpenAdmin,
   openAdmin,
+  t,
 }) {
   const theme = useTheme();
   const isDark = theme.palette.mode === "dark";
-
   return (
     <Box
       sx={{
@@ -78,7 +78,7 @@ export default function Login({
               letterSpacing: -1,
             }}
           >
-            Welcome Back 🍽️
+            {t("Welcome Back")} 🍽️
           </Typography>
 
           <Typography
@@ -87,11 +87,12 @@ export default function Login({
             mb={4}
             sx={{ fontWeight: 500 }}
           >
-            Delicious meals are just a login away
+            {t("desc 7")}
           </Typography>
 
           {/* Email Login Form */}
           <EmailLogin
+            t={t}
             user={user}
             setUser={setUser}
             handleEmailLogin={handleEmailLogin}
@@ -108,11 +109,11 @@ export default function Login({
               color: "text.secondary",
             }}
           >
-            Forgot password?{" "}
+            {t("Forgot password?")}{" "}
             <span
               style={{ color: theme.palette.primary.main, marginLeft: "4px" }}
             >
-              Reset here
+              {t("Reset here")}
             </span>
           </Button>
 
@@ -124,12 +125,13 @@ export default function Login({
               variant="caption"
               sx={{ color: "text.disabled", px: 1, fontWeight: 700 }}
             >
-              OR CONTINUE WITH
+              {t("OR CONTINUE WITH")}
             </Typography>
           </Divider>
 
           {/* Social Login Buttons */}
           <FacGoogleLogin
+            t={t}
             googleLoading={googleLoading}
             googleError={googleError}
             handleGoogleLogin={handleGoogleLogin}
@@ -152,7 +154,7 @@ export default function Login({
               color="text.disabled"
               sx={{ fontWeight: 600 }}
             >
-              STAFF ONLY
+              {t("STAFF ONLY")}
             </Typography>
             <Button
               variant="text"
@@ -166,15 +168,15 @@ export default function Login({
                 "&:hover": { bgcolor: "primary.main", color: "#fff" },
               }}
             >
-              Admin Dashboard
+              {t("Admin Dashboard")}
             </Button>
           </Box>
         </Box>
       </Fade>
 
       {/* Dialogs */}
-      <ContAdminDialog open={openAdmin} setOpen={setOpenAdmin} />
-      <DialogReset open={openReset} setOpen={setOpenReset} />
+      <ContAdminDialog t={t} open={openAdmin} setOpen={setOpenAdmin} />
+      <DialogReset t={t} open={openReset} setOpen={setOpenReset} />
     </Box>
   );
 }

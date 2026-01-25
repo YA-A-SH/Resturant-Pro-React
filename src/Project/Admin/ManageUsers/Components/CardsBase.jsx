@@ -88,6 +88,7 @@ export default function CardBase({ isDark, data, id }) {
       sx={{
         p: 0,
         width: "100%",
+        minWidth: 330,
         borderRadius: "32px",
         position: "relative",
         overflow: "hidden",

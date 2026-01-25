@@ -11,7 +11,7 @@ import {
   TextField,
 } from "@mui/material";
 
-export default function DialogReset({ open, setOpen }) {
+export default function DialogReset({ open, setOpen, t }) {
   const { loading, success, error } = useSelector((st) => st.reset);
   const [email, setEmail] = useState("");
   const dispatch = useDispatch();
@@ -33,13 +33,13 @@ export default function DialogReset({ open, setOpen }) {
         },
       }}
     >
-      <DialogTitle>Reset Password</DialogTitle>
+      <DialogTitle>{t("Reset Password")}</DialogTitle>
 
       <DialogContent>
         <TextField
           fullWidth
           autoFocus
-          label="Email"
+          label={t("Email")}
           type="email"
           sx={{ mt: 1 }}
           value={email}
@@ -48,25 +48,25 @@ export default function DialogReset({ open, setOpen }) {
 
         {success && (
           <Alert severity="success" sx={{ mt: 2 }}>
-            Reset email sent successfully ✅
+            {t("Reset email sent successfully")} ✅
           </Alert>
         )}
 
         {error && (
           <Alert severity="error" sx={{ mt: 2 }}>
-            Sorry Something Went Wrong Try Again Later
+            {t("Sorry Something Went Wrong Try Again Later")}
           </Alert>
         )}
       </DialogContent>
 
       <DialogActions>
-        <Button onClick={handleClose}>Cancel</Button>
+        <Button onClick={handleClose}>{t("Cancel")}</Button>
         <Button
           variant="contained"
           disabled={loading || !email}
           onClick={() => dispatch(resetPassword(email))}
         >
-          {loading ? "Sending..." : "Send Link"}
+          {loading ? t("Sending...") : t("Send Link")}
         </Button>
       </DialogActions>
     </Dialog>

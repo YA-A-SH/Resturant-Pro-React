@@ -149,7 +149,6 @@ export const loginWithGoogle = createAsyncThunk(
     try {
       const result = await signInWithPopup(auth, providerGoogle);
       const user = result.user;
-      console.log("Google User:", user);
       localStorage.setItem("user", JSON.stringify(user));
       return user;
     } catch (err) {
@@ -239,7 +238,7 @@ export const loginWithEmail = createAsyncThunk(
       );
 
       localStorage.setItem("user", JSON.stringify(result.user));
-      console.log("Logged In User:", result.user);
+
       return result.user;
     } catch (error) {
       return thunkAPI.rejectWithValue(error.message);

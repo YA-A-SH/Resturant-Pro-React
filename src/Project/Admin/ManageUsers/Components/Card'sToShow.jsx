@@ -224,7 +224,7 @@ export default function CardsToShowAndTaps({
                     fontSize: "0.95rem",
                     transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
                     bgcolor: isActive
-                      ? "admin.main"
+                      ? "#F59E0B"
                       : isDark
                         ? "rgba(255, 255, 255, 0.05)"
                         : "rgba(255, 255, 255, 0.8)",
@@ -235,23 +235,23 @@ export default function CardsToShowAndTaps({
                         : "text.primary",
                     border: "1px solid",
                     borderColor: isActive
-                      ? "admin.main"
+                      ? "#F59E0B"
                       : isDark
                         ? "rgba(255,255,255,0.1)"
                         : "rgba(0,0,0,0.06)",
                     boxShadow: isActive
-                      ? `0 8px 20px -6px ${theme.palette.admin.main}`
+                      ? `0 8px 20px -6px#F59E0B`
                       : "none",
                     backdropFilter:
                       !isActive && !isEllipsis ? "blur(8px)" : "none",
                     "&:hover": {
-                      bgcolor: isActive ? "admin.main" : "admin.main",
+                      bgcolor: "#F59E0B",
                       color: "#fff",
                       transform: !isEllipsis ? "translateY(-4px)" : "none",
                       boxShadow: !isEllipsis
-                        ? `0 12px 20px -8px ${theme.palette.admin.main}`
+                        ? `0 12px 20px -8px #F59E0B`
                         : "none",
-                      borderColor: "admin.main",
+                      borderColor: "#F59E0B",
                     },
                     "&.Mui-disabled": {
                       color: isDark

@@ -19,6 +19,7 @@ import FavoriteIcon from "@mui/icons-material/Favorite";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import { useContext, useState } from "react";
 import { ShowCart } from "../Context/MainContext";
+import { useTranslation } from "react-i18next";
 
 export default function FoodCard({
   id,
@@ -34,7 +35,7 @@ export default function FoodCard({
   const { setShow, setCartItems } = useContext(ShowCart);
   const [openDet, setOpenDet] = useState(false);
   const theme = useTheme();
-
+  const { t } = useTranslation();
   // Variables
   const isDark = theme.palette.mode === "dark";
 
@@ -50,8 +51,8 @@ export default function FoodCard({
       return [...prev, { id, image, title, price, quantity: 1 }];
     });
     setOpenSnackbar({
-      open: true,
-      msg: "Tasty choice! Added to your cart 🍔",
+      openSnackbar: true,
+      message: t("Tasty choice! Added to your cart 🍔"),
       color: "success",
     });
     setTimeout(() => {
@@ -151,7 +152,7 @@ export default function FoodCard({
             }}
             aria-label="Add"
           >
-            Add
+            {t("Add")}
           </Button>
           <Button
             variant="outlined"
@@ -166,7 +167,7 @@ export default function FoodCard({
             }}
             aria-label="More Info"
           >
-            Info
+            {t("Info")}
           </Button>
         </Stack>
       </CardContent>
@@ -206,7 +207,7 @@ export default function FoodCard({
             variant="outlined"
             aria-label="Close"
           >
-            Close
+            {t("Close")}
           </Button>
           <Button
             variant="contained"
@@ -214,7 +215,7 @@ export default function FoodCard({
             sx={{ borderRadius: "10px" }}
             aria-label="Order Now"
           >
-            Order Now
+            {t("Order Now")}
           </Button>
         </DialogActions>
       </Dialog>

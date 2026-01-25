@@ -16,6 +16,7 @@ import { useTheme } from "@emotion/react";
 //Components
 
 import CartPre from "./PresenterCart";
+import { useTranslation } from "react-i18next";
 
 export default function ContCart({ setSnackbar }) {
   // Hooks Use
@@ -23,6 +24,8 @@ export default function ContCart({ setSnackbar }) {
   const { show, setShow, cartItems, setCartItems } = useContext(ShowCart);
   const [readyItemsState, setReadyItemsState] = useState([]);
   const navigate = useNavigate();
+  const { t } = useTranslation();
+
   const theme = useTheme();
 
   // Variables
@@ -31,7 +34,7 @@ export default function ContCart({ setSnackbar }) {
   const fullScreen = useMediaQuery(theme.breakpoints.down("md"));
   const totalPrice = (cartItems || []).reduce(
     (acc, item) => acc + item.price * item.quantity,
-    0
+    0,
   );
 
   // Effect
@@ -57,29 +60,29 @@ export default function ContCart({ setSnackbar }) {
       setCartItems((prev) =>
         prev
           .map((e) => (e.id === id ? { ...e, quantity: e.quantity - 1 } : e))
-          .filter((e) => e.quantity > 0)
+          .filter((e) => e.quantity > 0),
       );
     },
-    [setCartItems]
+    [setCartItems],
   );
 
   const onIncrease = useCallback(
     (id) => {
       setCartItems((prev) =>
-        prev.map((e) => (e.id === id ? { ...e, quantity: e.quantity + 1 } : e))
+        prev.map((e) => (e.id === id ? { ...e, quantity: e.quantity + 1 } : e)),
       );
     },
-    [setCartItems]
+    [setCartItems],
   );
 
   const handelClear = useCallback(() => {
     setCartItems([]);
     setSnackbar({
       open: true,
-      message: "Cart Cleared Successfully",
+      message: t("Cart Cleared Successfully"),
       color: "error",
     });
-  }, [setCartItems, setSnackbar]);
+  }, [setCartItems, setSnackbar, t]);
 
   const onPay = useCallback(() => {
     const id = uuidv4();
@@ -88,10 +91,10 @@ export default function ContCart({ setSnackbar }) {
     setShow(false);
     setSnackbar({
       open: true,
-      message: "Item's Added Successfully",
+      message: t("Item's Added Successfully"),
       color: "success",
     });
-  }, [cartItems, setCartItems, setShow, setSnackbar]);
+  }, [cartItems, setCartItems, setShow, setSnackbar, t]);
 
   // UI
 
@@ -109,6 +112,7 @@ export default function ContCart({ setSnackbar }) {
       onPay={onPay}
       handelClear={handelClear}
       handleClose={handleClose}
+      t={t}
     />
   );
 }

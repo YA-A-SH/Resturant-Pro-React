@@ -11,7 +11,15 @@ import { Close, WarningAmberRounded, DeleteSweep } from "@mui/icons-material";
 // eslint-disable-next-line no-unused-vars
 import { motion, AnimatePresence } from "framer-motion";
 
-const DeletePopup = ({ open, handleClose, handleDelete, id, msg1, msg2 }) => {
+const DeletePopup = ({
+  t,
+  open,
+  handleClose,
+  handleDelete,
+  id,
+  msg1,
+  msg2,
+}) => {
   const theme = useTheme();
   const isDark = theme.palette.mode === "dark";
 
@@ -132,7 +140,7 @@ const DeletePopup = ({ open, handleClose, handleDelete, id, msg1, msg2 }) => {
                     "&:hover": { bgcolor: "action.hover" },
                   }}
                 >
-                  Discard
+                  {t("Discard")}
                 </Button>
                 <Button
                   fullWidth
@@ -153,7 +161,7 @@ const DeletePopup = ({ open, handleClose, handleDelete, id, msg1, msg2 }) => {
                     handleClose();
                   }}
                 >
-                  Confirm
+                  {t("Confirm")}
                 </Button>
               </Stack>
             </Box>

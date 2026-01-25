@@ -1,12 +1,9 @@
-import {
-  Favorite,
-  FavoriteBorderOutlined,
-  HeartBrokenRounded,
-} from "@mui/icons-material";
+import { Favorite, HeartBrokenRounded } from "@mui/icons-material";
 import { Box, Card, IconButton, Typography, useTheme } from "@mui/material";
+// eslint-disable-next-line no-unused-vars
 import { motion, AnimatePresence } from "framer-motion";
 
-export default function FavoriteComp({ fav, toggleFavorite }) {
+export default function FavoriteComp({ t, fav, toggleFavorite }) {
   const theme = useTheme();
   const isDark = theme.palette.mode === "dark";
 
@@ -19,11 +16,11 @@ export default function FavoriteComp({ fav, toggleFavorite }) {
         textAlign="center"
         sx={{ letterSpacing: -1 }}
       >
-        ❤️ Favorite Collection
+        ❤️ {t("Favorite Collection")}
       </Typography>
 
       {fav.length === 0 ? (
-        // ===== Empty State بتصميم أنيميشن فخم =====
+        // ===== Empty State =====
         <motion.div
           initial={{ opacity: 0, scale: 0.9 }}
           animate={{ opacity: 1, scale: 1 }}
@@ -42,15 +39,14 @@ export default function FavoriteComp({ fav, toggleFavorite }) {
               sx={{ fontSize: 80, color: "text.disabled", mb: 2, opacity: 0.5 }}
             />
             <Typography variant="h6" fontWeight={700} color="text.secondary">
-              Your heart is empty
+              {t("Your heart is empty")}
             </Typography>
             <Typography variant="body2" color="text.disabled" sx={{ mt: 1 }}>
-              Start adding some flavors to your favorites!
+              {t("Start adding some flavors to your favorites!")}
             </Typography>
           </Box>
         </motion.div>
       ) : (
-        // ===== قائمة المفضلات مع أنيميشن الدخول الخرافي =====
         <Box
           sx={{
             display: "flex",
@@ -58,7 +54,7 @@ export default function FavoriteComp({ fav, toggleFavorite }) {
             overflowX: "auto",
             p: 2,
             pb: 4,
-            scrollSnapType: "x mandatory", // يجعل السكرول يقف عند كل كرت بدقة
+            scrollSnapType: "x mandatory",
             "&::-webkit-scrollbar": { height: 6 },
             "&::-webkit-scrollbar-thumb": {
               bgcolor: "primary.main",
@@ -70,11 +66,11 @@ export default function FavoriteComp({ fav, toggleFavorite }) {
             {fav.map((item, index) => (
               <motion.div
                 key={item.id}
-                layout // يجعل الكروت تعيد ترتيب نفسها بسلاسة عند الحذف
+                layout
                 initial={{ opacity: 0, x: 50, rotate: 2 }}
                 animate={{ opacity: 1, x: 0, rotate: 0 }}
                 exit={{ opacity: 0, scale: 0.5, transition: { duration: 0.2 } }}
-                transition={{ delay: index * 0.1 }} // ظهور تدريجي واحد تلو الآخر
+                transition={{ delay: index * 0.1 }}
                 whileHover={{ y: -5 }}
                 style={{ scrollSnapAlign: "center" }}
               >
@@ -127,7 +123,7 @@ export default function FavoriteComp({ fav, toggleFavorite }) {
                     </IconButton>
                   </Box>
 
-                  {/* تفاصيل المنتج بتنسيق نظيف */}
+                  {/* Details */}
                   <Box sx={{ p: 2.5, textAlign: "center" }}>
                     <Typography
                       variant="subtitle1"
@@ -147,7 +143,7 @@ export default function FavoriteComp({ fav, toggleFavorite }) {
                         opacity: 0.7,
                       }}
                     >
-                      Premium Selection
+                      {t("Premium Selection")}
                     </Typography>
                   </Box>
                 </Card>

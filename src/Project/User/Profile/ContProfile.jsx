@@ -8,8 +8,11 @@ import {
   Phone,
   Receipt,
 } from "@mui/icons-material";
+import { useTranslation } from "react-i18next";
 
 export default function ContProfile() {
+  // Hooks Use
+
   const [deletePopupInfo, setDeletePopupInfo] = useState({
     id: "",
     open: "",
@@ -18,17 +21,10 @@ export default function ContProfile() {
     msg1: "",
     msg2: "",
   });
-
-  const theme = useTheme();
   const [paid, setPaid] = useState(() => {
     const saved = localStorage.getItem("payedItems");
     return saved ? JSON.parse(saved) : [];
   });
-
-  useEffect(() => {
-    localStorage.setItem("payedItems", JSON.stringify(paid));
-  }, [paid]);
-
   const [editOpen, setEditOpen] = useState(false);
   const [favMeals, setFavMeals] = useState([]);
   const [userMoreInfo, setUserMoreInfo] = useState({
@@ -37,7 +33,8 @@ export default function ContProfile() {
     mail: "No Email Provided",
     name: "User",
   });
-
+  const theme = useTheme();
+  const { t } = useTranslation();
   // Variables
 
   const u = JSON.parse(localStorage.getItem("user"));
@@ -49,7 +46,35 @@ export default function ContProfile() {
       ? "Google Account"
       : "Email Account";
 
-  // ================== FAVORITES ==================
+  const info = [
+    { icon: <Phone />, label: t("Phone"), value: userMoreInfo.phone },
+    {
+      icon: <LocationOn />,
+      label: t("Address"),
+      value: userMoreInfo.address,
+    },
+    {
+      icon: <CalendarToday />,
+      label: t("Joined On"),
+      value: new Date(1766304856103).toDateString(),
+    },
+    {
+      icon: <Receipt />,
+      label: t("Last Login"),
+      value: new Date(Number(u?.lastLoginAt)).toLocaleString(),
+    },
+    {
+      icon: <Email />,
+      label: t("Email"),
+      value: accType === "Email Account" ? u?.email : userMoreInfo.mail,
+    },
+  ];
+
+  //  Side Effects
+  useEffect(() => {
+    localStorage.setItem("payedItems", JSON.stringify(paid));
+  }, [paid]);
+
   useEffect(() => {
     const favIds = JSON.parse(localStorage.getItem("fav")) || [];
     const meals = JSON.parse(localStorage.getItem("meals")) || [];
@@ -69,43 +94,19 @@ export default function ContProfile() {
     // eslint-disable-next-line react-hooks/set-state-in-effect
     setFavMeals(readyFav);
 
-    document.title = "Zeus Restaurant | Profile";
+    document.title = t("Zeus Restaurant | Profile");
   }, []);
 
-  // ================== USER INFO ==================
   useEffect(() => {
     const saved = JSON.parse(localStorage.getItem("userMoreInfo"));
     // eslint-disable-next-line react-hooks/set-state-in-effect
     if (saved) setUserMoreInfo(saved);
   }, []);
 
-  const info = [
-    { icon: <Phone />, label: "Phone", value: userMoreInfo.phone },
-    {
-      icon: <LocationOn />,
-      label: "Address",
-      value: userMoreInfo.address,
-    },
-    {
-      icon: <CalendarToday />,
-      label: "Joined On",
-      value: new Date(1766304856103).toDateString(),
-    },
-    {
-      icon: <Receipt />,
-      label: "Last Login",
-      value: new Date(Number(u?.lastLoginAt)).toLocaleString(),
-    },
-    {
-      icon: <Email />,
-      label: "Email",
-      value: accType === "Email Account" ? u?.email : userMoreInfo.mail,
-    },
-  ];
-
   // ================== FUNCTIONS ==================
 
   const handleEditOpen = () => setEditOpen(true);
+
   const handleEditClose = () => setEditOpen(false);
 
   const handleSave = () => {
@@ -124,7 +125,7 @@ export default function ContProfile() {
     localStorage.setItem("fav", JSON.stringify(updatedFav));
 
     setFavMeals((prev) =>
-      isFav ? prev.filter((item) => item.id !== id) : prev
+      isFav ? prev.filter((item) => item.id !== id) : prev,
     );
   }
 
@@ -137,9 +138,9 @@ export default function ContProfile() {
                 ...order,
                 cartItems: order.cartItems.filter((item) => item.id !== itemId),
               }
-            : order
+            : order,
         )
-        .filter((order) => order.cartItems.length > 0)
+        .filter((order) => order.cartItems.length > 0),
     );
   }
 
@@ -196,6 +197,7 @@ export default function ContProfile() {
 
   return (
     <PreProfile
+      t={t}
       user={user}
       handlersAndToggles={handlersAndToggles}
       mealsTypes={mealsTypes}

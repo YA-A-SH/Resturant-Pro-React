@@ -1,6 +1,6 @@
 import { Avatar, Box, Button, Typography } from "@mui/material";
 
-export default function IsEmpty({ navigate, setShow }) {
+export default function IsEmpty({ navigate, setShow, t }) {
   return (
     <>
       <Box
@@ -31,11 +31,11 @@ export default function IsEmpty({ navigate, setShow }) {
           color="primary"
           sx={{ animation: "bounce 1.2s infinite" }}
         >
-          Your Cart is Empty!
+          {t("Your Cart is Empty!")}
         </Typography>
         <Typography variant="body1" color="text.secondary">
-          Start exploring our delicious meals and add something amazing to your
-          cart.
+       {t("desc 6")}
+
         </Typography>
         <Button
           variant="contained"
@@ -46,7 +46,8 @@ export default function IsEmpty({ navigate, setShow }) {
             navigate("/meals");
           }}
         >
-          Go Shopping
+         {t("Go Shopping")}
+
         </Button>
       </Box>
     </>

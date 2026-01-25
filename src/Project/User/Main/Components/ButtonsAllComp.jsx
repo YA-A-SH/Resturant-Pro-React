@@ -4,6 +4,7 @@ export default function ButtonsAllComp({
   selectedType,
   setSelectedType,
   isDark,
+  t,
 }) {
   return (
     <>
@@ -43,7 +44,11 @@ export default function ButtonsAllComp({
               },
             }}
           >
-            {type}
+            {type === "Breakfast"
+              ? t("Breakfast")
+              : type === "Lunch"
+                ? t("Lunch")
+                : t("Dinner")}
           </Button>
         ))}
       </Box>

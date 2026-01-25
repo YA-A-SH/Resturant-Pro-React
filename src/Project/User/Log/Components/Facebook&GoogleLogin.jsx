@@ -5,6 +5,7 @@ export default function FacGoogleLogin({
   googleLoading,
   googleError,
   handleGoogleLogin,
+  t
 }) {
   return (
     <>
@@ -19,7 +20,7 @@ export default function FacGoogleLogin({
             color: "#1877F2",
           }}
         >
-          Coming Soon
+          {t("Coming Soon")}
         </Button>
 
         <Button
@@ -48,7 +49,7 @@ export default function FacGoogleLogin({
           })}
           onClick={handleGoogleLogin}
         >
-          Google
+          {t("Google")}
         </Button>
       </Box>
     </>

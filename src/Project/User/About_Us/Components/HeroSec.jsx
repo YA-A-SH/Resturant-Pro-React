@@ -1,7 +1,9 @@
 import { ChevronRightRounded } from "@mui/icons-material";
 import { Box, Button, Container, Typography } from "@mui/material";
+import { useTranslation } from "react-i18next";
 
 export default function HeroSec({ isDark, navigate }) {
+  const { t } = useTranslation();
   return (
     <>
       <Box
@@ -47,7 +49,7 @@ export default function HeroSec({ isDark, navigate }) {
               textShadow: "0 4px 12px rgba(0,0,0,0.5)",
             }}
           >
-            ZEUS Restaurant
+            {t("ZEUS Restaurant")}
           </Typography>
 
           <Typography
@@ -60,7 +62,7 @@ export default function HeroSec({ isDark, navigate }) {
               textShadow: "0 2px 8px rgba(0,0,0,0.4)",
             }}
           >
-            Crafting Culinary Experiences, Not Just Meals.
+            {t("desc 3")}
           </Typography>
 
           <Button
@@ -84,7 +86,7 @@ export default function HeroSec({ isDark, navigate }) {
             }}
             onClick={() => navigate("/meals")}
           >
-            Explore the Menu
+            {t("Explore the Menu")}
           </Button>
         </Container>
       </Box>

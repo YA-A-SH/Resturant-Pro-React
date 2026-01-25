@@ -26,6 +26,7 @@ export default function DialogAdmin({
   handleCheck,
   openSnackbar,
   handleSnackbarClose,
+  t,
 }) {
   useEffect(() => {
     if (trys === 0) {
@@ -51,13 +52,13 @@ export default function DialogAdmin({
         },
       }}
     >
-      <DialogTitle>Login As Admin</DialogTitle>
+      <DialogTitle>{t("Login As Admin")}</DialogTitle>
 
       <DialogContent>
         <TextField
           fullWidth
           autoFocus
-          label="Enter You'r Secrete Number"
+          label={t("Enter You'r Secrete Number")}
           sx={{ mt: 1 }}
           value={secNum}
           onChange={(e) => setSecNum(e.target.value)}
@@ -71,7 +72,7 @@ export default function DialogAdmin({
           disabled={!secNum || isAval}
           onClick={handleCheck}
         >
-          Check The Secrete Number
+          {t("Check The Secrete Number")}
         </Button>
       </DialogActions>
 
@@ -79,8 +80,8 @@ export default function DialogAdmin({
         openSnackbar={openSnackbar.openSnackbar}
         msg={
           trys === 0
-            ? "You Use All You'r Attempts Try Again Later "
-            : `Wrong Key You Have ${trys} Attempts Left`
+            ? t("You Use All You'r Attempts Try Again Later")
+            : t("Wrong Key You Have") + " " + trys + " " + t("Attempts Left")
         }
         color="error"
         handleClose={handleSnackbarClose}
