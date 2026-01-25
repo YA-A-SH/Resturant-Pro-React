@@ -1,4 +1,4 @@
-# 🍽️ Restaurant Management Web Application (React)
+# 🍽️ Restaurant Management Web Application With Admin Dashboard (React)
 ## 📌 Overview
 
 This project is a full-featured Restaurant Management Web Application built with React, designed to simulate a real-world restaurant system with a strong focus on clean code, scalable architecture, performance optimization, and user experience.
@@ -140,7 +140,8 @@ Subtle animations for better visual experience
 A fully implemented Admin Dashboard is included as part of the project.
 It is logically and visually separated from the user-facing application and designed to manage the system efficiently.
 
-# To Try Admin This Is The Code (770304)
+> **Admin Access (Demo Only):**  
+> Use the private admin access code: `770304`
 
 Key Features:
 
@@ -184,8 +185,24 @@ Fully responsive design across all devices
 
 Smooth animations and transitions
 
-## ⚠️ Note:
-Multi-language support is planned but not implemented yet in the Admin Dashboard.
+## 🌍 Multilingual Experience (i18n & Localization)
+
+The application supports both **English and Arabic**, implemented using **i18n** with a clear focus on *localization*, not literal translation.
+
+Each language version was crafted as a **standalone experience**, ensuring that:
+- The Arabic version is not a word-by-word translation.
+- Content tone, expressions, and UX copy are culturally adapted.
+- Users feel the application was originally designed in their language.
+
+This approach resulted in:
+- 5,000+ localized content entries
+- Unique phrasing, storytelling, and emotional tone per language
+- A more natural and immersive experience for both English and Arabic users
+
+Language switching is seamless and applied across:
+- User-facing pages
+- Admin Dashboard
+- Notifications, alerts, and system messages
 
 ## 🧠 Architecture & Code Quality
 
@@ -233,8 +250,6 @@ Favorites restored on initial render
 ## 🚀 Future Improvements
 
 Migrate data fetching to RTK Query
-
-Add multi-language support (Arabic / English)
 
 Add Login as Guest functionality
 
@@ -291,4 +306,6 @@ This project was built as a practical showcase of my development mindset, focusi
 
 Over approximately one month of development, multiple challenges were identified and resolved, turning complex requirements into a solid and reusable workflow.
 
-# AI-assisted design enhancements were used in selected parts of the application to improve the overall UI and user experience.
+# 🤖 AI-Assisted Enhancements
+
+AI-assisted tools were selectively used to support design decisions and improve the overall user interface and user experience in specific parts of the application.
