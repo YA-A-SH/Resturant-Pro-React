@@ -140,6 +140,8 @@ Subtle animations for better visual experience
 A fully implemented Admin Dashboard is included as part of the project.
 It is logically and visually separated from the user-facing application and designed to manage the system efficiently.
 
+# To Try Admin This Is The Code (770304)
+
 Key Features:
 
 Admin Authentication
