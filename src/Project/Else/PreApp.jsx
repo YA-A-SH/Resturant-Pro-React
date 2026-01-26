@@ -33,6 +33,10 @@ import ContLogin from "../User/Log/ContLogin";
 import Logout from "../User/Log/Logout";
 import Footer from "../Else/Components/Footer";
 import SnackbarComp from "../Else/Components/SnackbarComp";
+import ContUsers from "../Admin/ManageUsers/ContUsers";
+import ManageMeals from "../Admin/ManageDishes/ManageMeals";
+import ManageDrinks from "../Admin/ManageDishes/ManageDrinks";
+import ManageSweets from "../Admin/ManageDishes/ManageSweets";
 
 // ************** Router ****************
 
@@ -47,10 +51,7 @@ import DrinksAndSweetsSkeleton from "../User/Skeleton/DrinksAndSweetsSkiliton";
 // ************** Else ****************
 import { AnimatePresence } from "framer-motion";
 import AdminProtectedRoute from "../User/Routes/AdminProtectedRoute";
-import ContUsers from "../Admin/ManageUsers/ContUsers";
-import ManageMeals from "../Admin/ManageDishes/ManageMeals";
-import ManageDrinks from "../Admin/ManageDishes/ManageDrinks";
-import ManageSweets from "../Admin/ManageDishes/ManageSweets";
+import NotFound from "./Components/PageNotFound";
 
 export default function PreApp({
   mode,
@@ -239,6 +240,14 @@ export default function PreApp({
             element={
               <PageWrapper>
                 <Logout />
+              </PageWrapper>
+            }
+          />
+          <Route
+            path="*"
+            element={
+              <PageWrapper>
+                <NotFound />
               </PageWrapper>
             }
           />
