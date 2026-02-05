@@ -1,3 +1,6 @@
+// ************* React **********************
+import { lazy, Suspense, useState } from "react";
+
 // ************** Contexts ****************
 
 import {
@@ -10,18 +13,15 @@ import {
 
 // ************** Components ****************
 
-import ContApp from "./Project/Else/ContApp";
+const ContApp = lazy(() => import("./Project/Else/ContApp"));
 import Theme from "./Project/Else/Components/Theme";
-
-// ************* React **********************
-
-import { useState } from "react";
+import Loader from "./Project/Else/Components/Loader";
 
 function App() {
   const [mode, setMode] = useState("light");
 
   return (
-    <>
+    <Suspense fallback={<Loader />}>
       <Theme mode={mode}>
         <IsAdminProvider>
           <ChefsProvider>
@@ -35,7 +35,7 @@ function App() {
           </ChefsProvider>
         </IsAdminProvider>
       </Theme>
-    </>
+    </Suspense>
   );
 }
 
