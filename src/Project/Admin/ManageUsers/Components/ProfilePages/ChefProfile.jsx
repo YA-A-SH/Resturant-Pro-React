@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { ChefsContext } from "../../../../Else/Context/MainContext";
+import { ChefsContext } from "@else/Components/Context/MainContext";
 import ProfileView from "./BaseProfile";
 import EliteLoader from "./Loader";
 
