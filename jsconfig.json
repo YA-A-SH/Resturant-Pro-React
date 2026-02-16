@@ -1,0 +1,10 @@
+{
+  "compilerOptions": {
+    "baseUrl": ".",
+    "paths": {
+      "@user/*": ["src/Project/User/*"],
+      "@admin/*": ["src/Project/Admin/*"],
+      "@else/*": ["src/Project/Else/*"]
+    }
+  }
+}

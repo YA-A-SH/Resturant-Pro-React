@@ -1,6 +1,9 @@
 // Contexts
 
-import { ShowCart } from "../Context/MainContext";
+import {
+  OpenSnackbarContext,
+  ShowCart,
+} from "@else/Components/Context/MainContext";
 
 //Hooks
 
@@ -18,8 +21,9 @@ import { useTheme } from "@emotion/react";
 import CartPre from "./PresenterCart";
 import { useTranslation } from "react-i18next";
 
-export default function ContCart({ setSnackbar }) {
+export default function ContCart() {
   // Hooks Use
+  const { setOpenSnackbar } = useContext(OpenSnackbarContext);
 
   const { show, setShow, cartItems, setCartItems } = useContext(ShowCart);
   const [readyItemsState, setReadyItemsState] = useState([]);
@@ -77,24 +81,24 @@ export default function ContCart({ setSnackbar }) {
 
   const handelClear = useCallback(() => {
     setCartItems([]);
-    setSnackbar({
+    setOpenSnackbar({
       open: true,
       message: t("Cart Cleared Successfully"),
       color: "error",
     });
-  }, [setCartItems, setSnackbar, t]);
+  }, [setCartItems, setOpenSnackbar, t]);
 
   const onPay = useCallback(() => {
     const id = uuidv4();
     setReadyItemsState((prev) => [...prev, { id, cartItems }]);
     setCartItems([]);
     setShow(false);
-    setSnackbar({
+    setOpenSnackbar({
       open: true,
       message: t("Item's Added Successfully"),
       color: "success",
     });
-  }, [cartItems, setCartItems, setShow, setSnackbar, t]);
+  }, [cartItems, setCartItems, setOpenSnackbar, setShow, t]);
 
   // UI
 

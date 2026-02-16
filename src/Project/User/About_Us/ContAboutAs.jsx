@@ -2,7 +2,7 @@ import { useTheme } from "@mui/material";
 import AboutUs from "./PresenterAboutUs";
 import { useNavigate } from "react-router-dom";
 import { useContext, useEffect } from "react";
-import { ChefsContext } from "../Context/MainContext";
+import { ChefsContext } from "@else/Components/Context/MainContext";
 import { useTranslation } from "react-i18next";
 
 export default function ContAboutUs() {

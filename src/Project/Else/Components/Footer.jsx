@@ -1,7 +1,7 @@
 import { Facebook, GitHub, LinkedIn } from "@mui/icons-material";
 import { Box, IconButton, Stack, Typography } from "@mui/material";
 import { useContext } from "react";
-import { IsAdminContext } from "../../User/Context/MainContext";
+import { IsAdminContext } from "@else/Components/Context/MainContext";
 import { useTranslation } from "react-i18next";
 export default function Footer() {
   const { isAdmin } = useContext(IsAdminContext);

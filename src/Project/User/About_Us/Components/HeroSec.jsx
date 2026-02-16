@@ -19,7 +19,7 @@ export default function HeroSec({ isDark, navigate }) {
             : `radial-gradient(circle, rgba(255,255,255,0.1) 0%, rgba(0, 0, 0, 0.19) 100%), url('https://images.unsplash.com/photo-1514362545857-3bc16c4c7d1b?auto=format&fit=crop&w=1500')`,
           backgroundSize: "cover",
           backgroundPosition: "center",
-          backgroundAttachment: { xs: "scroll", md: "fixed" }, // الـ fixed أحياناً بيعمل غبش في الموبايل
+          backgroundAttachment: { xs: "scroll", md: "fixed" },
           mb: 8,
           borderRadius: "0 0 80px 80px",
           filter: isDark ? "brightness(0.8) contrast(1.1)" : "none",

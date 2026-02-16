@@ -17,10 +17,10 @@ import {
   Clear,
 } from "@mui/icons-material";
 import UsersCharts from "./Components/User'sCharts";
-import { fetchFakeUser } from "../../User/RTK/MainSlice";
+import { fetchFakeUser } from "@user/RTK/MainSlice";
 import CardsToShowAndTaps from "./Components/Card'sToShow";
 import AddChefModal from "./Components/AddChefComp";
-import SnackbarComp from "../../Else/Components/SnackbarComp";
+import SnackbarComp from "@else/Components/Else/SnackbarComp";
 export default function PreUser({
   t,
   dispatch,

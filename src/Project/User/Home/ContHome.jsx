@@ -1,5 +1,5 @@
 // Hooks
-import { useContext, useEffect, useState } from "react";
+import { useCallback, useContext, useEffect, useState } from "react";
 
 //Lib
 
@@ -11,13 +11,12 @@ import { useDispatch, useSelector } from "react-redux";
 import { fetchMeals } from "../RTK/MainSlice";
 import HomePre from "./PresenterHome";
 import { useTranslation } from "react-i18next";
-import { OpenSnackbarContext } from "../Context/MainContext";
+import { OpenSnackbarContext } from "@else/Components/Context/MainContext";
 
 export default function ContHome() {
   // Hooks Use
 
   const { openSnackbar, setOpenSnackbar } = useContext(OpenSnackbarContext);
-
   const { meals, loading, error } = useSelector((state) => state.meals);
   const [popularMeals, setPopularMeals] = useState([]);
   const { t } = useTranslation();
@@ -29,13 +28,11 @@ export default function ContHome() {
 
   useEffect(() => {
     if (location.state?.loginSuccess) {
-      // eslint-disable-next-line react-hooks/set-state-in-effect
       setOpenSnackbar({
         openSnackbar: true,
         message: t("login"),
         color: "success",
       });
-      
 
       window.history.replaceState({}, document.title);
     }
@@ -79,7 +76,7 @@ export default function ContHome() {
     setOpenSnackbar({ openSnackbar: false, message: "", color: "" });
   };
 
-  function toggleFavorite(id) {
+  const toggleFavorite = useCallback((id) => {
     const favFromLS = JSON.parse(localStorage.getItem("fav")) || [];
     const isFav = favFromLS.includes(id);
 
@@ -95,7 +92,7 @@ export default function ContHome() {
         meal.id === id ? { ...meal, favorite: !meal.favorite } : meal,
       ),
     );
-  }
+  }, []);
 
   // Variables
 

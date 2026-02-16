@@ -5,7 +5,7 @@ import { useContext, useEffect, useState } from "react";
 import {
   ChefsContext,
   OpenSnackbarContext,
-} from "../../User/Context/MainContext";
+} from "../../Else/Components/Context/MainContext";
 import { useTranslation } from "react-i18next";
 
 export default function ContUsers() {

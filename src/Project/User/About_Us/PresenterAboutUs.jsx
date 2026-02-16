@@ -45,7 +45,7 @@ export default function AboutUs({
       {/* ===== STATS ===== */}
       <Box
         sx={{
-          bgcolor: isDark ? "rgba(255,255,255,0.02)" : "grey.50", // خلفية أنعم في الدارك مود
+          bgcolor: isDark ? "rgba(255,255,255,0.02)" : "grey.50", 
           py: 10,
           mb: 12,
           borderTop: "1px solid",

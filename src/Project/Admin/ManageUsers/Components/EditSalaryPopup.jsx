@@ -18,7 +18,7 @@ import {
   CheckCircleRounded,
 } from "@mui/icons-material";
 import { motion } from "framer-motion";
-import { ChefsContext } from "../../../User/Context/MainContext";
+import { ChefsContext } from "@else/Components/Context/MainContext";
 import { useTranslation } from "react-i18next";
 
 export default function EditSalaryPopup({

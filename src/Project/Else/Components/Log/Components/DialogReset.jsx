@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { clearResetState, resetPassword } from "../../RTK/MainSlice";
+import { clearResetState, resetPassword } from "@user/RTK/MainSlice";
 import {
   Alert,
   Button,

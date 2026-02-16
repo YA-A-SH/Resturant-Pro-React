@@ -1,7 +1,10 @@
 import { useContext, useState } from "react";
 import DialogAdmin from "./DialogAdmin";
 import { useNavigate } from "react-router-dom";
-import { IsAdminContext, OpenSnackbarContext } from "../../Context/MainContext";
+import {
+  IsAdminContext,
+  OpenSnackbarContext,
+} from "@else/Components/Context/MainContext";
 
 export default function ContAdminDialog({ open, setOpen, t }) {
   const [secNum, setSecNum] = useState("");

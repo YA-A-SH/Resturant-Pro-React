@@ -1,7 +1,7 @@
 import { Box, Typography, Stack, Container, Grid } from "@mui/material";
 import FoodCard from "../Main/FoodCards";
 import FoodCardSkeleton from "../Skeleton/FoodCardSkeleton";
-import SnackbarComp from "../../Else/Components/SnackbarComp";
+import SnackbarComp from "@else/Components/Else/SnackbarComp";
 import HeaderHome from "./Components/HeaderHome";
 
 export default function HomePre({

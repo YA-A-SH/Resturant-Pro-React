@@ -22,8 +22,7 @@ import { InfoRow } from "./OtherCompForCard'sBase";
 import FooterCardBase from "./FooterCardBase";
 import EditSalaryPopup from "./EditSalaryPopup";
 import DeleteChefPopup from "./DeleteChefPopup";
-import SnackbarComp from "../../../Else/Components/SnackbarComp";
-import { OpenSnackbarContext } from "../../../User/Context/MainContext";
+import { OpenSnackbarContext } from "@else/Components/Context/MainContext";
 
 export default function CardBase({ t, isDark, data, id }) {
   // Hooks

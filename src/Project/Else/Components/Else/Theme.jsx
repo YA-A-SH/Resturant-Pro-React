@@ -40,7 +40,7 @@ export default function Theme({ mode, children }) {
       },
 
       typography: {
-        fontFamily: "'Playpen Sans Arabic', sans-serif",
+        fontFamily: "'Playpen Sans Arabic', 'Roboto', 'Arial', sans-serif",
       },
       components: {
         MuiButton: {

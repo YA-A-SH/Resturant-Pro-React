@@ -18,7 +18,7 @@ import FavoriteBorderOutlinedIcon from "@mui/icons-material/FavoriteBorderOutlin
 import FavoriteIcon from "@mui/icons-material/Favorite";
 import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import { useContext, useState } from "react";
-import { ShowCart } from "../Context/MainContext";
+import { ShowCart } from "@else/Components/Context/MainContext";
 import { useTranslation } from "react-i18next";
 
 export default function FoodCard({

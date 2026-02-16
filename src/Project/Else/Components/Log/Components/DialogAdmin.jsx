@@ -8,7 +8,7 @@ import {
   Slide,
   TextField,
 } from "@mui/material";
-import SnackbarComp from "../../../Else/Components/SnackbarComp";
+import SnackbarComp from "@else/Components/Else/SnackbarComp";
 
 const Transition = (props) => {
   return <Slide direction="up" {...props} />;

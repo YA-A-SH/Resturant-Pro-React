@@ -11,7 +11,7 @@ import {
 import LogoutIcon from "@mui/icons-material/Logout";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { logout } from "../RTK/MainSlice";
+import { logout } from "@user/RTK/MainSlice";
 import { motion, AnimatePresence } from "framer-motion";
 import { useContext, useEffect } from "react";
 import { IsAdminContext } from "../Context/MainContext";
@@ -22,7 +22,7 @@ export default function Logout() {
   const navigate = useNavigate();
   const dispatch = useDispatch();
   const theme = useTheme();
-  const { isAdmin, setIsAdmin } = useContext(IsAdminContext); // سحبنا قيمة isAdmin
+  const { isAdmin, setIsAdmin } = useContext(IsAdminContext);
   const isDark = theme.palette.mode === "dark";
 
   const mainColor = isAdmin

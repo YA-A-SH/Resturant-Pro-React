@@ -1,8 +1,9 @@
 import { Box, Typography, useTheme, alpha } from "@mui/material";
 
-export default function Loader() {
+export default function Loader({ id }) {
   const theme = useTheme();
-  const primaryColor = "#ff6b00"; // اللون الأساسي الفخم للموقع
+  const primaryColor =
+    id === "admin" ? theme.palette.admin.main : theme.palette.primary.main;
 
   return (
     <Box
@@ -26,7 +27,6 @@ export default function Loader() {
           alignItems: "center",
         }}
       >
-        {/* حلقة الدوران (Spinner) باستخدام CSS خالص */}
         <Box
           sx={{
             position: "absolute",
@@ -43,18 +43,17 @@ export default function Loader() {
           }}
         />
 
-        {/* النص المركزي مع تأثير النبض */}
         <Typography
           sx={{
             color: primaryColor,
-            fontSize: "1.2rem",
+            fontSize: "1.8rem",
             fontWeight: 900,
             letterSpacing: 1,
             textAlign: "center",
             animation: "pulse 2s ease-in-out infinite",
             "@keyframes pulse": {
-              "0%, 100%": { opacity: 0.6, transform: "scale(0.95)" },
-              "50%": { opacity: 1, transform: "scale(1)" },
+              "0%, 100%": { opacity: 0.3, transform: "scale(0.95)" },
+              "50%": { opacity: 1, transform: "scale(1.9)" },
             },
           }}
         >
@@ -62,7 +61,6 @@ export default function Loader() {
         </Typography>
       </Box>
 
-      {/* نص التحميل السفلي */}
       <Typography
         sx={{
           mt: 4,

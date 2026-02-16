@@ -9,12 +9,12 @@ import {
 } from "@mui/material";
 import FoodCard from "./FoodCards";
 import { useContext, useMemo, useState } from "react";
-import { OpenSnackbarContext } from "../Context/MainContext";
+import { OpenSnackbarContext } from "@else/Components/Context/MainContext";
 import SwapVertIcon from "@mui/icons-material/SwapVert";
 import FoodCardSkeleton from "../Skeleton/FoodCardSkeleton";
 // eslint-disable-next-line no-unused-vars
 import { motion, AnimatePresence } from "framer-motion";
-import SnackbarComp from "../../Else/Components/SnackbarComp";
+import SnackbarComp from "@else/Components/Else/SnackbarComp";
 import ButtonsAllComp from "./Components/ButtonsAllComp";
 import { useTranslation } from "react-i18next";
 
@@ -87,7 +87,7 @@ export default function Base({
     if (reason === "clickaway") {
       return;
     }
-    setOpenSnackbar({  openSnackbar: false });
+    setOpenSnackbar({ openSnackbar: false });
   };
 
   return (

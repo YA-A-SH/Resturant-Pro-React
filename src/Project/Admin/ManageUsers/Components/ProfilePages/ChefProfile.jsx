@@ -1,6 +1,6 @@
 import { useContext, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
-import { ChefsContext } from "../../../../User/Context/MainContext";
+import { ChefsContext } from "../../../../Else/Context/MainContext";
 import ProfileView from "./BaseProfile";
 import EliteLoader from "./Loader";
 
@@ -10,7 +10,6 @@ export default function ChefProfile() {
   const { chefs } = useContext(ChefsContext);
   const location = useLocation();
   const navigate = useNavigate();
-
 
   const chefId = location.state?.userData?.id;
   const chef = chefs.find((c) => String(c.id) === String(chefId));

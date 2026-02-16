@@ -2,16 +2,14 @@ import { Box, Typography, Stack, IconButton } from "@mui/material";
 import { CloseRounded } from "@mui/icons-material";
 import { AnimatePresence, motion } from "framer-motion";
 import MainNav from "./Components/MainNav";
-export default function PreNav({
-  showNav,
-  setMode,
-  menuItems,
-  closeNav,
-  isDark,
-  location,
-  isAdmin,
-  t,
-}) {
+import { useTranslation } from "react-i18next";
+import { useContext } from "react";
+import { IsAdminContext } from "@else/Components/Context/MainContext";
+
+export default function PreNav({ showNav, closeNav, isDark }) {
+  const { t } = useTranslation();
+  const { isAdmin } = useContext(IsAdminContext);
+
   return (
     <AnimatePresence>
       {showNav && (
@@ -71,15 +69,7 @@ export default function PreNav({
             </IconButton>
           </Stack>
 
-          <MainNav
-            t={t}
-            menuItems={menuItems}
-            closeNav={closeNav}
-            isDark={isDark}
-            setMode={setMode}
-            location={location}
-            isAdmin={isAdmin}
-          />
+          <MainNav closeNav={closeNav} isDark={isDark}  />
         </Box>
       )}
     </AnimatePresence>

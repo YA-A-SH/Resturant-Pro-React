@@ -1,4 +1,4 @@
-import { createContext, useState } from "react";
+import { createContext, useMemo, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
 
 // eslint-disable-next-line react-refresh/only-export-components
@@ -131,5 +131,23 @@ export const ChefsProvider = ({ children }) => {
     <ChefsContext.Provider value={{ chefs, setChefs }}>
       {children}
     </ChefsContext.Provider>
+  );
+};
+
+// eslint-disable-next-line react-refresh/only-export-components
+export const ModeContext = createContext();
+
+export const ModeProvider = ({ children }) => {
+  const [mode, setMode] = useState("light");
+
+  const contextValue = useMemo(
+    () => ({
+      mode,
+      setMode,
+    }),
+    [mode],
+  );
+  return (
+    <ModeContext.Provider value={contextValue}>{children}</ModeContext.Provider>
   );
 };

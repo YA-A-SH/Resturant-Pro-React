@@ -2,7 +2,7 @@ import { useEffect, useState } from "react";
 import Login from "./Login";
 import { useNavigate } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
-import { loginWithEmail, loginWithGoogle } from "../RTK/MainSlice";
+import { loginWithEmail, loginWithGoogle } from "@user/RTK/MainSlice";
 import { useTranslation } from "react-i18next";
 
 export default function ContLogin() {

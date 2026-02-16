@@ -22,8 +22,8 @@ import FooterSection from "./BaseComponents/Footer.jsx";
 import Charts from "./BaseComponents/Charts.jsx";
 import { useContext, useState } from "react";
 import AddDishModal from "./BaseComponents/AddDishModal.jsx";
-import { OpenSnackbarContext } from "../../User/Context/MainContext.jsx";
-import SnackbarComp from "../../Else/Components/SnackbarComp.jsx";
+import { OpenSnackbarContext } from "@else/Components/Context/MainContext.jsx";
+import SnackbarComp from "@else/Components/Else/SnackbarComp.jsx";
 import { useTranslation } from "react-i18next";
 export default function BaseManage({
   theme,

@@ -1,24 +1,26 @@
-import { useContext, useState } from "react";
-import ContNav from "../../User/Navbar/ContNav";
+import React, { useContext, useState } from "react";
+import ContNav from "@user/Navbar/ContNav";
 import { useNavigate } from "react-router-dom";
 import { Close, List } from "@mui/icons-material";
 import { Box, IconButton, Typography, useTheme } from "@mui/material";
 import { useSelector } from "react-redux";
-import { IsAdminContext } from "../../User/Context/MainContext";
+import {
+  IsAdminContext,
+  ModeContext,
+} from "@else/Components/Context/MainContext";
 import { useTranslation } from "react-i18next";
 
-export default function Head({ setMode, mode }) {
+const Head = React.memo(() => {
+  const { mode } = useContext(ModeContext);
+  const { isAdmin } = useContext(IsAdminContext);
   const [showNav, setShowNav] = useState(false);
+  const goUser = useSelector((state) => state.google.user);
+  const maUser = useSelector((state) => state.email.user);
   const navigate = useNavigate();
   const { t } = useTranslation();
   const theme = useTheme();
   const isDark = mode === "dark";
-
-  const goUser = useSelector((state) => state.google.user);
-  const maUser = useSelector((state) => state.email.user);
-  const { isAdmin } = useContext(IsAdminContext);
   const disabled = !!goUser || !!maUser || isAdmin;
-
   const headerBg = isAdmin
     ? isDark
       ? "rgba(15, 23, 42, 0.8)"
@@ -103,7 +105,9 @@ export default function Head({ setMode, mode }) {
         </IconButton>
       </Box>
 
-      <ContNav showNav={showNav} setMode={setMode} setShowNav={setShowNav} />
+      <ContNav showNav={showNav} setShowNav={setShowNav} />
     </>
   );
-}
+});
+
+export default Head;

@@ -1,30 +1,108 @@
 import {
+  IsAdminContext,
+  ModeContext,
+} from "@else/Components/Context/MainContext";
+import {
   DarkModeRounded,
   LightModeRounded,
   LogoutRounded,
 } from "@mui/icons-material";
 import { Box, Button, Divider, Stack } from "@mui/material";
-import { useEffect, useState } from "react";
+import { useContext, useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
+import {
+  HomeRounded,
+  PersonRounded,
+  RestaurantRounded,
+  LocalBarRounded,
+  CakeRounded,
+  InfoRounded,
+  AdminPanelSettings,
+  RestaurantMenu,
+  SupervisedUserCircle,
+  LocalBar,
+} from "@mui/icons-material";
 
-export default function MainNav({
-  menuItems,
-  location,
-  closeNav,
-  isDark,
-  setMode,
-  t,
-  isAdmin,
-}) {
-  const { i18n } = useTranslation();
+export default function MainNav({ closeNav, isDark }) {
   const [language, setLang] = useState(
     () => JSON.parse(localStorage.getItem("lang")) || "EN",
   );
+
+  const { i18n, t } = useTranslation();
+
+  const { setMode } = useContext(ModeContext);
+  const { isAdmin } = useContext(IsAdminContext);
+
+  const location = useLocation();
+
   const activeColor = isAdmin ? "admin.main" : "primary.main";
   const activeGradient = isAdmin
     ? "linear-gradient(135deg, #6366F1 0%, #A855F7 100%)"
     : "linear-gradient(135deg, #B8860B 0%, #D4AF37 100%)";
+
+  const menuItems = useMemo(() => {
+    return isAdmin
+      ? [
+          {
+            label: t("Admin Dashboard"),
+            path: "/admin",
+            icon: <AdminPanelSettings fontSize="small" />,
+          },
+          {
+            label: t("Manage Users"),
+            path: "/admin/manage-users",
+            icon: <SupervisedUserCircle fontSize="small" />,
+          },
+          {
+            label: t("ManageMeals"),
+            path: "/admin/manageMeals",
+            icon: <RestaurantMenu fontSize="small" />,
+          },
+          {
+            label: t("Manage Drinks"),
+            path: "/admin/manageDrinks",
+            icon: <LocalBar fontSize="small" />,
+          },
+          {
+            label: t("Manage Sweets"),
+            path: "/admin/manageSweets",
+            icon: <CakeRounded fontSize="small" />,
+          },
+        ]
+      : [
+          {
+            label: t("Home"),
+            path: "/",
+            icon: <HomeRounded fontSize="small" />,
+          },
+          {
+            label: t("Profile"),
+            path: "/profile",
+            icon: <PersonRounded fontSize="small" />,
+          },
+          {
+            label: t("Meals"),
+            path: "/meals",
+            icon: <RestaurantRounded fontSize="small" />,
+          },
+          {
+            label: t("Drinks"),
+            path: "/drinks",
+            icon: <LocalBarRounded fontSize="small" />,
+          },
+          {
+            label: t("Sweets"),
+            path: "/sweet",
+            icon: <CakeRounded fontSize="small" />,
+          },
+          {
+            label: t("About us"),
+            path: "/aboutUs",
+            icon: <InfoRounded fontSize="small" />,
+          },
+        ];
+  }, [isAdmin, t]);
 
   useEffect(() => {
     localStorage.setItem("lang", JSON.stringify(language));
