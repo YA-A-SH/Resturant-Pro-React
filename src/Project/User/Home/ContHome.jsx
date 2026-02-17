@@ -55,7 +55,6 @@ const ContHome = React.memo(() => {
           favorite: favFromLS.includes(meal.idMeal),
         }));
 
-      // eslint-disable-next-line react-hooks/set-state-in-effect
       setPopularMeals(fixedMeals);
     }
   }, [meals]);

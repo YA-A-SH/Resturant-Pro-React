@@ -230,7 +230,7 @@ const HeaderHome = React.memo(() => {
         {/* --- Logo --- */}
         <Box
           component="img"
-          src="/favBig.png"
+          src="/favBig.webp"
           alt="Logo"
           sx={{
             height: {
