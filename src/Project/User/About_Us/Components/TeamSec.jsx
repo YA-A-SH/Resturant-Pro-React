@@ -1,7 +1,13 @@
+import { ChefsContext } from "@else/Components/Context/MainContext";
 import { GroupsRounded } from "@mui/icons-material";
 import { Avatar, Box, Container, Grid, Stack, Typography } from "@mui/material";
+import React, { useContext } from "react";
+import { useTranslation } from "react-i18next";
 
-export default function TeamSec({ teamMembers, t }) {
+const TeamSec = React.memo(() => {
+  const { t } = useTranslation();
+  const { chefs } = useContext(ChefsContext);
+
   return (
     <>
       <Container maxWidth="lg">
@@ -21,7 +27,7 @@ export default function TeamSec({ teamMembers, t }) {
             alignItems: "center",
           }}
         >
-          {teamMembers.map((member) => (
+          {chefs.map((member) => (
             <Grid key={member.name} item xs={12} sm={6} md={4}>
               <Box sx={{ textAlign: "center", position: "relative" }}>
                 <Avatar
@@ -55,4 +61,5 @@ export default function TeamSec({ teamMembers, t }) {
       </Container>
     </>
   );
-}
+});
+export default TeamSec;

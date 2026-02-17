@@ -1,9 +1,14 @@
 import { ChevronRightRounded } from "@mui/icons-material";
-import { Box, Button, Container, Typography } from "@mui/material";
+import { Box, Button, Container, Typography, useTheme } from "@mui/material";
+import React from "react";
 import { useTranslation } from "react-i18next";
-
-export default function HeroSec({ isDark, navigate }) {
+import { useNavigate } from "react-router-dom";
+const HeroSec = React.memo(() => {
   const { t } = useTranslation();
+  const navigate = useNavigate();
+  const theme = useTheme();
+  const isDark = theme.palette.mode === "dark";
+
   return (
     <>
       <Box
@@ -92,4 +97,6 @@ export default function HeroSec({ isDark, navigate }) {
       </Box>
     </>
   );
-}
+});
+
+export default HeroSec;

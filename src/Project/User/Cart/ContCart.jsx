@@ -1,45 +1,29 @@
-// Contexts
-
 import {
   OpenSnackbarContext,
   ShowCart,
 } from "@else/Components/Context/MainContext";
-
-//Hooks
-
-import { useCallback, useContext, useEffect, useState } from "react";
-
-// Lib
-
+import { useCallback, useContext, useEffect, useMemo, useState } from "react";
 import { v4 as uuidv4 } from "uuid";
-import { useMediaQuery } from "@mui/material";
-import { useNavigate } from "react-router-dom";
-import { useTheme } from "@emotion/react";
-
-//Components
-
 import CartPre from "./PresenterCart";
 import { useTranslation } from "react-i18next";
 
 export default function ContCart() {
   // Hooks Use
+  const { setShow, cartItems, setCartItems } = useContext(ShowCart);
   const { setOpenSnackbar } = useContext(OpenSnackbarContext);
 
-  const { show, setShow, cartItems, setCartItems } = useContext(ShowCart);
   const [readyItemsState, setReadyItemsState] = useState([]);
-  const navigate = useNavigate();
-  const { t } = useTranslation();
 
-  const theme = useTheme();
+  const { t } = useTranslation();
 
   // Variables
 
-  const isDark = theme.palette.mode === "dark";
-  const fullScreen = useMediaQuery(theme.breakpoints.down("md"));
-  const totalPrice = (cartItems || []).reduce(
-    (acc, item) => acc + item.price * item.quantity,
-    0,
-  );
+  const totalPrice = useMemo(() => {
+    return (cartItems || []).reduce(
+      (acc, item) => acc + item.price * item.quantity,
+      0,
+    );
+  }, [cartItems]);
 
   // Effect
 
@@ -58,26 +42,6 @@ export default function ContCart() {
   const handleClose = useCallback(() => {
     setShow(false);
   }, [setShow]);
-
-  const onDecrease = useCallback(
-    (id) => {
-      setCartItems((prev) =>
-        prev
-          .map((e) => (e.id === id ? { ...e, quantity: e.quantity - 1 } : e))
-          .filter((e) => e.quantity > 0),
-      );
-    },
-    [setCartItems],
-  );
-
-  const onIncrease = useCallback(
-    (id) => {
-      setCartItems((prev) =>
-        prev.map((e) => (e.id === id ? { ...e, quantity: e.quantity + 1 } : e)),
-      );
-    },
-    [setCartItems],
-  );
 
   const handelClear = useCallback(() => {
     setCartItems([]);
@@ -104,19 +68,10 @@ export default function ContCart() {
 
   return (
     <CartPre
-      show={show}
-      fullScreen={fullScreen}
       totalPrice={totalPrice}
-      navigate={navigate}
-      isDark={isDark}
-      cartItems={cartItems}
-      setShow={setShow}
-      onDecrease={onDecrease}
-      onIncrease={onIncrease}
       onPay={onPay}
       handelClear={handelClear}
       handleClose={handleClose}
-      t={t}
     />
   );
 }

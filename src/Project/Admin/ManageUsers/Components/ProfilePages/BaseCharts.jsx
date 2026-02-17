@@ -14,7 +14,7 @@ import {
   YAxis,
   CartesianGrid,
 } from "recharts";
-import ChartCard from "../../../Main/Components/ChartCard";
+import ChartCard from "@admin/Main/Components/ChartCard";
 import { motion, AnimatePresence } from "framer-motion";
 
 export default function BaseCharts({ t, type, isDark, chartData }) {

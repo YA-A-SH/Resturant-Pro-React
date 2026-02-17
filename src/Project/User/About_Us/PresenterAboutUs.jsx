@@ -1,43 +1,35 @@
-import { Box, Typography, Grid, Container, Paper } from "@mui/material";
+import {
+  Box,
+  Typography,
+  Grid,
+  Container,
+  Paper,
+  useTheme,
+} from "@mui/material";
 import Mission from "./Components/Missions";
 import Counter from "./Components/Counter";
 import TeamSec from "./Components/TeamSec";
 import HeroSec from "./Components/HeroSec";
+import { useTranslation } from "react-i18next";
+import React from "react";
 
-export default function AboutUs({
-  theme,
-  navigate,
-  textSecondary,
-  cardBg,
-  teamMembers,
-  stats,
-  isDark,
-  t,
-}) {
+const AboutUs = React.memo(({ stats }) => {
+  const { t } = useTranslation();
+  const theme = useTheme();
+  const isDark = theme.palette.mode === "dark";
+
   return (
     <Box sx={{ minHeight: "100vh", bgcolor: "background.default", pb: 10 }}>
       {/* ===== LUXURY HERO SECTION ===== */}
-      <HeroSec navigate={navigate} isDark={isDark} />
+      <HeroSec />
 
       {/* ===== MISSION & VISION ===== */}
       <Container maxWidth="lg" sx={{ mb: 12 }}>
         <Grid container spacing={4}>
-          <Mission
-            msg={t("Our Mission")}
-            msgBody={t("desc 4")}
-            cardBg={cardBg}
-            theme={theme}
-            textSecondary={textSecondary}
-          />
+          <Mission msg={t("Our Mission")} msgBody={t("desc 4")} />
 
           <Grid item xs={12} md={6} sx={{ mt: { md: 6 } }}>
-            <Mission
-              msg={t("Our Vision")}
-              msgBody={t("desc 5")}
-              cardBg={cardBg}
-              theme={theme}
-              textSecondary={textSecondary}
-            />
+            <Mission msg={t("Our Vision")} msgBody={t("desc 5")} />
           </Grid>
         </Grid>
       </Container>
@@ -45,7 +37,7 @@ export default function AboutUs({
       {/* ===== STATS ===== */}
       <Box
         sx={{
-          bgcolor: isDark ? "rgba(255,255,255,0.02)" : "grey.50", 
+          bgcolor: isDark ? "rgba(255,255,255,0.02)" : "grey.50",
           py: 10,
           mb: 12,
           borderTop: "1px solid",
@@ -122,7 +114,9 @@ export default function AboutUs({
         </Container>
       </Box>
       {/* ===== TEAM SECTION ===== */}
-      <TeamSec teamMembers={teamMembers} t={t} />
+      <TeamSec />
     </Box>
   );
-}
+});
+
+export default AboutUs;

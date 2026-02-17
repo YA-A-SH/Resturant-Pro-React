@@ -10,7 +10,7 @@ import {
 import { alpha, Box, Button, Stack, Tooltip } from "@mui/material";
 import { ActionButton } from "./OtherCompForCard'sBase";
 import { useNavigate } from "react-router-dom";
-import { toggleBlocked, toggleVerified } from "../../../User/RTK/MainSlice";
+import { toggleBlocked, toggleVerified } from "@user/RTK/MainSlice";
 import { useDispatch } from "react-redux";
 
 export default function FooterCardBase({

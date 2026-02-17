@@ -11,16 +11,42 @@ import {
   Avatar,
   Typography,
   IconButton,
+  useMediaQuery,
+  useTheme,
 } from "@mui/material";
 import { RemoveCircleOutline, AddCircleOutline } from "@mui/icons-material";
+import { useTranslation } from "react-i18next";
+import React, { useCallback, useContext } from "react";
+import { ShowCart } from "@else/Components/Context/MainContext";
 
-export default function DialogCont({
-  fullScreen,
-  cartItems,
-  onDecrease,
-  onIncrease,
-  t,
-}) {
+const DialogCont = React.memo(() => {
+  const { cartItems, setCartItems } = useContext(ShowCart);
+
+  const { t } = useTranslation();
+  const theme = useTheme();
+
+  const fullScreen = useMediaQuery(theme.breakpoints.down("md"));
+
+  // Functions
+  const onDecrease = useCallback(
+    (id) => {
+      setCartItems((prev) =>
+        prev
+          .map((e) => (e.id === id ? { ...e, quantity: e.quantity - 1 } : e))
+          .filter((e) => e.quantity > 0),
+      );
+    },
+    [setCartItems],
+  );
+
+  const onIncrease = useCallback(
+    (id) => {
+      setCartItems((prev) =>
+        prev.map((e) => (e.id === id ? { ...e, quantity: e.quantity + 1 } : e)),
+      );
+    },
+    [setCartItems],
+  );
   return (
     <>
       <DialogContent dividers sx={{ p: { xs: 1, sm: 2 } }}>
@@ -123,4 +149,5 @@ export default function DialogCont({
       </DialogContent>
     </>
   );
-}
+});
+export default DialogCont;

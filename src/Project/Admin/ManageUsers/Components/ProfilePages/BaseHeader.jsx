@@ -9,7 +9,7 @@ import {
 import { alpha, Box, Button } from "@mui/material";
 import { motion } from "framer-motion";
 import { useDispatch } from "react-redux";
-import { toggleBlocked, toggleVerified } from "../../../../User/RTK/MainSlice";
+import { toggleBlocked, toggleVerified } from "@user/RTK/MainSlice";
 import HeaderContent from "./HeaderContent";
 export default function BaseHeader({
   t,

@@ -1,6 +1,14 @@
+import { ShowCart } from "@else/Components/Context/MainContext";
 import { Avatar, Box, Button, Typography } from "@mui/material";
+import { useContext } from "react";
+import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 
-export default function IsEmpty({ navigate, setShow, t }) {
+export default function IsEmpty() {
+  const { setShow } = useContext(ShowCart);
+  const navigate = useNavigate();
+  const { t } = useTranslation();
+
   return (
     <>
       <Box
@@ -34,8 +42,7 @@ export default function IsEmpty({ navigate, setShow, t }) {
           {t("Your Cart is Empty!")}
         </Typography>
         <Typography variant="body1" color="text.secondary">
-       {t("desc 6")}
-
+          {t("desc 6")}
         </Typography>
         <Button
           variant="contained"
@@ -46,8 +53,7 @@ export default function IsEmpty({ navigate, setShow, t }) {
             navigate("/meals");
           }}
         >
-         {t("Go Shopping")}
-
+          {t("Go Shopping")}
         </Button>
       </Box>
     </>

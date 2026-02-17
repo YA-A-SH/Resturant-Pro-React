@@ -1,13 +1,13 @@
 import { EmojiObjects } from "@mui/icons-material";
-import { Card, Grid, Stack, Typography } from "@mui/material";
+import { Card, Grid, Stack, Typography, useTheme } from "@mui/material";
+import React from "react";
 
-export default function Mission({
-  cardBg,
-  theme,
-  textSecondary,
-  msg,
-  msgBody,
-}) {
+const Mission = React.memo(({ msg, msgBody }) => {
+  const theme = useTheme();
+  const cardBg =
+    theme.palette.mode === "dark" ? theme.palette.background.paper : "#fff";
+  const textSecondary = theme.palette.text.secondary;
+
   return (
     <>
       <Grid item xs={12} md={6}>
@@ -32,4 +32,5 @@ export default function Mission({
       </Grid>
     </>
   );
-}
+});
+export default Mission;
