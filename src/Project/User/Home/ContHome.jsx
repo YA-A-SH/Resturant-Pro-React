@@ -1,9 +1,8 @@
 // Hooks
-import { useCallback, useContext, useEffect, useState } from "react";
+import React, { useCallback, useContext, useEffect, useState } from "react";
 
 //Lib
 
-import { useTheme } from "@mui/material";
 import { useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
@@ -13,16 +12,14 @@ import HomePre from "./PresenterHome";
 import { useTranslation } from "react-i18next";
 import { OpenSnackbarContext } from "@else/Components/Context/MainContext";
 
-export default function ContHome() {
+const ContHome = React.memo(() => {
   // Hooks Use
-
   const { openSnackbar, setOpenSnackbar } = useContext(OpenSnackbarContext);
   const { meals, loading, error } = useSelector((state) => state.meals);
   const [popularMeals, setPopularMeals] = useState([]);
   const { t } = useTranslation();
   const location = useLocation();
   const dispatch = useDispatch();
-  const theme = useTheme();
 
   // Effects
 
@@ -65,50 +62,31 @@ export default function ContHome() {
 
   useEffect(() => {
     document.title = t("title");
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, []);
 
-  // Functions
-
-  const handleCloseSnackbar = (reason) => {
-    if (reason === "clickaway") {
-      return;
-    }
-    setOpenSnackbar({ openSnackbar: false, message: "", color: "" });
-  };
-
-  const toggleFavorite = useCallback((id) => {
-    const favFromLS = JSON.parse(localStorage.getItem("fav")) || [];
-    const isFav = favFromLS.includes(id);
-
-    if (isFav) {
-      const newFav = favFromLS.filter((favId) => favId !== id);
-      localStorage.setItem("fav", JSON.stringify(newFav));
-    } else {
-      localStorage.setItem("fav", JSON.stringify([...favFromLS, id]));
-    }
-
-    setPopularMeals((prevMeals) =>
-      prevMeals.map((meal) =>
-        meal.id === id ? { ...meal, favorite: !meal.favorite } : meal,
-      ),
-    );
-  }, []);
+  const handleCloseSnackbar = useCallback(
+    (reason) => {
+      if (reason === "clickaway") {
+        return;
+      }
+      setOpenSnackbar({ openSnackbar: false, message: "", color: "" });
+    },
+    [setOpenSnackbar],
+  );
 
   // Variables
-
-  const isDark = theme.palette.mode === "dark";
 
   return (
     <HomePre
       loading={loading}
       error={error}
       popularMeals={popularMeals}
-      toggleFavorite={toggleFavorite}
-      isDark={isDark}
+      handleCloseSnackbar={handleCloseSnackbar}
+      setPopularMeals={setPopularMeals}
       openSnackbar={openSnackbar}
       setOpenSnackbar={setOpenSnackbar}
-      handleCloseSnackbar={handleCloseSnackbar}
-      t={t}
     />
   );
-}
+});
+export default ContHome;

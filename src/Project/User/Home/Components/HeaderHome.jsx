@@ -8,10 +8,11 @@ import {
   Typography,
   useTheme,
 } from "@mui/material";
+import React from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 
-export default function HeaderHome() {
+const HeaderHome = React.memo(() => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const theme = useTheme();
@@ -215,7 +216,7 @@ export default function HeaderHome() {
               color="text.secondary"
               sx={{
                 fontWeight: 600,
-                textAlign: { xxs: "center", sm: "left" }, // النص نفسه يتوسط في الموبايل
+                textAlign: { xxs: "center", sm: "left" },
               }}
             >
               {t("Join")}{" "}
@@ -249,4 +250,5 @@ export default function HeaderHome() {
       </Box>
     </Box>
   );
-}
+});
+export default HeaderHome;

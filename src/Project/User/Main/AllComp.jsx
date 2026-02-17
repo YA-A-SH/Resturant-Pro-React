@@ -29,8 +29,8 @@ export default function Base({
   setSelectedType,
   sortAscending,
   setSortAscending,
-  toggleFavorite,
   itemsPerPage = 12,
+  setPopularMeals,
 }) {
   //Hooks Use
   const { openSnackbar, setOpenSnackbar } = useContext(OpenSnackbarContext);
@@ -191,7 +191,7 @@ export default function Base({
                       <FoodCard
                         {...item}
                         setOpenSnackbar={setOpenSnackbar}
-                        toggleFavorite={toggleFavorite}
+                        setPopularMeals={setPopularMeals}
                       />
                     </Box>
                   </Grid>

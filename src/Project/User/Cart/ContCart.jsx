@@ -2,12 +2,18 @@ import {
   OpenSnackbarContext,
   ShowCart,
 } from "@else/Components/Context/MainContext";
-import { useCallback, useContext, useEffect, useMemo, useState } from "react";
+import React, {
+  useCallback,
+  useContext,
+  useEffect,
+  useMemo,
+  useState,
+} from "react";
 import { v4 as uuidv4 } from "uuid";
 import CartPre from "./PresenterCart";
 import { useTranslation } from "react-i18next";
 
-export default function ContCart() {
+const ContCart = React.memo(() => {
   // Hooks Use
   const { setShow, cartItems, setCartItems } = useContext(ShowCart);
   const { setOpenSnackbar } = useContext(OpenSnackbarContext);
@@ -74,4 +80,5 @@ export default function ContCart() {
       handleClose={handleClose}
     />
   );
-}
+});
+export default ContCart;

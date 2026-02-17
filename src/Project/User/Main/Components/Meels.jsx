@@ -53,24 +53,6 @@ export default function Meals() {
     sortAscending ? a.price - b.price : b.price - a.price,
   );
 
-  function toggleFavorite(id) {
-    const favFromLS = JSON.parse(localStorage.getItem("fav")) || [];
-    const isFav = favFromLS.includes(id);
-
-    if (isFav) {
-      const newFav = favFromLS.filter((favId) => favId !== id);
-      localStorage.setItem("fav", JSON.stringify(newFav));
-    } else {
-      localStorage.setItem("fav", JSON.stringify([...favFromLS, id]));
-    }
-
-    setPreparedMeals((prevMeals) =>
-      prevMeals.map((meal) =>
-        meal.id === id ? { ...meal, favorite: !meal.favorite } : meal,
-      ),
-    );
-  }
-
   return (
     <>
       <Base
@@ -82,7 +64,7 @@ export default function Meals() {
         setSelectedType={setSelectedType}
         sortAscending={sortAscending}
         setSortAscending={setSortAscending}
-        toggleFavorite={toggleFavorite}
+        setPopularMeals={setPreparedMeals}
       />
     </>
   );
