@@ -1,10 +1,10 @@
 import { useSelector, useDispatch } from "react-redux";
-import { useEffect, useState } from "react";
+import React, { useEffect, useMemo, useState } from "react";
 import { fetchDrinks, fetchSweets } from "../../RTK/MainSlice";
 import Base from "../AllComp";
 import { useTranslation } from "react-i18next";
 
-export default function SweetsAndDrinks({ type }) {
+const SweetsAndDrinks = React.memo(({ type }) => {
   const { meals, loading, error } = useSelector((st) =>
     type === "drinks" ? st.drinks : st.sweet,
   );
@@ -17,6 +17,7 @@ export default function SweetsAndDrinks({ type }) {
     type === "drinks"
       ? (document.title = t("Zeus Restaurant | Drinks"))
       : (document.title = t("Zeus Restaurant | Sweets"));
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [type]);
 
   useEffect(() => {
@@ -45,10 +46,11 @@ export default function SweetsAndDrinks({ type }) {
     }
   }, [meals, type]);
 
-  const sortedMeals = [...preparedMeals].sort((a, b) =>
-    sortAscending ? a.price - b.price : b.price - a.price,
-  );
-
+  const sortedMeals = useMemo(() => {
+    return [...preparedMeals].sort((a, b) =>
+      sortAscending ? a.price - b.price : b.price - a.price,
+    );
+  }, [preparedMeals, sortAscending]);
   return (
     <Base
       loading={loading}
@@ -66,4 +68,5 @@ export default function SweetsAndDrinks({ type }) {
       setPopularMeals={setPreparedMeals}
     />
   );
-}
+});
+export default SweetsAndDrinks;

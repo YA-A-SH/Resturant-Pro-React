@@ -2,9 +2,12 @@ import { Favorite, HeartBrokenRounded } from "@mui/icons-material";
 import { Box, Card, IconButton, Typography, useTheme } from "@mui/material";
 // eslint-disable-next-line no-unused-vars
 import { motion, AnimatePresence } from "framer-motion";
+import React from "react";
+import { useTranslation } from "react-i18next";
 
-export default function FavoriteComp({ t, fav, toggleFavorite }) {
+const FavoriteComp = React.memo(({ fav, toggleFavorite }) => {
   const theme = useTheme();
+  const { t } = useTranslation();
   const isDark = theme.palette.mode === "dark";
 
   return (
@@ -97,7 +100,7 @@ export default function FavoriteComp({ t, fav, toggleFavorite }) {
                     }}
                   >
                     <motion.img
-                      whileHover={{ scale: 1.1 }} // زووم خفيف عند الوقوف بالماوس
+                      whileHover={{ scale: 1.1 }}
                       transition={{ duration: 0.4 }}
                       src={item.image}
                       style={{
@@ -154,4 +157,5 @@ export default function FavoriteComp({ t, fav, toggleFavorite }) {
       )}
     </Box>
   );
-}
+});
+export default FavoriteComp;

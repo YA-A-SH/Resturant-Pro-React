@@ -6,17 +6,22 @@ import {
   DialogTitle,
   TextField,
 } from "@mui/material";
+import { useTranslation } from "react-i18next";
 
 export default function EditProfile({
-  t,
   editOpen,
   handleEditClose,
   userMoreInfo,
   setUserMoreInfo,
   handleSave,
-  u,
-  accType,
 }) {
+  const { t } = useTranslation();
+  const u = JSON.parse(localStorage.getItem("user"));
+  const accType =
+    u?.providerData?.[0]?.providerId === "google.com"
+      ? "Google Account"
+      : "Email Account";
+
   return (
     <Dialog open={editOpen} onClose={handleEditClose}>
       <DialogTitle textAlign="center">{t("Edit Profile")}</DialogTitle>

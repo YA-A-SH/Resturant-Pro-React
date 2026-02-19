@@ -26,7 +26,6 @@ export default function Meals() {
   useEffect(() => {
     if (meals.length) {
       const favFromLS = JSON.parse(localStorage.getItem("fav")) || [];
-
       const fixedMeals = meals.map((meal) => ({
         id: meal.idMeal,
         title: meal.strMeal,

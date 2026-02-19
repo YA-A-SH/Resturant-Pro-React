@@ -1,17 +1,10 @@
-import { useTheme } from "@emotion/react";
 import PreProfile from "./PresenterProfile";
-import { useEffect, useState } from "react";
-import {
-  CalendarToday,
-  Email,
-  LocationOn,
-  Phone,
-  Receipt,
-} from "@mui/icons-material";
+import React, { useCallback, useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 
-export default function ContProfile() {
+const ContProfile = React.memo(() => {
   // Hooks Use
+  const { t } = useTranslation();
 
   const [deletePopupInfo, setDeletePopupInfo] = useState({
     id: "",
@@ -28,47 +21,11 @@ export default function ContProfile() {
   const [editOpen, setEditOpen] = useState(false);
   const [favMeals, setFavMeals] = useState([]);
   const [userMoreInfo, setUserMoreInfo] = useState({
-    phone: "No Phone Provided",
-    address: "No Address Provided",
-    mail: "No Email Provided",
-    name: "User",
+    phone: t("No Phone Provided"),
+    address: t("No Address Provided"),
+    mail: t("No Email Provided"),
+    name: t("User"),
   });
-  const theme = useTheme();
-  const { t } = useTranslation();
-  // Variables
-
-  const u = JSON.parse(localStorage.getItem("user"));
-
-  const isDark = theme.palette.mode === "dark";
-
-  const accType =
-    u?.providerData?.[0]?.providerId === "google.com"
-      ? "Google Account"
-      : "Email Account";
-
-  const info = [
-    { icon: <Phone />, label: t("Phone"), value: userMoreInfo.phone },
-    {
-      icon: <LocationOn />,
-      label: t("Address"),
-      value: userMoreInfo.address,
-    },
-    {
-      icon: <CalendarToday />,
-      label: t("Joined On"),
-      value: new Date(1766304856103).toDateString(),
-    },
-    {
-      icon: <Receipt />,
-      label: t("Last Login"),
-      value: new Date(Number(u?.lastLoginAt)).toLocaleString(),
-    },
-    {
-      icon: <Email />,
-      label: t("Email"),
-      value: accType === "Email Account" ? u?.email : userMoreInfo.mail,
-    },
-  ];
 
   //  Side Effects
   useEffect(() => {
@@ -105,16 +62,16 @@ export default function ContProfile() {
 
   // ================== FUNCTIONS ==================
 
-  const handleEditOpen = () => setEditOpen(true);
+  const handleEditOpen = useCallback(() => setEditOpen(true), []);
 
-  const handleEditClose = () => setEditOpen(false);
+  const handleEditClose = useCallback(() => setEditOpen(false), []);
 
-  const handleSave = () => {
+  const handleSave = useCallback(() => {
     localStorage.setItem("userMoreInfo", JSON.stringify(userMoreInfo));
     setEditOpen(false);
-  };
+  }, [userMoreInfo]);
 
-  function toggleFavorite(id) {
+  const toggleFavorite = useCallback((id) => {
     const favFromLS = JSON.parse(localStorage.getItem("fav")) || [];
     const isFav = favFromLS.includes(id);
 
@@ -127,9 +84,9 @@ export default function ContProfile() {
     setFavMeals((prev) =>
       isFav ? prev.filter((item) => item.id !== id) : prev,
     );
-  }
+  }, []);
 
-  function handleDeleteItem(cartId, itemId) {
+  const handleDeleteItem = useCallback((cartId, itemId) => {
     setPaid((prev) =>
       prev
         .map((order) =>
@@ -142,68 +99,68 @@ export default function ContProfile() {
         )
         .filter((order) => order.cartItems.length > 0),
     );
-  }
+  }, []);
 
-  function handleDeleteCartOrder(id) {
+  const handleDeleteCartOrder = useCallback((id) => {
     setPaid((prev) => {
       const updated = prev.filter((order) => order.id !== id);
       return updated;
     });
-  }
+  }, []);
 
-  function handleDeletePopupClose() {
+  const handleDeletePopupClose = useCallback(() => {
     setDeletePopupInfo({ ...deletePopupInfo, open: false });
-  }
-
+  }, [deletePopupInfo]);
   // ================== Obj For Props  ==================
 
-  const user = {
-    u: u,
-    userMoreInfo: userMoreInfo,
-    accType: accType,
-  };
+  const handlersAndToggles = useMemo(
+    () => ({
+      handleEditOpen,
+      handleEditClose,
+      handleSave,
+      handleDeleteItem,
+      handleDeleteCartOrder,
+      handleDeletePopupClose,
+      toggleFavorite,
+    }),
+    [
+      handleEditOpen,
+      handleEditClose,
+      handleSave,
+      handleDeleteItem,
+      handleDeleteCartOrder,
+      handleDeletePopupClose,
+      toggleFavorite,
+    ],
+  );
 
-  const handlersAndToggles = {
-    handleEditOpen: handleEditOpen,
-    handleEditClose: handleEditClose,
-    handleSave: handleSave,
-    handleDeleteItem: handleDeleteItem,
-    handleDeleteCartOrder: handleDeleteCartOrder,
-    handleDeletePopupClose: handleDeletePopupClose,
-    toggleFavorite: toggleFavorite,
-  };
+  const mealsTypes = useMemo(
+    () => ({
+      fav: favMeals,
+    }),
+    [favMeals],
+  );
 
-  const mealsTypes = {
-    fav: favMeals,
-  };
+  const state = useMemo(
+    () => ({
+      editOpen: editOpen,
+      paid: paid,
+      deletePopupInfo: deletePopupInfo,
+    }),
+    [editOpen, paid, deletePopupInfo],
+  );
 
-  const state = {
-    editOpen: editOpen,
-    paid: paid,
-    deletePopupInfo: deletePopupInfo,
-  };
-
-  const setState = {
-    setUserMoreInfo: setUserMoreInfo,
-    setDeletePopupInfo: setDeletePopupInfo,
-  };
-
-  const variables = {
-    theme: theme,
-    info: info,
-    isDark: isDark,
-  };
   // ================== RENDER ==================
 
   return (
     <PreProfile
-      t={t}
-      user={user}
+      userMoreInfo={userMoreInfo}
       handlersAndToggles={handlersAndToggles}
       mealsTypes={mealsTypes}
       state={state}
-      setState={setState}
-      variables={variables}
+      setUserMoreInfo={setUserMoreInfo}
+      setDeletePopupInfo={setDeletePopupInfo}
     />
   );
-}
+});
+export default ContProfile;

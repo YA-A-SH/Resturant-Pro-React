@@ -1,10 +1,12 @@
+import React from "react";
 import SweetsAndDrinks from "./Sweets&DrinksBaseComp";
 
-export default function Sweets() {
+const Sweets = React.memo(() => {
   const type = "sweets";
   return (
     <>
       <SweetsAndDrinks type={type} />
     </>
   );
-}
+});
+export default Sweets;

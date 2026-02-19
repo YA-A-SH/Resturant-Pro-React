@@ -7,20 +7,24 @@ import {
   Container,
   Stack,
   Typography,
+  useTheme,
 } from "@mui/material";
 
 // eslint-disable-next-line no-unused-vars
 import { motion } from "framer-motion";
+import React from "react";
+import { useTranslation } from "react-i18next";
 
-export default function HeroSecProfile({
-  isDark,
-  theme,
-  u,
-  accType,
-  userMoreInfo,
-  handleEditOpen,
-  t,
-}) {
+const HeroSecProfile = React.memo(({ userMoreInfo, handleEditOpen }) => {
+  const theme = useTheme();
+  const { t } = useTranslation();
+  const isDark = theme.palette.mode === "dark";
+  const u = JSON.parse(localStorage.getItem("user"));
+  const accType =
+    u?.providerData?.[0]?.providerId === "google.com"
+      ? "Google Account"
+      : "Email Account";
+
   return (
     <>
       <Box
@@ -118,4 +122,5 @@ export default function HeroSecProfile({
       </Box>
     </>
   );
-}
+});
+export default HeroSecProfile;

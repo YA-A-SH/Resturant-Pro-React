@@ -10,16 +10,11 @@ import {
 import { Close, WarningAmberRounded, DeleteSweep } from "@mui/icons-material";
 // eslint-disable-next-line no-unused-vars
 import { motion, AnimatePresence } from "framer-motion";
+import { useTranslation } from "react-i18next";
 
-const DeletePopup = ({
-  t,
-  open,
-  handleClose,
-  handleDelete,
-  id,
-  msg1,
-  msg2,
-}) => {
+const DeletePopup = ({ open, handleClose, handleDelete, id, msg1, msg2 }) => {
+  const { t } = useTranslation();
+
   const theme = useTheme();
   const isDark = theme.palette.mode === "dark";
 

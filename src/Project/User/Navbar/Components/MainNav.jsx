@@ -7,8 +7,8 @@ import {
   LightModeRounded,
   LogoutRounded,
 } from "@mui/icons-material";
-import { Box, Button, Divider, Stack } from "@mui/material";
-import { useContext, useEffect, useMemo, useState } from "react";
+import { Box, Button, Divider, Stack, useTheme } from "@mui/material";
+import React, { useContext, useEffect, useMemo, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { Link, useLocation } from "react-router-dom";
 import {
@@ -24,10 +24,12 @@ import {
   LocalBar,
 } from "@mui/icons-material";
 
-export default function MainNav({ closeNav, isDark }) {
+const MainNav = React.memo(({ closeNav }) => {
   const [language, setLang] = useState(
     () => JSON.parse(localStorage.getItem("lang")) || "EN",
   );
+  const theme = useTheme();
+  const isDark = theme.palette.mode === "dark";
 
   const { i18n, t } = useTranslation();
 
@@ -252,4 +254,5 @@ export default function MainNav({ closeNav, isDark }) {
       </Button>
     </Stack>
   );
-}
+});
+export default MainNav;

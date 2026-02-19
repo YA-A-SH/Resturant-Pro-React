@@ -1,6 +1,7 @@
+import React from "react";
 import SweetsAndDrinks from "./Sweets&DrinksBaseComp";
 
-export default function Drinks() {
+const Drinks = React.memo(() => {
   const type = "drinks";
 
   return (
@@ -8,4 +9,5 @@ export default function Drinks() {
       <SweetsAndDrinks type={type} />
     </>
   );
-}
+});
+export default Drinks;

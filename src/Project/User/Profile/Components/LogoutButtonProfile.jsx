@@ -1,7 +1,12 @@
 import { LogoutRounded } from "@mui/icons-material";
-import { Box, Button, Typography } from "@mui/material";
+import { Box, Button, Typography, useTheme } from "@mui/material";
+import React from "react";
+import { useTranslation } from "react-i18next";
+import { Link } from "react-router-dom";
 
-export default function LogoutBTNProfile({ t, Link, theme }) {
+const LogoutBTNProfile = React.memo(() => {
+  const theme = useTheme();
+  const { t } = useTranslation();
   return (
     <>
       <Box sx={{ mt: 15, textAlign: "center" }}>
@@ -40,4 +45,5 @@ export default function LogoutBTNProfile({ t, Link, theme }) {
       </Box>
     </>
   );
-}
+});
+export default LogoutBTNProfile;

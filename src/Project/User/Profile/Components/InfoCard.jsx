@@ -1,6 +1,57 @@
 import { Box, Card, Grid, Stack, Typography } from "@mui/material";
+import { useTranslation } from "react-i18next";
+import {
+  CalendarToday,
+  Email,
+  LocationOn,
+  Phone,
+  Receipt,
+} from "@mui/icons-material";
+import React, { useMemo } from "react";
 
-export default function InfoCards({ info ,t }) {
+const InfoCards = React.memo(({ userMoreInfo }) => {
+  const { t } = useTranslation();
+  const u = JSON.parse(localStorage.getItem("user"));
+  const accType =
+    u?.providerData?.[0]?.providerId === "google.com"
+      ? "Google Account"
+      : "Email Account";
+
+  const info = useMemo(
+    () => [
+      { icon: <Phone />, label: t("Phone"), value: userMoreInfo.phone },
+      {
+        icon: <LocationOn />,
+        label: t("Address"),
+        value: userMoreInfo.address,
+      },
+      {
+        icon: <CalendarToday />,
+        label: t("Joined On"),
+        value: new Date(1766304856103).toDateString(),
+      },
+      {
+        icon: <Receipt />,
+        label: t("Last Login"),
+        value: new Date(Number(u?.lastLoginAt)).toLocaleString(),
+      },
+      {
+        icon: <Email />,
+        label: t("Email"),
+        value: accType === "Email Account" ? u?.email : userMoreInfo.mail,
+      },
+    ],
+    [
+      accType,
+      t,
+      u?.email,
+      u?.lastLoginAt,
+      userMoreInfo.address,
+      userMoreInfo.mail,
+      userMoreInfo.phone,
+    ],
+  );
+
   return (
     <>
       <Grid
@@ -31,7 +82,7 @@ export default function InfoCards({ info ,t }) {
                     {item.label}
                   </Typography>
                   <Typography fontWeight="bold">
-                    {item.value ||t("Not provided")}
+                    {item.value || t("Not provided")}
                   </Typography>
                 </Box>
               </Stack>
@@ -41,4 +92,5 @@ export default function InfoCards({ info ,t }) {
       </Grid>
     </>
   );
-}
+});
+export default InfoCards;

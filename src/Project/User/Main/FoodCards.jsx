@@ -37,11 +37,10 @@ const FoodCard = React.memo(
     const [openDet, setOpenDet] = useState(false);
     const theme = useTheme();
     const { t } = useTranslation();
-    // Variables
     const isDark = theme.palette.mode === "dark";
 
     // Functions
-    function handleAddToCartClick() {
+    const handleAddToCartClick = useCallback(() => {
       setCartItems((prev) => {
         const found = prev.find((e) => e.id === id);
         if (found) {
@@ -60,7 +59,7 @@ const FoodCard = React.memo(
         setOpenSnackbar({ open: false, msg: "", color: "" });
       }, 3000);
       setShow(true);
-    }
+    }, [id, image, price, setCartItems, setOpenSnackbar, setShow, t, title]);
 
     const toggleFavorite = useCallback(
       (id) => {
@@ -133,6 +132,8 @@ const FoodCard = React.memo(
             height="200"
             image={image}
             alt={title}
+            loading="lazy"
+            style={{ aspectRatio: "1/1", objectFit: "cover" }}
             sx={{ transition: "0.5s ease" }}
           />
         </Box>
