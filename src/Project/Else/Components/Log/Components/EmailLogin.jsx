@@ -1,12 +1,27 @@
 import { Button, CircularProgress, TextField } from "@mui/material";
+import React, { useCallback, useState } from "react";
+import { useTranslation } from "react-i18next";
+import { useDispatch, useSelector } from "react-redux";
+import { loginWithEmail } from "@user/RTK/MainSlice";
+import { useNavigate } from "react-router-dom";
 
-export default function EmailLogin({
-  user,
-  setUser,
-  handleEmailLogin,
-  mailLoading,
-  t,
-}) {
+const EmailLogin = React.memo(() => {
+  const { loading: mailLoading } = useSelector((st) => st.email);
+  const { t } = useTranslation();
+  const dispatch = useDispatch();
+  const navigate = useNavigate();
+
+  const [user, setUser] = useState({ email: "", pw: "" });
+
+  const handleEmailLogin = useCallback(async () => {
+    const res = await dispatch(
+      loginWithEmail({ email: user.email, password: user.pw }),
+    );
+    if (res.meta.requestStatus === "fulfilled") {
+      navigate("/", { state: { loginSuccess: true } });
+    }
+  }, [dispatch, navigate, user.email, user.pw]);
+
   return (
     <>
       <TextField
@@ -48,4 +63,5 @@ export default function EmailLogin({
       </Button>
     </>
   );
-}
+});
+export default EmailLogin;

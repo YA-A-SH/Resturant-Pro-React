@@ -56,6 +56,17 @@ const AdminRoute = ({ children }) => {
     </Suspense>
   );
 };
+
+const UserRoute = ({ children, Load }) => {
+  return (
+    <PageWrapper>
+      <Suspense fallback={Load}>
+        <ProtectedRoute>{children}</ProtectedRoute>
+      </Suspense>
+    </PageWrapper>
+  );
+};
+
 const RoutesComp = React.memo(() => {
   const location = useLocation();
   const { isAdmin } = useContext(IsAdminContext);
@@ -90,119 +101,94 @@ const RoutesComp = React.memo(() => {
           <Route
             path="/admin/manage-users"
             element={
-              <PageWrapper>
-                <AdminProtectedRoute>
-                  <ContUsers />
-                </AdminProtectedRoute>
-              </PageWrapper>
+              <AdminRoute>
+                <ContUsers />
+              </AdminRoute>
             }
           />
           <Route
             path="/admin/manage-users/chef"
             element={
-              <PageWrapper>
-                <AdminProtectedRoute>
-                  <ChefProfile />
-                </AdminProtectedRoute>
-              </PageWrapper>
+              <AdminRoute>
+                <ChefProfile />
+              </AdminRoute>
             }
           />{" "}
           <Route
             path="/admin/manage-users/manager"
             element={
-              <PageWrapper>
-                <AdminProtectedRoute>
-                  <ManagerProfile />
-                </AdminProtectedRoute>
-              </PageWrapper>
+              <AdminRoute>
+                {" "}
+                <ManagerProfile />
+              </AdminRoute>
             }
           />{" "}
           <Route
             path="/admin/manage-users/user"
             element={
-              <PageWrapper>
-                <AdminProtectedRoute>
-                  <UserProfile />
-                </AdminProtectedRoute>
-              </PageWrapper>
+              <AdminRoute>
+                {" "}
+                <UserProfile />
+              </AdminRoute>
             }
           />
           <Route
             path="/admin/manageMeals"
             element={
-              <PageWrapper>
-                <AdminProtectedRoute>
-                  <ManageMeals />
-                </AdminProtectedRoute>
-              </PageWrapper>
+              <AdminRoute>
+                {" "}
+                <ManageMeals />
+              </AdminRoute>
             }
           />
           <Route
             path="/admin/manageDrinks"
             element={
-              <PageWrapper>
-                <AdminProtectedRoute>
-                  <ManageDrinks />
-                </AdminProtectedRoute>
-              </PageWrapper>
+              <AdminRoute>
+                {" "}
+                <ManageDrinks />
+              </AdminRoute>
             }
           />
           <Route
             path="/admin/manageSweets"
             element={
-              <PageWrapper>
-                <AdminProtectedRoute>
-                  <ManageSweets />
-                </AdminProtectedRoute>
-              </PageWrapper>
+              <AdminRoute>
+                {" "}
+                <ManageSweets />
+              </AdminRoute>
             }
           />
           <Route
             path="/meals"
             element={
-              <PageWrapper>
-                <Suspense fallback={<MealsSkeleton />}>
-                  <ProtectedRoute>
-                    <Meals />
-                  </ProtectedRoute>
-                </Suspense>
-              </PageWrapper>
+              <UserRoute Load={<MealsSkeleton />}>
+                <Meals />
+              </UserRoute>
             }
           />
           <Route
             path="/drinks"
             element={
-              <PageWrapper>
-                <Suspense fallback={<DrinksAndSweetsSkeleton />}>
-                  <ProtectedRoute>
-                    <Drinks />
-                  </ProtectedRoute>
-                </Suspense>
-              </PageWrapper>
+              <UserRoute Load={<DrinksAndSweetsSkeleton />}>
+                <Drinks />
+              </UserRoute>
             }
           />
           <Route
             path="/sweet"
             element={
-              <PageWrapper>
-                <Suspense fallback={<DrinksAndSweetsSkeleton />}>
-                  <ProtectedRoute>
-                    <Sweets />
-                  </ProtectedRoute>
-                </Suspense>
-              </PageWrapper>
+              <UserRoute Load={<DrinksAndSweetsSkeleton />}>
+                <Sweets />
+              </UserRoute>
             }
           />
           <Route
             path="/profile"
             element={
-              <PageWrapper>
-                <Suspense fallback={<ProfileSkeleton />}>
-                  <ProtectedRoute>
-                    <Profile />
-                  </ProtectedRoute>
-                </Suspense>
-              </PageWrapper>
+              <UserRoute Load={<ProfileSkeleton />}>
+                <Profile />
+              </UserRoute>
             }
           />
           <Route

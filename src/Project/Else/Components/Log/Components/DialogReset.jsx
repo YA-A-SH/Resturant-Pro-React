@@ -1,4 +1,4 @@
-import { useState } from "react";
+import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
 import { clearResetState, resetPassword } from "@user/RTK/MainSlice";
 import {
@@ -10,8 +10,11 @@ import {
   DialogTitle,
   TextField,
 } from "@mui/material";
+import { useTranslation } from "react-i18next";
 
-export default function DialogReset({ open, setOpen, t }) {
+const DialogReset = React.memo(({ open, setOpen }) => {
+  const { t } = useTranslation();
+
   const { loading, success, error } = useSelector((st) => st.reset);
   const [email, setEmail] = useState("");
   const dispatch = useDispatch();
@@ -71,4 +74,5 @@ export default function DialogReset({ open, setOpen, t }) {
       </DialogActions>
     </Dialog>
   );
-}
+});
+export default DialogReset;

@@ -1,12 +1,24 @@
 import { Error, Facebook, Google } from "@mui/icons-material";
 import { Box, Button, CircularProgress } from "@mui/material";
+import { useTranslation } from "react-i18next";
+import { useSelector } from "react-redux";
+import { useNavigate } from "react-router-dom";
+import { loginWithGoogle } from "@user/RTK/MainSlice";
+import React from "react";
 
-export default function FacGoogleLogin({
-  googleLoading,
-  googleError,
-  handleGoogleLogin,
-  t
-}) {
+const FacGoogleLogin = React.memo(() => {
+  const { loading: googleLoading, error: googleError } = useSelector(
+    (st) => st.google,
+  );
+  const { t } = useTranslation();
+  const navigate = useNavigate();
+
+  const handleGoogleLogin = async () => {
+    const res = await dispatchEvent(loginWithGoogle());
+    if (res.meta.requestStatus === "fulfilled") {
+      navigate("/", { state: { loginSuccess: true } });
+    }
+  };
   return (
     <>
       <Box sx={{ display: "flex", gap: 2 }}>
@@ -54,4 +66,5 @@ export default function FacGoogleLogin({
       </Box>
     </>
   );
-}
+});
+export default FacGoogleLogin;
