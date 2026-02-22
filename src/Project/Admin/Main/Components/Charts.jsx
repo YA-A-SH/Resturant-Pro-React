@@ -14,8 +14,31 @@ import {
   XAxis,
 } from "recharts";
 import { Group, Restaurant, TrendingUp } from "@mui/icons-material";
+import { useTranslation } from "react-i18next";
+import React from "react";
 
-export default function Charts({ t }) {
+const usersData = [
+  { year: "2015", users: 400 },
+  { year: "2020", users: 11650 },
+  { year: "2022", users: 22000 },
+  { year: "2024", users: 38016 },
+  { year: "2026", users: 50680 },
+];
+const topTenDishes = [
+  { name: "Big Mac", Dish: 13000 },
+  { name: "Koshari", Dish: 7000 },
+  { name: "Cacik", Dish: 3300 },
+  { name: "Migas", Dish: 7000 },
+  { name: "Afterglow", Dish: 10533 },
+  { name: "Apple Karate", Dish: 5000 },
+  { name: "Hot Cocoa", Dish: 3332 },
+  { name: "Bananas", Dish: 8000 },
+  { name: "Thai Coffee", Dish: 6329 },
+  { name: "Pancakes", Dish: 9144 },
+];
+const Charts = React.memo(() => {
+  const { t } = useTranslation();
+
   const theme = useTheme();
   const isDark = theme.palette.mode === "dark";
 
@@ -30,26 +53,6 @@ export default function Charts({ t }) {
     { name: t("Meals"), orders: 63 },
     { name: t("Drinks"), orders: 24 },
     { name: t("Sweets"), orders: 13 },
-  ];
-
-  const usersData = [
-    { year: "2015", users: 400 },
-    { year: "2020", users: 11650 },
-    { year: "2022", users: 22000 },
-    { year: "2024", users: 38016 },
-    { year: "2026", users: 50680 },
-  ];
-  const topTenDishes = [
-    { name: "Big Mac", Dish: 13000 },
-    { name: "Koshari", Dish: 7000 },
-    { name: "Cacik", Dish: 3300 },
-    { name: "Migas", Dish: 7000 },
-    { name: "Afterglow", Dish: 10533 },
-    { name: "Apple Karate", Dish: 5000 },
-    { name: "Hot Cocoa", Dish: 3332 },
-    { name: "Bananas", Dish: 8000 },
-    { name: "Thai Coffee", Dish: 6329 },
-    { name: "Pancakes", Dish: 9144 },
   ];
 
   const tooltipStyle = {
@@ -147,7 +150,10 @@ export default function Charts({ t }) {
 
       {/* 3. Top Dishes (Bar Chart) */}
       <Grid item xs={12}>
-        <ChartCard title={t("Elite Culinary Performance")} icon={<Restaurant />}>
+        <ChartCard
+          title={t("Elite Culinary Performance")}
+          icon={<Restaurant />}
+        >
           <Box sx={{ width: "100%", height: 300, mt: 3, pr: 2 }}>
             <ResponsiveContainer width="100%" height="100%">
               <BarChart data={topTenDishes}>
@@ -184,4 +190,5 @@ export default function Charts({ t }) {
       </Grid>
     </Grid>
   );
-}
+});
+export default Charts;

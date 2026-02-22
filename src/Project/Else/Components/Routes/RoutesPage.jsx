@@ -22,7 +22,7 @@ const Meals = lazy(() => import("@user/Main/Components/Meels"));
 const Drinks = lazy(() => import("@user/Main/Components/Drinks"));
 const Sweets = lazy(() => import("@user/Main/Components/Sweet"));
 const Profile = lazy(() => import("@user/Profile/ContProfile"));
-const ContAdmin = lazy(() => import("@admin/Main/ContAdmin"));
+const PreAdmin = lazy(() => import("@admin/Main/PreAdmin"));
 const ChefProfile = lazy(
   () => import("@admin/ManageUsers/Components/ProfilePages/ChefProfile"),
 );
@@ -94,7 +94,7 @@ const RoutesComp = React.memo(() => {
             element={
               <AdminRoute>
                 {" "}
-                <ContAdmin />
+                <PreAdmin />
               </AdminRoute>
             }
           />

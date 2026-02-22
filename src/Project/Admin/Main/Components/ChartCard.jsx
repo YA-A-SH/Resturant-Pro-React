@@ -1,42 +1,44 @@
 import { Box, Paper, Typography, useTheme } from "@mui/material";
+import React, { useMemo } from "react";
 
-export default function ChartCard({ title, children, icon, sentColor }) {
+const ChartCard = React.memo(({ title, children, icon, sentColor }) => {
   const theme = useTheme();
   const isDark = theme.palette.mode === "dark";
 
+  const paperStyle = useMemo(
+    () => ({
+      p: { xxs: 2, xs: 3, sm: 4 },
+      width: {
+        xxs: 220,
+        xs: 250,
+        sm: 490,
+        ss: 450,
+        md: 400,
+        ms: 350,
+        lg: 490,
+        xl: 450,
+      },
+      borderRadius: "28px",
+      display: "flex",
+      flexDirection: "column",
+      position: "relative",
+      bgcolor: isDark ? "rgba(18, 18, 20, 0.6)" : "rgba(255, 255, 255, 0.7)",
+      backdropFilter: "blur(20px)",
+      border: "1px solid",
+      borderColor: isDark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.05)",
+      transition: "all 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
+      "&:hover": {
+        transform: "translateY(-8px)",
+        borderColor: sentColor || "admin.main",
+        boxShadow: isDark
+          ? `0 20px 40px -10px rgba(99, 102, 241, 0.2)`
+          : `0 20px 40px -10px rgba(99, 102, 241, 0.1)`,
+      },
+    }),
+    [isDark, sentColor],
+  );
   return (
-    <Paper
-      elevation={0}
-      sx={{
-        p: { xxs: 2, xs: 3, sm: 4 },
-        width: {
-          xxs: 220,
-          xs: 250,
-          sm: 490,
-          ss: 450,
-          md: 400,
-          ms: 350,
-          lg: 490,
-          xl: 450,
-        },
-        borderRadius: "28px",
-        display: "flex",
-        flexDirection: "column",
-        position: "relative",
-        bgcolor: isDark ? "rgba(18, 18, 20, 0.6)" : "rgba(255, 255, 255, 0.7)",
-        backdropFilter: "blur(20px)",
-        border: "1px solid",
-        borderColor: isDark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.05)",
-        transition: "all 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
-        "&:hover": {
-          transform: "translateY(-8px)",
-          borderColor: sentColor || "admin.main",
-          boxShadow: isDark
-            ? `0 20px 40px -10px rgba(99, 102, 241, 0.2)`
-            : `0 20px 40px -10px rgba(99, 102, 241, 0.1)`,
-        },
-      }}
-    >
+    <Paper elevation={0} sx={paperStyle}>
       <Box
         sx={{
           position: "absolute",
@@ -80,4 +82,5 @@ export default function ChartCard({ title, children, icon, sentColor }) {
       <Box sx={{ flexGrow: 1, width: "100%", zIndex: 1 }}>{children}</Box>{" "}
     </Paper>
   );
-}
+});
+export default ChartCard;

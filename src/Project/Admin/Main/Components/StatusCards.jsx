@@ -6,47 +6,53 @@ import {
   TrendingUp,
 } from "@mui/icons-material";
 import { Box, Grid, Paper, Typography, useTheme } from "@mui/material";
+import React, { useMemo } from "react";
+import { useTranslation } from "react-i18next";
 
-export default function StatusCards({t, isDark }) {
+const StatusCards = React.memo(() => {
   const theme = useTheme();
-
-  const statusCardInfo = [
-    {
-      title: t("Total Revenue"),
-      value: "$154,230",
-      growth: "+12%",
-      icon: <TrendingUp />,
-      color: theme.palette.admin.main,
-    },
-    {
-      title: t("New Customers"),
-      value: "7,240",
-      growth: "+11%",
-      icon: <Group />,
-      color: "#F59E0B",
-    },
-    {
-      title: t("Total Customers"),
-      value: "55,930",
-      growth: "+7%",
-      icon: <People />,
-      color: theme.palette.admin.secondary || "#A855F7",
-    },
-    {
-      title: t("Low Stock"),
-      value: "8 Items",
-      growth: "-3%",
-      icon: <Inventory />,
-      color: "#EF4444",
-    },
-    {
-      title: t("Active Orders"),
-      value: "4,642",
-      growth: "+19%",
-      icon: <ShoppingCart />,
-      color: "#10B981",
-    },
-  ];
+  const { t } = useTranslation();
+  const isDark = theme.palette.mode === "dark";
+  const statusCardInfo = useMemo(
+    () => [
+      {
+        title: t("Total Revenue"),
+        value: "$154,230",
+        growth: "+12%",
+        icon: <TrendingUp />,
+        color: theme.palette.admin.main,
+      },
+      {
+        title: t("New Customers"),
+        value: "7,240",
+        growth: "+11%",
+        icon: <Group />,
+        color: "#F59E0B",
+      },
+      {
+        title: t("Total Customers"),
+        value: "55,930",
+        growth: "+7%",
+        icon: <People />,
+        color: theme.palette.admin.secondary || "#A855F7",
+      },
+      {
+        title: t("Low Stock"),
+        value: "8 Items",
+        growth: "-3%",
+        icon: <Inventory />,
+        color: "#EF4444",
+      },
+      {
+        title: t("Active Orders"),
+        value: "4,642",
+        growth: "+19%",
+        icon: <ShoppingCart />,
+        color: "#10B981",
+      },
+    ],
+    [t, theme.palette.admin.main, theme.palette.admin.secondary],
+  );
 
   return (
     <Grid container spacing={3} mb={6} justifyContent="center">
@@ -157,4 +163,5 @@ export default function StatusCards({t, isDark }) {
       ))}
     </Grid>
   );
-}
+});
+export default StatusCards;

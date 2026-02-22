@@ -1,10 +1,49 @@
-import { Box, Button, Container, Grid, Stack, Typography } from "@mui/material";
+import {
+  Box,
+  Button,
+  Container,
+  Grid,
+  Stack,
+  Typography,
+  useTheme,
+} from "@mui/material";
 import { TrendingUp, DashboardCustomize } from "@mui/icons-material";
 import Charts from "./Components/Charts";
 import Roadmap from "./Components/Roadmap";
 import StatusCards from "./Components/StatusCards";
+import { useTranslation } from "react-i18next";
+import React, { useEffect, useMemo } from "react";
+import { useNavigate } from "react-router-dom";
 
-export default function PreAdmin({ isDark, theme, navigate, t }) {
+const PreAdmin = React.memo(() => {
+  const { t } = useTranslation();
+  useEffect(() => {
+    document.title = t("Zeus Restaurant | Admin");
+  }, []);
+  const theme = useTheme();
+  const isDark = theme.palette.mode === "dark";
+  const navigate = useNavigate();
+  const userReportStyle = useMemo(
+    () => ({
+      px: 5,
+      py: 1.8,
+      borderRadius: "16px",
+      fontWeight: 800,
+      background: theme.palette.admin.gradient,
+      color: "#fff",
+      boxShadow: `0 12px 30px ${
+        isDark ? "rgba(99, 102, 241, 0.4)" : "rgba(99, 102, 241, 0.2)"
+      }`,
+      transition: "0.5s",
+      "&:hover": {
+        transform: "translateY(-5px)",
+        boxShadow: `0 15px 40px ${
+          isDark ? "rgba(99, 102, 241, 0.6)" : "rgba(99, 102, 241, 0.3)"
+        }`,
+      },
+    }),
+    [isDark, theme.palette.admin.gradient],
+  );
   return (
     <Box
       sx={{
@@ -89,26 +128,7 @@ export default function PreAdmin({ isDark, theme, navigate, t }) {
               size="large"
               startIcon={<TrendingUp />}
               onClick={() => navigate("/admin/manage-users")}
-              sx={{
-                px: 5,
-                py: 1.8,
-                borderRadius: "16px",
-                fontWeight: 800,
-                background: theme.palette.admin.gradient,
-                color: "#fff",
-                boxShadow: `0 12px 30px ${
-                  isDark ? "rgba(99, 102, 241, 0.4)" : "rgba(99, 102, 241, 0.2)"
-                }`,
-                transition: "0.5s",
-                "&:hover": {
-                  transform: "translateY(-5px)",
-                  boxShadow: `0 15px 40px ${
-                    isDark
-                      ? "rgba(99, 102, 241, 0.6)"
-                      : "rgba(99, 102, 241, 0.3)"
-                  }`,
-                },
-              }}
+              sx={userReportStyle}
             >
               {t("User's Reports")}
             </Button>
@@ -117,7 +137,7 @@ export default function PreAdmin({ isDark, theme, navigate, t }) {
 
         {/* Status Cards */}
         <Box sx={{ mb: 6 }}>
-          <StatusCards t={t} isDark={isDark} />
+          <StatusCards />
         </Box>
 
         {/* Charts Section */}
@@ -133,16 +153,17 @@ export default function PreAdmin({ isDark, theme, navigate, t }) {
               : "0 20px 60px rgba(0,0,0,0.05)",
           }}
         >
-          <Charts t={t} isDark={isDark} />
+          <Charts />
         </Box>
 
         {/* Roadmap Section */}
         <Grid container justifyContent="center" sx={{ mt: 10 }}>
           <Grid item xs={12} lg={10}>
-            <Roadmap t={t} isDark={isDark} />
+            <Roadmap />
           </Grid>
         </Grid>
       </Container>
     </Box>
   );
-}
+});
+export default PreAdmin;

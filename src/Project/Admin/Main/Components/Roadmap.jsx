@@ -5,9 +5,14 @@ import {
   RocketLaunch,
 } from "@mui/icons-material";
 import { Box, Grid, Paper, Stack, Typography, useTheme } from "@mui/material";
+import React from "react";
+import { useTranslation } from "react-i18next";
 
-export default function Roadmap({ isDark, t }) {
+const Roadmap = React.memo(() => {
+  const { t } = useTranslation();
+
   const theme = useTheme();
+  const isDark = theme.palette.mode === "dark";
 
   const ideas = [
     {
@@ -163,4 +168,5 @@ export default function Roadmap({ isDark, t }) {
       </Grid>
     </Box>
   );
-}
+});
+export default Roadmap;
