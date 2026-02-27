@@ -1,24 +1,24 @@
 import { Error, Facebook, Google } from "@mui/icons-material";
 import { Box, Button, CircularProgress } from "@mui/material";
 import { useTranslation } from "react-i18next";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
 import {
   loginWithGoogle,
-  selectAuthError,
-  selectAuthLoading,
+  selectGoogleAuthError,
+  selectGoogleAuthLoading,
 } from "@user/RTK/LogSlice";
 import React from "react";
 
 const FacGoogleLogin = React.memo(() => {
-  const googleLoading = useSelector(selectAuthLoading);
-  const googleError = useSelector(selectAuthError);
-
+  const googleLoading = useSelector(selectGoogleAuthLoading);
+  const googleError = useSelector(selectGoogleAuthError);
+  const dispatch = useDispatch();
   const { t } = useTranslation();
   const navigate = useNavigate();
 
   const handleGoogleLogin = async () => {
-    const res = await dispatchEvent(loginWithGoogle());
+    const res = await dispatch(loginWithGoogle());
     if (res.meta.requestStatus === "fulfilled") {
       navigate("/", { state: { loginSuccess: true } });
     }

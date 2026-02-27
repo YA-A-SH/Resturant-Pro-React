@@ -132,9 +132,10 @@ const emailSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(loginWithEmail.pending, (state) => {
+      .addCase(loginWithGoogle.pending, (state) => {
         state.loading = true;
-        ((state.error = null), (state.user = null));
+        state.error = null;
+        state.user = null;
       })
       .addCase(loginWithEmail.fulfilled, (state, action) => {
         state.loading = false;
@@ -239,11 +240,22 @@ export const selectCurrentUser = createSelector(
   },
 );
 
-export const selectAuthLoading = createSelector(
-  [selectGoogleAuth, selectEmailAuth],
-  (google, email) => google.loading || email.loading,
+export const selectGoogleAuthLoading = createSelector(
+  [selectGoogleAuth],
+  (google) => google.loading,
 );
-export const selectAuthError = createSelector(
-  [selectGoogleAuth, selectEmailAuth],
-  (google, email) => google.error || email.error,
+
+export const selectGoogleAuthError = createSelector(
+  [selectGoogleAuth],
+  (google) => google.error,
+);
+
+export const selectEmailAuthLoading = createSelector(
+  [selectEmailAuth],
+  (email) => email.loading,
+);
+
+export const selectEmailAuthError = createSelector(
+  [selectEmailAuth],
+  (email) => email.error,
 );
