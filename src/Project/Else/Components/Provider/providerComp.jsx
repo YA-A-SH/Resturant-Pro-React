@@ -5,6 +5,7 @@ import {
   IsAdminProvider,
   ModeContext,
   OpenSnackbarProvider,
+  SelectedTapAdminProvider,
   ShowCartProvider,
 } from "../Context/MainContext";
 import Loader from "../Else/Loader";
@@ -18,17 +19,19 @@ export default function ProviderComp() {
       {" "}
       <Theme mode={mode}>
         <Suspense fallback={<Loader id="user" />}>
-          <IsAdminProvider>
-            <ChefsProvider>
-              <FavProvider>
-                <ShowCartProvider>
-                  <OpenSnackbarProvider>
-                    <ContApp />
-                  </OpenSnackbarProvider>
-                </ShowCartProvider>
-              </FavProvider>
-            </ChefsProvider>
-          </IsAdminProvider>
+          <SelectedTapAdminProvider>
+            <IsAdminProvider>
+              <ChefsProvider>
+                <FavProvider>
+                  <ShowCartProvider>
+                    <OpenSnackbarProvider>
+                      <ContApp />
+                    </OpenSnackbarProvider>
+                  </ShowCartProvider>
+                </FavProvider>
+              </ChefsProvider>
+            </IsAdminProvider>
+          </SelectedTapAdminProvider>
         </Suspense>
       </Theme>
     </>

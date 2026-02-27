@@ -9,18 +9,18 @@ import {
   ModeContext,
 } from "@else/Components/Context/MainContext";
 import { useTranslation } from "react-i18next";
+import { selectCurrentUser } from "@user/RTK/LogSlice";
 
 const Head = React.memo(() => {
   const { mode } = useContext(ModeContext);
   const { isAdmin } = useContext(IsAdminContext);
   const [showNav, setShowNav] = useState(false);
-  const goUser = useSelector((state) => state.google.user);
-  const maUser = useSelector((state) => state.email.user);
+  const user = useSelector(selectCurrentUser);
   const navigate = useNavigate();
   const { t } = useTranslation();
   const theme = useTheme();
   const isDark = mode === "dark";
-  const disabled = !!goUser || !!maUser || isAdmin;
+  const disabled = !!user || isAdmin;
   const headerBg = isAdmin
     ? isDark
       ? "rgba(15, 23, 42, 0.8)"
@@ -35,7 +35,6 @@ const Head = React.memo(() => {
           height: 80,
           px: { xxs: 2, xs: 2, md: 4 },
           display: "flex",
-
           alignItems: "center",
           justifyContent: "space-between",
           position: "sticky",

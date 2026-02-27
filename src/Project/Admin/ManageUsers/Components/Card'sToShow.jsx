@@ -9,40 +9,111 @@ import {
 } from "@mui/material";
 import CardBase from "./CardsBase";
 import CardBaseSkeleton from "./CardBaseSkeleton";
-import { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState, useMemo } from "react";
+import { useSelector } from "react-redux";
+import {
+  selectUserData,
+  selectUserError,
+  selectUserLoading,
+} from "@user/RTK/ElseSlice";
+import { useTranslation } from "react-i18next";
+import {
+  ChefsContext,
+  SelectedTapAdmin,
+} from "@else/Components/Context/MainContext";
 
-export default function CardsToShowAndTaps({
-  t,
-  setSelectedTap,
-  selectedTap,
-  chefs,
-  managers,
-  users,
-  loading,
-  error,
-  isDark,
-}) {
+const MANAGERS_DATA = [
+  {
+    id: "1",
+    name: "Yaser",
+    mail: "yasermail@gmail.com",
+    city: "Rafah",
+    img: "https://randomuser.me/api/portraits/men/1.jpg",
+    age: "21",
+    income: [
+      { month: "Jan", income: 10043 },
+      { month: "Feb", income: 13955 },
+      { month: "Mar", income: 22240 },
+    ],
+  },
+  {
+    id: "2",
+    name: "عصملي",
+    mail: "عصمليmail@gmail.com",
+    city: "Rafah",
+    img: "https://randomuser.me/api/portraits/men/24.jpg",
+    age: "35",
+    income: [
+      { month: "Jan", incomes: 17043 },
+      { month: "Feb", incomes: 8955 },
+      { month: "Mar", incomes: 11240 },
+    ],
+  },
+];
+
+const CardsToShowAndTaps = React.memo(({ searchText }) => {
+  const { t } = useTranslation();
   const theme = useTheme();
+
+  const { selectedTap, setSelectedTap } = useContext(SelectedTapAdmin);
+  const { chefs } = useContext(ChefsContext);
+
+  const isDark = theme.palette.mode === "dark";
+
+  // Redux
+  const users = useSelector(selectUserData);
+  const loading = useSelector(selectUserLoading);
+  const error = useSelector(selectUserError);
+
+  const filteredData = useMemo(() => {
+    const query = searchText.toLowerCase().trim();
+
+    if (selectedTap === "Chef's") {
+      return query
+        ? chefs.filter((c) => c.name.toLowerCase().includes(query))
+        : chefs;
+    }
+    if (selectedTap === "Manager's") {
+      return query
+        ? MANAGERS_DATA.filter((m) => m.name.toLowerCase().includes(query))
+        : MANAGERS_DATA;
+    }
+    if (selectedTap === "User's") {
+      return query
+        ? users.filter((u) => u.name.toLowerCase().includes(query))
+        : users;
+    }
+    return [];
+  }, [searchText, selectedTap, chefs, users]);
+
+  const [currentPage, setCurrentPage] = useState(1);
+  const cardsPerPage = 8;
+  const totalPages = Math.ceil(filteredData?.length / cardsPerPage);
+  const startCard = (currentPage - 1) * cardsPerPage;
+  const dataToShow = filteredData?.slice(startCard, startCard + cardsPerPage);
+
+  useEffect(() => {
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    setCurrentPage(1);
+  }, [selectedTap, searchText]);
+
+  useEffect(() => {
+    localStorage.setItem("tap", JSON.stringify(selectedTap));
+  }, [selectedTap]);
 
   const tabs = [
     { id: "Manager's", label: t("Managers"), color: "#7a61f3" },
     { id: "Chef's", label: t("Master Chefs"), color: "#0dae7a" },
     { id: "User's", label: t("Community"), color: "#e78a09" },
   ];
-  const cardsPerPage = 8;
-  const totalPages = Math.ceil(users?.length / cardsPerPage);
-  const [currentPage, setCurrentPage] = useState(1);
-  const startCard = (currentPage - 1) * cardsPerPage;
-  const usersToShow = users?.slice(startCard, startCard + cardsPerPage);
 
   const paginationButtons = () => {
     let buttons = [];
     if (totalPages <= 5) {
       for (let i = 1; i <= totalPages; i++) buttons.push(i);
     } else {
-      if (currentPage <= 2) {
-        buttons = [1, 2, 3, "...", totalPages];
-      } else if (currentPage >= totalPages - 2) {
+      if (currentPage <= 2) buttons = [1, 2, 3, "...", totalPages];
+      else if (currentPage >= totalPages - 2)
         buttons = [
           1,
           "...",
@@ -51,7 +122,7 @@ export default function CardsToShowAndTaps({
           totalPages - 1,
           totalPages,
         ];
-      } else {
+      else
         buttons = [
           1,
           "...",
@@ -61,21 +132,13 @@ export default function CardsToShowAndTaps({
           "...",
           totalPages,
         ];
-      }
     }
     return buttons;
   };
 
-  useEffect(() => {
-    // eslint-disable-next-line react-hooks/set-state-in-effect
-    setCurrentPage(1);
-  }, [selectedTap]);
-
-  useEffect(() => {
-    localStorage.setItem("tap", JSON.stringify(selectedTap));
-  }, [selectedTap]);
   return (
     <>
+      {/* --- Taps Bar --- */}
       <Box
         sx={{
           width: { xxs: "100%", sm: "fit-content" },
@@ -109,19 +172,16 @@ export default function CardsToShowAndTaps({
                 fontWeight: 800,
                 fontSize: "0.9rem",
                 textTransform: "capitalize",
-                transition: "all 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
+                transition: "all 0.4s",
                 background: isActive ? tab.color : "transparent",
                 color: isActive ? "#fff" : "text.secondary",
-                boxShadow: isActive
-                  ? `0 10px 20px ${theme.palette.admin.main}40`
-                  : "none",
+                boxShadow: isActive ? `0 10px 20px ${tab.color}40` : "none",
                 "&:hover": {
                   bgcolor: isActive
-                    ? "none"
+                    ? tab.color
                     : isDark
                       ? "rgba(255,255,255,0.08)"
                       : "rgba(0,0,0,0.06)",
-                  color: isActive ? "#fff" : "text.primary",
                   transform: isActive ? "scale(1.05)" : "none",
                 },
               }}
@@ -132,143 +192,100 @@ export default function CardsToShowAndTaps({
         })}
       </Box>
 
-      <Grid
-        container
-        spacing={4}
-        sx={{ display: "flex", justifyContent: "center", alignItems: "center" }}
-      >
-        {selectedTap === "Manager's" &&
-          managers.map((manager, index) => (
-            <Fade in timeout={500 + index * 100} key={manager.id}>
-              <Grid item xxs={12} sm={6} md={4} lg={3}>
-                <CardBase t={t} data={manager} isDark={isDark} id="manager" />
-              </Grid>
-            </Fade>
+      {/* --- Cards Grid --- */}
+      <Grid container spacing={4} justifyContent="center" alignItems="center">
+        {/* Loading State for Users */}
+        {selectedTap === "User's" &&
+          loading &&
+          [...Array(8)].map((_, i) => (
+            <Grid item xxs={12} sm={6} md={4} lg={3} key={i}>
+              <CardBaseSkeleton isDark={isDark} />
+            </Grid>
           ))}
 
-        {selectedTap === "Chef's" &&
-          chefs.map((chef, index) => (
-            <Fade
-              in
-              timeout={500 + index * 100}
-              key={`${chef.id || chef.email}-${index}`}
-            >
+        {/* Error State */}
+        {selectedTap === "User's" && error && (
+          <Box sx={{ width: "100%", textAlign: "center", mt: 10 }}>
+            <Typography color="error" variant="h4" fontWeight={900}>
+              {error}
+            </Typography>
+          </Box>
+        )}
+
+        {/* Display Data (Managers, Chefs, or Users) */}
+        {!loading &&
+          !error &&
+          dataToShow.map((item, index) => (
+            <Fade in timeout={500 + index * 50} key={item.id || index}>
               <Grid item xxs={12} sm={6} md={4} lg={3}>
                 <CardBase
-                  t={t}
-                  data={chef}
-                  isDark={isDark}
-                  id="chef"
-                  chefId={chef.id}
+                  data={item}
+                  id={
+                    selectedTap === "Manager's"
+                      ? "manager"
+                      : selectedTap === "Chef's"
+                        ? "chef"
+                        : "user"
+                  }
+                  chefId={item.id}
                 />
               </Grid>
             </Fade>
           ))}
 
-        {selectedTap === "User's" && (
-          <>
-            {loading &&
-              [...Array(8)].map((_, i) => (
-                <Grid item xxs={12} sm={6} md={4} lg={3} key={i}>
-                  <CardBaseSkeleton isDark={isDark} />
-                </Grid>
-              ))}
-
-            {error && (
-              <Box sx={{ width: "100%", textAlign: "center", mt: 10 }}>
-                <Typography color="error" variant="h4" fontWeight={900}>
-                  {error}
-                </Typography>
-              </Box>
-            )}
-
-            {!loading &&
-              !error &&
-              usersToShow?.map((user, index) => (
-                <Fade
-                  in
-                  timeout={500 + index * 50}
-                  key={`${user.id || user.email}-${index}`}
-                >
-                  <Grid item xxs={12} sm={6} md={4} lg={3}>
-                    <CardBase t={t} data={user} isDark={isDark} id="user" />
-                  </Grid>
-                </Fade>
-              ))}
-          </>
+        {/* No Results Message */}
+        {!loading && dataToShow.length === 0 && (
+          <Typography variant="h6" sx={{ mt: 5, opacity: 0.5 }}>
+            {t("No results found")}
+          </Typography>
         )}
       </Grid>
-      {selectedTap === "User's" ? (
-        totalPages > 1 ? (
-          <Stack
-            direction="row"
-            spacing={1.2}
-            justifyContent="center"
-            alignItems="center"
-            mt={8}
-            mb={4}
-          >
-            {paginationButtons().map((btn, idx) => {
-              const isActive = currentPage === btn;
-              const isEllipsis = btn === "...";
 
-              return (
-                <Button
-                  key={idx}
-                  disabled={isEllipsis}
-                  onClick={() => !isEllipsis && setCurrentPage(btn)}
-                  sx={{
-                    minWidth: isEllipsis ? "35px" : "48px",
-                    height: "48px",
-                    p: 0,
-                    borderRadius: "16px",
-                    fontWeight: 800,
-                    fontSize: "0.95rem",
-                    transition: "all 0.3s cubic-bezier(0.4, 0, 0.2, 1)",
-                    bgcolor: isActive
-                      ? "#F59E0B"
-                      : isDark
-                        ? "rgba(255, 255, 255, 0.05)"
-                        : "rgba(255, 255, 255, 0.8)",
-                    color: isActive
-                      ? "#fff"
-                      : isDark
-                        ? "rgba(255,255,255,0.7)"
-                        : "text.primary",
-                    border: "1px solid",
-                    borderColor: isActive
-                      ? "#F59E0B"
-                      : isDark
-                        ? "rgba(255,255,255,0.1)"
-                        : "rgba(0,0,0,0.06)",
-                    boxShadow: isActive ? `0 8px 20px -6px#F59E0B` : "none",
-                    backdropFilter:
-                      !isActive && !isEllipsis ? "blur(8px)" : "none",
-                    "&:hover": {
-                      bgcolor: "#F59E0B",
-                      color: "#fff",
-                      transform: !isEllipsis ? "translateY(-4px)" : "none",
-                      boxShadow: !isEllipsis
-                        ? `0 12px 20px -8px #F59E0B`
-                        : "none",
-                      borderColor: "#F59E0B",
-                    },
-                    "&.Mui-disabled": {
-                      color: isDark
-                        ? "rgba(255,255,255,0.3)"
-                        : "rgba(0,0,0,0.3)",
-                      border: "none",
-                      bgcolor: "transparent",
-                    },
-                  }}
-                >
-                  {btn}
-                </Button>
-              );
-            })}
-          </Stack>
-        ) : null
-      ) : null}
+      {/* --- Pagination --- */}
+      {totalPages > 1 && (
+        <Stack
+          direction="row"
+          spacing={1.2}
+          justifyContent="center"
+          alignItems="center"
+          mt={8}
+          mb={4}
+        >
+          {paginationButtons().map((btn, idx) => {
+            const isActive = currentPage === btn;
+            const isEllipsis = btn === "...";
+            return (
+              <Button
+                key={idx}
+                disabled={isEllipsis}
+                onClick={() => !isEllipsis && setCurrentPage(btn)}
+                sx={{
+                  minWidth: isEllipsis ? "35px" : "48px",
+                  height: "48px",
+                  borderRadius: "16px",
+                  fontWeight: 800,
+                  bgcolor: isActive
+                    ? "#F59E0B"
+                    : isDark
+                      ? "rgba(255,255,255,0.05)"
+                      : "rgba(255,255,255,0.8)",
+                  color: isActive ? "#fff" : "text.primary",
+                  border: "1px solid",
+                  borderColor: isActive ? "#F59E0B" : "rgba(0,0,0,0.06)",
+                  "&:hover": {
+                    bgcolor: "#F59E0B",
+                    color: "#fff",
+                    transform: !isEllipsis ? "translateY(-4px)" : "none",
+                  },
+                }}
+              >
+                {btn}
+              </Button>
+            );
+          })}
+        </Stack>
+      )}
     </>
   );
-}
+});
+export default CardsToShowAndTaps;

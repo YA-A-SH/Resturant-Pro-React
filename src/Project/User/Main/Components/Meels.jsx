@@ -1,8 +1,13 @@
 import { useEffect, useState } from "react";
-import { fetchMeals } from "../../RTK/MainSlice";
+import { fetchMeals } from "../../RTK/Dishe'sSlice";
 import { useDispatch, useSelector } from "react-redux";
 import Base from "../AllComp";
 import { useTranslation } from "react-i18next";
+import {
+  mealsDataSelector,
+  mealsErrorSelector,
+  mealsLoadingSelector,
+} from "@user/RTK/Dishe'sSlice";
 
 function getMealType(category) {
   if (category === "Breakfast" || category === "Side" || category === "Starter")
@@ -14,7 +19,9 @@ function getMealType(category) {
 
 export default function Meals() {
   const [selectedType, setSelectedType] = useState("Breakfast");
-  const { meals, loading, error } = useSelector((state) => state.meals);
+  const meals = useSelector(mealsDataSelector);
+  const loading = useSelector(mealsLoadingSelector);
+  const error = useSelector(mealsErrorSelector);
   const [preparedMeals, setPreparedMeals] = useState([]);
   const [sortAscending, setSortAscending] = useState(true);
   const { t } = useTranslation();

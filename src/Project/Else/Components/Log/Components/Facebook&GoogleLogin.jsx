@@ -3,13 +3,17 @@ import { Box, Button, CircularProgress } from "@mui/material";
 import { useTranslation } from "react-i18next";
 import { useSelector } from "react-redux";
 import { useNavigate } from "react-router-dom";
-import { loginWithGoogle } from "@user/RTK/MainSlice";
+import {
+  loginWithGoogle,
+  selectAuthError,
+  selectAuthLoading,
+} from "@user/RTK/LogSlice";
 import React from "react";
 
 const FacGoogleLogin = React.memo(() => {
-  const { loading: googleLoading, error: googleError } = useSelector(
-    (st) => st.google,
-  );
+  const googleLoading = useSelector(selectAuthLoading);
+  const googleError = useSelector(selectAuthError);
+
   const { t } = useTranslation();
   const navigate = useNavigate();
 

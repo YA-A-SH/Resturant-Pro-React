@@ -6,22 +6,26 @@ import {
   GppGoodRounded,
   BlockRounded,
 } from "@mui/icons-material";
-import { alpha, Box, Button } from "@mui/material";
+import { alpha, Box, Button, useTheme } from "@mui/material";
 import { motion } from "framer-motion";
 import { useDispatch } from "react-redux";
-import { toggleBlocked, toggleVerified } from "@user/RTK/MainSlice";
+import { toggleBlocked, toggleVerified } from "@user/RTK/ElseSlice";
 import HeaderContent from "./HeaderContent";
+import { useTranslation } from "react-i18next";
 export default function BaseHeader({
-  t,
   configs,
   data,
-  isDark,
   type,
   setSalaryState,
   setDeleteState,
 }) {
   const dispatch = useDispatch();
   const isUserVerified = type === "user" && data?.isVerified;
+
+  const { t } = useTranslation();
+
+  const theme = useTheme();
+  const isDark = theme.palette.mode === "dark";
 
   const renderActions = () => {
     if (type === "chef") {
@@ -152,7 +156,6 @@ export default function BaseHeader({
       {/* Content Area */}
       <HeaderContent
         data={data}
-        isDark={isDark}
         isUserVerified={isUserVerified}
         type={type}
         renderActions={renderActions}

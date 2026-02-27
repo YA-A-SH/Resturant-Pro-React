@@ -19,11 +19,18 @@ import {
   OpenSnackbarContext,
   ShowCart,
 } from "./Components/Context/MainContext";
+import { useSelector } from "react-redux";
+import { selectCurrentUser } from "@user/RTK/LogSlice";
 
 const PreApp = React.memo(({ handleCloseSnackbar }) => {
   const { isAdmin } = useContext(IsAdminContext);
   const { openSnackbar } = useContext(OpenSnackbarContext);
   const { setShow } = useContext(ShowCart);
+
+  const user = useSelector(selectCurrentUser);
+
+  const disabled = !!user;
+
   const openShopCart = useCallback(() => setShow(true), [setShow]);
   return (
     <Box component="main">
@@ -53,6 +60,7 @@ const PreApp = React.memo(({ handleCloseSnackbar }) => {
             position: "fixed",
             bottom: 24,
             right: 24,
+            display: disabled ? "" : "none",
             boxShadow: "0 0 20px rgba(255,152,0,0.6)",
           }}
           onClick={openShopCart}

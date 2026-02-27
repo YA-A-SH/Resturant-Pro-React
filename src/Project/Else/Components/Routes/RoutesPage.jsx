@@ -46,10 +46,11 @@ import MealsSkeleton from "@user/Skeleton/MealsSkeleton";
 import DrinksAndSweetsSkeleton from "@user/Skeleton/DrinksAndSweetsSkiliton";
 import Loader from "../Else/Loader";
 import { IsAdminContext } from "../Context/MainContext";
+import EliteLoader from "@admin/ManageUsers/Components/ProfilePages/Loader";
 
 const AdminRoute = ({ children }) => {
   return (
-    <Suspense fallback={<Loader id="admin" />}>
+    <Suspense fallback={<EliteLoader color="#A855F7" />}>
       <PageWrapper>
         <AdminProtectedRoute>{children}</AdminProtectedRoute>
       </PageWrapper>

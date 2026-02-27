@@ -11,7 +11,7 @@ import {
 import LogoutIcon from "@mui/icons-material/Logout";
 import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
-import { logout } from "@user/RTK/MainSlice";
+import { logout } from "@user/RTK/LogSlice";
 import { motion, AnimatePresence } from "framer-motion";
 import { useContext, useEffect } from "react";
 import { IsAdminContext } from "../Context/MainContext";

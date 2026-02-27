@@ -1,6 +1,3 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { createAsyncThunk } from "@reduxjs/toolkit";
-import axios from "axios";
 import {
   GoogleAuthProvider,
   signInWithPopup,
@@ -9,131 +6,9 @@ import {
 import { auth } from "../Firebase/Firebase";
 import { signOut } from "firebase/auth";
 import { sendPasswordResetEmail } from "firebase/auth";
+import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
 
 const providerGoogle = new GoogleAuthProvider();
-// const providerFacebook = new FacebookAuthProvider();
-
-export const fetchMeals = createAsyncThunk(
-  "create/fetchMeals",
-  async (_, thunkAPI) => {
-    try {
-      const res = await axios.get(
-        "https://www.themealdb.com/api/json/v1/1/search.php?s=",
-      );
-      localStorage.setItem("meals", JSON.stringify(res.data.meals));
-      return res.data.meals;
-    } catch (err) {
-      return thunkAPI.rejectWithValue(err.message);
-    }
-  },
-);
-const mealsSlice = createSlice({
-  name: "meal",
-  initialState: {
-    meals: [],
-    loading: false,
-    error: null,
-  },
-  reducers: {},
-  extraReducers: (builder) => {
-    builder
-      .addCase(fetchMeals.pending, (state) => {
-        state.loading = true;
-        ((state.error = null), (state.meals = []));
-      })
-      .addCase(fetchMeals.fulfilled, (state, action) => {
-        ((state.loading = false), (state.meals = action.payload));
-      })
-      .addCase(fetchMeals.rejected, (state, action) => {
-        ((state.loading = false),
-          (state.error = action.payload || "Unknown Error"));
-      });
-  },
-});
-
-export const fetchDrinks = createAsyncThunk(
-  "create/fetchDrinks",
-  async (_, thunkAPI) => {
-    try {
-      const res = await axios.get(
-        "https://www.thecocktaildb.com/api/json/v1/1/filter.php?a=Non_Alcoholic",
-      );
-      localStorage.setItem("drinks", JSON.stringify(res.data.drinks));
-      return res.data.drinks;
-    } catch (err) {
-      return thunkAPI.rejectWithValue(err.message);
-    }
-  },
-);
-const drinkSlice = createSlice({
-  name: "drink",
-  initialState: {
-    meals: [],
-    loading: false,
-    error: null,
-  },
-  reducers: {},
-  extraReducers: (builder) => {
-    builder
-      .addCase(fetchDrinks.pending, (state) => {
-        state.loading = true;
-        ((state.error = null), (state.meals = []));
-      })
-      .addCase(fetchDrinks.fulfilled, (state, action) => {
-        ((state.loading = false), (state.meals = action.payload));
-      })
-      .addCase(fetchDrinks.rejected, (state, action) => {
-        ((state.loading = false),
-          (state.error = action.payload || "Unknown Error"));
-      });
-  },
-});
-
-export const fetchSweets = createAsyncThunk(
-  "create/fetchSweets",
-  async (_, thunkAPI) => {
-    try {
-      const res = await axios.get(
-        "https://www.themealdb.com/api/json/v1/1/filter.php?c=Dessert",
-      );
-      localStorage.setItem("sweets", JSON.stringify(res.data.meals));
-      return res.data.meals;
-    } catch (err) {
-      return thunkAPI.rejectWithValue(err.message);
-    }
-  },
-);
-const sweetSlice = createSlice({
-  name: "sweet",
-  initialState: {
-    meals: [],
-    loading: false,
-    error: null,
-  },
-  reducers: {},
-  extraReducers: (builder) => {
-    builder
-      .addCase(fetchSweets.pending, (state) => {
-        state.loading = true;
-        ((state.error = null), (state.meals = []));
-      })
-      .addCase(fetchSweets.fulfilled, (state, action) => {
-        ((state.loading = false), (state.meals = action.payload));
-      })
-      .addCase(fetchSweets.rejected, (state, action) => {
-        ((state.loading = false),
-          (state.error = action.payload || "Unknown Error"));
-      });
-  },
-});
-
-export const sweetsReducer = sweetSlice.reducer;
-
-export const drinksReducer = drinkSlice.reducer;
-
-export const mealsReducer = mealsSlice.reducer;
-
-// Auth ///////////////////////////
 
 const storedUser = JSON.parse(localStorage.getItem("user"));
 
@@ -318,6 +193,19 @@ const resetSlice = createSlice({
 export const resetReducer = resetSlice.reducer;
 export const { clearResetState } = resetSlice.actions;
 
+const resetSelect = (state) => state.reset;
+
+export const resetSuccessSelector = createSelector([resetSelect], (resent) => {
+  return resent.success;
+});
+
+export const resetLoadingSelector = createSelector([resetSelect], (resent) => {
+  return resent.loading;
+});
+export const resetErrorSelector = createSelector([resetSelect], (resent) => {
+  return resent.error;
+});
+
 export const emailReducer = emailSlice.reducer;
 
 // export const facebookReducer = facebookSlice.reducer;
@@ -339,71 +227,23 @@ export const logout = () => async (dispatch) => {
   localStorage.removeItem("user");
 };
 
-export const fetchFakeUser = createAsyncThunk(
-  "create/fetchUsers",
-  async (_, thunkAPI) => {
-    try {
-      const res = await axios.get("https://randomuser.me/api/?results=100");
+import { createSelector } from "@reduxjs/toolkit";
 
-      const user = res.data.results.map((u) => ({
-        id: u.login.uuid,
-        name: `${u.name.first} ${u.name.last}`,
-        gender: u.gender,
-        email: u.email,
-        phone: u.cell,
-        city: u.location.city,
-        image: u.picture.large,
-        isBlocked: false,
-        isVerified: false,
-      }));
+const selectGoogleAuth = (state) => state.google;
+const selectEmailAuth = (state) => state.email;
 
-      return user;
-    } catch (err) {
-      return thunkAPI.rejectWithValue(err.message);
-    }
+export const selectCurrentUser = createSelector(
+  [selectGoogleAuth, selectEmailAuth],
+  (google, email) => {
+    return google.user || email.user || null;
   },
 );
 
-const usersSlice = createSlice({
-  name: "user",
-  initialState: {
-    users: [],
-    loading: false,
-    error: null,
-  },
-  reducers: {
-    toggleVerified: (state, action) => {
-      const userId = action.payload;
-      const user = state.users.find((user) => user.id === userId);
-      if (user) {
-        user.isVerified = !user.isVerified;
-      }
-    },
-    toggleBlocked: (state, action) => {
-      const userId = action.payload;
-      const user = state.users.find((user) => user.id === userId);
-      if (user) {
-        user.isBlocked = !user.isBlocked;
-      }
-    },
-  },
-  extraReducers: (builder) => {
-    builder
-      .addCase(fetchFakeUser.pending, (state) => {
-        state.loading = true;
-        state.error = null;
-      })
-      .addCase(fetchFakeUser.fulfilled, (state, action) => {
-        state.loading = false;
-        state.users = action.payload;
-      })
-      .addCase(fetchFakeUser.rejected, (state, action) => {
-        state.loading = false;
-        state.error = action.payload || "Unknown Error";
-      });
-  },
-});
-
-export const usersReducer = usersSlice.reducer;
-export const { toggleVerified } = usersSlice.actions;
-export const { toggleBlocked } = usersSlice.actions;
+export const selectAuthLoading = createSelector(
+  [selectGoogleAuth, selectEmailAuth],
+  (google, email) => google.loading || email.loading,
+);
+export const selectAuthError = createSelector(
+  [selectGoogleAuth, selectEmailAuth],
+  (google, email) => google.error || email.error,
+);

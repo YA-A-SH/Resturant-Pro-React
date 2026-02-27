@@ -12,11 +12,12 @@ import {
   XAxis,
 } from "recharts";
 import { Restaurant, Sell } from "@mui/icons-material";
+import { useTranslation } from "react-i18next";
 
-export default function Charts({ t, time, firstChartData, secondChartData }) {
+export default function Charts({ time, firstChartData, secondChartData }) {
   const theme = useTheme();
   const isDark = theme.palette.mode === "dark";
-
+  const { t } = useTranslation();
   const tooltipStyle = {
     contentStyle: {
       backgroundColor: isDark ? "#1e1e26" : "#fff",

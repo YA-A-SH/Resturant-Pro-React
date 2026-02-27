@@ -7,7 +7,7 @@ import { useLocation } from "react-router-dom";
 import { useDispatch, useSelector } from "react-redux";
 
 // Comp
-import { fetchMeals } from "../RTK/MainSlice";
+import { fetchMeals, mealsDataSelector, mealsErrorSelector, mealsLoadingSelector } from "../RTK/Dishe'sSlice";
 import HomePre from "./PresenterHome";
 import { useTranslation } from "react-i18next";
 import { OpenSnackbarContext } from "@else/Components/Context/MainContext";
@@ -15,7 +15,10 @@ import { OpenSnackbarContext } from "@else/Components/Context/MainContext";
 const ContHome = React.memo(() => {
   // Hooks Use
   const { openSnackbar, setOpenSnackbar } = useContext(OpenSnackbarContext);
-  const { meals, loading, error } = useSelector((state) => state.meals);
+  const meals = useSelector(mealsDataSelector);
+  const loading = useSelector(mealsLoadingSelector);
+  const error = useSelector(mealsErrorSelector);
+
   const [popularMeals, setPopularMeals] = useState([]);
   const { t } = useTranslation();
   const location = useLocation();

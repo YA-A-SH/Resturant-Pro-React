@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import {
   Dialog,
   DialogTitle,
@@ -22,15 +22,12 @@ import {
 } from "@mui/icons-material";
 import { v4 as uuidv4 } from "uuid";
 import { useTranslation } from "react-i18next";
+import { ChefsContext } from "@else/Components/Context/MainContext";
 
-export default function AddChefModal({
-  open,
-  chefs,
-  setChefs,
-  handleClose,
-  setOpenSnackbar,
-}) {
+export default function AddChefModal({ open, handleClose, setOpenSnackbar }) {
   // Hooks
+  const { chefs, setChefs } = useContext(ChefsContext);
+
   const [formData, setFormData] = useState({
     id: uuidv4(),
     name: "",

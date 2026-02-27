@@ -13,14 +13,12 @@ import {
   Stack,
   Typography,
 } from "@mui/material";
+import React from "react";
+import { useTranslation } from "react-i18next";
 
-export default function BaseDetails({
-  t,
-  configs,
-  type,
-  isVerified,
-  isBlocked,
-}) {
+const BaseDetails = React.memo(({ configs, type, isVerified, isBlocked }) => {
+  const { t } = useTranslation();
+
   const getTrustStatus = () => {
     if (isBlocked) {
       return {
@@ -219,4 +217,5 @@ export default function BaseDetails({
       </Grid>
     </>
   );
-}
+});
+export default BaseDetails;

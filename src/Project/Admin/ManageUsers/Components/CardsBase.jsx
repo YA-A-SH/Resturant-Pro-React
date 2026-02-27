@@ -1,4 +1,4 @@
-import { cloneElement, useContext, useState } from "react";
+import React, { cloneElement, useContext, useState } from "react";
 import {
   MailRounded,
   LocationOnRounded,
@@ -23,14 +23,16 @@ import FooterCardBase from "./FooterCardBase";
 import EditSalaryPopup from "./EditSalaryPopup";
 import DeleteChefPopup from "./DeleteChefPopup";
 import { OpenSnackbarContext } from "@else/Components/Context/MainContext";
+import { useTranslation } from "react-i18next";
 
-export default function CardBase({ t, isDark, data, id }) {
+const CardBase = React.memo(({ data, id }) => {
   // Hooks
   const { setOpenSnackbar } = useContext(OpenSnackbarContext);
   const [openEditSalaryPopup, setOpenEditSalaryPopup] = useState(false);
   const [openDeleteChefPopup, setOpenDeleteChefPopup] = useState(false);
   const theme = useTheme();
-
+  const { t } = useTranslation();
+  const isDark = theme.palette.mode === "dark";
   // Variables
 
   const isUserVerified = id === "user" && data?.isVerified;
@@ -245,18 +247,14 @@ export default function CardBase({ t, isDark, data, id }) {
       </Box>
       {/* Footer & Popups */}
       <FooterCardBase
-        t={t}
-        isDark={isDark}
         data={data}
         id={id}
-        theme={theme}
         configs={configs}
         setOpenEditSalaryPopup={setOpenEditSalaryPopup}
         setOpenDeleteChefPopup={setOpenDeleteChefPopup}
         setSnackbarAlert={setOpenSnackbar}
       />
       <EditSalaryPopup
-        t={t}
         id={data?.id}
         open={openEditSalaryPopup}
         setOpenEditSalaryPopup={setOpenEditSalaryPopup}
@@ -264,7 +262,6 @@ export default function CardBase({ t, isDark, data, id }) {
         setSnackbarAlert={setOpenSnackbar}
       />
       <DeleteChefPopup
-        t={t}
         data={data}
         open={openDeleteChefPopup}
         setOpenDeleteChefPopup={setOpenDeleteChefPopup}
@@ -272,4 +269,5 @@ export default function CardBase({ t, isDark, data, id }) {
       />{" "}
     </Card>
   );
-}
+});
+export default CardBase;

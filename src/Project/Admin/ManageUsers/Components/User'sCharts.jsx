@@ -22,9 +22,13 @@ import {
   AreaChart,
   Area,
 } from "recharts";
+import { useTranslation } from "react-i18next";
+import React from "react";
 
-export default function UsersCharts({ t, isDark }) {
+const UsersCharts = React.memo(() => {
   const theme = useTheme();
+  const { t } = useTranslation();
+  const isDark = theme.palette.mode === "dark";
 
   const verifyUsers = [
     { year: "2015", users: 400, verifyUsers: 58 },
@@ -109,7 +113,6 @@ export default function UsersCharts({ t, isDark }) {
                     tick={{ fill: theme.palette.text.secondary, fontSize: 12 }}
                   />
                   <Tooltip
-                    content={<CustomTooltip isDark={isDark} t={t} />}
                     cursor={{
                       stroke: theme.palette.admin.main,
                       strokeWidth: 2,
@@ -178,7 +181,6 @@ export default function UsersCharts({ t, isDark }) {
                         ? "rgba(255,255,255,0.03)"
                         : "rgba(0,0,0,0.02)",
                     }}
-                    content={<CustomTooltip isDark={isDark} t={t} />}
                   />
                   <Bar
                     dataKey="ban"
@@ -205,64 +207,5 @@ export default function UsersCharts({ t, isDark }) {
       </Grid>
     </Box>
   );
-}
-
-const CustomTooltip = ({ t, active, payload, label, isDark }) => {
-  if (active && payload && payload.length) {
-    return (
-      <Paper
-        elevation={0}
-        sx={{
-          p: 2,
-          borderRadius: "16px",
-          bgcolor: isDark
-            ? "rgba(30, 30, 30, 0.9)"
-            : "rgba(255, 255, 255, 0.9)",
-          backdropFilter: "blur(10px)",
-          border: "1px solid",
-          borderColor: isDark ? "rgba(255,255,255,0.1)" : "rgba(0,0,0,0.05)",
-          boxShadow: "0 10px 30px rgba(0,0,0,0.15)",
-        }}
-      >
-        <Typography
-          variant="subtitle2"
-          sx={{ mb: 1.5, fontWeight: 900, color: isDark ? "#fff" : "#000" }}
-        >
-          {t("Timeline:")} {label}
-        </Typography>
-        <Stack spacing={1}>
-          {payload.map((entry, index) => (
-            <Stack
-              key={index}
-              direction="row"
-              alignItems="center"
-              spacing={1.5}
-            >
-              <Box
-                sx={{
-                  width: 8,
-                  height: 8,
-                  borderRadius: "50%",
-                  bgcolor: entry.color || entry.fill,
-                }}
-              />
-              <Typography
-                variant="caption"
-                sx={{ fontWeight: 700, color: "text.secondary", flex: 1 }}
-              >
-                {entry.name}
-              </Typography>
-              <Typography
-                variant="body2"
-                sx={{ fontWeight: 900, color: isDark ? "#fff" : "#000" }}
-              >
-                {entry.value.toLocaleString()}
-              </Typography>
-            </Stack>
-          ))}
-        </Stack>
-      </Paper>
-    );
-  }
-  return null;
-};
+});
+export default UsersCharts;

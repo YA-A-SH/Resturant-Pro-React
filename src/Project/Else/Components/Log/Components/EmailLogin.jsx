@@ -2,11 +2,11 @@ import { Button, CircularProgress, TextField } from "@mui/material";
 import React, { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
-import { loginWithEmail } from "@user/RTK/MainSlice";
+import { loginWithEmail, selectAuthLoading } from "@user/RTK/LogSlice";
 import { useNavigate } from "react-router-dom";
 
 const EmailLogin = React.memo(() => {
-  const { loading: mailLoading } = useSelector((st) => st.email);
+  const mailLoading = useSelector(selectAuthLoading);
   const { t } = useTranslation();
   const dispatch = useDispatch();
   const navigate = useNavigate();

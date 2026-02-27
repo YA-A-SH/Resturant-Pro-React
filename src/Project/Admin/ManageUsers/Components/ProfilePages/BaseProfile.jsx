@@ -27,7 +27,6 @@ export default function ProfileView({
   const { t } = useTranslation();
   const navigate = useNavigate();
   const theme = useTheme();
-  const isDark = theme.palette.mode === "dark";
 
   const isUserVerified = type === "user" && data?.isVerified;
   const isBlocked = type === "user" && data?.isBlocked;
@@ -104,11 +103,8 @@ export default function ProfileView({
       {/* --- Header Card --- */}
 
       <BaseHeader
-        t={t}
         configs={configs}
         data={data}
-        isDark={isDark}
-        theme={theme}
         type={type}
         setSalaryState={setState1}
         setDeleteState={setState2}
@@ -127,14 +123,11 @@ export default function ProfileView({
       >
         {" "}
         <BaseCharts
-          t={t}
           type={type}
           configs={configs}
-          theme={theme}
           chartData={chartData}
         />
         <BaseDetails
-          t={t}
           configs={configs}
           type={type}
           isVerified={isUserVerified}

@@ -7,23 +7,26 @@ import {
   TrendingUp,
   VerifiedUserRounded,
 } from "@mui/icons-material";
-import { alpha, Box, Button, Stack, Tooltip } from "@mui/material";
+import { alpha, Box, Button, Stack, Tooltip, useTheme } from "@mui/material";
 import { ActionButton } from "./OtherCompForCard'sBase";
 import { useNavigate } from "react-router-dom";
-import { toggleBlocked, toggleVerified } from "@user/RTK/MainSlice";
+import { toggleBlocked, toggleVerified } from "@user/RTK/ElseSlice";
 import { useDispatch } from "react-redux";
+import { useTranslation } from "react-i18next";
 
 export default function FooterCardBase({
-  t,
   data,
-  isDark,
+
   id,
-  theme,
+
   configs,
   setOpenEditSalaryPopup,
   setOpenDeleteChefPopup,
   setSnackbarAlert,
 }) {
+  const theme = useTheme();
+  const { t } = useTranslation();
+  const isDark = theme.palette.mode === "dark";
   const dispatch = useDispatch();
   const navigate = useNavigate();
 
@@ -104,7 +107,7 @@ export default function FooterCardBase({
               <ActionButton
                 icon={data?.isBlocked ? <CancelTwoTone /> : <BlockRounded />}
                 color={data?.isBlocked ? "#0ad69c" : "#EF4444"}
-                title={data?.isBlocked ? t("Unblock User"): t("Block User")}
+                title={data?.isBlocked ? t("Unblock User") : t("Block User")}
                 handle={handleBlockedUser}
               />
             </>

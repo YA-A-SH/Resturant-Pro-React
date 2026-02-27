@@ -11,18 +11,21 @@ import {
   Stack,
   Tooltip,
   Typography,
+  useTheme,
 } from "@mui/material";
 import { useTranslation } from "react-i18next";
 
 export default function HeaderContent({
   data,
-  isDark,
   isUserVerified,
   type,
   renderActions,
   configs,
 }) {
   const { t } = useTranslation();
+  const theme = useTheme();
+  const isDark = theme.palette.mode === "dark";
+
   return (
     <>
       <Box sx={{ p: { xxs: 3, md: 5 }, mt: -10, position: "relative" }}>

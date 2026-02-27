@@ -7,6 +7,7 @@ import {
   MenuItem,
   Select,
   FormControl,
+  useTheme,
 } from "@mui/material";
 import {
   AddRounded,
@@ -26,7 +27,6 @@ import { OpenSnackbarContext } from "@else/Components/Context/MainContext.jsx";
 import SnackbarComp from "@else/Components/Else/SnackbarComp.jsx";
 import { useTranslation } from "react-i18next";
 export default function BaseManage({
-  theme,
   timeFilter,
   setTimeFilter,
   type,
@@ -44,6 +44,7 @@ export default function BaseManage({
   todayOrders,
 }) {
   const { t } = useTranslation();
+  const theme = useTheme();
 
   const [openAddDish, setOpenAddDish] = useState(false);
   const { openSnackbar, setOpenSnackbar } = useContext(OpenSnackbarContext);
@@ -243,8 +244,6 @@ export default function BaseManage({
         {/* Charts */}
 
         <Charts
-          t={t}
-          theme={theme}
           time={timeFilter}
           firstChartData={
             type === "meals"
@@ -262,7 +261,7 @@ export default function BaseManage({
           }
         />
         {/* Footer  */}
-        <FooterSection t={t} theme={theme} />
+        <FooterSection />
       </Box>
       <SnackbarComp
         openSnackbar={openSnackbar.openSnackbar}

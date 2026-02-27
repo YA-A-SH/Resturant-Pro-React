@@ -1,13 +1,28 @@
 import { useSelector, useDispatch } from "react-redux";
 import React, { useEffect, useMemo, useState } from "react";
-import { fetchDrinks, fetchSweets } from "../../RTK/MainSlice";
+import { fetchDrinks, fetchSweets } from "../../RTK/Dishe'sSlice";
 import Base from "../AllComp";
 import { useTranslation } from "react-i18next";
+import {
+  drinksDataSelector,
+  drinksErrorSelector,
+  drinksLoadingSelector,
+  sweetsDataSelector,
+  sweetsErrorSelector,
+  sweetsLoadingSelector,
+} from "@user/RTK/Dishe'sSlice";
 
 const SweetsAndDrinks = React.memo(({ type }) => {
-  const { meals, loading, error } = useSelector((st) =>
-    type === "drinks" ? st.drinks : st.sweet,
+  const meals = useSelector(
+    type === "drinks" ? drinksDataSelector : sweetsDataSelector,
   );
+  const loading = useSelector(
+    type === "drinks" ? drinksLoadingSelector : sweetsLoadingSelector,
+  );
+  const error = useSelector(
+    type === "drinks" ? drinksErrorSelector : sweetsErrorSelector,
+  );
+
   const [preparedMeals, setPreparedMeals] = useState([]);
   const [sortAscending, setSortAscending] = useState(true);
   const { t } = useTranslation();

@@ -16,10 +16,14 @@ import {
 } from "recharts";
 import ChartCard from "@admin/Main/Components/ChartCard";
 import { motion, AnimatePresence } from "framer-motion";
+import { useTranslation } from "react-i18next";
+import React from "react";
 
-export default function BaseCharts({ t, type, isDark, chartData }) {
+const BaseCharts = React.memo(({ type, chartData }) => {
   const theme = useTheme();
   const hasData = chartData && chartData.length > 0;
+  const isDark = theme.palette.mode === "dark";
+  const { t } = useTranslation();
 
   const getThemeAssets = () => {
     switch (type) {
@@ -207,4 +211,5 @@ export default function BaseCharts({ t, type, isDark, chartData }) {
       </ChartCard>
     </Grid>
   );
-}
+});
+export default BaseCharts;

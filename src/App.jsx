@@ -6,11 +6,12 @@ import "./App.css";
 import ProviderComp from "@else/Components/Provider/providerComp";
 
 function App() {
- 
   return (
-    <ModeProvider>
-      <ProviderComp />
-    </ModeProvider>
+    <>
+      <ModeProvider>
+        <ProviderComp />
+      </ModeProvider>
+    </>
   );
 }
 

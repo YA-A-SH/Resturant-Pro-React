@@ -12,7 +12,7 @@ import React, {
 import { v4 as uuidv4 } from "uuid";
 import CartPre from "./PresenterCart";
 import { useTranslation } from "react-i18next";
-
+  
 const ContCart = React.memo(() => {
   // Hooks Use
   const { setShow, cartItems, setCartItems } = useContext(ShowCart);

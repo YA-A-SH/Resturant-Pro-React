@@ -151,3 +151,18 @@ export const ModeProvider = ({ children }) => {
     <ModeContext.Provider value={contextValue}>{children}</ModeContext.Provider>
   );
 };
+
+// eslint-disable-next-line react-refresh/only-export-components
+export const SelectedTapAdmin = createContext();
+
+export const SelectedTapAdminProvider = ({ children }) => {
+  const [selectedTap, setSelectedTap] = useState(
+    () => JSON.parse(localStorage.getItem("tap")) || "Manager's",
+  );
+
+  return (
+    <SelectedTapAdmin.Provider value={{ selectedTap, setSelectedTap }}>
+      {children}
+    </SelectedTapAdmin.Provider>
+  );
+};

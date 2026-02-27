@@ -17,20 +17,16 @@ import {
 import { motion } from "framer-motion";
 import { useContext } from "react";
 import { ChefsContext } from "@else/Components/Context/MainContext";
-import { useNavigate } from "react-router-dom";
 import { useTranslation } from "react-i18next";
 
 export default function DeleteChefPopup({
   open,
   data,
   setOpenDeleteChefPopup,
-  isInProfile,
-  setIsProfile,
   setSnackbarAlert,
 }) {
   const { chefs, setChefs } = useContext(ChefsContext);
   const { t } = useTranslation();
-  const navigate = useNavigate();
   const theme = useTheme();
   const dangerColor = "#ff3d00";
 
@@ -38,17 +34,8 @@ export default function DeleteChefPopup({
     const updatedChefs = chefs.filter((chef) => {
       return chef.id !== data?.id;
     });
-    if (isInProfile) {
-      navigate(`/admin/manage-users`);
-      setIsProfile(false);
-      setTimeout(() => {
-        setChefs(updatedChefs);
-        setOpenDeleteChefPopup(false);
-      }, 1000);
-    } else {
-      setChefs(updatedChefs);
-      setOpenDeleteChefPopup(false);
-    }
+    setChefs(updatedChefs);
+    setOpenDeleteChefPopup(false);
     setSnackbarAlert({
       openSnackbar: true,
       message: t("Chef Fired Done"),
@@ -140,7 +127,7 @@ export default function DeleteChefPopup({
             fullWidth
             variant="contained"
             onClick={() => {
-              handleDelete(data.id);
+              handleDelete();
               handleClose();
             }}
             sx={{

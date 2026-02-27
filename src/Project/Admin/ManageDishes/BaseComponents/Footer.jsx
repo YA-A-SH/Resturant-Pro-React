@@ -7,11 +7,15 @@ import {
   Grid,
   Stack,
   Typography,
+  useTheme,
 } from "@mui/material";
+import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 
-export default function FooterSection({t, theme }) {
+export default function FooterSection() {
   const navigate = useNavigate();
+  const { t } = useTranslation();
+  const theme = useTheme();
   return (
     <Box
       sx={{
@@ -33,8 +37,8 @@ export default function FooterSection({t, theme }) {
             {t("Ready to scale your business?")}
           </Typography>
           <Typography variant="body1" sx={{ opacity: 0.9, maxWidth: 500 }}>
-          {t("desc 21")}
-        </Typography>
+            {t("desc 21")}
+          </Typography>
         </Grid>
         <Grid item xs={12} md={4} textAlign={{ md: "right" }}>
           <Button
@@ -62,7 +66,7 @@ export default function FooterSection({t, theme }) {
         sx={{ opacity: 0.8 }}
       >
         <Typography variant="caption" fontWeight={700}>
-         {t(" © 2024 Admin Panel Dashboard")}
+          {t(" © 2024 Admin Panel Dashboard")}
         </Typography>
         <Stack direction="row" spacing={3}>
           <Typography

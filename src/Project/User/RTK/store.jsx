@@ -1,14 +1,12 @@
 import { configureStore } from "@reduxjs/toolkit";
+import { mealsReducer, drinksReducer, sweetsReducer } from "./Dishe'sSlice";
 import {
-  mealsReducer,
-  drinksReducer,
-  sweetsReducer,
   googleReducer,
   // facebookReducer,
-  usersReducer,
   emailReducer,
   resetReducer,
-} from "./MainSlice";
+} from "./LogSlice";
+import { usersReducer } from "./ElseSlice";
 export const store = configureStore({
   reducer: {
     meals: mealsReducer,

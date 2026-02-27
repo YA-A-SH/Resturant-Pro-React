@@ -1,6 +1,12 @@
 import React, { useState } from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { clearResetState, resetPassword } from "@user/RTK/MainSlice";
+import {
+  clearResetState,
+  resetErrorSelector,
+  resetLoadingSelector,
+  resetPassword,
+  resetSuccessSelector,
+} from "@user/RTK/LogSlice";
 import {
   Alert,
   Button,
@@ -15,7 +21,9 @@ import { useTranslation } from "react-i18next";
 const DialogReset = React.memo(({ open, setOpen }) => {
   const { t } = useTranslation();
 
-  const { loading, success, error } = useSelector((st) => st.reset);
+  const success = useSelector(resetSuccessSelector);
+  const loading = useSelector(resetLoadingSelector);
+  const error = useSelector(resetErrorSelector);
   const [email, setEmail] = useState("");
   const dispatch = useDispatch();
 
