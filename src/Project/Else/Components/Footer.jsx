@@ -10,7 +10,6 @@ export default function Footer() {
   return (
     <Box
       sx={{
-        mt: 3,
         py: 2,
         textAlign: "center",
         bgcolor: "background.paper",
@@ -29,7 +28,7 @@ export default function Footer() {
           href="https://www.facebook.com/yaser.shkfa"
           target="_blank"
           rel="noopener noreferrer"
-          sx={{ color: isAdmin ? "#7960f3" : "primary.main" }}
+          sx={{ color: isAdmin ? "#7960f3" : "primary.custom" }}
         >
           {" "}
           <Facebook />{" "}
@@ -39,7 +38,7 @@ export default function Footer() {
           href="https://www.linkedin.com/in/ya-a-sh-4494743a3"
           target="_blank"
           rel="noopener noreferrer"
-          sx={{ color: isAdmin ? "#7960f3" : "primary.main" }}
+          sx={{ color: isAdmin ? "#7960f3" : "primary.custom" }}
         >
           {" "}
           <LinkedIn />{" "}
@@ -49,7 +48,7 @@ export default function Footer() {
           href="https://github.com/YA-A-SH"
           target="_blank"
           rel="noopener noreferrer"
-          sx={{ color: isAdmin ? "#7960f3" : "primary.main" }}
+          sx={{ color: isAdmin ? "#7960f3" : "primary.custom" }}
         >
           <GitHub />{" "}
         </IconButton>{" "}

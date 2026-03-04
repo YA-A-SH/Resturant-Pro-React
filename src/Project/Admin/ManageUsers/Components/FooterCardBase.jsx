@@ -16,9 +16,7 @@ import { useTranslation } from "react-i18next";
 
 export default function FooterCardBase({
   data,
-
   id,
-
   configs,
   setOpenEditSalaryPopup,
   setOpenDeleteChefPopup,

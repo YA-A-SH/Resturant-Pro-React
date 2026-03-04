@@ -165,7 +165,7 @@ export default function BaseManage({
         </Stack>
 
         <AddDishModal
-          t={t}
+         
           open={openAddDish}
           setOpen={setOpenAddDish}
           type={type}

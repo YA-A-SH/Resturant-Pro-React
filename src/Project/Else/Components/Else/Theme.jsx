@@ -12,6 +12,7 @@ export default function Theme({ mode, children }) {
           main: isDark ? "#D4AF37" : "#B8860B",
           light: "#E6C65D",
           dark: "#996515",
+          custom: "#f7d724",
           contrastText: isDark ? "#000" : "#fff",
         },
         admin: {

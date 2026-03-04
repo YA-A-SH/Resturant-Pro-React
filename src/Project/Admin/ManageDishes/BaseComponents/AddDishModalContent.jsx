@@ -11,17 +11,19 @@ import {
   TextField,
   Typography,
   alpha,
+  useTheme,
 } from "@mui/material";
+import { useTranslation } from "react-i18next";
 
 export default function Content({
-  t,
   formData,
   handleInputChange,
   handleImageChange,
   errors,
   fileInputRef,
-  theme,
 }) {
+  const { t } = useTranslation();
+  const theme = useTheme();
   return (
     <Box component="form" noValidate sx={{ mt: 1 }}>
       <Grid

@@ -3,7 +3,7 @@ import { Box, Typography, useTheme, alpha } from "@mui/material";
 export default function Loader({ id }) {
   const theme = useTheme();
   const primaryColor =
-    id === "admin" ? theme.palette.admin.main : theme.palette.primary.main;
+    id === "admin" ? theme.palette.admin.main : theme.palette.primary.custom;
 
   return (
     <Box

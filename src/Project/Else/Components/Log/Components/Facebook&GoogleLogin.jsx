@@ -25,7 +25,13 @@ const FacGoogleLogin = React.memo(() => {
   };
   return (
     <>
-      <Box sx={{ display: "flex", gap: 2 }}>
+      <Box
+        sx={{
+          display: "flex",
+          gap: { xxs: 2, ss: 7 },
+          justifyContent: "space-around",
+        }}
+      >
         <Button
           fullWidth
           variant="outlined"
@@ -34,6 +40,7 @@ const FacGoogleLogin = React.memo(() => {
           sx={{
             borderColor: "#1877F2",
             color: "#1877F2",
+            fontSize: { xxs: "0.6rem", ss: "1rem", ms: "0.7rem" },
           }}
         >
           {t("Coming Soon")}
@@ -52,9 +59,10 @@ const FacGoogleLogin = React.memo(() => {
             )
           }
           sx={(theme) => ({
-            borderColor: "primary.main",
-            color: "primary.main",
+            borderColor: "primary.custom",
+            color: "primary.custom",
             transition: "0.3s",
+            fontSize: { xxs: "0.7rem", ss: "1rem", ms: "0.7rem" },
             "&:hover": {
               bgcolor:
                 theme.palette.mode === "dark"

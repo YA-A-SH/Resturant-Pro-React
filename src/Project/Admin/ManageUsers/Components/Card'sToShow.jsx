@@ -31,8 +31,8 @@ const MANAGERS_DATA = [
     img: "https://randomuser.me/api/portraits/men/1.jpg",
     age: "21",
     income: [
-      { month: "Jan", income: 10043 },
-      { month: "Feb", income: 13955 },
+      { month: "Jan", income: 40043 },
+      { month: "Feb", income: 19955 },
       { month: "Mar", income: 22240 },
     ],
   },

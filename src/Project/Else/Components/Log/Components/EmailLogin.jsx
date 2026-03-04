@@ -1,4 +1,10 @@
-import { Button, CircularProgress, TextField } from "@mui/material";
+import {
+  Button,
+  CircularProgress,
+  TextField,
+  Typography,
+  useTheme,
+} from "@mui/material";
 import React, { useCallback, useState } from "react";
 import { useTranslation } from "react-i18next";
 import { useDispatch, useSelector } from "react-redux";
@@ -22,8 +28,24 @@ const EmailLogin = React.memo(() => {
     }
   }, [dispatch, navigate, user.email, user.pw]);
 
+  const theme = useTheme();
   return (
     <>
+      <Typography
+        variant="h4"
+        fontWeight="1000"
+        mb={1}
+        sx={{
+          background: `linear-gradient(45deg, #fee76a, #fee76a, ${theme.palette.primary.light}, #fee76a , #fee76a)`,
+          WebkitBackgroundClip: "text",
+          WebkitTextFillColor: "transparent",
+          letterSpacing: -1,
+          fontSize: { xxs: "1.5rem", ss: "2.2rem", ms: "2.1rem", md: "2.8rem" },
+          mb: 4,
+        }}
+      >
+        {t("Login By Email")}
+      </Typography>
       <TextField
         label={t("Email Address")}
         fullWidth
@@ -48,13 +70,19 @@ const EmailLogin = React.memo(() => {
         fullWidth
         onClick={handleEmailLogin}
         disabled={mailLoading}
+        disableElevation
         sx={{
+          backgroundColor: "#fffdfa",
+          color: theme.palette.primary.custom,
+          border: `2px solid ${theme.palette.primary.custom}`,
           py: 1.3,
           mb: 2,
-          transition: "transform 0.3s ease, box-shadow 0.3s ease", // ⚡ لازم
+          transition: "transform 0.3s ease, box-shadow 0.3s ease",
+          boxShadow: "0 5px 20px #f7d72487",
+
           "&:hover": {
             transform: "translateY(-2px)",
-            boxShadow: "0 8px 25px rgba(255,152,0,0.5)",
+            boxShadow: "0 8px 25px #f7d724",
           },
         }}
         startIcon={mailLoading && <CircularProgress size={20} />}

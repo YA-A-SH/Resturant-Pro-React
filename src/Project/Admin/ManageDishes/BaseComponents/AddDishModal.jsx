@@ -4,27 +4,22 @@ import {
   Modal,
   Typography,
   Stack,
-  TextField,
   Button,
   IconButton,
   alpha,
   useTheme,
   Backdrop,
   Fade,
-  InputAdornment,
   Divider,
   CircularProgress,
 } from "@mui/material";
 import { CloseRounded, FastfoodRounded } from "@mui/icons-material";
 import Content from "./AddDishModalContent";
+import { useTranslation } from "react-i18next";
 
-export default function AddDishModal({
-  t,
-  open,
-  setOpen,
-  type,
-  setOpenSnackbar,
-}) {
+export default function AddDishModal({ open, setOpen, type, setOpenSnackbar }) {
+  const { t } = useTranslation();
+
   const theme = useTheme();
   const fileInputRef = useRef(null);
 
@@ -153,13 +148,11 @@ export default function AddDishModal({
 
           {/* Form Content */}
           <Content
-            t={t}
             handleImageChange={handleImageChange}
             formData={formData}
             handleInputChange={handleInputChange}
             errors={errors}
             fileInputRef={fileInputRef}
-            theme={theme}
           />
 
           {/* Footer Actions */}

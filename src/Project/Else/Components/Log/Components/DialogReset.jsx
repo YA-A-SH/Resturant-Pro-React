@@ -15,12 +15,12 @@ import {
   DialogContent,
   DialogTitle,
   TextField,
+  Typography,
 } from "@mui/material";
 import { useTranslation } from "react-i18next";
 
 const DialogReset = React.memo(({ open, setOpen }) => {
   const { t } = useTranslation();
-
   const success = useSelector(resetSuccessSelector);
   const loading = useSelector(resetLoadingSelector);
   const error = useSelector(resetErrorSelector);
@@ -37,50 +37,81 @@ const DialogReset = React.memo(({ open, setOpen }) => {
     <Dialog
       open={open}
       onClose={handleClose}
+      fullWidth
+      maxWidth="xs"
       PaperProps={{
         sx: {
-          borderRadius: 3,
-          bgcolor: "background.paper",
+          borderRadius: "20px",
+          padding: "10px",
+          boxShadow: "0px 10px 30px rgba(0,0,0,0.1)",
         },
       }}
     >
-      <DialogTitle>{t("Reset Password")}</DialogTitle>
+      <DialogTitle sx={{ pb: 1, fontWeight: "bold", fontSize: "1.5rem" }}>
+        {t("Reset Password")}
+        <Typography variant="body2" color="text.secondary">
+          {t("Enter your email to receive a reset link")}
+        </Typography>
+      </DialogTitle>
 
-      <DialogContent>
+      <DialogContent sx={{ mt: 1 }}>
         <TextField
           fullWidth
           autoFocus
-          label={t("Email")}
+          label={t("Email Address")}
           type="email"
-          sx={{ mt: 1 }}
+          variant="outlined"
           value={email}
           onChange={(e) => setEmail(e.target.value)}
+          sx={{
+            mt: 1,
+            "& .MuiOutlinedInput-root": {
+              borderRadius: "12px",
+            },
+          }}
         />
 
         {success && (
-          <Alert severity="success" sx={{ mt: 2 }}>
+          <Alert severity="success" sx={{ mt: 2, borderRadius: "10px" }}>
             {t("Reset email sent successfully")} ✅
           </Alert>
         )}
 
         {error && (
-          <Alert severity="error" sx={{ mt: 2 }}>
-            {t("Sorry Something Went Wrong Try Again Later")}
+          <Alert severity="error" sx={{ mt: 2, borderRadius: "10px" }}>
+            {typeof error === "string"
+              ? error
+              : t("Sorry Something Went Wrong")}
           </Alert>
         )}
       </DialogContent>
 
-      <DialogActions>
-        <Button onClick={handleClose}>{t("Cancel")}</Button>
+      <DialogActions sx={{ px: 3, pb: 2, justifyContent: "space-between" }}>
+        <Button
+          onClick={handleClose}
+          sx={{ color: "#777", fontWeight: "bold" }}
+        >
+          {t("Cancel")}
+        </Button>
+
         <Button
           variant="contained"
           disabled={loading || !email}
+          loading={loading}
           onClick={() => dispatch(resetPassword(email))}
+          sx={{
+            borderRadius: "10px",
+            px: 4,
+            bgcolor: "primary.main",
+            boxShadow: "none",
+            "&:hover": { bgcolor: "primary.dark", boxShadow: "none" },
+          }}
         >
-          {loading ? t("Sending...") : t("Send Link")}
+          {t("Send Link")}
         </Button>
       </DialogActions>
     </Dialog>
   );
 });
+
 export default DialogReset;

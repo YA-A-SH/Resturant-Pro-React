@@ -61,7 +61,7 @@ const Head = React.memo(() => {
             letterSpacing: "-0.5px",
             background: isAdmin
               ? theme.palette.admin.gradient
-              : `linear-gradient(135deg, ${theme.palette.primary.main} 0%, ${theme.palette.primary.light} 100%)`,
+              : `linear-gradient(135deg, ${theme.palette.primary.custom} 0%, ${theme.palette.primary.light} 100%)`,
             WebkitBackgroundClip: "text",
             WebkitTextFillColor: "transparent",
             fontSize: {
