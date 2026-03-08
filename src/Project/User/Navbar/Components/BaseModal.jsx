@@ -44,6 +44,7 @@ const BaseModal = ({ show, setShow, type, data }) => {
   const isMS = useMediaQuery(theme.breakpoints.between("ms", "md"));
   const isMD = useMediaQuery(theme.breakpoints.between("md", "lg"));
   const isLG = useMediaQuery(theme.breakpoints.between("lg", "xl"));
+  const isXL = useMediaQuery(theme.breakpoints.between("xl", "xxl"));
 
   const getResponsiveSize = (isActive) => {
     if (isActive) {
@@ -54,6 +55,7 @@ const BaseModal = ({ show, setShow, type, data }) => {
       if (isMS) return "29";
       if (isMD) return "30";
       if (isLG) return "31";
+      if (isXL) return "31";
     }
 
     if (isXXS) return "21";
@@ -63,6 +65,7 @@ const BaseModal = ({ show, setShow, type, data }) => {
     if (isMS) return "27";
     if (isMD) return "26";
     if (isLG) return "30";
+    if (isXL) return "31";
 
     return "18";
   };
