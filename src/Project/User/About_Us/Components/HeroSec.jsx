@@ -51,6 +51,7 @@ const HeroSec = React.memo(() => {
               color: "white",
               letterSpacing: -1,
               mb: 2,
+              mt: { xxs: 13, md: 6 },
               textShadow: "0 4px 12px rgba(0,0,0,0.5)",
             }}
           >

@@ -20,6 +20,7 @@
     "firebase": "^12.6.0",
     "framer-motion": "^12.23.26",
     "i18next": "^25.8.0",
+    "iconsax-react": "^0.0.8",
     "react": "^19.2.0",
     "react-dom": "^19.2.0",
     "react-hook-form": "^7.68.0",

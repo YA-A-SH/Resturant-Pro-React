@@ -9,7 +9,7 @@ export default function Theme({ mode, children }) {
       palette: {
         mode,
         primary: {
-          main: isDark ? "#D4AF37" : "#B8860B",
+          main: isDark ? "#D4AF37" : "#f2d237",
           light: "#E6C65D",
           dark: "#996515",
           custom: "#f7d724",
@@ -41,7 +41,7 @@ export default function Theme({ mode, children }) {
       },
 
       typography: {
-        fontFamily: "'Playpen Sans Arabic', 'Roboto', 'Arial', sans-serif",
+        fontFamily: "'El Messiri', 'Roboto', 'Arial', sans-serif",
       },
       components: {
         MuiButton: {

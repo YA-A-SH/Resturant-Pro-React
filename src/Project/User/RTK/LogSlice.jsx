@@ -132,7 +132,7 @@ const emailSlice = createSlice({
   },
   extraReducers: (builder) => {
     builder
-      .addCase(loginWithGoogle.pending, (state) => {
+      .addCase(loginWithEmail.pending, (state) => {
         state.loading = true;
         state.error = null;
         state.user = null;
@@ -140,7 +140,7 @@ const emailSlice = createSlice({
       .addCase(loginWithEmail.fulfilled, (state, action) => {
         state.loading = false;
         state.user = action.payload;
-        localStorage.setItem("user", JSON.stringify(action.payload)); // ✅ حفظ بعد login
+        localStorage.setItem("user", JSON.stringify(action.payload)); 
       })
       .addCase(loginWithEmail.rejected, (state, action) => {
         ((state.loading = false),

@@ -35,7 +35,7 @@ const HomePre = React.memo(
           background: isDark ? "#050505" : "#f8f9fa",
           position: "relative",
           overflow: "hidden",
-          pt: { xxs: 10, md: 15 },
+          pt: { xxs: 10, md: 3 },
           pb: 8,
         }}
       >
@@ -52,6 +52,7 @@ const HomePre = React.memo(
             filter: "blur(80px)",
             borderRadius: "50%",
             zIndex: 0,
+            mt: { xxs: 6, ss: 9 },
           }}
         />
 

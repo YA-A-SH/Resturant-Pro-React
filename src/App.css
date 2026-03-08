@@ -1,17 +1,7 @@
 @font-face {
-  font-family: "Playpen Sans Arabic";
+  font-family: "El Messiri";
   font-style: normal;
-  font-weight: 300;
+  font-weight: 300 700;
   font-display: swap;
-  src: url("./assets/Fonts/playpen-sans-arabic-v8-arabic_latin-300.woff2")
-    format("woff2");
-}
-
-@font-face {
-  font-family: "Playpen Sans Arabic";
-  font-style: normal;
-  font-weight: 700;
-  font-display: swap;
-  src: url("./assets/Fonts/playpen-sans-arabic-v8-arabic_latin-700.woff2")
-    format("woff2");
+  src: url("./assets/Fonts/ElMessiri-VariableFont_wght.ttf") format("truetype");
 }

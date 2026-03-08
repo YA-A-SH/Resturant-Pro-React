@@ -1,110 +1,111 @@
-import React, { useContext, useState } from "react";
-import ContNav from "@user/Navbar/ContNav";
+import React, { useContext } from "react";
 import { useNavigate } from "react-router-dom";
-import { Close, List } from "@mui/icons-material";
-import { Box, IconButton, Typography, useTheme } from "@mui/material";
-import { useSelector } from "react-redux";
+import { Box, Typography, useTheme } from "@mui/material";
 import {
   IsAdminContext,
   ModeContext,
 } from "@else/Components/Context/MainContext";
 import { useTranslation } from "react-i18next";
+import PreNav from "@user/Navbar/PresenterNavbar";
+import { useSelector } from "react-redux";
 import { selectCurrentUser } from "@user/RTK/LogSlice";
 
 const Head = React.memo(() => {
   const { mode } = useContext(ModeContext);
   const { isAdmin } = useContext(IsAdminContext);
-  const [showNav, setShowNav] = useState(false);
-  const user = useSelector(selectCurrentUser);
   const navigate = useNavigate();
   const { t } = useTranslation();
   const theme = useTheme();
   const isDark = mode === "dark";
-  const disabled = !!user || isAdmin;
   const headerBg = isAdmin
     ? isDark
       ? "rgba(15, 23, 42, 0.8)"
       : "rgba(248, 250, 252, 0.8)"
-    : theme.palette.background.glass;
+    : isDark
+      ? "rgba(5, 5, 5, 0.85)"
+      : "rgba(248, 249, 250, 0.85)";
 
+  const user = useSelector(selectCurrentUser);
+
+  const disabled = !!user;
   return (
     <>
       <Box
         component="header"
         sx={{
           height: 80,
-          px: { xxs: 2, xs: 2, md: 4 },
+          px: { xxs: 2, md: 4 },
           display: "flex",
           alignItems: "center",
-          justifyContent: "space-between",
+          justifyContent: { xxs: "center", md: "space-between" },
           position: "sticky",
           top: 0,
-          zIndex: 1000,
+          zIndex: 1100,
           backdropFilter: "blur(15px)",
-          WebkitBackdropFilter: "blur(15px)",
           bgcolor: headerBg,
-          borderBottom: "1px solid",
-          borderColor: isDark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.05)",
+          borderBottom: `1px solid ${isDark ? "rgba(255,255,255,0.08)" : "rgba(0,0,0,0.08)"}`,
+          transition: "background 0.3s ease",
           boxShadow: isDark
-            ? "0 4px 20px rgba(0,0,0,0.4)"
-            : "0 4px 20px rgba(148, 163, 184, 0.1)",
-          transition: "all 0.4s cubic-bezier(0.4, 0, 0.2, 1)",
+            ? "0px 2px 10px 0px #ffffff50"
+            : "0px 2px 10px 0px #00000050",
         }}
       >
-        <Typography
-          variant="h4"
-          fontWeight={900}
+        <Box
           onClick={() => navigate(isAdmin ? "/admin" : "/")}
           sx={{
             cursor: "pointer",
-            userSelect: "none",
-            letterSpacing: "-0.5px",
-            background: isAdmin
-              ? theme.palette.admin.gradient
-              : `linear-gradient(135deg, ${theme.palette.primary.custom} 0%, ${theme.palette.primary.light} 100%)`,
-            WebkitBackgroundClip: "text",
-            WebkitTextFillColor: "transparent",
-            fontSize: {
-              xxs: "1.7rem",
-              xs: "2rem",
-              sm: "3.2rem",
-              md: "3.5rem",
-            },
-            transition: "transform 0.3s ease",
-            "&:hover": {
-              transform: "scale(1.02)",
-            },
+            display: "flex",
+            alignItems: "center",
+            gap: 1,
           }}
         >
-          {isAdmin ? t("ZEUS Admin") : t("ZEUS Restaurant")}
-        </Typography>
-
-        <IconButton
-          onClick={() => setShowNav(!showNav)}
-          disabled={!disabled}
-          sx={{
-            color: isAdmin ? "admin.main" : "primary.main",
-            bgcolor: isDark ? "rgba(255,255,255,0.03)" : "rgba(0,0,0,0.03)",
-            borderRadius: "12px",
-            p: 1.2,
-            transition: "0.3s",
-            "&:hover": {
-              bgcolor: isAdmin
-                ? "rgba(99, 102, 241, 0.1)"
-                : "rgba(184, 134, 11, 0.1)",
-              transform: "rotate(30deg)",
-            },
-            "&.Mui-disabled": {
-              opacity: 0.3,
-            },
-            scale: { xxs: 0.84, sm: 1 },
-          }}
-        >
-          {showNav ? <Close /> : <List />}
-        </IconButton>
+          <Typography
+            variant="h4"
+            fontWeight={700}
+            sx={{
+              cursor: "pointer",
+              userSelect: "none",
+              letterSpacing: "-0.5px",
+              background: isAdmin
+                ? theme.palette.admin.gradient
+                : `linear-gradient(135deg, ${theme.palette.primary.custom} 0%, ${theme.palette.primary.light} 100%)`,
+              WebkitBackgroundClip: "text",
+              WebkitTextFillColor: "transparent",
+              fontSize: {
+                xxs: "2.09rem",
+                ss: "3rem",
+                sm: "3.2rem",
+                md: "2.5rem",
+              },
+              transition: "transform 0.3s ease",
+              "&:hover": {
+                transform: "scale(1.02)",
+              },
+            }}
+          >
+            {isAdmin ? t("ZEUS ADMIN") : t("ZEUS RESTAURANT")}
+          </Typography>
+        </Box>
+        {disabled ? (
+          <PreNav />
+        ) : (
+          <Box
+            component="img"
+            src="/logo_2.webp"
+            alt="Logo"
+            sx={{
+              position: { xxs: "absolute", md: "initial" },
+              top: { xxs: 50, md: "" },
+              height: 80,
+              filter: isDark
+                ? "brightness(1.2) drop-shadow(0 0 20px rgba(255,255,255,0.1))"
+                : "none",
+              transition: "all 0.4s ease",
+              "&:hover": { transform: "rotate(5deg) scale(1.1)" },
+            }}
+          />
+        )}
       </Box>
-
-      <ContNav showNav={showNav} setShowNav={setShowNav} />
     </>
   );
 });

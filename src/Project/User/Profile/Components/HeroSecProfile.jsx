@@ -34,7 +34,7 @@ const HeroSecProfile = React.memo(({ userMoreInfo, handleEditOpen }) => {
           width: "100%",
           display: "flex",
           justifyContent: "center",
-          mb: -10,
+          mb: -5,
         }}
       >
         <Box
@@ -52,7 +52,7 @@ const HeroSecProfile = React.memo(({ userMoreInfo, handleEditOpen }) => {
           }}
         />
 
-        <Container maxWidth="md" sx={{ zIndex: 1, pt: 8 }}>
+        <Container maxWidth="md" sx={{ zIndex: 1, pt: 8, mt: 3 }}>
           <Stack alignItems="center" spacing={3}>
             <motion.div
               initial={{ scale: 0, opacity: 0 }}

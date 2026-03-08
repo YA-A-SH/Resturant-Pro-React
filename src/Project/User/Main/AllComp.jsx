@@ -77,7 +77,7 @@ const Base = React.memo(
           pb: 10,
         }}
       >
-        <Container maxWidth="xl">
+        <Container maxWidth="xl" sx={{ mt: { xxs: 12, ss: 17, md: 2 } }}>
           {/* ===== Sort BTN ===== */}
 
           <Box sx={{ display: "flex", justifyContent: "center", mb: 4 }}>
