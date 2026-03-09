@@ -67,6 +67,7 @@ export default function BaseManage({
       <Box
         sx={{
           p: { xs: 2, md: 4 },
+          mt: { xxs: 11, md: 0 },
           minHeight: "100vh",
           bgcolor: "background.default",
         }}
@@ -165,7 +166,6 @@ export default function BaseManage({
         </Stack>
 
         <AddDishModal
-         
           open={openAddDish}
           setOpen={setOpenAddDish}
           type={type}

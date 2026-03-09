@@ -88,7 +88,7 @@ const CardBase = React.memo(({ data, id }) => {
       sx={{
         p: 0,
         width: "100%",
-        minWidth: 330,
+        minWidth: { xxs: 250, ss: 330 },
         borderRadius: "32px",
         position: "relative",
         overflow: "hidden",

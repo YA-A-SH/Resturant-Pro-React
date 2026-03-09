@@ -69,7 +69,14 @@ const DialogAdmin = React.memo(
           }}
         >
           <LockPersonIcon sx={{ fontSize: 40, color: "primary.main", mb: 1 }} />
-          <DialogTitle sx={{ fontWeight: "bold", textAlign: "center", p: 0 }}>
+          <DialogTitle
+            sx={{
+              fontWeight: "bold",
+              textAlign: "center",
+              color: "primary.main",
+              p: 0,
+            }}
+          >
             {t("Login As Admin")}
           </DialogTitle>
         </Box>
@@ -94,6 +101,7 @@ const DialogAdmin = React.memo(
             error={trys < 3 && trys > 0}
             helperText={trys < 3 ? `${t("Attempts left")}: ${trys}` : ""}
             sx={{
+              color: "primary.main",
               "& .MuiOutlinedInput-root": {
                 borderRadius: "14px",
               },

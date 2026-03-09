@@ -51,13 +51,18 @@ const PreAdmin = React.memo(() => {
         background: isDark
           ? `radial-gradient(circle at 0% 0%, ${theme.palette.admin.surface} 0%, ${theme.palette.background.default} 100%)`
           : `radial-gradient(circle at 0% 0%, #f0f4ff 0%, ${theme.palette.background.default} 100%)`,
-        py: { xs: 4, md: 8 },
+        py: { xs: 4 },
         transition: "background 0.5s ease",
       }}
     >
       <Container maxWidth="xl">
         {/* Header Section */}
-        <Box textAlign="center" mb={10} position="relative">
+        <Box
+          textAlign="center"
+          mb={10}
+          position="relative"
+          sx={{ mt: { xxs: 9, md: 0 } }}
+        >
           <Box
             sx={{
               position: "absolute",

@@ -29,6 +29,9 @@ import {
   Sun1,
   Global,
   Moon,
+  Element4,
+  SecurityUser,
+  BagHappy,
 } from "iconsax-react";
 import BaseModal from "./Components/BaseModal";
 
@@ -49,7 +52,75 @@ const PreNav = React.memo(() => {
 
   const menuItems = useMemo(() => {
     return isAdmin
-      ? []
+      ? [
+          {
+            label: t("Admin"),
+            key: "admin-dashboard",
+            path: "/admin",
+            icon: Element4,
+          },
+          {
+            label: t("M-Users"),
+            key: "manage-users",
+            path: "/admin/manage-users",
+            icon: SecurityUser,
+          },
+          {
+            label: t("M-Deash's"),
+            key: "manage-deash's",
+            path: "#",
+            icon: Reserve,
+            items: [
+              {
+                label: t("M-Meals"),
+                key: "manage-meals",
+                path: "/admin/manageMeals",
+                icon: BagHappy,
+              },
+              {
+                label: t("M-Drinks"),
+                key: "manage-drinks",
+                path: "/admin/manageDrinks",
+                icon: Coffee,
+              },
+              {
+                label: t("M-Sweets"),
+                key: "manage-sweets",
+                path: "/admin/manageSweets",
+                icon: Cake,
+              },
+            ],
+          },
+
+          {
+            key: "settingAdmin",
+            label: t("Settings"),
+            icon: Setting2,
+            items: [
+              {
+                label: t("Mode"),
+                path: "#",
+                icon: mode === "light" ? Sun1 : Moon,
+                from: "mode",
+                key: "mode",
+              },
+              {
+                label: t("Language"),
+                path: "#",
+                icon: i18n.language === "ar" ? Translate : Global,
+                from: "lang",
+                key: "lang",
+              },
+
+              {
+                label: t("Log out"),
+                path: "/logout",
+                icon: LogoutCurve,
+                key: "logoutAdmin",
+              },
+            ],
+          },
+        ]
       : [
           { label: t("Home"), key: "home", path: "/", icon: Home2 },
           {
@@ -111,36 +182,51 @@ const PreNav = React.memo(() => {
   }, [i18n.language, isAdmin, mode, t]);
 
   // Responsive Breakpoints
-  const isXXS = useMediaQuery(theme.breakpoints.between("xxs", "xs"));
-  const isXS = useMediaQuery(theme.breakpoints.between("xs", "ss"));
+  const isXXS = useMediaQuery(theme.breakpoints.between("xxs", "ss"));
   const isSS = useMediaQuery(theme.breakpoints.between("ss", "sm"));
   const isSM = useMediaQuery(theme.breakpoints.between("sm", "ms"));
   const isMS = useMediaQuery(theme.breakpoints.between("ms", "md"));
   const isMD = useMediaQuery(theme.breakpoints.between("md", "lg"));
+  const isLG = useMediaQuery(theme.breakpoints.between("lg", "xl"));
 
   const getResponsiveSize = (isActive) => {
-    const sizes = isActive
-      ? { xxs: "24", xs: "25", ss: "26", sm: "27", ms: "28", md: "25" }
-      : { xxs: "21", xs: "22", ss: "23", sm: "24", ms: "26", md: "23" };
+    const sizes = isAdmin
+      ? isActive
+        ? { xxs: "24", ss: "26", sm: "27", ms: "28", md: "25", lg: "28" }
+        : { xxs: "20", ss: "23", sm: "24", ms: "26", md: "23", lg: "26" }
+      : isActive
+        ? { xxs: "24", ss: "26", sm: "27", ms: "28", md: "25", lg: "28" }
+        : { xxs: "21", ss: "23", sm: "24", ms: "26", md: "23", lg: "26" };
 
     if (isXXS) return sizes.xxs;
-    if (isXS) return sizes.xs;
     if (isSS) return sizes.ss;
     if (isSM) return sizes.sm;
     if (isMS) return sizes.ms;
     if (isMD) return sizes.md;
+    if (isLG) return sizes.lg;
+
     return "18";
   };
 
   function handleBtnClick(key) {
-    if (key === "dish" || key === "setting") {
+    if (
+      key === "dish" ||
+      key === "setting" ||
+      key === "manage-deash's" ||
+      key === "settingAdmin"
+    ) {
       setShowItems(true);
       setShowType(key);
     } else {
       setShowItems(false);
     }
     setSelectedBtn(key);
-    if (key !== "dish" && key !== "setting") {
+    if (
+      key !== "dish" &&
+      key !== "setting" &&
+      key !== "manage-deash's" &&
+      key !== "settingAdmin"
+    ) {
       localStorage.setItem("btnSelectedNav", key);
     }
   }
@@ -152,6 +238,20 @@ const PreNav = React.memo(() => {
     if (dishPaths.includes(currentPath)) setSelectedBtn("dish");
     else if (settingPaths.includes(currentPath)) setSelectedBtn("setting");
     else if (currentPath === "#" || currentPath === "/") setSelectedBtn("home");
+  }, [currentPath]);
+
+  useEffect(() => {
+    const dishManagePaths = [
+      "/admin/manageMeals",
+      "/admin/manageDrinks",
+      "/admin/manageSweets",
+    ];
+    // eslint-disable-next-line react-hooks/set-state-in-effect
+    if (dishManagePaths.includes(currentPath)) setSelectedBtn("manage-deash's");
+    else if (currentPath === "/admin/manage-users")
+      setSelectedBtn("manage-users");
+    else if (currentPath === "#" || currentPath === "/admin")
+      setSelectedBtn("admin-dashboard");
   }, [currentPath]);
 
   return (
@@ -219,7 +319,9 @@ const PreNav = React.memo(() => {
                   to={ele.path || "#"}
                   onClick={() => handleBtnClick(ele.key)}
                   sx={{
-                    minWidth: { xxs: "65px", md: "100px" },
+                    minWidth: isAdmin
+                      ? { xxs: "35px", md: "70px", lg: "100px" }
+                      : { xxs: "65px", md: "100px", lg: "110px" },
                     height: "50px",
                     display: "flex",
                     flexDirection: { xxs: "column", md: "row" },
@@ -231,7 +333,9 @@ const PreNav = React.memo(() => {
                         : "#222222"
                       : "transparent",
                     color: isActive
-                      ? "#d7a500"
+                      ? isAdmin
+                        ? "admin.main"
+                        : "#d7a500"
                       : isDark
                         ? "#b0b0b0"
                         : "#55595d",
@@ -241,8 +345,10 @@ const PreNav = React.memo(() => {
                       : "none",
                     gap: { md: 1 },
                     boxShadow: isActive
-                      ? isDark
-                        ? "0px 2px 8px rgba(215, 165, 0, 0.3)"
+                      ? isAdmin
+                        ? isDark
+                          ? "0px 2px 8px rgba(81, 4, 223, 0.51)"
+                          : "0px 2px 8px rgba(17, 0, 254, 0.67)"
                         : "0px 2px 5px rgba(0,0,0,0.2)"
                       : "none",
                     alignItems: { md: "center" },
@@ -265,7 +371,7 @@ const PreNav = React.memo(() => {
                         height: "20px",
                         width: "1px",
                         background: isDark ? "#444" : "#ccc",
-                        opacity: ele.key === "home" ? 0 : 1, // إخفاء الفاصل قبل أول عنصر
+                        opacity: ele.key === "home" ? 0 : 1,
                       },
                     },
                   }}
@@ -280,10 +386,21 @@ const PreNav = React.memo(() => {
                   <Typography
                     variant="caption"
                     sx={{
-                      mt: 0.3,
+                      mt: isAdmin ? { md: 0.3 } : 0.3,
                       color: "inherit",
-                      fontWeight: isActive ? "bold" : "medium",
-                      fontSize: { md: "1rem", xxs: "0.7rem" },
+                      fontWeight: "bold",
+                      fontSize: isAdmin
+                        ? isActive
+                          ? { xxs: "0.7rem", md: "0.8rem", lg: "1rem" }
+                          : { xxs: "0.65rem", md: "0.75rem", lg: "0.85rem" }
+                        : isActive
+                          ? { md: "1rem", xxs: "0.7rem" }
+                          : { md: "0.85rem", xxs: "0.6rem" },
+                      display: isAdmin
+                        ? { xxs: "none", ss: "initial" }
+                        : "initial",
+                      whiteSpace: "nowrap",
+                      overflow: "hidden",
                     }}
                   >
                     {ele.label}

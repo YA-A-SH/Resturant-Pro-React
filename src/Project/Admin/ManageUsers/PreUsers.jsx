@@ -57,7 +57,7 @@ const PreUser = React.memo(
       <Box
         sx={{
           minHeight: "100vh",
-          pt: { xxs: 12, md: 15 },
+          pt: { xxs: 12, md: 7 },
           pb: 8,
           background: isDark
             ? `radial-gradient(circle at top right, ${theme.palette.admin.main}15, transparent)`

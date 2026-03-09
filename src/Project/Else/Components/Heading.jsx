@@ -27,7 +27,7 @@ const Head = React.memo(() => {
 
   const user = useSelector(selectCurrentUser);
 
-  const disabled = !!user;
+  const disabled = !!user || !!isAdmin;
   return (
     <>
       <Box
@@ -75,7 +75,7 @@ const Head = React.memo(() => {
                 xxs: "2.09rem",
                 ss: "3rem",
                 sm: "3.2rem",
-                md: "2.5rem",
+                md: "3.8rem",
               },
               transition: "transform 0.3s ease",
               "&:hover": {

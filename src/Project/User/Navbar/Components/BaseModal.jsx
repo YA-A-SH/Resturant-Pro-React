@@ -1,5 +1,7 @@
-import { ModeContext } from "@else/Components/Context/MainContext";
-import { ShoppingCart } from "@mui/icons-material";
+import {
+  IsAdminContext,
+  ModeContext,
+} from "@else/Components/Context/MainContext";
 import {
   Box,
   Button,
@@ -9,12 +11,13 @@ import {
   useTheme,
 } from "@mui/material";
 import { motion, AnimatePresence } from "framer-motion";
-import { ArrowUp2, ArrowUp3, DirectUp } from "iconsax-react";
+import { ArrowUp2 } from "iconsax-react";
 import React, { useContext } from "react";
 import { useTranslation } from "react-i18next";
 import { Link, useLocation } from "react-router-dom";
 
 const BaseModal = ({ show, setShow, type, data }) => {
+  const { isAdmin } = useContext(IsAdminContext);
   const location = useLocation();
   const { i18n } = useTranslation();
   const menuItems = data.find((item) => item.key === type)?.items || [];
@@ -114,7 +117,7 @@ const BaseModal = ({ show, setShow, type, data }) => {
             onClick={(e) => e.stopPropagation()}
             sx={{
               width: { xxs: "99%", xs: "95%" },
-              bgcolor: "primary.custom",
+              bgcolor: isAdmin ? "admin.main" : "primary.custom",
               display: "flex",
               justifyContent: "center",
               alignItems: "center",
@@ -154,14 +157,20 @@ const BaseModal = ({ show, setShow, type, data }) => {
                     sx={{
                       color: isActive
                         ? mode === "dark"
-                          ? "#e2b04a"
-                          : "primary.main"
+                          ? isAdmin
+                            ? "#000000"
+                            : "#e2b04a"
+                          : isAdmin
+                            ? "#ffffff"
+                            : "primary.main"
                         : mode === "dark"
                           ? "rgba(255,255,255,0.4)"
                           : "gray",
                       filter:
                         isActive && mode === "dark"
-                          ? "drop-shadow(0 0 8px rgba(226, 176, 74, 0.8))"
+                          ? isAdmin
+                            ? "drop-shadow(0 0 8px rgba(25, 0, 255, 0.8))"
+                            : "drop-shadow(0 0 8px rgba(226, 176, 74, 0.8))"
                           : "none",
                       minWidth: "15px",
                       height: "30px",
@@ -198,7 +207,11 @@ const BaseModal = ({ show, setShow, type, data }) => {
                             transform: "translateX(-50%)",
                             width: { xxs: "25px", ss: "33px" },
                             height: "3px",
-                            backgroundColor: theme.palette.primary.custom,
+                            backgroundColor: isAdmin
+                              ? mode === "dark"
+                                ? "#000000"
+                                : "#ffffff"
+                              : theme.palette.primary.custom,
                             borderRadius: "10px 10px 0px 0px",
                           }
                         : {},

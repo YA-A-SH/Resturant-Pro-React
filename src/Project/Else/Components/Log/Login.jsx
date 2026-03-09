@@ -156,7 +156,6 @@ const Login = React.memo(
                   <Button
                     variant="text"
                     size="small"
-                    disabled
                     onClick={() => setOpenAdmin(true)}
                     sx={{
                       color: theme.palette.primary.custom,
@@ -169,7 +168,7 @@ const Login = React.memo(
                       "&:hover": { bgcolor: "primary.custom", color: "#fff" },
                     }}
                   >
-                    {t("Under Working ...")}
+                    {t("Admin Page's")}
                   </Button>
                 </Box>
               </Box>
