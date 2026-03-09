@@ -267,7 +267,7 @@ const PreNav = React.memo(() => {
           top: { xxs: "65px", md: "0" },
           right: { md: 0 },
           transform: { xxs: "translateX(-50%)", md: "" },
-          width: { xxs: "100%", md: "500px" },
+          width: { xxs: "100%", md: "430px", lg: "600px" },
           zIndex: 1000,
           display: "flex",
           justifyContent: "center",
@@ -276,7 +276,7 @@ const PreNav = React.memo(() => {
       >
         <Box
           sx={{
-            width: { xxs: "99%", xs: "95%", md: "100%" },
+            width: { xxs: "99%", md: "100%" },
             display: "flex",
             justifyContent: "center",
             alignItems: "center",
@@ -321,7 +321,7 @@ const PreNav = React.memo(() => {
                   sx={{
                     minWidth: isAdmin
                       ? { xxs: "35px", md: "70px", lg: "100px" }
-                      : { xxs: "65px", md: "100px", lg: "110px" },
+                      : { xxs: "65px", md: "70px", lg: "110px" },
                     height: "50px",
                     display: "flex",
                     flexDirection: { xxs: "column", md: "row" },
@@ -386,7 +386,7 @@ const PreNav = React.memo(() => {
                   <Typography
                     variant="caption"
                     sx={{
-                      mt: isAdmin ? { md: 0.3 } : 0.3,
+                      mt: { md: 0.3 },
                       color: "inherit",
                       fontWeight: "bold",
                       fontSize: isAdmin

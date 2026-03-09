@@ -74,7 +74,7 @@ const RoutesComp = React.memo(() => {
 
   return (
     <>
-      <AnimatePresence exitBeforeEnter>
+      <AnimatePresence mode="wait">
         <Routes key={location.pathname} location={location}>
           <Route
             path="/"

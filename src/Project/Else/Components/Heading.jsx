@@ -71,12 +71,20 @@ const Head = React.memo(() => {
                 : `linear-gradient(135deg, ${theme.palette.primary.custom} 0%, ${theme.palette.primary.light} 100%)`,
               WebkitBackgroundClip: "text",
               WebkitTextFillColor: "transparent",
-              fontSize: {
-                xxs: "2.09rem",
-                ss: "3rem",
-                sm: "3.2rem",
-                md: "3.8rem",
-              },
+              fontSize: isAdmin
+                ? {
+                    xxs: "2.09rem",
+                    ss: "3rem",
+                    sm: "3.2rem",
+                    md: "3.8rem",
+                  }
+                : {
+                    xxs: "2.09rem",
+                    ss: "3rem",
+                    sm: "3.2rem",
+                    md: "2.8rem",
+                    lg: "3.8rem",
+                  },
               transition: "transform 0.3s ease",
               "&:hover": {
                 transform: "scale(1.02)",
