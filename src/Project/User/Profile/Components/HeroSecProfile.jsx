@@ -22,8 +22,8 @@ const HeroSecProfile = React.memo(({ userMoreInfo, handleEditOpen }) => {
   const u = JSON.parse(localStorage.getItem("user"));
   const accType =
     u?.providerData?.[0]?.providerId === "google.com"
-      ? "Google Account"
-      : "Email Account";
+      ? t("Google Account")
+      : t("Email Account");
 
   return (
     <>

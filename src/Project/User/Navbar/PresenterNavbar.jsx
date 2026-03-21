@@ -400,7 +400,7 @@ const PreNav = React.memo(() => {
                         ? { xxs: "none", ss: "initial" }
                         : "initial",
                       whiteSpace: "nowrap",
-                      overflow: "hidden",
+                      // overflow: "hidden",
                     }}
                   >
                     {ele.label}

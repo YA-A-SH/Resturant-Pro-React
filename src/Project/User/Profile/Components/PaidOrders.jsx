@@ -156,7 +156,7 @@ const PaidOrder = React.memo(
 
                       <Stack direction="row" spacing={1}>
                         <Chip
-                          label="Processing"
+                          label={t("Processing")}
                           color="warning"
                           size="small"
                           sx={{ fontWeight: 800, borderRadius: "8px" }}

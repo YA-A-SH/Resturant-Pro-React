@@ -55,7 +55,7 @@ const HeroSec = React.memo(() => {
               textShadow: "0 4px 12px rgba(0,0,0,0.5)",
             }}
           >
-            {t("ZEUS Restaurant")}
+            {t("ZEUS RESTAURANT")}
           </Typography>
 
           <Typography
