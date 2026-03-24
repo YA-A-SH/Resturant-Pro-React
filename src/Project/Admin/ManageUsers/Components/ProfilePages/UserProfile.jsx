@@ -1,11 +1,11 @@
 import { useLocation, useNavigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import ProfileView from "./BaseProfile";
-import { useEffect } from "react";
+import React, { useEffect } from "react";
 import EliteLoader from "./Loader";
 import { selectUserById } from "@user/RTK/ElseSlice";
 
-export default function UserProfile() {
+const UserProfile = React.memo(() => {
   const location = useLocation();
   const navigate = useNavigate();
   const userId = location.state?.userData?.id;
@@ -24,4 +24,5 @@ export default function UserProfile() {
   }
 
   return <ProfileView type="user" data={user} />;
-}
+});
+export default UserProfile;

@@ -76,7 +76,8 @@ const Head = React.memo(() => {
                     xxs: "2.09rem",
                     ss: "3rem",
                     sm: "3.2rem",
-                    md: "3.8rem",
+                    md: "3rem",
+                    lg: "3.8rem",
                   }
                 : {
                     xxs: "2.09rem",

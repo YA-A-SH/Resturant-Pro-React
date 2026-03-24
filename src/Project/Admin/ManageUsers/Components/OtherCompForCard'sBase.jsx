@@ -5,10 +5,14 @@ import {
   Stack,
   Tooltip,
   Typography,
+  useTheme,
 } from "@mui/material";
 import { cloneElement } from "react";
 
-export function InfoRow({ icon, text, label, isDark }) {
+export function InfoRow({ icon, text, label }) {
+  const theme = useTheme();
+  const isDark = theme.palette.mode === "dark";
+
   return (
     <Stack
       direction="row"

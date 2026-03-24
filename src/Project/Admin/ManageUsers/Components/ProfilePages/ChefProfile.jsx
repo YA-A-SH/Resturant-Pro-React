@@ -1,10 +1,10 @@
-import { useContext, useEffect, useState } from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { useLocation, useNavigate } from "react-router-dom";
 import { ChefsContext } from "@else/Components/Context/MainContext";
 import ProfileView from "./BaseProfile";
 import EliteLoader from "./Loader";
 
-export default function ChefProfile() {
+const ChefProfile = React.memo(() => {
   const [openDelete, setOpenDelete] = useState(false);
   const [openEdit, setOpenEdit] = useState(false);
   const { chefs } = useContext(ChefsContext);
@@ -36,4 +36,5 @@ export default function ChefProfile() {
       setState2={setOpenDelete}
     />
   );
-}
+});
+export default ChefProfile;

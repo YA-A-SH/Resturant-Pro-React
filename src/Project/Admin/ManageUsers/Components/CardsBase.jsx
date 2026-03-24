@@ -186,13 +186,11 @@ const CardBase = React.memo(({ data, id }) => {
             icon={<MailRounded />}
             text={data?.email || data?.mail}
             label={t("Contact")}
-            isDark={isDark}
           />
           <InfoRow
             icon={<LocationOnRounded />}
             text={data?.city || t("Unknown")}
             label={t("Resident")}
-            isDark={isDark}
           />
 
           {/* Highlight Box */}

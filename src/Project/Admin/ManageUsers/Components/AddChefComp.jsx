@@ -22,11 +22,15 @@ import {
 } from "@mui/icons-material";
 import { v4 as uuidv4 } from "uuid";
 import { useTranslation } from "react-i18next";
-import { ChefsContext } from "@else/Components/Context/MainContext";
+import {
+  ChefsContext,
+  OpenSnackbarContext,
+} from "@else/Components/Context/MainContext";
 
-export default function AddChefModal({ open, handleClose, setOpenSnackbar }) {
+const AddChefModal = React.memo(({ open, handleClose }) => {
   // Hooks
   const { chefs, setChefs } = useContext(ChefsContext);
+  const { setOpenSnackbar } = useContext(OpenSnackbarContext);
 
   const [formData, setFormData] = useState({
     id: uuidv4(),
@@ -307,4 +311,5 @@ export default function AddChefModal({ open, handleClose, setOpenSnackbar }) {
       </DialogActions>
     </Dialog>
   );
-}
+});
+export default AddChefModal;

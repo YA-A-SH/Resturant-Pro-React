@@ -1,6 +1,9 @@
-import { Card, Box, Skeleton, Stack, alpha } from "@mui/material";
+import { Card, Box, Skeleton, Stack, alpha, useTheme } from "@mui/material";
+import React from "react";
 
-export default function CardBaseSkeleton({ isDark }) {
+const CardBaseSkeleton = React.memo(() => {
+  const theme = useTheme();
+  const isDark = theme.palette.mode === "dark";
   return (
     <Card
       sx={{
@@ -95,4 +98,5 @@ export default function CardBaseSkeleton({ isDark }) {
       </Stack>
     </Card>
   );
-}
+});
+export default CardBaseSkeleton;

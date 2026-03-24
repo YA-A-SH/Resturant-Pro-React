@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useContext, useEffect } from "react";
 import {
   Box,
   Typography,
@@ -24,7 +24,7 @@ import AddChefModal from "./Components/AddChefComp";
 import SnackbarComp from "@else/Components/Else/SnackbarComp";
 import { useTranslation } from "react-i18next";
 import { useDispatch } from "react-redux";
-import { ChefsContext } from "@else/Components/Context/MainContext";
+import { OpenSnackbarContext } from "@else/Components/Context/MainContext";
 import QuickStatusCards from "./Components/QuickStatusCards";
 
 const PreUser = React.memo(
@@ -33,10 +33,9 @@ const PreUser = React.memo(
     setOpenAddChefComp,
     searchText,
     setSearchText,
-    openSnackbar,
     handleCloseSnackbar,
-    setOpenSnackbar,
   }) => {
+    const { openSnackbar } = useContext(OpenSnackbarContext);
     const { t } = useTranslation();
     const dispatch = useDispatch();
     const theme = useTheme();
@@ -45,6 +44,10 @@ const PreUser = React.memo(
 
     const isDark = theme.palette.mode === "dark";
 
+    useEffect(() => {
+      document.title = t("Zeus | Admin => Manage User's");
+    }, []);
+    
     useEffect(() => {
       dispatch(fetchFakeUser());
     }, [dispatch]);
@@ -139,7 +142,6 @@ const PreUser = React.memo(
             </Button>
           </Stack>
           <AddChefModal
-            setOpenSnackbar={setOpenSnackbar}
             open={openAddChefComp}
             handleClose={() => setOpenAddChefComp(false)}
           />
