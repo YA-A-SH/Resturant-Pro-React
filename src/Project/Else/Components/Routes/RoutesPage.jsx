@@ -44,7 +44,6 @@ import { Navigate, Route, Routes, useLocation } from "react-router-dom";
 
 import MealsSkeleton from "@user/Skeleton/MealsSkeleton";
 import DrinksAndSweetsSkeleton from "@user/Skeleton/DrinksAndSweetsSkiliton";
-import Loader from "../Else/Loader";
 import { IsAdminContext } from "../Context/MainContext";
 import EliteLoader from "@admin/ManageUsers/Components/ProfilePages/Loader";
 

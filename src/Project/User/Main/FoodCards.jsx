@@ -7,10 +7,6 @@ import {
   Rating,
   Button,
   Stack,
-  Dialog,
-  DialogTitle,
-  DialogContent,
-  DialogActions,
   IconButton,
   useTheme,
 } from "@mui/material";
@@ -20,6 +16,7 @@ import AddShoppingCartIcon from "@mui/icons-material/AddShoppingCart";
 import React, { useCallback, useContext, useState } from "react";
 import { ShowCart } from "@else/Components/Context/MainContext";
 import { useTranslation } from "react-i18next";
+import CardDialog from "./Components/CardDialog";
 
 const FoodCard = React.memo(
   ({
@@ -133,6 +130,7 @@ const FoodCard = React.memo(
             image={image}
             alt={title}
             loading="lazy"
+            decoding="async"
             style={{ aspectRatio: "1/1", objectFit: "cover" }}
             sx={{ transition: "0.5s ease" }}
           />
@@ -157,13 +155,16 @@ const FoodCard = React.memo(
             </Typography>
           </Stack>
 
-          <Stack direction="row" spacing={1.5}>
+          <Stack direction="row" sx={{ gap: 2 }}>
             <Button
               fullWidth
               variant="contained"
               startIcon={<AddShoppingCartIcon />}
               onClick={handleAddToCartClick}
               sx={{
+                "& .MuiButton-startIcon": {
+                  marginLeft: "10px",
+                },
                 borderRadius: "12px",
                 py: 1.2,
                 fontWeight: "bold",
@@ -200,51 +201,13 @@ const FoodCard = React.memo(
 
         {/* Food More Info  */}
 
-        <Dialog
-          open={openDet}
-          onClose={() => setOpenDet(false)}
-          PaperProps={{ sx: { borderRadius: "24px", p: 1 } }}
-        >
-          <DialogTitle fontWeight="bold">{title}</DialogTitle>
-          <DialogContent>
-            <Box
-              component="img"
-              src={image}
-              sx={{ width: "100%", borderRadius: "16px", mb: 2 }}
-            />
-            <Typography variant="body1" color="text.secondary">
-              Lorem ipsum dolor sit amet consectetur adipisicing elit. Quos
-              aspernatur a minus dolores rerum sequi soluta atque assumenda
-              officia adipisci. Voluptate quisquam soluta dolor sunt, aperiam
-              deleniti fuga praesentium modi.
-            </Typography>
-          </DialogContent>
-          <DialogActions
-            sx={{
-              p: 3,
-              display: "flex",
-              justifyContent: "space-around",
-              alignItems: "center",
-            }}
-          >
-            <Button
-              onClick={() => setOpenDet(false)}
-              color="warning"
-              variant="outlined"
-              aria-label="Close"
-            >
-              {t("Close")}
-            </Button>
-            <Button
-              variant="contained"
-              onClick={handleAddToCartClick}
-              sx={{ borderRadius: "10px" }}
-              aria-label="Order Now"
-            >
-              {t("Order Now")}
-            </Button>
-          </DialogActions>
-        </Dialog>
+        <CardDialog
+          openDet={openDet}
+          setOpenDet={setOpenDet}
+          title={title}
+          image={image}
+          handleAddToCartClick={handleAddToCartClick}
+        />
       </Card>
     );
   },

@@ -104,13 +104,13 @@ const PreNav = React.memo(() => {
                 from: "mode",
                 key: "mode",
               },
-              {
-                label: t("Language"),
-                path: "#",
-                icon: i18n.language === "ar" ? Translate : Global,
-                from: "lang",
-                key: "lang",
-              },
+              // {
+              //   label: t("Language"),
+              //   path: "#",
+              //   icon: i18n.language === "ar" ? Translate : Global,
+              //   from: "lang",
+              //   key: "lang",
+              // },
 
               {
                 label: t("Log out"),
@@ -157,13 +157,13 @@ const PreNav = React.memo(() => {
                 from: "mode",
                 key: "mode",
               },
-              {
-                label: t("Language"),
-                path: "#",
-                icon: i18n.language === "ar" ? Translate : Global,
-                from: "lang",
-                key: "lang",
-              },
+              // {
+              //   label: t("Language"),
+              //   path: "#",
+              //   icon: i18n.language === "ar" ? Translate : Global,
+              //   from: "lang",
+              //   key: "lang",
+              // },
               {
                 label: t("About us"),
                 path: "/aboutUs",
@@ -254,6 +254,7 @@ const PreNav = React.memo(() => {
       setSelectedBtn("admin-dashboard");
   }, [currentPath]);
 
+  const currentLanguage = i18n.language;
   return (
     <AnimatePresence>
       <Box
@@ -263,9 +264,11 @@ const PreNav = React.memo(() => {
         exit={{ opacity: 0, x: 20, scale: 0.95 }}
         transition={{ type: "spring", damping: 20, stiffness: 300 }}
         sx={{
-          position: "fixed",
+          position: "absolute",
           top: { xxs: "65px", md: "0" },
-          right: { md: 0 },
+          right: currentLanguage === "ar" ? "" : { md: 0 },
+          left: currentLanguage === "ar" ? { md: 0 } : "",
+
           transform: { xxs: "translateX(-50%)", md: "" },
           width: { xxs: "100%", md: "430px", lg: "600px" },
           zIndex: 1000,

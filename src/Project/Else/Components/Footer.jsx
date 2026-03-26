@@ -14,6 +14,7 @@ export default function Footer() {
         textAlign: "center",
         bgcolor: "background.paper",
         backdropFilter: "blur(10px)",
+        direction: "ltr",
       }}
     >
       {" "}

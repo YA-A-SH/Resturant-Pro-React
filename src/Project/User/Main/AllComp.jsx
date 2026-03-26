@@ -204,13 +204,11 @@ const Base = React.memo(
             </Stack>
           )}
         </Container>
-
         {/* ===== Snackbar ===== */}
-
         <SnackbarComp
           openSnackbar={openSnackbar.openSnackbar}
-          msg={t("Tasty choice! Added to your cart 🍔")}
-          color="success"
+          msg={openSnackbar.message}
+          color={openSnackbar.color}
           handleClose={handleCloseSnackbar}
         />
       </Box>

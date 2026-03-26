@@ -1,4 +1,4 @@
-import { Alert, Snackbar } from "@mui/material";
+import { Alert, Portal, Snackbar } from "@mui/material";
 
 export default function SnackbarComp({
   openSnackbar,
@@ -7,7 +7,7 @@ export default function SnackbarComp({
   handleClose,
 }) {
   return (
-    <>
+    <Portal>
       <Snackbar
         open={openSnackbar}
         onClose={handleClose}
@@ -26,6 +26,6 @@ export default function SnackbarComp({
           {msg}
         </Alert>
       </Snackbar>
-    </>
+    </Portal>
   );
 }

@@ -13,11 +13,11 @@ import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 
 const HeaderHome = React.memo(() => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const navigate = useNavigate();
   const theme = useTheme();
   const isDark = theme.palette.mode === "dark";
-
+  const currentLanguage = i18n.language;
   return (
     <Box component="main">
       <Box
@@ -110,19 +110,26 @@ const HeaderHome = React.memo(() => {
           {/* --- Buttons --- */}
           <Stack
             direction={{ xxs: "column", sm: "row" }}
-            spacing={2}
             sx={{
               width: "100%",
               justifyContent: { xs: "center", md: "flex-start" },
               alignItems: "center",
               pt: 2,
+              gap: 3,
             }}
           >
             <Button
               variant="contained"
               size="large"
-              endIcon={<LocalMall />}
+              endIcon={currentLanguage === "ar" ? "" : <LocalMall />}
+              startIcon={currentLanguage === "ar" ? <LocalMall /> : ""}
               sx={{
+                "& .MuiButton-endIcon": {
+                  marginLeft: "10px",
+                },
+                "& .MuiButton-startIcon": {
+                  marginLeft: "10px",
+                },
                 width: { xxs: "100%", sm: "200px", md: "auto" },
                 borderRadius: 3,
                 px: { xxs: 2, md: 5 },
@@ -141,8 +148,15 @@ const HeaderHome = React.memo(() => {
               variant="outlined"
               size="large"
               color="primary"
-              endIcon={<ArrowForward />}
+              endIcon={currentLanguage === "ar" ? "" : <ArrowForward />}
+              startIcon={currentLanguage === "ar" ? <ArrowForward /> : ""}
               sx={{
+                "& .MuiButton-endIcon": {
+                  marginLeft: "10px",
+                },
+                "& .MuiButton-startIcon": {
+                  marginLeft: "10px",
+                },
                 width: { xxs: "100%", sm: "200px", md: "auto" },
                 borderRadius: 3,
                 px: { xxs: 2, md: 5 },
@@ -234,6 +248,12 @@ const HeaderHome = React.memo(() => {
           alt="Logo"
           sx={{
             height: {
+              xxs: 280,
+              sm: 520,
+              md: 390,
+              lg: 440,
+            },
+            width: {
               xxs: 280,
               sm: 520,
               md: 390,

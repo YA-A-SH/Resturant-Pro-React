@@ -21,19 +21,23 @@ import {
 } from "./Components/Context/MainContext";
 import { useSelector } from "react-redux";
 import { selectCurrentUser } from "@user/RTK/LogSlice";
+import { useTranslation } from "react-i18next";
 
 const PreApp = React.memo(({ handleCloseSnackbar }) => {
   const { isAdmin } = useContext(IsAdminContext);
   const { openSnackbar } = useContext(OpenSnackbarContext);
   const { setShow } = useContext(ShowCart);
-
   const user = useSelector(selectCurrentUser);
-
   const disabled = !!user;
-
   const openShopCart = useCallback(() => setShow(true), [setShow]);
+
+  const { i18n } = useTranslation();
+  const currentLanguage = i18n.language;
   return (
-    <Box component="main">
+    <Box
+      component="main"
+      sx={{ direction: currentLanguage === "ar" ? "rtl" : "ltr" }}
+    >
       {/* //  Heading  */}
 
       <Head />
