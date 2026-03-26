@@ -187,7 +187,7 @@ Smooth animations and transitions
 
 ## 🌍 Multilingual Experience (i18n & Localization)
 
-The application supports both **English and Arabic**, implemented using **i18n** with a clear focus on *localization*, not literal translation.
+The application supports both English and Arabic using i18n, featuring a fully responsive layout that switches between LTR and RTL to ensure authentic localization, not just literal translation.
 
 Each language version was crafted as a **standalone experience**, ensuring that:
 - The Arabic version is not a word-by-word translation.
