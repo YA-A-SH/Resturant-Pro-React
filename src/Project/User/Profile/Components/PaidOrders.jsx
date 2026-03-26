@@ -125,7 +125,11 @@ const PaidOrder = React.memo(
                           : "rgba(0,0,0,0.02)",
                       }}
                     >
-                      <Stack direction="row" spacing={2} alignItems="center">
+                      <Stack
+                        direction="row"
+                        alignItems="center"
+                        sx={{ gap: 2 }}
+                      >
                         <Avatar
                           sx={{
                             bgcolor: "primary.main",
@@ -208,8 +212,8 @@ const PaidOrder = React.memo(
                           >
                             <Stack
                               direction="row"
-                              spacing={2}
                               alignItems="center"
+                              sx={{ gap: 2 }}
                             >
                               <Avatar
                                 src={item.image}

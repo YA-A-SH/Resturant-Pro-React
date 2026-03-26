@@ -43,11 +43,12 @@ export default function BaseManage({
   topDishOrders,
   todayOrders,
 }) {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const theme = useTheme();
 
   const [openAddDish, setOpenAddDish] = useState(false);
   const { openSnackbar, setOpenSnackbar } = useContext(OpenSnackbarContext);
+  const currentLanguage = i18n.language;
 
   const handleCloseSnackbar = () => {
     setOpenSnackbar({
@@ -93,6 +94,7 @@ export default function BaseManage({
                   md: "3.5rem",
                   lg: "4.5rem",
                 },
+                textAlign: currentLanguage === "ar" ? "right" : "",
               }}
             >
               {t("Analytics")}{" "}
@@ -105,7 +107,13 @@ export default function BaseManage({
               variant="body1"
               color="text.secondary"
               fontWeight={500}
-              sx={{ textAlign: { xxs: "center" }, mt: 3 }}
+              sx={{
+                textAlign: {
+                  xxs: "center",
+                  md: currentLanguage === "ar" ? "right" : "",
+                },
+                mt: 3,
+              }}
             >
               {t("Monitoring performance for")}{" "}
               <span style={{ color: theme.palette.admin.main }}>{type}</span>{" "}
@@ -115,9 +123,8 @@ export default function BaseManage({
 
           <Stack
             direction={{ xs: "column", sm: "row" }}
-            spacing={2}
             alignItems="center"
-            sx={{ width: { xs: "100%", md: "auto" } }}
+            sx={{ width: { xs: "100%", md: "auto" }, gap: 2 }}
           >
             {/* Time Filter */}
             <FormControl
@@ -160,7 +167,9 @@ export default function BaseManage({
               }}
               onClick={() => setOpenAddDish(true)}
             >
-              {t("Add New Dish")}
+              <p style={{ margin: 0, marginTop: 1, paddingRight: 10 }}>
+                {t("Add New Dish")}
+              </p>
             </Button>
           </Stack>
         </Stack>

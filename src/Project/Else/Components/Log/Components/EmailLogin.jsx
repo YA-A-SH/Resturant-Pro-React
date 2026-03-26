@@ -87,7 +87,7 @@ const EmailLogin = React.memo(() => {
         }}
         startIcon={mailLoading && <CircularProgress size={20} />}
       >
-        {t("Login")}
+        <p style={{ margin: 0, marginTop: 2, marginRight: 10 }}>{t("Login")}</p>
       </Button>
     </>
   );

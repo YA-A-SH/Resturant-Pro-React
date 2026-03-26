@@ -1,4 +1,4 @@
-import { ArrowForward, LocalMall } from "@mui/icons-material";
+import { ArrowBack, ArrowForward, LocalMall } from "@mui/icons-material";
 import {
   Avatar,
   AvatarGroup,
@@ -55,6 +55,7 @@ const HeaderHome = React.memo(() => {
                 md: "0.9rem",
                 lg: "1rem",
               },
+              pr: 2,
             }}
           >
             {t("head Title")}
@@ -70,6 +71,7 @@ const HeaderHome = React.memo(() => {
                 md: "3.2rem",
                 lg: "4.1rem",
               },
+              textAlign: currentLanguage === "ar" ? "right" : "",
               fontWeight: 900,
               lineHeight: 1,
               mt: 1,
@@ -102,6 +104,8 @@ const HeaderHome = React.memo(() => {
               lineHeight: 1.7,
               fontSize: { xs: "0.95rem", md: "1.1rem" },
               fontWeight: 400,
+              pr: 2,
+              textAlign: currentLanguage === "ar" ? "right" : "",
             }}
           >
             {t("desc 1")}
@@ -116,20 +120,16 @@ const HeaderHome = React.memo(() => {
               alignItems: "center",
               pt: 2,
               gap: 3,
+              pr: 2,
             }}
           >
             <Button
               variant="contained"
               size="large"
-              endIcon={currentLanguage === "ar" ? "" : <LocalMall />}
-              startIcon={currentLanguage === "ar" ? <LocalMall /> : ""}
+              endIcon={currentLanguage === "ar" ? <LocalMall /> : <LocalMall />}
               sx={{
-                "& .MuiButton-endIcon": {
-                  marginLeft: "10px",
-                },
-                "& .MuiButton-startIcon": {
-                  marginLeft: "10px",
-                },
+              
+                translate: "transformX(-50%)",
                 width: { xxs: "100%", sm: "200px", md: "auto" },
                 borderRadius: 3,
                 px: { xxs: 2, md: 5 },
@@ -141,25 +141,26 @@ const HeaderHome = React.memo(() => {
               }}
               onClick={() => navigate("/meals")}
             >
-              {t("Order Now")}
+              <p style={{ margin: 0, marginTop: 5, paddingLeft: 10 }}>
+                {t("Order Now")}
+              </p>
             </Button>
 
             <Button
               variant="outlined"
               size="large"
               color="primary"
-              endIcon={currentLanguage === "ar" ? "" : <ArrowForward />}
-              startIcon={currentLanguage === "ar" ? <ArrowForward /> : ""}
+              endIcon={
+                currentLanguage === "ar" ? <ArrowBack /> : <ArrowForward />
+              }
               sx={{
                 "& .MuiButton-endIcon": {
-                  marginLeft: "10px",
+                  textAlign: "center",
                 },
-                "& .MuiButton-startIcon": {
-                  marginLeft: "10px",
-                },
+
                 width: { xxs: "100%", sm: "200px", md: "auto" },
                 borderRadius: 3,
-                px: { xxs: 2, md: 5 },
+                px: { xxs: 2, md: 3 },
                 py: 1.8,
                 fontSize: { xxs: "0.9rem", md: "1rem" },
                 textTransform: "none",
@@ -171,7 +172,9 @@ const HeaderHome = React.memo(() => {
               }}
               onClick={() => navigate("/aboutUs")}
             >
-              {t("About Us")}
+              <p style={{ margin: 0, marginTop: 3, paddingLeft: 10 }}>
+                {t("About Us")}
+              </p>
             </Button>
           </Stack>
 
@@ -179,7 +182,6 @@ const HeaderHome = React.memo(() => {
           <Stack
             direction={{ xxs: "column", sm: "row" }}
             alignItems="center"
-            spacing={2}
             sx={{
               p: 1.5,
               borderRadius: 4,
@@ -229,7 +231,11 @@ const HeaderHome = React.memo(() => {
               variant="body2"
               color="text.secondary"
               sx={{
+                mr: currentLanguage === "ar" ? 2 : 0,
+                ml: currentLanguage === "ar" ? 0 : 2,
+
                 fontWeight: 600,
+                display: "block",
                 textAlign: { xxs: "center", sm: "left" },
               }}
             >

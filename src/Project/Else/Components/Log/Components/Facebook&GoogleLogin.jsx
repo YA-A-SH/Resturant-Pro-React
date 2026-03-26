@@ -43,7 +43,9 @@ const FacGoogleLogin = React.memo(() => {
             fontSize: { xxs: "0.6rem", ss: "1rem", ms: "0.7rem" },
           }}
         >
-          {t("Coming Soon")}
+          <p style={{ margin: 0, marginTop: 2, marginRight: 10 }}>
+            {t("Coming Soon")}
+          </p>
         </Button>
 
         <Button
@@ -73,7 +75,10 @@ const FacGoogleLogin = React.memo(() => {
           })}
           onClick={handleGoogleLogin}
         >
-          {t("Google")}
+          {" "}
+          <p style={{ margin: 0, marginTop: 2, marginRight: 10 }}>
+            {t("Google")}
+          </p>
         </Button>
       </Box>
     </>

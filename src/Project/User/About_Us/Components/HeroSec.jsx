@@ -1,13 +1,15 @@
-import { ChevronRightRounded } from "@mui/icons-material";
+import { ChevronLeftOutlined, ChevronRightRounded } from "@mui/icons-material";
 import { Box, Button, Container, Typography, useTheme } from "@mui/material";
 import React from "react";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
 const HeroSec = React.memo(() => {
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const navigate = useNavigate();
   const theme = useTheme();
   const isDark = theme.palette.mode === "dark";
+
+  const currentLanguage = i18n.language;
 
   return (
     <>
@@ -74,7 +76,13 @@ const HeroSec = React.memo(() => {
           <Button
             variant="contained"
             size="large"
-            endIcon={<ChevronRightRounded />}
+            endIcon={
+              currentLanguage === "ar" ? (
+                <ChevronLeftOutlined />
+              ) : (
+                <ChevronRightRounded />
+              )
+            }
             sx={{
               borderRadius: 4,
               px: 6,

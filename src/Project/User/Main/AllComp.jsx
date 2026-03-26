@@ -107,10 +107,12 @@ const Base = React.memo(
                 },
               }}
             >
-              {t("Price:")}{" "}
-              <strong style={{ marginLeft: "5px" }}>
-                {sortAscending ? t("Low to High") : t("High to Low")}
-              </strong>
+              <p style={{ margin: 0, marginTop: 5, marginRight: 10 }}>
+                {t("Price:")}{" "}
+                <strong style={{ marginLeft: "5px" }}>
+                  {sortAscending ? t("Low to High") : t("High to Low")}
+                </strong>
+              </p>
             </Button>
           </Box>
 
@@ -185,7 +187,7 @@ const Base = React.memo(
           {/* =====  NUMERIC PAGINATION ===== */}
 
           {totalPages > 1 && (
-            <Stack alignItems="center" mt={8}>
+            <Stack alignItems="center" mt={8}sx={{ direction: "ltr" }}>
               <Pagination
                 count={totalPages}
                 page={currentPage}

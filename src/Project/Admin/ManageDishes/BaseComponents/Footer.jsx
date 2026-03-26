@@ -1,4 +1,8 @@
-import { ArrowForwardRounded, AssessmentRounded } from "@mui/icons-material";
+import {
+  ArrowBackIosNew,
+  ArrowForwardRounded,
+  AssessmentRounded,
+} from "@mui/icons-material";
 import {
   alpha,
   Box,
@@ -14,8 +18,10 @@ import { useNavigate } from "react-router-dom";
 
 export default function FooterSection() {
   const navigate = useNavigate();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const theme = useTheme();
+  const currentLanguage = i18n.language;
+
   return (
     <Box
       sx={{
@@ -52,10 +58,18 @@ export default function FooterSection() {
               borderRadius: "15px",
               "&:hover": { bgcolor: alpha("#fff", 0.9) },
             }}
-            endIcon={<ArrowForwardRounded />}
+            endIcon={
+              currentLanguage === "ar" ? (
+                <ArrowBackIosNew />
+              ) : (
+                <ArrowForwardRounded />
+              )
+            }
             onClick={() => navigate("/admin")}
           >
-            {t("Export Reports")}
+            <p style={{ margin: 0, marginTop: 2, paddingLeft: 10 }}>
+              {t("Export Reports")}
+            </p>
           </Button>
         </Grid>
       </Grid>

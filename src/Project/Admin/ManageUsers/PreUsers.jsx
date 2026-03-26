@@ -47,7 +47,7 @@ const PreUser = React.memo(
     useEffect(() => {
       document.title = t("Zeus | Admin => Manage User's");
     }, []);
-    
+
     useEffect(() => {
       dispatch(fetchFakeUser());
     }, [dispatch]);
@@ -138,7 +138,9 @@ const PreUser = React.memo(
               }}
               onClick={() => setOpenAddChefComp(true)}
             >
-              {t("Add New Chef")}
+              <p style={{ margin: 0, marginTop: 5, marginRight: 15 }}>
+                {t("Add New Chef")}
+              </p>
             </Button>
           </Stack>
           <AddChefModal
@@ -199,7 +201,9 @@ const PreUser = React.memo(
                 sx={{ minWidth: "100px" }}
                 onClick={() => setSearchText("")}
               >
-                {t("Clear")}
+                <p style={{ margin: 0, marginTop: 2, marginRight: 10 }}>
+                  {t("Clear")}
+                </p>
               </Button>
             </Stack>
           </Card>

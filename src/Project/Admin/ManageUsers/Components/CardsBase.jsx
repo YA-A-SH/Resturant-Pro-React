@@ -116,7 +116,7 @@ const CardBase = React.memo(({ data, id }) => {
       <Box sx={{ height: 6, width: "100%", background: configs.gradient }} />
       <Box sx={{ p: 3.5 }}>
         {/* Header Section */}
-        <Stack direction="row" spacing={2.5} alignItems="center" mb={3}>
+        <Stack direction="row" alignItems="center" mb={3} sx={{ gap: 2 }}>
           <Box
             className="avatar-frame"
             sx={{
@@ -181,7 +181,7 @@ const CardBase = React.memo(({ data, id }) => {
         </Stack>
 
         {/* Info Content */}
-        <Stack spacing={2} sx={{ opacity: isBlocked ? 0.5 : 1 }}>
+        <Stack sx={{ opacity: isBlocked ? 0.5 : 1, gap: 2 }}>
           <InfoRow
             icon={<MailRounded />}
             text={data?.email || data?.mail}

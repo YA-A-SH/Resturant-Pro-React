@@ -72,6 +72,8 @@ const BaseModal = ({ show, setShow, type, data }) => {
 
     return "18";
   };
+  const currentLanguage = i18n.language;
+
   return (
     <AnimatePresence>
       {show && (
@@ -85,7 +87,9 @@ const BaseModal = ({ show, setShow, type, data }) => {
           sx={{
             position: "fixed",
             top: { xxs: "140px", ss: "150px", md: 77 },
-            right: { md: 0 },
+            right: currentLanguage === "ar" ? "" : { md: 10 },
+
+            left: currentLanguage === "ar" ? { md: 10 } : "",
             maxWidth: { md: 400 },
             transform: "translateX(-50%)",
             width: "60%",

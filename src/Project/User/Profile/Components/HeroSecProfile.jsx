@@ -115,7 +115,9 @@ const HeroSecProfile = React.memo(({ userMoreInfo, handleEditOpen }) => {
                 },
               }}
             >
-              {t("Edit Profile")}
+              <p style={{ margin: 0, marginTop: 5, marginRight: 15 }}>
+                {t("Edit Profile")}
+              </p>
             </Button>
           </Stack>
         </Container>

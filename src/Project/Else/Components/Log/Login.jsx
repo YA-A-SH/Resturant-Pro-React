@@ -16,9 +16,11 @@ import React from "react";
 
 const Login = React.memo(
   ({ setOpenReset, openReset, setOpenAdmin, openAdmin }) => {
-    const { t } = useTranslation();
+    const { t, i18n } = useTranslation();
     const theme = useTheme();
     const isDark = theme.palette.mode === "dark";
+    const currentLanguage = i18n.language;
+
     return (
       <Box
         sx={{
@@ -109,7 +111,8 @@ const Login = React.memo(
                   <span
                     style={{
                       color: theme.palette.primary.custom,
-                      marginLeft: "4px",
+                      marginLeft: currentLanguage === "ar" ? "" : "4px",
+                      marginRight: currentLanguage === "ar" ? "10px" : "",
                     }}
                   >
                     {t("Reset here")}

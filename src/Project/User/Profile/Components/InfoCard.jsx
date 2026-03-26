@@ -75,7 +75,7 @@ const InfoCards = React.memo(({ userMoreInfo }) => {
                 boxShadow: 4,
               }}
             >
-              <Stack direction="row" spacing={2} alignItems="center">
+              <Stack direction="row" alignItems="center" sx={{ gap: 2 }}>
                 {item.icon}
                 <Box>
                   <Typography variant="body2" color="text.secondary">

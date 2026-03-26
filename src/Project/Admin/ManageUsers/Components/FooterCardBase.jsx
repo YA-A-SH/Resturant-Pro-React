@@ -1,5 +1,6 @@
 import {
   AdminPanelSettingsRounded,
+  ArrowBackIosNewRounded,
   ArrowForwardIosRounded,
   BlockRounded,
   CancelSharp,
@@ -23,10 +24,11 @@ export default function FooterCardBase({
   setSnackbarAlert,
 }) {
   const theme = useTheme();
-  const { t } = useTranslation();
+  const { t, i18n } = useTranslation();
   const isDark = theme.palette.mode === "dark";
   const dispatch = useDispatch();
   const navigate = useNavigate();
+  const currentLanguage = i18n.language;
 
   const handleViewProfile = () => {
     navigate(`/admin/manage-users/${id}`, {
@@ -76,7 +78,7 @@ export default function FooterCardBase({
           }`,
         }}
       >
-        <Stack direction="row" spacing={1}>
+        <Stack direction="row" sx={{ gap: 1 }}>
           {id === "manager" ? (
             <Tooltip title={t("Full Admin Privileges")}>
               <Box
@@ -131,13 +133,17 @@ export default function FooterCardBase({
           variant="contained"
           disableElevation
           endIcon={
-            <ArrowForwardIosRounded sx={{ fontSize: "12px !important" }} />
+            currentLanguage === "ar" ? (
+              <ArrowBackIosNewRounded sx={{ fontSize: "12px !important" }} />
+            ) : (
+              <ArrowForwardIosRounded sx={{ fontSize: "12px !important" }} />
+            )
           }
           sx={{
             borderRadius: "14px",
             transition: "0.3s",
             fontWeight: 800,
-            px: 2.5,
+            px: 1.5,
             scale: { xxs: 0.8, xs: 0.85, sm: 1 },
             color: "#fff",
             background: configs.gradient,
@@ -148,7 +154,9 @@ export default function FooterCardBase({
           }}
           onClick={handleViewProfile}
         >
-          {t("View Profile")}
+          <p style={{ margin: 0, marginTop: 2, marginLeft: 10 }}>
+            {t("View Profile")}
+          </p>
         </Button>
       </Stack>
     </>

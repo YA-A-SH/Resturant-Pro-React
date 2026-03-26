@@ -104,13 +104,13 @@ const PreNav = React.memo(() => {
                 from: "mode",
                 key: "mode",
               },
-              // {
-              //   label: t("Language"),
-              //   path: "#",
-              //   icon: i18n.language === "ar" ? Translate : Global,
-              //   from: "lang",
-              //   key: "lang",
-              // },
+              {
+                label: t("Language"),
+                path: "#",
+                icon: i18n.language === "ar" ? Translate : Global,
+                from: "lang",
+                key: "lang",
+              },
 
               {
                 label: t("Log out"),
@@ -157,13 +157,13 @@ const PreNav = React.memo(() => {
                 from: "mode",
                 key: "mode",
               },
-              // {
-              //   label: t("Language"),
-              //   path: "#",
-              //   icon: i18n.language === "ar" ? Translate : Global,
-              //   from: "lang",
-              //   key: "lang",
-              // },
+              {
+                label: t("Language"),
+                path: "#",
+                icon: i18n.language === "ar" ? Translate : Global,
+                from: "lang",
+                key: "lang",
+              },
               {
                 label: t("About us"),
                 path: "/aboutUs",
@@ -196,7 +196,7 @@ const PreNav = React.memo(() => {
         : { xxs: "20", ss: "23", sm: "24", ms: "26", md: "23", lg: "26" }
       : isActive
         ? { xxs: "24", ss: "26", sm: "27", ms: "28", md: "25", lg: "28" }
-        : { xxs: "21", ss: "23", sm: "24", ms: "26", md: "23", lg: "26" };
+        : { xxs: "19", ss: "21", sm: "22", ms: "23", md: "20", lg: "23" };
 
     if (isXXS) return sizes.xxs;
     if (isSS) return sizes.ss;
@@ -268,9 +268,9 @@ const PreNav = React.memo(() => {
           top: { xxs: "65px", md: "0" },
           right: currentLanguage === "ar" ? "" : { md: 0 },
           left: currentLanguage === "ar" ? { md: 0 } : "",
-
           transform: { xxs: "translateX(-50%)", md: "" },
-          width: { xxs: "100%", md: "430px", lg: "600px" },
+          width: { xxs: "100%", md: currentLanguage === "ar" ?isAdmin ?  "470px" :  "580px" : "430px", lg: "600px" },
+          // bgcolor: "red",
           zIndex: 1000,
           display: "flex",
           justifyContent: "center",

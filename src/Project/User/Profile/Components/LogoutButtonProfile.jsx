@@ -33,7 +33,9 @@ const LogoutBTNProfile = React.memo(() => {
             },
           }}
         >
-          {t("Log out from account")}
+          <p style={{ margin: 0, marginTop: 5, marginRight: 15 }}>
+            {t("Log out from account")}
+          </p>
         </Button>
         <Typography
           variant="body2"

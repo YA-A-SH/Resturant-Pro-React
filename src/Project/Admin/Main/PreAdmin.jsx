@@ -135,7 +135,9 @@ const PreAdmin = React.memo(() => {
               onClick={() => navigate("/admin/manage-users")}
               sx={userReportStyle}
             >
-              {t("User's Reports")}
+              <p style={{ margin: 0, marginTop: 2, marginRight: 15 }}>
+                {t("User's Reports")}
+              </p>
             </Button>
           </Stack>
         </Box>
